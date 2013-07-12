@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<box xmlns="box" xmlns:box="box"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="box ../../xmlschema/strict/box.xsd">
+
+  <!-- section 3 -->
+   <presence xmlns="urn:ietf:params:xml:ns:pidf"
+	     xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model"
+	     xmlns:gp="urn:ietf:params:xml:ns:pidf:geopriv10"
+	     xmlns:ca="urn:ietf:params:xml:ns:pidf:geopriv10:civicAddr"
+	     xmlns:rel="urn:ietf:params:xml:ns:pidf:geopriv10:relative"
+	     xmlns:gml="http://www.opengis.net/gml"
+	     xmlns:gs="http://www.opengis.net/pidflo/1.0"
+	     entity="pres:relative@example.com">
+     <dm:device id="relative1">
+       <gp:geopriv>
+	 <gp:location-info>
+	   <ca:civicAddress xml:lang="en-AU">
+	     <ca:country>AU</ca:country>
+	     <ca:A1>NSW</ca:A1>
+	     <ca:A3>Wollongong</ca:A3>
+	     <ca:A4>North Wollongong</ca:A4>
+	     <ca:RD>Flinders</ca:RD>
+	     <ca:STS>Street</ca:STS>
+	     <ca:HNO>123</ca:HNO>
+	   </ca:civicAddress>
+	   <rel:relative-location>
+	     <rel:reference>
+	       <ca:civicAddress xml:lang="en-AU">
+		 <ca:INT N="Door" R="A">Front</ca:INT>
+	       </ca:civicAddress>
+	     </rel:reference>
+	     <rel:offset>
+	       <gml:Point xmlns:gml="http://www.opengis.net/gml"
+			  srsName="urn:ietf:params:geopriv:relative:2d">
+		 <gml:pos>100 50</gml:pos>
+	       </gml:Point>
+	     </rel:offset>
+	   </rel:relative-location>
+	 </gp:location-info>
+	 <gp:usage-rules/>
+	 <gp:method>GPS</gp:method>
+	 <rel:map>
+	   <rel:url type="image/png">
+	      http://example.com/location/map.png
+	   </rel:url>
+	   <rel:offset>20. 120.</rel:offset>
+	   <rel:orientation>29.</rel:orientation>
+	   <rel:scale>20. -20.</rel:scale>
+	 </rel:map>
+       </gp:geopriv>
+       <dm:deviceID>mac:1234567890ab</dm:deviceID>
+       <dm:timestamp>2007-06-22T20:57:29Z</dm:timestamp>
+     </dm:device>
+   </presence>
+
+   <!-- 4.10.3 -->
+
+   <rel:map xmlns:rel="urn:ietf:params:xml:ns:pidf:geopriv10:relative">
+     <rel:url type="image/jpeg">
+       http://example.com/map.jpg
+     </rel:url>
+     <rel:offset>200 210</rel:offset>
+     <rel:orientation>68</rel:orientation>
+     <rel:scale>2.90 -2.90</rel:scale>
+   </rel:map>
+
+   <!-- 5.1 -->
+    <presence xmlns="urn:ietf:params:xml:ns:pidf"
+	      xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model"
+	      xmlns:gp="urn:ietf:params:xml:ns:pidf:geopriv10"
+	      xmlns:ca="urn:ietf:params:xml:ns:pidf:geopriv10:civicAddr"
+	      xmlns:rel="urn:ietf:params:xml:ns:pidf:geopriv10:relative"
+	      xmlns:gml="http://www.opengis.net/gml"
+	      xmlns:gs="http://www.opengis.net/pidflo/1.0"
+	      entity="pres:ness@example.com">
+      <dm:device id="nesspc-1">
+	<gp:geopriv>
+	  <gp:location-info>
+	    <ca:civicAddress xml:lang="en-AU">
+	      <ca:country>AU</ca:country>
+	      <ca:A1>NSW</ca:A1>
+	      <ca:A3>Wollongong</ca:A3>
+	      <ca:A4>North Wollongong</ca:A4>
+	      <ca:RD>Flinders</ca:RD>
+	      <ca:STS>Street</ca:STS>
+	      <ca:HNO>123</ca:HNO>
+	    </ca:civicAddress>
+	    <rel:relative-location>
+	      <rel:reference>
+		<ca:civicAddress xml:lang="en-AU">
+		  <ca:INT N="Building">A</ca:INT>
+		  <ca:INT N="Level">I</ca:INT>
+		  <ca:INT N="Suite">113</ca:INT>
+		  <ca:INT N="Door" R="A">Front</ca:INT>
+		</ca:civicAddress>
+	      </rel:reference>
+	      <rel:offset>
+		 <gml:Polygon xmlns:gml="http://www.opengis.net/gml"
+		      srsName="urn:ietf:params:geopriv:relative:2d">
+		   <gml:exterior>
+		     <gml:LinearRing>
+		       <gml:pos>433.0 -734.0</gml:pos> <!--A-->
+		       <gml:pos>431.0 -733.0</gml:pos> <!--F-->
+		       <gml:pos>431.0 -732.0</gml:pos> <!--E-->
+		       <gml:pos>433.0 -731.0</gml:pos> <!--D-->
+		       <gml:pos>434.0 -732.0</gml:pos> <!--C-->
+		       <gml:pos>434.0 -733.0</gml:pos> <!--B-->
+		       <gml:pos>433.0 -734.0</gml:pos> <!--A-->
+		     </gml:LinearRing>
+		   </gml:exterior>
+		</gml:Polygon>
+	      <rel:offset>
+	    </rel:relative-location>
+	  </gp:location-info>
+	 <gp:usage-rules/>
+	  <gp:method>GPS</gp:method>
+	</gp:geopriv>
+	<dm:deviceID>mac:1234567890ab</dm:deviceID>
+	<dm:timestamp>2007-06-22T20:57:29Z</dm:timestamp>
+      </dm:device>
+    </presence>
+
+    <!-- 5.2 -->
+    <presence xmlns="urn:ietf:params:xml:ns:pidf"
+	      xmlns:dm="urn:ietf:params:xml:ns:pidf:data-model"
+	      xmlns:gp="urn:ietf:params:xml:ns:pidf:geopriv10"
+	      xmlns:rel="urn:ietf:params:xml:ns:pidf:geopriv10:relative"
+	      xmlns:gml="http://www.opengis.net/gml"
+	      entity="pres:point2d@example.com">
+      <dm:device id="point2d">
+	<gp:geopriv>
+	  <gp:location-info>
+	    <gml:Circle srsName="urn:ogc:def:crs:EPSG::4326">
+	      <gml:pos>-34.407 150.883</gml:pos>
+	      <gs:radius uom="urn:ogc:def:uom:EPSG::9001">
+		     50.0
+	      </gs:radius>
+	    </gml:Circle>
+	    <rel:relative-location>
+	      <rel:reference>
+		<gml:Point srsName="urn:ogc:def:crs:EPSG::4326">
+		  <gml:pos>-34.407 150.883</gml:pos>
+		</gml:Point>
+	      </rel:reference>
+	      <rel:offset>
+		<gml:Circle xmlns:gml="http://www.opengis.net/gml"
+		      srsName="urn:ietf:params:geopriv:relative:2d">
+		    <gml:pos>500.0 750.0</gml:pos>
+		    <gml:radius uom="urn:ogc:def:uom:EPSG::9001">
+		       5.0
+		     </gml:radius>
+	       </gml:Circle>
+	    </rel:relative-location>
+	    <map:map>
+	      <map:urltype="image/png">
+		https://www.example.com/flrpln/123South/flr-2</gp:url>
+	      <map:offset> 2670.0 1124.0 1022.0</gp:offset>
+	      <map:orientation>67.00</gp:orientation>
+	      <map:scale>10</gp:scale>
+	    </map:map>
+	  </gp:location-info>
+	  <gp:usage-rules/>
+	  <gp:method>Wiremap</gp:method>
+	</gp:geopriv>
+	<dm:deviceID>mac:1234567890ab</dm:deviceID>
+	<dm:timestamp>2007-06-22T20:57:29Z</dm:timestamp>
+      </dm:device>
+     </gp:geopriv>
+    </status>
+    <timestamp>2003-06-22T20:57:29Z</timestamp>
+   </tuple>
+  </presence>
+</box>
