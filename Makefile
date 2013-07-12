@@ -27,16 +27,10 @@ endif
 XSLT_HOME := ${XML_HOME}/rfc2629xslt
 HTML_XSLT := false
 IDNITS := ${XML_HOME}/idnits/idnits
-ifeq "$(shell uname -s 2>/dev/null)" "Darwin"
-    sed_i := sed -i ''
-else
-    sed_i := sed -i
-endif
 
-
-REV_CURRENT = $(shell git tag | grep "${BASE}" | tail -1 | awk -F- '{print $$NF}')
-REV_NEXT = $(shell printf "%.2d" `echo ${current_rev}+1 | bc`)
-BASE_NEXT = $(draft_title)-$(next_rev)
+REV_CURRENT = $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
+REV_NEXT = $(shell printf "%02d" $$((${REV_CURRENT}+1)) )
+BASE_NEXT = ${BASE}-${REV_NEXT}
 
 TARGET ?= txt
 
@@ -119,8 +113,7 @@ validate: $(wildcard xml/*.xml example*.xml)
 submit: ${BASE_NEXT}.txt
 
 ${BASE_NEXT}.xml:
-	cp $(draft_title).xml $(next_rev_name).xml
-	$(sed_i) -e"s/$(draft_title)-latest/$(next_rev_name)/" $(next_rev_name).xml
+	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < ${BASE}.xml > ${BASE_NEXT}.xml
 
 clean:
 	-rm -f $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
