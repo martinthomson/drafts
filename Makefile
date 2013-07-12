@@ -7,9 +7,7 @@ endif
 ifeq "${TOP}" ""
 error "$${TOP} must be specified"
 endif
-ifeq "${BASE}" ""
-error "$${BASE} must be specified"
-endif
+BASE := $(lastword $(basename $(wildcard draft-*.xml)))
 XML := ${BASE}.xml
 DTD := rfc2629.dtd
 XSLT := rfc2629.xslt
