@@ -430,7 +430,9 @@
         <t>
           The binary form uses single-precision floating point values <xref target="IEEE.754"> IEEE
           754</xref> to represent coordinates, distance and angle measures.  Single precision values
-          are 32-bit values with a sign bit, 8 exponent bits and 23 fractional bits.
+          are 32-bit values with a sign bit, 8 exponent bits and 23 fractional bits.  This uses the
+          interchange format defined in <xref target="IEEE.754"/>: sign, biased exponent and
+          significand, with the most significant bit first.
         </t>
         <t>
           Binary-encoded coordinate values are considered to be a single value without uncertainty.
@@ -1418,13 +1420,6 @@
     location.  This restricts information about the map URL to the entity serving the map request.
     If the map URL conveys more information about a target than a map server is authorized to
     receive, that URL MUST NOT be included in the PIDF-LO.
-  </t>
-  <t>
-    The fractional bits in <xref target="IEEE.754">IEEE 754</xref> floating point values can be used
-    as a covert channel.  For values of either zero or infinity, non-zero fraction bits could be
-    used to convey information.  If the presence of covert channels is not desired then the
-    fractional bits MUST be set to zero.  There is no need to represent NaN (not a number) in this
-    encoding.
   </t>
 </section>
 
