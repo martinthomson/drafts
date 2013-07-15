@@ -431,7 +431,7 @@
           The binary form uses single-precision floating point values <xref target="IEEE.754"> IEEE
           754</xref> to represent coordinates, distance and angle measures.  Single precision values
           are 32-bit values with a sign bit, 8 exponent bits and 23 fractional bits.  This uses the
-          interchange format defined in <xref target="IEEE.754"/>: sign, biased exponent and
+          interchange format defined in <xref target="IEEE.754"/>, that is: sign, biased exponent and
           significand, with the most significant bit first.
         </t>
         <t>
