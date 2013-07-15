@@ -10,6 +10,7 @@
 <!ENTITY RFC4776 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4776.xml">
 <!ENTITY RFC5139 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5139.xml">
 <!ENTITY RFC5226 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5226.xml">
+<!ENTITY RFC5246 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml">
 <!ENTITY RFC5491 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5491.xml">
 <!ENTITY RFC5962 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5962.xml">
 <!ENTITY RFC6225 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6225.xml">
@@ -956,6 +957,13 @@
 +------+------+------+------+------+--  --+------+
 ]]></artwork>
     </figure>
+
+    <t>
+      Note that the binary form restricts data to 255 octets.  This restriction could be problematic
+      for URLs in particular.  Applications that use the XML form, but cannot guarantee that a
+      binary form won't be used, are encouraged to limit the size of the URL to fit within this
+      restriction.
+    </t>
   </section>
 
   <section anchor="map-crs" title="Map Coordinate Reference System">
@@ -1394,9 +1402,23 @@
   <t>
     Privacy for location data is typically important.  Adding relative location may increase the
     precision of the location, but does not otherwise alter its privacy considerations, which are
-    discussed in <xref target="RFC4119"/>
+    discussed in <xref target="RFC4119"/>.
   </t>
-
+  <t>
+    The map URL provided in a relative location could accidentally reveal information if a Location
+    Recipient uses the URL to acquire the map.  The coverage area of a map, or parameters of the URL
+    itself, could provide information about the location of a Target.  In combination with other
+    information that could reveal the set of potential Targets that the Location Recipient has
+    location information for, acquiring a map could leak significant information.  In particular, it
+    is important to note that the Target and Location Recipient are often the same entity.
+  </t>
+  <t>
+    Access to map URLs MUST be secured with <xref target="RFC5246">TLS</xref> (that is, restricting
+    the map URL to be an https URI), unless the map URL cannot leak information about the Target's
+    location.  This restricts information about the map URL to the entity serving the map request.
+    If the map URL conveys more information about a target than a map server is authorized to
+    receive, that URL MUST NOT be included in the PIDF-LO.
+  </t>
   <t>
     The fractional bits in <xref target="IEEE.754">IEEE 754</xref> floating point values can be used
     as a covert channel.  For values of either zero or infinity, non-zero fraction bits could be
@@ -1626,6 +1648,7 @@
       &RFC4776;
       &RFC5139;
       &RFC5226;
+      &RFC5246;
       &RFC5491;
       &RFC5962;
       &RFC6225;
