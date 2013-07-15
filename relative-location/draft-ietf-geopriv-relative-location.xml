@@ -359,6 +359,13 @@
           the &lt;orientation&gt; element.  The coordinate system also moves as described by the
           &lt;speed&gt; and &lt;heading&gt; elements.
         </t>
+
+        <t>
+          The single timestamp included in the tuple (or equivalent) element applies to all location
+          elements, including all three components of a relative location: baseline, reference and
+          relative.  This is particularly important when there are dynamic components to these
+          items.  A location generator is responsible for ensuring the consistency of these fields.
+        </t>
         
       </section>
 
