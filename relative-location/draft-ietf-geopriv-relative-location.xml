@@ -211,19 +211,16 @@
       <t>
         Creators of location objects with relative location thus have a choice of how much
         information to put into the "baseline" location and how much to put into the "reference"
-        location.  For example, all location information could be put inside the
-        &lt;relative-location&gt; element, so that clients that do not understand relative location
-        would receive no location information at all.  Alternatively, the baseline location value
-        could be precise enough to specify a building that contains the relative location, and the
-        reference location could specify a point within the building from which the offset is
-        measured.
+        location.  For example, the baseline location value could be precise enough to specify a
+        building that contains the relative location, and the reference location could specify a
+        point within the building from which the offset is measured.
       </t>
       <t>
-        The baseline location SHOULD be general enough to describe both the reference location and
-        the relative location (reference plus offset). Location objects SHOULD NOT have all location
-        information in the baseline location. Doing this would cause clients that do not understand
-        relative location to incorrectly interpret the baseline location (i.e., the reference point)
-        as the actual, precise location of the client.
+        Location objects SHOULD NOT have all location information in the baseline location.  Doing
+        this would cause clients that do not understand relative location to incorrectly interpret
+        the baseline location (i.e., the reference point) as the actual, precise location of the
+        client.  The baseline location is intended to carry a location that encompasses both the
+        reference location and the relative location (i.e., the reference location plus offset).
       </t>
 
       <t>
