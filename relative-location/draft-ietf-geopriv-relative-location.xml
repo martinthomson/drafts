@@ -464,8 +464,8 @@
       <section anchor="reference" title="Reference TLV">
         <t>
           When a reference is encoded in binary form, the baseline and reference locations are
-          combined in a reference TLV.  This TLV contains civic address TLVs (if the baseline was
-          a civic) or geo TLVs (if the baseline was a geo).
+          combined in a reference TLV.  This TLV is identified with the code 111 and contains civic
+          address TLVs (if the baseline was a civic) or geo TLVs (if the baseline was a geo).
         </t>
         <figure title="Reference TLV">
           <artwork><![CDATA[
@@ -779,9 +779,10 @@
             </t>
             </section><section title="TLV Encoding">
             <t>
-              A polygon containing 2D points uses a type code of 119.  A polygon with 3D points uses a
-              type code of 120.  A prism uses a type code of 121.  The number of points can be inferred
-            from the length of the TLV.</t>
+              A polygon containing 2D points uses a type code of 119.  A polygon with 3D points uses
+              a type code of 120.  A prism uses a type code of 121.  The number of points can be
+              inferred from the length of the TLV.
+            </t>
             <figure title="Polygon or Prism Encoding">
               <artwork><![CDATA[
 +------+------+
@@ -884,7 +885,7 @@
   <section title="Orientation">
 
     <t>
-    The orientation of the target is described using one or two angles.</t>
+    The orientation of the target is described using one or two angles.  Orientation uses a type code of 123.</t>
 
     <figure title="Dynamic Orientation TLVs">
       <artwork><![CDATA[
@@ -900,7 +901,7 @@
   </section>
   <section title="Speed">
     <t>
-    The speed of the target is a scalar value in meters per second.</t>
+    The speed of the target is a scalar value in meters per second. Speed uses a type code of 124. </t>
 
     <figure title="Dynamic Speed TLVs">
       <artwork><![CDATA[
@@ -913,7 +914,7 @@
     </figure>
     </section><section title="Heading">
     <t>
-    The heading, or direction of travel, is described using one or two angles.</t>
+    The heading, or direction of travel, is described using one or two angles.  Heading uses a type code of 125.</t>
     <figure title="Dynamic Heading TLVs">
       <artwork><![CDATA[
 +------+------+
@@ -949,7 +950,8 @@
       &lt;map type="image/png"&gt;https://www.example.com/floorplans/123South/floor-2&lt;/map&gt;.
     </t>
     <t>
-      In binary, the map type is a separate TLV from the map URL:
+      In binary, the map type is a separate TLV from the map URL.  The media type uses a type code
+      of 126; the URL uses a type code of 127.
     </t>
 
     <figure title="Map URL TLVs">
@@ -1008,16 +1010,19 @@
       <figure title="Map Reference Point Example XML">
         <preamble>
           The &lt;offset&gt; element contains 2 (or 3) coordinates similar to a GML <spanx
-          style="verb">pos</spanx>, For example:
+          style="verb">pos</spanx>.  For example:
         </preamble>
         <artwork><![CDATA[
      <offset> 2670.0 1124.0 1022.0</offset>
 ]]></artwork>
       </figure>
+      <t>
+        The map referenc point uses a type code of 129.
+      </t>
       <figure title="Map Reference Point Coordinates TLV">
         <artwork><![CDATA[
    +------+------+
-   | 128  |Length|
+   | 129  |Length|
    +------+------+------+------+
    |  Coordinate-1             |
    +------+------+------+------+
@@ -1048,12 +1053,13 @@
       </t>
       <t>
         In XML, the &lt;orientation&gt; element contains a single floating point value, example
-        &lt;orientation&gt;67.00&lt;/orientation&gt;.  In TLV form:
+        &lt;orientation&gt;67.00&lt;/orientation&gt;.  In TLV form map orientation uses the code
+        130:
       </t>
       <figure title="Map Orientation TLV">
         <artwork><![CDATA[
 +------+------+------+------+------+------+
-|  129 |Length|  Angle                    |
+|  130 |Length|  Angle                    |
 +------+------+------+------+------+------+
 ]]></artwork>
       </figure>
@@ -1093,13 +1099,13 @@
       </t>
       <t>
         In XML, the &lt;scale&gt; element MAY contain a single scale value, or MAY contain 2 (or 3)
-        values in XML list form.  In TLV form, the length of the TLV determines how many scale
-        values are present:
+        values in XML list form.  In TLV form, scale uses a type code of 131.  The length of the TLV
+        determines how many scale values are present:
       </t>
       <figure title="Map Scale TLV">
         <artwork><![CDATA[
 +------+------+------+------+------+------+
-|  130 |Length|  Scale(s)               ...
+|  131 |Length|  Scale(s)               ...
 +------+------+------+------+------+------+
 ]]></artwork>
       </figure>
@@ -1276,11 +1282,11 @@
         |        |                                                 |
         | 127    | http://maps.example.com/3400Wacker/A6           |
         |        |                                                 |
-        | 128    | 0.0 4120.0                                      |
+        | 129    | 0.0 4120.0                                      |
         |        |                                                 |
-        | 129    | 113.0                                           |
+        | 130    | 113.0                                           |
         |        |                                                 |
-        | 130    | 10.6                                            |
+        | 131    | 10.6                                            |
         +--------+-------------------------------------------------+
 ]]></artwork>
     </figure>
@@ -1465,6 +1471,9 @@
    +--------+----------------------------------------+-----------+
    | RLtype | description                            | Reference |
    +--------+----------------------------------------+-----------+
+   | 0-40   | RESERVED by CAtypes registry           | this RFC  |
+   | 128    |                                        | & RFC4776 |
+   +--------+----------------------------------------+-----------+
    | 111    | relative location reference            | this RFC  |
    | 113    | relative location shape 2D point       | this RFC  |
    | 114    | relative location shape 3D point       | this RFC  | 
@@ -1481,9 +1490,9 @@
    | 125    | relative location dynamic heading      | this RFC  |
    | 126    | relative location map type             | this RFC  |
    | 127    | relative location map URI              | this RFC  |
-   | 128    | relative location map coordinates      | this RFC  |
-   | 129    | relative location map angle            | this RFC  |
-   | 130    | relative location map scale            | this RFC  |
+   | 129    | relative location map coordinates      | this RFC  |
+   | 130    | relative location map angle            | this RFC  |
+   | 131    | relative location map scale            | this RFC  |
    +--------+----------------------------------------+-----------+
 ]]></artwork>
     </figure>
