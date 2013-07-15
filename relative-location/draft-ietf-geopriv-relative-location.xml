@@ -412,6 +412,7 @@
           TLDs described in this document.
         </t>
       </section>
+
       <section title="Distances and Angles">
         <t>
           All distance measures used in shapes are expressed in meters.
@@ -423,6 +424,7 @@
           toward the first axis (x or Easting).
         </t>
       </section>
+
       <section title="Value Encoding">
         <t>
           The binary form uses single-precision floating point values <xref target="IEEE.754"> IEEE
@@ -435,6 +437,7 @@
           selected according to <xref target="Clinger1990"/>.
         </t>
       </section>
+
       <section title="Relative Location Restrictions">
         <t>
           More than one relative shape MUST NOT be included in either a PIDF-LO or TLV encoding of
@@ -1510,12 +1513,16 @@
       </list>
     </t>
   </section>
-  <section title="Registration of Relative Coordinate Reference System URNs">
+
+  <section title="Geopriv Identifiers Registry">
     <t>
       This section registers two URNs for use in identifying relative coordinate reference systems.
-      These are added to a new "Geopriv Identifiers" registry according to the procedures in Section 4
-      of <xref target="RFC3553"/>.  Registrations in this registry follow the <xref
-      target="RFC5226">IETF Review</xref> policy.
+      These are added to a new "Geopriv Identifiers" registry according to the procedures in Section
+      4 of <xref target="RFC3553"/>.  The "Geopriv Identifiers" registry is entered under the
+      "Uniform Resource Name (URN) Namespace for IETF Use" category.
+    </t>
+    <t>
+      Registrations in this registry follow the <xref target="RFC5226">IETF Review</xref> policy.
       <list style="hanging">
         <t hangText="Registry name:">Geopriv Identifiers</t>
         <t hangText="URN Prefix:">urn:ietf:params:geopriv:</t>
@@ -1544,7 +1551,8 @@
       The "Geopriv Identifiers" registry has two initial registrations, included in the following
       sections.
     </t>
-    <section title="Registration of 2D CRS URN">
+
+    <section title="Registration of Two-Dimentional Relative Coordinate Reference System URN">
       <t>
         This section registers the <spanx style="verb">urn:ietf:params:geopriv:relative:2d</spanx> URN
         in the "Geopriv Identifiers" registry.
@@ -1558,7 +1566,8 @@
         </list>
       </t>
     </section>
-    <section title="Registration of 3D CRS URN">
+
+    <section title="Registration of Three-Dimentional Relative Coordinate Reference System URN">
       <t>
         This section registers the <spanx style="verb">urn:ietf:params:geopriv:relative:3d</spanx> URN
         in the "Geopriv Identifiers" registry.
@@ -1573,6 +1582,7 @@
       </t>
     </section>
   </section>
+
   <section title="CAtype Registration">
     <t>
       This section adds a new entry to the CAtype registry defined by <xref target="RFC6848"/>.
@@ -1597,6 +1607,7 @@
     </t>
   </section>
 </section>
+
 <section title="Acknowledgements">
   <t>
     This is the product of a design team on relative location.  Besides the authors, this team
