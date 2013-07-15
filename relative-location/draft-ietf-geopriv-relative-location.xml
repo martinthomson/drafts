@@ -1617,30 +1617,6 @@
       </t>
     </section>
   </section>
-
-  <section title="CAtype Registration">
-    <t>
-      This section adds a new entry to the CAtype registry defined by <xref target="RFC6848"/>.
-    </t>
-    <t>
-      <list style="hanging">
-        <t hangText="Namespace URI:">urn:ietf:params:xml:ns:pidf:geopriv10:relative
-        </t>
-        <t hangText="Local Name:">REL
-        </t>
-        <t hangText="Description:">Relative location from a reference point
-        </t>
-        <t hangText="Contact:">The IESG (iesg@ietf.org); the GEOPRIV working group (geopriv@ietf.org).
-        </t>
-        <t hangText="Specification:"> RFCXXXX 
-        </t>
-        <t hangText="Schema:">urn:ietf:params:xml:schema:pidf:geopriv10:relativeLocation
-        </t>
-        <t hangText="Type:">A
-        </t>
-      </list>
-    </t>
-  </section>
 </section>
 
 <section title="Acknowledgements">
