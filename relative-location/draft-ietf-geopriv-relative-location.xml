@@ -1,6 +1,7 @@
 <?xml version="1.0"?>
 <?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
+<!ENTITY RFC1014 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1014.xml">
 <!ENTITY RFC2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
 <!ENTITY RFC3553 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3553.xml">
 <!ENTITY RFC3688 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3688.xml">
@@ -431,8 +432,9 @@
           The binary form uses single-precision floating point values <xref target="IEEE.754"> IEEE
           754</xref> to represent coordinates, distance and angle measures.  Single precision values
           are 32-bit values with a sign bit, 8 exponent bits and 23 fractional bits.  This uses the
-          interchange format defined in <xref target="IEEE.754"/>, that is: sign, biased exponent and
-          significand, with the most significant bit first.
+          interchange format defined in <xref target="IEEE.754"/> and Section 3.6 of <xref
+          target="RFC1014"/>, that is: sign, biased exponent and significand, with the most
+          significant bit first.
         </t>
         <t>
           Binary-encoded coordinate values are considered to be a single value without uncertainty.
@@ -1427,30 +1429,37 @@
   <section title="Relative Location Registry">
     <t>
       This document creates a new registry called "Relative Location Parameters".  As defined in
-    <xref target="RFC5226"/>, this registry operates under "IETF Review" rules.</t>
+      <xref target="RFC5226"/>, this registry operates under "IETF Review" rules.
+    </t>
     <t>
-    The content of this registry includes:</t>
-
-    <t>
-    Relative Location Code:  Numeric identifier, assigned by IANA.</t>
-
-    <t>
-      Brief description:  Short description identifying the meaning of the
-    element.</t>
-
-    <t>
-      Reference to published specification:  A stable reference to an RFC
-      which describes the value in sufficient
-      detail so that interoperability between independent
-    implementations is possible.</t>
+      The content of this registry includes:
+      <list style="hanging">
+        <t hangText="Relative Location Code:">
+          Numeric identifier, assigned by IANA.
+        </t>
+        
+        <t hangText="Brief description:">
+          Short description identifying the meaning of the element.
+        </t>
+        
+        <t hangText="Reference to published specification:">
+          A stable reference to an RFC which describes the value in sufficient detail so that
+          interoperability between independent implementations is possible.
+        </t>
+      </list>
+    </t>
 
     <t>
       Values requested to be assigned into this registry MUST NOT conflict with values assigned in
       the CAtypes registry or vice versa, unless the IANA considerations section for the new value
       explicitly overrides this prohibition and the document defining the value describes how
-    conflicting TLV codes will be interpreted by implementations.</t>
+      conflicting TLV codes will be interpreted by implementations.  To ensure this, the CAtypes
+      entries are explicitly reserved in the initial values table below.  Those reserved entries can
+      be changed, but only with caution as explained here.
+    </t>
     <t>
-    The values defined are:</t>
+      The values defined are:
+    </t>
     <figure>
       <artwork><![CDATA[
    +--------+----------------------------------------+-----------+
@@ -1636,6 +1645,7 @@
   <back>
 
     <references title="Normative References">
+      &RFC1014;
       &RFC2119;
       &RFC3553;
       &RFC3688;
