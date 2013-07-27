@@ -1,0 +1,243 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="std" ipr="trust200902" docName="draft-thomson-http-unimportant-latest">
+  <front>
+    <title abbrev="Unimportant Requests">
+      Marking HTTP Requests as Unimportant
+    </title>
+
+    <author initials="M." surname="Thomson" fullname="Martin Thomson">
+      <organization>Microsoft</organization>
+      <address>
+        <postal>
+          <street>3210 Porter Drive</street>
+          <city>Palo Alto</city>
+          <region>CA</region>
+          <code>94304</code>
+          <country>US</country>
+        </postal>
+
+        <email>martin.thomson@skype.net</email>
+      </address>
+    </author>
+
+    <date year="2013"/>
+    <area>Application</area>
+    <workgroup>HTTPBIS</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <keyword>Unimportant</keyword>
+    <keyword>Priority</keyword>
+    <keyword>HTTP</keyword>
+    <keyword>CoAP</keyword>
+    <keyword>Battery</keyword>
+
+    <abstract>
+      <t>
+        An HTTP header field is defined that marks a request as unimportant.  Intermediaries can choose to discard the request or serve it from cache rather than forwarding it to an origin server.  This enables constrained origin servers, such as those that rely on battery power, to avoid expending limited resources on serving requests.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+
+    <section anchor="intro" title="Introduction">
+      <t>
+        <xref target="RFC2616">HTTP</xref> servers are beginning to appear as the interface to a wide array of devices.  Management interfaces in many devices have classically been provided as HTTP servers, but this trend now extends to HTTP APIs on a range of devices, including constrained devices.  Constrained devices are those with limited processing power, network connectivity or battery capacity.
+      </t>
+      <t>
+        The <xref target="CoAP">Constrained Application Protocol (CoAP)</xref> in particular is designed to provide devices with extremely limited capabilities a way to provide an HTTP-compatible interface to the information and services they provide.  An <xref target="CoAPHTTP">CoAP-HTTP gateway</xref> provides HTTP-capable clients a means of accessing these devices.
+      </t>
+      <t>
+        For a device that operates based on a battery, it is often crucial that the device remain dormant for extended periods.  Radio communication in particular consumes a significant amount of power.  Frequent communication limits the length of time that the device can operate.  It is often the case that communication can be initiated, but this could require a significant expenditure of stored energy.
+      </t>
+      <t>
+        Many constrained devices rely on intermediaries such as the CoAP-HTTP gateway to terminate requests and mediate access.  Clients that access the services provided by such limited devices can be unaware of the limited nature of the device serving the request, since they actually interact with the intermediary.  Even when the client is aware of these limitatons, it is not always possible for clients to learn whether any given request would cause significant expenditure of resources at the constrained device.
+      </t>
+      <t>
+        This document defines an HTTP header field, <spanx style="verb">Unimportant</spanx> that can be used by clients to indicate that a request is not urgent or important enough to cause a constrained server to expend special effort to serve.  An intermediary that is aware that the origin server is unable to handle the request can instead terminate the request.  The request is forwarded as normal to an origin server that is available.
+      </t>
+      <t>
+        The intermediary can generate an error response in response to an unimportant request, avoiding the need to contact the constrained origin server.  Alternatively, the intermediary could delay the request until the origin server becomes available, or serve a response from cache if that is possible.
+      </t>
+      <t>
+        No specific mechanism is defined for an origin server to inform intermediaries of absence or other indisposition.
+      </t>
+
+      <section anchor="terminology" title="Conventions and Terminology">
+       <t>
+         At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  The meaning of these is described in <xref target="RFC2119"/>.
+       </t>
+      </section>
+
+    </section>
+
+    <section anchor="header" title="The Unimportant Header Field">
+      <t>
+        The <spanx style="verb">Unimportant</spanx> header field indicates that a request is less important than a request that doesn't bear this header.  The value of the header field is a decimal number that can be either <spanx style="verb">1</spanx> or <spanx style="verb">0</spanx>, where <spanx style="verb">1</spanx> indicates that the request is unimportant and <spanx style="verb">0</spanx> (or an absent header field) indicates that the request is to be forwarded as normal.
+      </t>
+      <figure><artwork type="abnf"><![CDATA[
+Unimportant  = "Unimportant" ":" ("1" / "0")
+]]></artwork></figure>
+      <t>
+        Multiple values for the header field MUST NOT be included.  If multiple values are present, an intermediary MAY choose to treat the request in any way it chooses.
+      </t>
+
+      <figure>
+        <preamble>
+          For example, the following request indicates that it is unimportant:
+        </preamble>
+        <artwork><![CDATA[
+GET /m HTTP/1.1
+Host: device9710.example.net:11453
+Unimportant: 1
+]]></artwork>
+      </figure>
+
+      <figure>
+        <preamble>
+          An intermediary might reject this request, indicating that the origin server is not available using a 503 status code.
+        </preamble>
+        <artwork><![CDATA[
+HTTP/1.1 503 Service Unavailable
+Date: Fri, 26 Jul 2013 
+Content-Type: text/plain;charset=utf8
+Content-Length: 63
+
+The server is asleep, don't disturb it unless it's important.
+]]></artwork>
+      </figure>
+
+      <t>
+        A key characteristic of this header field is that intermediaries and clients that do not understand its semantics treat requests so marked no different to any other requests.  An intermediary that has no special information about the availability of the origin server will also forward the request.  That means that requests from a client that does not include this header will always reach the origin server.
+      </t>
+
+      <section title="Polling with Unimportant Requests">
+        <t>
+          Marking a request unimportant is quite useful for requests that do not require immediate action.  Clients might wish to have the request fulfilled, but are willing to wait until the origin server is present.  Such requests might be sent periodically until they succeed.
+        </t>
+        <t>
+          In some cases, origin server availability is predictable and known to the intermediary.  Some devices have predictable cycles of availability, which are used for brief bursts of communication.  If the next time that the origin server is available is known, an intermediary can include a <spanx style="verb">Retry-After</spanx> header field in a generated error response.
+        </t>
+        <figure>
+          <preamble>For example:</preamble>
+          <artwork><![CDATA[
+HTTP/1.1 503 Service Unavailable
+Date: Fri, 26 Jul 2013 03:34:19 GMT
+Retry-After: 4
+]]></artwork>
+        </figure>
+        <t>
+          Alternatively, requests can be held for an amount of time by the intermediary to be forwarded when the origin server becomes available.  Including a <spanx style="verb">Prefer</spanx> header field <xref target="PREFER"/> with the <spanx style="verb">wait</spanx> tag provides the intermediary information about how long the client is prepared to await a response.  This could allow the intermediary to reject the request immediately if the device is known to be unreachable for the entire duration.
+        </t>
+      </section>
+    </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>
+        Lowering the priority with which a request is handled is unlikely to cause any special concern with respect to security.
+      </t>
+      <t>
+        Intermediaries that do not support the <spanx style="verb">Unimportant</spanx> header field might erroneously cache a response from an intermediary that handles the request without forwarding to the origin server.  Intermediaries MUST NOT generate cacheable responses to requests containing an <spanx style="verb">Unimportant</spanx> header field.  Intermediaries MAY however provide cached responses originally provided by the origin server.
+      </t>
+    </section>
+
+    <section anchor="ack" title="Acknowledgements">
+      <t>
+        The original idea for this header field was devised by Matthew Kaufman and Bruce Lowekamp, who realized the importance of making the header a negative rather than positive expression of priority.
+      </t>
+    </section>
+
+    <!--
+        <appendix title="Change Log">
+        <t>[[The RFC Editor is requested to remove this section at publication.]]</t>
+        <t>Changes since -0-1:
+        <list style="symbols">
+        <t>Document created.</t>
+        </list>
+        </t>
+        </appendix>
+    -->
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+      <reference anchor="RFC2119">
+        <front>
+          <title>
+            Key words for use in RFCs to Indicate Requirement Levels
+          </title>
+          <author initials="S." surname="Bradner" fullname="Scott Bradner">
+            <organization>Harvard University</organization>
+            <address><email>sob@harvard.edu</email></address>
+          </author>
+          <date month="March" year="1997"/>
+        </front>
+        <seriesInfo name="BCP" value="14"/>
+        <seriesInfo name="RFC" value="2119"/>
+      </reference>
+      <reference anchor="RFC2616">
+        <front>
+          <title>
+            Hyper-Text Transfer Protocol -- HTTP/1.1
+          </title>
+          <author initials="R" surname="Fielding" fullname="Roy Fielding"/>
+          <author initials="J" surname="Gettys" fullname="Jim Gettys"/>
+          <author initials="J" surname="Mogul" fullname="J Mogul"/>
+          <author initials="H" surname="Frystyk" fullname="Henrik Frystyk"/>
+          <author initials="L" surname="Masinter" fullname="Larry Masinter"/>
+          <author initials="P" surname="Leach" fullname="P Leach"/>
+          <author initials="T" surname="Berners-Lee" fullname="Tim Berners-Lee"/>
+          <date month="June" year="1999"/>
+        </front>
+        <seriesInfo name="RFC" value="2616"/>
+      </reference>
+    </references>
+    <references title="Normative References">
+      <reference anchor="PREFER" target="">
+        <front>
+          <title>
+            The HTTP Prefer Header
+          </title>
+          <author initials="J" surname="Snell" fullname="James Snell">
+            <organization/>
+          </author>
+          <date day="1" month="January" year="2000"/>
+        </front>
+        <seriesInfo name="RFC" value="????"/>
+      </reference>
+      <reference anchor="CoAP" target="">
+        <front>
+          <title>
+            Constrained Application Protocol (CoAP)
+          </title>
+          <author initials="C" surname="Bormann" fullname="Carsten Bormann"/>
+          <author initials="z" surname="Shelby" fullname="Zack Shelby"/>
+          <date day="1" month="January" year="2000"/>
+        </front>
+        <seriesInfo name="RFC" value="????"/>
+      </reference>
+      <reference anchor="CoAPHTTP" target="">
+        <front>
+          <title>
+            Constrained Application Protocol (CoAP) HTTP Mapping
+          </title>
+          <author initials="C" surname="Bormann" fullname="Carsten Bormann"/>
+          <author initials="z" surname="Shelby" fullname="Zack Shelby"/>
+          <date day="1" month="January" year="2000"/>
+        </front>
+        <seriesInfo name="RFC" value="????"/>
+      </reference>
+    </references>
+  </back>
+</rfc>
