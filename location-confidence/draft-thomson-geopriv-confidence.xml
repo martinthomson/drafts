@@ -103,11 +103,31 @@
       <t>If a PIDF-LO does not include the confidence element, confidence is 95% <xref target="RFC5491"/>.  A Point shape does not have uncertainty (or it has infinite uncertainty), so confidence is meaningless for a point; therefore, this element MUST be omitted if only a point is provided.
       </t>
 
-      <t>Location generators SHOULD attempt to ensure that confidence is equal in each dimension when generating location information.  This restriction, while not always possible, allows for more accurate scaling, if scaling is necessary.
-      </t>
+      <section title="Generating Locations with Confidence">
+        <t>Location generators SHOULD attempt to ensure that confidence is equal in each dimension when generating location information.  This restriction, while not always practical, allows for more accurate scaling, if scaling is necessary.
+        </t>
 
-      <t>Confidence SHOULD NOT be included unless location information cannot be acquired with 95% confidence.
-      </t>
+        <t>Confidence MUST NOT be included unless location information cannot be acquired with 95% confidence.
+        </t>
+      </section>
+
+      <section title="Consuming and Presenting Confidence">
+        <t>
+          The inclusion of confidence that is anything other than 95% presents a potentially difficult usability for applications that use location information.  Effectively communicating the probability that a location is incorrect to a user can be difficult.
+        </t>
+        <t>
+          It is inadvisable to simply display locations of any confidence, or to display confidence in a separate or non-bovious fashion.  If locations with different confidence levels are displayed identically, or the distinction is subtle or easy to overlook - such as using fine graduations of color or transparency for graphical uncertainty regions, or displaying uncertainty graphically, but providing confidence as supplementary text - a user could fail to notice a difference in the quality of the location information that might be significant.
+        </t>
+        <t>
+          Depending on the circumstances, different ways of handling confidence might be appropriate.  <xref target="I-D.thomson-geopriv-uncertainty"/> describes techniques that could be appropriate for consumers that use automated processing as well as background on the issue.
+        </t>
+        <t>
+          Providing that the full implications of any choice for the application are understood, some amount of automated processing could be appropriate.  In a simple example, applications could choose to discard or suppress the display of location information if confidence does not meet a pre-determined threshold.
+        </t>
+        <t>
+          In settings where there is an opportunity for user training, some of these problems might be mitigated by defining different operational procedures for handling location information at different confidence levels.
+        </t>
+      </section>
     </section>
 
     <section title="Example">
