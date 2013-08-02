@@ -26,19 +26,17 @@
     </title>
 
     <author initials="M." surname="Thomson" fullname="Martin Thomson">
-      <organization>Andrew Corporation</organization>
+      <organization>Microsoft</organization>
       <address>
         <postal>
-          <street>Andrew Building (39)</street>
-          <street>Wollongong University Campus</street>
-          <street>Northfields Avenue</street>
-          <city>Wollongong</city>
-          <region>NSW</region>
-          <code>2522</code>
-          <country>AU</country>
+          <street></street>
+          <city>Mountain View</city>
+          <region>VA</region>
+          <code>94043</code>
+          <country>US</country>
         </postal>
 
-        <email>martin.thomson@andrew.com</email>
+        <email>martin.thomson@gmail.com</email>
       </address>
     </author>
 
@@ -108,7 +106,7 @@
       <t>Location generators SHOULD attempt to ensure that confidence is equal in each dimension when generating location information.  This restriction, while not always possible, allows for more accurate scaling, if scaling is necessary.
       </t>
 
-      <t>Confidence SHOULD NOT be included unless location information cannot be acquired with 95% confidence.  Confidence SHOULD NOT be included with civic address information; civic addresses are less subject to variable errors than geodetic positions.
+      <t>Confidence SHOULD NOT be included unless location information cannot be acquired with 95% confidence.
       </t>
     </section>
 
