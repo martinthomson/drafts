@@ -63,7 +63,7 @@
       <t>On the whole, a fixed definition for confidence ensures consistency between implementations.  Location generators that are aware of this constraint can generate location information at the required confidence.  Location recipients are able to make sensible assumptions about the quality of the information that they receive.
       </t>
 
-      <t>In some circumstances - particularly with pre-existing systems - location generators might provide location information with some other confidence.  Common values include 38%, 67% and 90%; all of which are prevalent in current systems.  Existing forms of expressing location information, such as that defined in <xref target="3GPP-TS-23_032"/>, contain elements that express the confidence in the result.
+      <t>In some circumstances - particularly with pre-existing systems - location generators might provide location information with some other confidence.  Common values include 38%, 67% and 90%; all of which are prevalent in current systems.  Existing forms of expressing location information, such as that defined in <xref target="TS-3GPP-23_032"/>, contain elements that express the confidence in the result.
       </t>
 
       <t>The addition of a confidence element provides information that was previously unavailable to recipients of location information.  Without this information, a location server or generator that has access to location information with a confidence lower than 95% has two options:
@@ -116,7 +116,7 @@
           The inclusion of confidence that is anything other than 95% presents a potentially difficult usability for applications that use location information.  Effectively communicating the probability that a location is incorrect to a user can be difficult.
         </t>
         <t>
-          It is inadvisable to simply display locations of any confidence, or to display confidence in a separate or non-bovious fashion.  If locations with different confidence levels are displayed identically, or the distinction is subtle or easy to overlook - such as using fine graduations of color or transparency for graphical uncertainty regions, or displaying uncertainty graphically, but providing confidence as supplementary text - a user could fail to notice a difference in the quality of the location information that might be significant.
+          It is inadvisable to simply display locations of any confidence, or to display confidence in a separate or non-obvious fashion.  If locations with different confidence levels are displayed such that the distinction is subtle or easy to overlook - such as using fine graduations of color or transparency for graphical uncertainty regions, or displaying uncertainty graphically, but providing confidence as supplementary text - a user could fail to notice a difference in the quality of the location information that might be significant.
         </t>
         <t>
           Depending on the circumstances, different ways of handling confidence might be appropriate.  <xref target="I-D.thomson-geopriv-uncertainty"/> describes techniques that could be appropriate for consumers that use automated processing as well as background on the issue.
@@ -297,14 +297,13 @@
       &RFC3693;
       &I-D.thomson-geopriv-uncertainty;
       &RFC5491;
-      <reference
-          anchor="3GPP-TS-23_032">
+      <reference anchor="TS-3GPP-23_032">
         <front>
           <title>Universal Geographic Area Description (GAD)</title>
           <author><organization>3GPP</organization></author>
-          <date day="14" month="December" year="2009"/>
+          <date month="September" year="2012"/>
         </front>
-        <seriesInfo name="3GPP TS" value="23.032 9.0.0"/>
+        <seriesInfo name="3GPP TS" value="23.032 11.0.0"/>
         <format type="HTML" target="http://www.3gpp.org/ftp/Specs/html-info/23032.htm"/>
       </reference>
 
