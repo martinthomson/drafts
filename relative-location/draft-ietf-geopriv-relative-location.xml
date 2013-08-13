@@ -3,9 +3,13 @@
 <!DOCTYPE rfc SYSTEM "rfc2629.dtd" [
 <!ENTITY RFC1014 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.1014.xml">
 <!ENTITY RFC2119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml">
+<!ENTITY RFC2046 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2046.xml">
+<!ENTITY RFC2616 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml">
+<!ENTITY RFC2818 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml">
 <!ENTITY RFC3553 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3553.xml">
 <!ENTITY RFC3688 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3688.xml">
 <!ENTITY RFC3863 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3863.xml">
+<!ENTITY RFC3986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.3986.xml">
 <!ENTITY RFC4119 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4119.xml">
 <!ENTITY RFC4479 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4479.xml">
 <!ENTITY RFC4776 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.4776.xml">
@@ -250,15 +254,16 @@
       </t>
 
       <t>
-        Optionally, a reference to a 'map' document can be provided.  The reference is a URI.  The
-        document could be an image or dataset that represents a map, floorplan or other form.  The
-        type of document the URI points to is described as a MIME media type.  Metadata in the
-        relative location can include the location of the reference point in the map as well as an
-        orientation (angle from North) and scale to align the document Co-ordinate Reference System
-        (CRS) with the WGS84 <xref target="WGS84"/> CRS.  The document is assumed to be useable by
-        the application receiving the PIDF with the relative location to locate the reference point
-        in the map.  This document does not describe any mechanisms for displaying or manipulating
-        the document other than providing the reference location, orientation and scale.
+        Optionally, a reference to a 'map' document can be provided.  The reference is a <xref
+        target="RFC3986">URI</xref>.  The document could be an image or dataset that represents a
+        map, floorplan or other form.  The type of document the URI points to is described as a
+        <xref target="RFC2046">MIME media type</xref>.  Metadata in the relative location can
+        include the location of the reference point in the map as well as an orientation (angle from
+        North) and scale to align the document Co-ordinate Reference System (CRS) with the WGS84
+        <xref target="WGS84"/> CRS.  The document is assumed to be useable by the application
+        receiving the PIDF with the relative location to locate the reference point in the map.
+        This document does not describe any mechanisms for displaying or manipulating the document
+        other than providing the reference location, orientation and scale.
       </t>
 
       <figure>
@@ -844,12 +849,12 @@
   <gs:ArcBand xmlns:gml="http://www.opengis.net/gml"
               xmlns:gs="http://www.opengis.net/pidflo/1.0"
               srsName="urn:ietf:params:geopriv:relative:2d">
-    <gml:pos>$Coordinate-1 $Coordinate-2$</gml:pos>
+    <gml:pos>$Coordinate-1$ $Coordinate-2$</gml:pos>
     <gs:innerRadius uom="urn:ogc:def:uom:EPSG::9001">
       $Inner-Radius$
     </gs:innerRadius>
     <gs:outerRadius uom="urn:ogc:def:uom:EPSG::9001">
-      $Inner-Radius$
+      $Outer-Radius$
     </gs:outerRadius>
     <gs:startAngle uom="urn:ogc:def:uom:EPSG::9102">
      $Start-Angle$
@@ -950,11 +955,12 @@
     <t>
       In XML, the map is a &lt;map&gt; element defined within &lt;relative-location&gt; and contains
       the URL.  The URL is encoded as a UTF-8 encoded string.  An <spanx style="verb">http:</spanx>
-      or <spanx style="verb">https:</spanx> URL MUST be used unless the entity creating the PIDF-LO
-      is able to ensure that authorized recipients of this data are able to use other URI schemes.
-      A "type" attribute MUST be present and specifies the kind of map the URL points to.  Map types
-      are specified as MIME media types as recorded in the IANA Media Types registry.  For example
-      &lt;map type="image/png"&gt;https://www.example.com/floorplans/123South/floor-2&lt;/map&gt;.
+      (<xref target="RFC2616"/>) or <spanx style="verb">https:</spanx> (<xref target="RFC2818"/>)
+      URL MUST be used unless the entity creating the PIDF-LO is able to ensure that authorized
+      recipients of this data are able to use other URI schemes.  A "type" attribute MUST be present
+      and specifies the kind of map the URL points to.  Map types are specified as MIME media types
+      as recorded in the IANA Media Types registry.  For example &lt;map
+      type="image/png"&gt;https://www.example.com/floorplans/123South/floor-2&lt;/map&gt;.
     </t>
     <t>
       In binary, the map type is a separate TLV from the map URL.  The media type uses a type code
@@ -1024,7 +1030,7 @@
 ]]></artwork>
       </figure>
       <t>
-        The map referenc point uses a type code of 129.
+        The map reference point uses a type code of 129.
       </t>
       <figure title="Map Reference Point Coordinates TLV">
         <artwork><![CDATA[
@@ -1040,8 +1046,11 @@
 ]]></artwork>
       </figure>
       <t>
-        If omitted, a value containing all zeros is assumed.  If the coordinates provided contain fewer
-        values than are needed, the first value from the set is applied in place of any missing values.
+        If omitted, a value containing all zeros is assumed.  If the coordinates provided contain
+        fewer values than are needed, the first value from the set is applied in place of any absent
+        values.  Thus, if a single value is provided, that value is used for Coordinate-2 and
+        Coordinate-3 (if required).  If two values are provided and three are required, the value of
+        Coordinate-1 is used in place of Coordinate-3.
       </t>
     </section>
 
@@ -1299,7 +1308,19 @@
     </figure>
   </section>
 </section>
+
 <section anchor="schema" title="Schema Definition">
+  <t>
+    <list style="hanging">
+      <t hangText="Note:">
+        The pattern value for <spanx style="verb">mimeType</spanx> has been folded onto multiple
+        lines.  Whitespace has been added to conform to comply with document formatting
+        restrictions.  Extra whitespace around the line endings MUST be removed before using this
+        schema.
+      </t>
+    </list>
+  </t>
+
   <figure title="xml schema relative-location">
     <artwork><![CDATA[
 <?xml version="1.0"?>
@@ -1396,9 +1417,9 @@
 
   <xs:simpleType name="mimeType">
     <xs:restriction base="xs:token">
-      <xs:pattern value="[!#$%&amp;'\*\+\-\.\dA-Z^_`a-z\|~]+
-      /[!#$%&amp;'\*\+\-\.\dA-Z^_`a-z\|~]+([\t ]*;([\t ])*[!#$%&amp;
-      '\*\+\-\.\dA-Z^_`a-z\|~]+=([!#$%&amp;'\*\+\-\.\dA-Z^_`a-z\|~]+|
+     <xs:pattern value="[!#$%&amp;'\*\+\-\.\dA-Z^_`a-z\|~]+
+     /[!#$%&amp;'\*\+\-\.\dA-Z^_`a-z\|~]+([\t ]*;([\t ])*[!#$%&amp;
+     '\*\+\-\.\dA-Z^_`a-z\|~]+=([!#$%&amp;'\*\+\-\.\dA-Z^_`a-z\|~]+|
       &quot;([!#-\[\]-~]|[\t ]*|\\[\t !-~])*&quot;))*"/>
     </xs:restriction>
   </xs:simpleType>
@@ -1509,7 +1530,8 @@
     
     <t>
       This document registers a new XML namespace, as per the guidelines in <xref
-      target="RFC3688"/>).</t>
+      target="RFC3688"/>).
+    </t>
       
       <figure><artwork><![CDATA[
    URI:  urn:ietf:params:xml:ns:pidf:geopriv10:relative
@@ -1534,9 +1556,10 @@
                  RFCXXXX</a>.</p>
         </body>
       </html>
-  <!-- [[NOTE TO RFC-EDITOR: Please replace all instances of RFCXXXX  
-       with the number of the published
-       document and remove this note.]] -->
+<!-- 
+  [[NOTE TO RFC-EDITOR: Please replace all instances of RFCXXXX  
+  with the number of the published document and remove this note.]]
+-->
        END
 ]]></artwork>
     </figure>
@@ -1550,8 +1573,8 @@
         <t hangText="URI:">urn:ietf:params:xml:schema:pidf:geopriv10:relativeLocation</t>
         <t hangText="Registratant Contact:">IETF, GEOPRIV working group (geopriv@ietf.org),
         Martin Thomson (martin.thomson@skype.net).</t>
-        <t hangText="Schema">The XML for this schema is the entirety of Section 6
-        of this document.</t>
+        <t hangText="Schema">The XML for this schema is found in <xref target="schema"/> of this
+        document.</t>
       </list>
     </t>
   </section>
@@ -1639,8 +1662,12 @@
     <references title="Normative References">
       &RFC1014;
       &RFC2119;
+      &RFC2046;
+      &RFC2616;
+      &RFC2818;
       &RFC3553;
       &RFC3688;
+      &RFC3986;
       &RFC4119;
       &RFC4776;
       &RFC5139;
@@ -1731,7 +1758,7 @@
           </author> 
           <date day="3" month="January" year="2000"/> 
         </front> 
-        <seriesInfo name="NIMA"                    value="TR8350.2"/>
+        <seriesInfo name="NIMA" value="TR8350.2"/>
         <format type="TXT"
                 target="https://www1.nga.mil/PRODUCTSSERVICES/GEODESYGEOPHYSICS/WORLDGEODETICSYSTEM/Pages/default.aspx"/>
       </reference> 
