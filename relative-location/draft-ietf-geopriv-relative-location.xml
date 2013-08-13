@@ -1462,8 +1462,10 @@
 <section anchor="iana" title="IANA Considerations">
   <section title="Relative Location Registry">
     <t>
-      This document creates a new registry called "Relative Location Parameters".  As defined in
-      <xref target="RFC5226"/>, this registry operates under "IETF Review" rules.
+      This document creates a new registry called "Relative Location Parameters".  This shares a
+      page, entitled "Civic and Relative Location Parameters" with the existing "Civic Address Types
+      Registry (CAtypes)" registry.  As defined in <xref target="RFC5226"/>, this new registry
+      operates under "IETF Review" rules.
     </t>
     <t>
       The content of this registry includes:
@@ -1485,11 +1487,12 @@
 
     <t>
       Values requested to be assigned into this registry MUST NOT conflict with values assigned in
-      the CAtypes registry or vice versa, unless the IANA considerations section for the new value
-      explicitly overrides this prohibition and the document defining the value describes how
-      conflicting TLV codes will be interpreted by implementations.  To ensure this, the CAtypes
-      entries are explicitly reserved in the initial values table below.  Those reserved entries can
-      be changed, but only with caution as explained here.
+      the "Civic Address Types Registry (CAtypes)" registry or vice versa, unless the IANA
+      considerations section for the new value explicitly overrides this prohibition and the
+      document defining the value describes how conflicting TLV codes will be interpreted by
+      implementations.  To ensure this, the CAtypes entries are explicitly reserved in the initial
+      values table below.  Those reserved entries can be changed, but only with caution as explained
+      here.
     </t>
     <t>
       The values defined are:
