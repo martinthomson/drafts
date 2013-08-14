@@ -141,7 +141,7 @@ The server is asleep, don't disturb it unless it's urgent.
         </t>
         <t>
           The following describes a potential set of policies regarding selection and treatment of <spanx style="verb">Nice</spanx> header field value:
-          <list style="numbers">
+          <list style="format nice: %d =">
             <t>
               The client regards the request as relatively urgent, but not critically so.  An intermediary might use a heuristic with a moderate risk of false positives in determining whether the server is available.  An intermediary might also forward a request so marked to a dormant device that has a relatively low activation cost.
             </t>
