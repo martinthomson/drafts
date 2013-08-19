@@ -92,10 +92,10 @@
         request is forwarded as normal to an origin server that is available.
       </t>
       <t>
-        An intermediary can generate an error response in response to a nice request, avoiding the
-        need to contact the constrained origin server.  Alternatively, the intermediary could delay
-        the request until the origin server becomes available or serve a response from cache if that
-        is possible.
+        An intermediary can generate an error or 203 (Non-Authoritative Information) response in
+        response to a nice request, avoiding the need to contact the constrained origin server.
+        Alternatively, the intermediary could delay the request until the origin server becomes
+        available or serve a response from cache if that is possible.
       </t>
       <t>
         No specific mechanism is defined for an origin server to inform intermediaries of absence or
