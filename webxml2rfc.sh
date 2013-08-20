@@ -68,6 +68,6 @@ fi
 
 if [[ "${OUTPUT##*.}" = "txt" || "${OUTPUT##*.}" = "unpg" ]]; then
     sed -i -e '/CGItemp/ {s/^.*$/'"${OUTPUT##*/}"'/;:a;s/^.\{1,70\}$/ & /;ta}' "$OUTPUT"
-else
-    sed -i -e 's/CGItemp[-0-9]*//'"${OUTPUT##*/}"'/' "$OUTPUT"
+#else
+#    sed -i -e 's/CGItemp[-0-9]*//'"${OUTPUT##*/}"'/' "$OUTPUT"
 fi

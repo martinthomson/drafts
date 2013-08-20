@@ -26,13 +26,13 @@ XSLT_HOME := ${XML_HOME}/rfc2629xslt
 HTML_XSLT := false
 IDNITS := ${XML_HOME}/idnits/idnits
 
-REV_CURRENT = $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
+REV_CURRENT := $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
 ifeq "${REV_CURRENT}" ""
-REV_NEXT = 00
+REV_NEXT ?= 00
 else
-REV_NEXT = $(shell printf "%02d" $$((${REV_CURRENT}+1)) )
+REV_NEXT ?= $(shell printf "%02d" `echo '${REV_CURRENT}+1' | bc`)
 endif
-BASE_NEXT = ${BASE}-${REV_NEXT}
+BASE_NEXT := ${BASE}-${REV_NEXT}
 
 TARGET ?= txt
 
@@ -120,6 +120,16 @@ ${BASE_NEXT}.xml:
 clean:
 	-rm -f $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
 
-test:
-	echo ${REV_CURRENT}
-	echo $(shell printf "%02d" $$((${REV_CURRENT}+1)) )
+GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
+.TRANSIENT: ${GHPAGES_TMP}
+ghpages: 
+	git checkout master
+	for i in *; do [ -d $i ] && (cd $i && echo $i && $(MAKE) txt html); done
+        find . -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
+	@find ${GHPAGES_TMP}
+	git checkout gh-pages
+	git pull
+	mv -f ${GHPAGES_TMP}/* .
+	git add *.txt *.html
+	git commit -am "Script updating page."
+	#-rf -rf ${GHPAGES_TMP}
