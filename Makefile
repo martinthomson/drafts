@@ -4,9 +4,6 @@ else
     CYGPATH := echo
 endif
 
-ifeq "${TOP}" ""
-error "$${TOP} must be specified"
-endif
 BASE := $(lastword $(basename $(wildcard draft-*.xml)))
 XML := ${BASE}.xml
 DTD := rfc2629.dtd
@@ -39,7 +36,11 @@ TARGET ?= txt
 EXTRA := html pdf xhtml svg nr unpg
 
 .PHONY: default all extra nits validate clean submit
+ifeq "${TOP}" ""
+default:
+else
 default: ${TARGET}
+endif
 extra: default ${EXTRA}
 all: extra nits validate
 
@@ -125,7 +126,7 @@ GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 ghpages: 
 	git checkout master
 	-for i in *; do [ -d $$i ] && (cd $$i && $(MAKE) txt html); done
-        find . -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
+	find . -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
 	@find ${GHPAGES_TMP}
 	git checkout gh-pages
 	git pull
