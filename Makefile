@@ -124,8 +124,11 @@ clean:
 GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 .TRANSIENT: ${GHPAGES_TMP}
 GITBRANCH := $(shell git branch | grep '\*' | cut -c3- -)
-ghpages: 
+recurse:
 	for i in *; do [ ! -d $$i ] || (cd $$i && $(MAKE) txt html); done
+
+ghpages: recurse
+	mkdir ${GHPAGES_TMP}
 	find . -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
 	@find ${GHPAGES_TMP}
 	git checkout gh-pages
