@@ -123,9 +123,9 @@ clean:
 
 GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 .TRANSIENT: ${GHPAGES_TMP}
+GITBRANCH := $(shell git branch | grep '\*' | cut -c3- -)
 ghpages: 
-	git checkout master
-	-for i in *; do [ -d $$i ] && (cd $$i && $(MAKE) txt html); done
+	for i in *; do [ ! -d $$i ] || (cd $$i && $(MAKE) txt html); done
 	find . -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
 	@find ${GHPAGES_TMP}
 	git checkout gh-pages
@@ -133,4 +133,5 @@ ghpages:
 	mv -f ${GHPAGES_TMP}/* .
 	git add *.txt *.html
 	git commit -am "Script updating page."
+	git checkout ${GITBRANCH}
 	#-rf -rf ${GHPAGES_TMP}
