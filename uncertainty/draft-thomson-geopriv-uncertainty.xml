@@ -86,7 +86,7 @@
        <t>This document assumes a basic understanding of the principles of mathematics, particularly statistics and geometry.
         </t>
 
-        <t>Some terminology is borrowed from <xref target="RFC3693"/> and <xref target="I-D.ietf-geopriv-arch"/>.</t>
+        <t>Some terminology is borrowed from <xref target="RFC3693"/> and <xref target="RFC6280"/>.</t>
 
         <t>Mathematical formulae are presented using the following notation: add <spanx style="verb">+</spanx>, subtract <spanx style="verb">-</spanx>, multiply <spanx style="verb">*</spanx>, divide <spanx style="verb">/</spanx>, power <spanx style="verb">^</spanx> and absolute value <spanx style="verb">|x|</spanx>.  Precedence is indicated using parentheses.  Mathematical functions are represented by common abbreviations: square root <spanx style="verb">sqrt(x)</spanx>, sine <spanx style="verb">sin(x)</spanx>, cosine <spanx style="verb">cos(x)</spanx>, inverse cosine <spanx style="verb">acos(x)</spanx>, tangent <spanx style="verb">tan(x)</spanx>, inverse tangent <spanx style="verb">atan(x)</spanx>, error function <spanx style="verb">erf(x)</spanx>, and inverse error function <spanx style="verb">erfinv(x)</spanx>.
         </t>
@@ -825,8 +825,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5139.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5222.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5491.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-geopriv-policy.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-geopriv-arch.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6280.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.thomson-geopriv-location-obscuring.xml"?>
 
       <reference anchor="WGS84" target="">
@@ -990,7 +989,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
       </t>
 
       <section anchor="polygonup" title="Checking that a Polygon Upward Normal Points Up">
-        <t><xref target="RFC5491">RFC 5491</xref> mandates that polygons be presented in anti-clockwise direction so that the upward normal is in an upward direction.  Accidental reversal of points can invert this vector.  This error can be hard to detect just by looking at the series of coordinates that form the polygon.
+        <t><xref target="RFC5491">RFC 5491</xref> stipulates that polygons be presented in anti-clockwise direction so that the upward normal is in an upward direction.  Accidental reversal of points can invert this vector.  This error can be hard to detect just by looking at the series of coordinates that form the polygon.
         </t>
 
         <t>Calculate the dot product of the <xref target="polygonupnormal">upward normal of the polygon</xref> and any vector that points away from the center of the Earth from the location of polygon.  If this product is positive, then the polygon upward normal also points away from the center of the Earth.
