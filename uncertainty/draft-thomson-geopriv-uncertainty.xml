@@ -10,7 +10,7 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="info" ipr="trust200902">
+<rfc category="info" ipr="trust200902" docName="draft-thomson-geopriv-uncertainty-latest">
   <front>
     <title abbrev="Uncertainty &amp; Confidence">
       Representation of Uncertainty and Confidence in PIDF-LO
@@ -47,7 +47,7 @@
       </address>
     </author>
 
-    <date month="March" year="2012"/>
+    <date year="2013"/>
     <area>Application</area>
     <workgroup>GEOPRIV</workgroup>
     <keyword>Internet-Draft</keyword>
