@@ -27,7 +27,7 @@ REV_CURRENT := $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
 ifeq "${REV_CURRENT}" ""
 REV_NEXT ?= 00
 else
-REV_NEXT ?= $(shell printf "%02d" `echo '${REV_CURRENT}+1' | bc`)
+REV_NEXT ?= $(shell printf "%.2d" $$((1${REV_CURRENT}-99)))
 endif
 BASE_NEXT := ${BASE}-${REV_NEXT}
 
@@ -115,7 +115,7 @@ validate: $(wildcard xml/*.xml example*.xml)
 
 submit: ${BASE_NEXT}.txt
 
-${BASE_NEXT}.xml:
+${BASE_NEXT}.xml: ${BASE}.xml
 	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < ${BASE}.xml > ${BASE_NEXT}.xml
 
 clean:
@@ -137,4 +137,4 @@ ghpages: recurse
 	git add *.txt *.html
 	git commit -am "Script updating page."
 	git checkout ${GITBRANCH}
-	#-rf -rf ${GHPAGES_TMP}
+	-rf -rf ${GHPAGES_TMP}
