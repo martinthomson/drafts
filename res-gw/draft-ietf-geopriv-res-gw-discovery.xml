@@ -230,17 +230,15 @@
           Unfortunately, such an active involvement in the discovery process only works for new
           residential gateway devices that implement those recommendations. </t>
 
-        <t>Where residential gateways already exist, direct involvement of the gateway in LIS
+        <t>
+          Where residential gateways already exist, direct involvement of the gateway in LIS
           discovery requires that the residential gateway be updated or replaced. The cost of
           replacement is difficult to justify to the owner of the gateway, especially when it is
-          considered that the gateway still fills its primary function: Internet access. </t>
-
-        <t>Existing residential gateways have proven to be quite reliable devices, some operating
-          continuously for many years without failure. As a result, there are many operational
-          gateways that are of a considerable age, some well outside the period of manufacturer
-          support. Updating the software in such devices is not feasible in many cases. Even if
+          considered that the gateway still fills its primary function: Internet access.
+          Furthermore, updating the software in such devices is not feasible in many cases. Even if
           software updates were made available, many residential gateways cannot be updated
-          remotely, inevitably leading to some proportion that is not updated. </t>
+          remotely, inevitably leading to some proportion that is not updated.
+        </t>
 
         <t>This document therefore describes a method which can be used by Devices to discover their
           LIS without any assistance from the network.</t>
