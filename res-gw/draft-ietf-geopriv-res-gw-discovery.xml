@@ -339,25 +339,53 @@
       </section>
 
       <section anchor="shorten-dns" title="Shortened DNS Names">
-        <t>Additional domain names are added to allow for a single DNS record to cover a larger set
+        <t>
+          Additional domain names are added to allow for a single DNS record to cover a larger set
           of addresses. If the search on the domain derived from the full IP address does not
           produce a NAPTR record with the desired service tag (e.g.,
           <spanx style="verb">LIS:HELD</spanx>), a similar search is repeated based on a shorter
-          domain name, using a part of the IP address: <list style="symbols">
-            <t>For IP version 4, the resulting domain name SHOULD be shortened successively by one
+          domain name, using a part of the IP address: 
+          <list style="symbols">
+            <t>
+              For IP version 4, the resulting domain name SHOULD be shortened successively by one
               and two labels and the query repeated. This corresponds to a search on a /24 or /16
               network prefix. This allows for fewer DNS records in the case where a single access
-              network covering an entire /24 or /16 network is served by the same LIS. </t>
+              network covering an entire /24 or /16 network is served by the same LIS.
+            </t>
 
-            <t>For IP version 6, the resulting domain SHOULD be shortened sucessively by 16, 18, 20
+            <t>
+              For IP version 6, the resulting domain SHOULD be shortened sucessively by 16, 18, 20
               and 24 labels and the query repeated. This corresponds to a search on a /64, /56, /48
-              or /32 network prefix.</t>
-
+              or /32 network prefix.
+            </t>
           </list> 
+        </t>
+        <t>
+          For example, the IPv4 address <spanx style="verb">192.0.2.75</spanx> could result in
+          queries to:
+          <list style="symbols">
+            <t>75.2.0.192.in-addr.arpa.</t>
+            <t>2.0.192.in-addr.arpa.</t>
+            <t>0.192.in-addr.arpa.</t>
+          </list>
+        </t>
+        <t>
+          Similarly, the IPv6 address <spanx style="verb">2001:DB8::28e4:3a93:4429:dfb5</spanx>
+          could result in queries to:
+          <list style="symbols">
+            <t>5.b.f.d.9.2.4.4.3.9.a.3.4.e.8.2.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2 .ip6.arpa.</t>
+            <t>0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.</t>
+            <t>0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.</t>
+            <t>0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.</t>
+            <t>8.b.d.0.1.0.0.2.ip6.arpa.</t>
+          </list>
+        </t>
+        <t>
           The limited number of labels by which each name is shortened is intended to limit the
           number of DNS queries performed by Devices. If no LIS is discovered by this method, the
           result will be that no more than four U-NAPTR resolutions are invoked for each IP
-          address. </t>
+          address.
+        </t>
       </section>
 
       <section title="When To Use The Reverse DNS Method">
