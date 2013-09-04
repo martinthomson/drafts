@@ -530,6 +530,13 @@
         security requirements of the LCP it implements.  For HELD, these requirements are laid out
         in Section 9 of <xref target="RFC5985"/>.
       </t>
+      
+      <t>
+        A Device that discovers a LIS using the methods in this document MUST NOT provide that LIS
+        with additional information that might reveal its position, such as the location
+        measurements described in <xref target="I-D.ietf-geopriv-held-measurements"/>, unless it has
+        a secondary method for determining the authenticity of the LIS, such as a white list.
+      </t>
     </section>
 
     <section anchor="security" title="Security Considerations">
