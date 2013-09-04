@@ -100,7 +100,7 @@
         Without location information, some network services are not available. </t>
 
       <t>The configuration of a LIS IP address on a Device requires some automated process. This is
-        particularly relevant when it is considered that Devices might move between different access
+        particularly relevant when one considers that Devices might move between different access
         networks served by different LISs. <xref target="RFC5986">LIS Discovery</xref> describes a
         method that employs the Dynamic Host Configuration Protocol (<xref target="RFC2131"
           >DHCPv4</xref>, <xref target="RFC3315">DHCPv6</xref>) as input to U-NAPTR <xref
@@ -315,7 +315,7 @@
             target="I-D.cheshire-nat-pmp">NAT Port Mapping Protocol (NAT-PMP)</xref> are both able
           to provide the external address of a residential gateway device when enabled. These as
           well as proprietary methods for determining other addresses might also be available.
-          Because there is no assurance that these methods will be supported by any access network
+          Because there is no assurance that these methods will be supported by any access network,
           these methods are not mandated. Note also that in some cases, methods that rely on the
           view of the network from the residential gateway device could reveal an address in a
           private address range (see <xref target="assumptions"/>). </t>
@@ -456,10 +456,12 @@
       </section>
 
       <section title="Failure Modes">
-        <t>Successful use of private addresses relies on a DNS server that has records for the
+        <t>
+          Successful use of private addresses relies on a DNS server that has records for the
           address space that is used. Using a public IP address increases the likelihood of this.
           This document relies on STUN to provide the Device with a public reflexive transport
-          address. Configuration of STUN server is necessary to ensure that this is successful. </t>
+          address. Configuration of a STUN server is necessary to ensure that this is successful.
+        </t>
 
         <t>In cases where a virtual private network (VPN) or other tunnel is used, the entity
           providing a public IP address might not be able to provide the Device with location
