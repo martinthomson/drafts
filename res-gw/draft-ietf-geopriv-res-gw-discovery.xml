@@ -353,10 +353,11 @@
               and 24 labels and the query repeated. This corresponds to a search on a /64, /56, /48
               or /32 network prefix.</t>
 
-          </list> DNS queries on other prefixes than those listed above SHOULD NOT be performed in
-          order to limit the number of DNS queries performed by Devices. If no LIS is discovered by
-          this method, the result will be that no more than four U-NAPTR resolutions are invoked for
-          each IP address. </t>
+          </list> 
+          The limited number of labels by which each name is shortened is intended to limit the
+          number of DNS queries performed by Devices. If no LIS is discovered by this method, the
+          result will be that no more than four U-NAPTR resolutions are invoked for each IP
+          address. </t>
       </section>
 
       <section title="When To Use The Reverse DNS Method">
