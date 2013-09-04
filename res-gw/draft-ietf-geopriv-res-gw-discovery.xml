@@ -471,17 +471,30 @@
       </section>
 
       <section title="Deployment Considerations">
-        <t>An access network provider SHOULD provide NAPTR records for each public IP address that
-          is used for Devices within the access network. If the access network provider uses NAT,
-          any DNS server internal to that NAT SHOULD also include records for the private address
-          range. </t>
+        <t>
+          An access network provider SHOULD provide NAPTR records for each public IP address that is
+          used for Devices within the access network.
+        </t>
 
-        <t>NAPTR records can be provided for individual IP addresses. To limit the proliferation of
+        <t>
+          Any DNS server internal to a NAT SHOULD also include records for the private address
+          range.  These records might only be provided to clients making requests from the private
+          address range.  Doing so allows clients within the private address range to discover a LIS
+          based on their IP address prior to any address translation.  In geographically distributed
+          networks that use a private address range, this enables the use of a different LIS for
+          different locations, based on the IP address range used at each location.  Use of a
+          public, translated IP address for the network can still work, but it might result in a
+          suboptimal LIS selection.
+        </t>
+
+        <t>
+          NAPTR records can be provided for individual IP addresses. To limit the proliferation of
           identical records, a single record can be placed at a the higher nodes of the tree
           (corresponding to /24 and /16 for IPv4; /64, /48 and /32 for IPv6). A record at a higher
           point in the tree (those with a shorter prefix) applies to all addresses lower in the tree
           (those with a longer prefix); records at the lower point override those at higher points,
-          thus allowing for exceptions to be specified. </t>
+          thus allowing for exceptions to be specified.
+        </t>
       </section>
 
     </section>
