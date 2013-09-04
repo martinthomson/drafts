@@ -461,10 +461,6 @@
           This document relies on STUN to provide the Device with a public reflexive transport
           address. Configuration of STUN server is necessary to ensure that this is successful. </t>
 
-        <t>Alternative methods for discovering external IP addresses are possible, including UPnP
-          and NAT-PMP. These methods might not be supported by the residential gateway and cannot be
-          relied upon in all cases. </t>
-
         <t>In cases where a virtual private network (VPN) or other tunnel is used, the entity
           providing a public IP address might not be able to provide the Device with location
           information. It is assumed that this entity is able to identify this problem and indicate
