@@ -3,6 +3,11 @@ ifeq "$(shell uname -o 2>/dev/null)" "Cygwin"
 else
     CYGPATH := echo
 endif
+ifeq "$(shell uname -s 2>/dev/null)" "Darwin"
+    sed_i := sed -i ''
+else
+    sed_i := sed -i
+endif
 
 BASE := $(lastword $(basename $(wildcard draft-*.xml)))
 XML := ${BASE}.xml
@@ -56,8 +61,11 @@ unpg: ${BASE}.unpg
 .TRANSIENT: tmp.fo ${BASE}.svg~
 
 ifeq "${HTML_XSLT}" "false"
-%.html: %.xml
+extra_css := ${TOP}/lib/style.css
+css_content = $(shell cat $(extra_css))
+%.html: %.xml $(extra_css)
 	${XML2RFC} $< $@
+	$(sed_i) -e's~</style>~</style><style tyle="text/css">$(css_content)</style>~' $@
 else
 %.html: %.xml ${DTD} ${XSLT}
 #	${SAXON} '$(subst \,\\,$(shell ${CYGPATH} $<))' '$(subst \,\\,$(shell ${CYGPATH} ${XSLT_HOME}/${XSLT}))' > $@
