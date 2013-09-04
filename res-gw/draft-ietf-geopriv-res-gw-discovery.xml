@@ -26,7 +26,7 @@
 <?rfc toc="yes"?>
 <?rfc tocindent="yes"?>
 
-<rfc category="info" ipr="trust200902" docName="draft-ietf-geopriv-res-gw-discovery-latest">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-geopriv-res-gw-discovery-latest">
   <front>
     <title abbrev="LIS Discovery by IP"> Location Information Server (LIS) Discovery using IP
       address and Reverse DNS </title>
