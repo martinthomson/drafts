@@ -360,7 +360,7 @@
       </section>
 
       <section title="When To Use The Reverse DNS Method">
-        <t>The DHCP method described in <xref target="RFC5986"/> SHOULD be attempted on all local
+        <t>The DHCP method described in <xref target="RFC5986"/> MUST be attempted on all local
           network interfaces before attempting this method. This method is employed either because
           DHCP is unavailable, when the DHCP server does not provide a value for the access network
           domain name option, or if a request to the resulting LIS results in a HELD
