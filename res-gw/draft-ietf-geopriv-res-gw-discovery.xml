@@ -135,8 +135,11 @@
         "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in
           <xref target="RFC2119"/>. </t>
 
-      <t>This document uses terminology established in <xref target="RFC3693"/> and <xref
-          target="RFC5012"/>. </t>
+      <t>
+        This document uses terminology established in <xref target="RFC6280"/> and <xref
+        target="RFC5012"/>.  The terms Device and LIS are capitalized throughout when they are used
+        to identify the roles defined in <xref target="RFC6280"/>.
+      </t>
     </section>
 
     <section anchor="ps" title="Problem Statement">
@@ -264,7 +267,7 @@
       </t>
 
       <t>
-        This document specifies a means for a device to discover several alternative domain names
+        This document specifies a means for a Device to discover several alternative domain names
         that can be used as input to the DDDS process. These domain names are based on the IP
         address of the Device. Specifically, the domain names are a portion of the reverse DNS trees
         - either the <spanx style="verb">.in-addr.arpa.</spanx> or <spanx
@@ -595,10 +598,10 @@
 
   <back>
 
-    <references title="Normative References"> &RFC1035; &RFC2119; &RFC3424; &RFC3596;
+    <references title="Normative References"> &RFC1035; &RFC2119; &RFC3596;
       &RFC5986; </references>
 
-    <references title="Informative References"> &RFC1918; &RFC2131; &RFC3315; &RFC3693; &RFC4848;
+    <references title="Informative References"> &RFC1918; &RFC2131; &RFC3315; &RFC3424; &RFC3693; &RFC4848;
       &RFC5012; &RFC5389; &RFC5687; &RFC6280; <reference anchor="UPnP-IGD-WANIPConnection1">
         <front>
           <title> Internet Gateway Device (IGD) Standardized Device Control Protocol V 1.0:
