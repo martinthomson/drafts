@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 # A replacement for xml2rfc that uses wget and the web service at xml.resource.org.
 
 if [[ $# -lt 1 ]]; then
@@ -12,7 +12,7 @@ fi
 
 URI="${XML2RFC_URI:-http://xml.resource.org/cgi-bin/xml2rfc.cgi}"
 # development URI: http://xml.resource.org/cgi-bin/xml2rfc-dev.cgi
-BOUNDARY="boundary-"`head "$1" | md5sum - | cut -c 1-32 -`
+BOUNDARY="boundary-"`head "$1" | md5 | cut -c 1-32 -`
 FILE=/tmp/${0##*/}$$
 M=""
 
@@ -66,8 +66,8 @@ if grep -l -q '<title>\(Unable to Convert File\|You lose\)</title>' "$OUTPUT" 1>
     exit 1
 fi
 
-if [[ "${OUTPUT##*.}" = "txt" || "${OUTPUT##*.}" = "unpg" ]]; then
-    sed -i -e '/CGItemp/ {s/^.*$/'"${OUTPUT##*/}"'/;:a;s/^.\{1,70\}$/ & /;ta}' "$OUTPUT"
+#if [[ "${OUTPUT##*.}" = "txt" || "${OUTPUT##*.}" = "unpg" ]]; then
+#    sed -i -e '/CGItemp/ {s/^.*$/'"${OUTPUT##*/}"'/;:a;s/^.\{1,70\}$/ & /;ta}' "$OUTPUT"
 #else
 #    sed -i -e 's/CGItemp[-0-9]*//'"${OUTPUT##*/}"'/' "$OUTPUT"
-fi
+#fi
