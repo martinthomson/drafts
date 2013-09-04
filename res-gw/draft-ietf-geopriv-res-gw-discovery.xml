@@ -256,23 +256,49 @@
 
     <section anchor="ip-dns" title="IP-based DNS Solution">
 
-      <t><xref target="RFC5986">LIS discovery</xref> uses a DNS-based Dynamic Delegation Discovery
+      <t>
+        <xref target="RFC5986">LIS discovery</xref> uses a DNS-based Dynamic Delegation Discovery
         Service (DDDS) system as the basis of discovery. Input to this process is a domain name. Use
         of DHCP for acquiring the domain name is specified, but alternative methods of acquisition
-        are permitted. </t>
+        are permitted.
+      </t>
 
-      <t>This document specifies a means for a device to discover several alternative domain names
+      <t>
+        This document specifies a means for a device to discover several alternative domain names
         that can be used as input to the DDDS process. These domain names are based on the IP
         address of the Device. Specifically, the domain names are a portion of the reverse DNS trees
-        - either the <spanx style="verb">.in-addr.arpa.</spanx> or
-        <spanx style="verb">.ip6.arpa.</spanx> tree. </t>
+        - either the <spanx style="verb">.in-addr.arpa.</spanx> or <spanx
+        style="verb">.ip6.arpa.</spanx> tree.
+      </t>
+
+      <t>
+        The goal of this process is to make a small number of DDDS queries in order to find a LIS.
+        After LIS discovery using the DHCP-based process in <xref target="RFC5986"/> has failed, a
+        Device can:
+        <list style="numbers">
+          <t>
+            Collect a set of IP addresses that refer to the Device (<xref target="getip"/>).
+          </t>
+          <t>
+            Convert each IP address into DNS names in the <spanx style="verb">in-addr.arpa.</spanx>
+            or <spanx style="verb">ip6.arpa.</spanx> tree (<xref target="dns-names"/>).
+          </t>
+          <t>
+            Perform the DDDS process for LIS discovery on those DNS names (<xref target="RFC5986"/>).
+          </t>
+          <t>
+            Shorten the DNS names by some number of labels and repeat the DDDS process (<xref
+            target="shorten-dns"/>).
+          </t>
+        </list>
+      </t>
 
       <t>A Device might be reachable at one of a number of IP addresses. In the process described, a
         Device first identifies each IP address that it is potentially reachable from. From each of
         these addresses, the Device then selects up to three domain names for use in discovery.
         These domain names are then used as input to the DDDS process. </t>
 
-      <section title="Identification of IP Addresses">
+      <section anchor="getip" title="Identification of IP Addresses">
         <t>A Device identifies a set of potential IP addresses that currently result in packets
           being routed to it. These are ordered by proximity, with those addresses that are used in
           adjacent network segments being favoured over those used in public or remote networks. The
@@ -302,14 +328,16 @@
           private IP address range. </t>
       </section>
 
-      <section title="Domain Name Selection">
+      <section anchor="dns-names" title="Domain Name Selection">
         <t>The domain name selected for each resulting IP address is the name that would be used for
           a reverse DNS lookup. The domain name derived from an IP version 4 address is in the
           <spanx style="verb">.in-addr.arpa.</spanx> tree and follows the construction rules in
           Section 3.5 of <xref target="RFC1035"/>. The domain name derived from an IP version 6
           address is in the <spanx style="verb">.ip6.arpa.</spanx> tree and follows the construction
           rules in Section 2.5 of <xref target="RFC3596"/>. </t>
+      </section>
 
+      <section anchor="shorten-dns" title="Shortened DNS Names">
         <t>Additional domain names are added to allow for a single DNS record to cover a larger set
           of addresses. If the search on the domain derived from the full IP address does not
           produce a NAPTR record with the desired service tag (e.g.,
