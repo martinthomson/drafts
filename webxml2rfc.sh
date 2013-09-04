@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/sh
 # A replacement for xml2rfc that uses wget and the web service at xml.resource.org.
 
 if [[ $# -lt 1 ]]; then
@@ -12,11 +12,16 @@ fi
 
 URI="${XML2RFC_URI:-http://xml.resource.org/cgi-bin/xml2rfc.cgi}"
 # development URI: http://xml.resource.org/cgi-bin/xml2rfc-dev.cgi
-BOUNDARY="boundary-"`head "$1" | md5sum - | cut -c 1-32 -`
+declare -a MD5 OPTIONS
+if [[ `uname -s 2>/dev/null` == "Darwin" ]]; then
+    MD5=(md5)
+else
+    MD5=(md5sum -)
+fi
+BOUNDARY="boundary-"`head "$1" | "${MD5[@]}" | cut -c 1-32 -`
 FILE=/tmp/${0##*/}$$
 M=""
 
-declare -a OPTIONS
 OPTIONS=(--header "Content-Type: multipart/form-data; boundary=$BOUNDARY")
 OPTIONS=("${OPTIONS[@]}" --header 'Cache-Control: no-cache')
 OPTIONS=("${OPTIONS[@]}" --referer 'http://xml.resource.org/')
