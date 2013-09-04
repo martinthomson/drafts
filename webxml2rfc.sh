@@ -66,8 +66,3 @@ if grep -l -q '<title>\(Unable to Convert File\|You lose\)</title>' "$OUTPUT" 1>
     exit 1
 fi
 
-if [[ "${OUTPUT##*.}" = "txt" || "${OUTPUT##*.}" = "unpg" ]]; then
-    sed -i -e '/CGItemp/ {s/^.*$/'"${OUTPUT##*/}"'/;:a;s/^.\{1,70\}$/ & /;ta}' "$OUTPUT"
-#else
-#    sed -i -e 's/CGItemp[-0-9]*//'"${OUTPUT##*/}"'/' "$OUTPUT"
-fi
