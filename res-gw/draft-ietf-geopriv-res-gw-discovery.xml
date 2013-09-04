@@ -16,6 +16,7 @@
 <!ENTITY RFC5687 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5687.xml">
 <!ENTITY RFC5985 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5985.xml">
 <!ENTITY RFC5986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5986.xml">
+<!ENTITY RFC6280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6280.xml">
 <!ENTITY I-D.cheshire-nat-pmp PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cheshire-nat-pmp.xml">
 ]>
 <?rfc rfcedstyle="no"?>
@@ -434,6 +435,34 @@
       <t>This document has no IANA actions.</t>
     </section>
 
+    <section anchor="privacy" title="Privacy Considerations">
+      <t>
+        As with all uses of geolocation information, it is very important that measures be taken to
+        ensure that location information is not provided to unauthorized parties.  The mechanism
+        defined in this document is focused on the case where a device is learning its own location,
+        so that it can provide that location information to applications.  We assume that the device
+        learning its own location is not a privacy risk.  There are then two remaining privacy
+        risks: The use of geolocation by applications, and abuse of the location configuration
+        protocol.
+      </t>
+
+      <t>
+        The privacy considerations around the use of geolocation by applications vary considerably
+        by application context.  A framework for location privacy in applications is provided in
+        <xref target="RFC6280"/>.
+      </t>
+
+      <t>
+        The mechanism specified in this document allows a device to discover its local LIS, from
+        which it then acquires its location using a Location Configuration Protocol <xref
+        target="RFC5687"/>.  If an unauthorized third party can spoof the LCP to obtain a target's
+        location information, then the mechanism in this document could allow them to discover the
+        proper server to attack for a given IP address.  Thus, it is important that a LIS meet the
+        security requirements of the LCP it implements.  For HELD, these requirements are laid out
+        in Section 9 of <xref target="RFC5985"/>.
+      </t>
+    </section>
+
     <section anchor="security" title="Security Considerations">
       <t>The security considerations described in <xref target="RFC5986"/> apply to the discovery
         process as a whole. The primary security concern is with the potential for an attacker to
@@ -523,10 +552,11 @@
       </t>
     </section>
 
-    <!--
     <section anchor="ack" title="Acknowledgements">
+      <t>
+        Richard Barnes provided the text in <xref target="privacy"/>.
+      </t>
     </section>
--->
 
   </middle>
 
@@ -536,7 +566,7 @@
       &RFC5986; </references>
 
     <references title="Informative References"> &RFC1918; &RFC2131; &RFC3315; &RFC3693; &RFC4848;
-      &RFC5012; &RFC5389; &RFC5687; <reference anchor="UPnP-IGD-WANIPConnection1">
+      &RFC5012; &RFC5389; &RFC5687; &RFC6280; <reference anchor="UPnP-IGD-WANIPConnection1">
         <front>
           <title> Internet Gateway Device (IGD) Standardized Device Control Protocol V 1.0:
             WANIPConnection:1 Service Template Version 1.01 For UPnP Version 1.0 </title>
