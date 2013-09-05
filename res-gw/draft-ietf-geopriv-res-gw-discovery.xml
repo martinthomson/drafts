@@ -90,10 +90,12 @@
   <middle>
 
     <section anchor="intro" title="Introduction">
-      <t>A Location Information Server (LIS) is a service provided by an access network. The LIS
-        uses knowledge of the access network topology and other information to generate location for
+      <t>
+        A Location Information Server (LIS) is a service provided by an access network. The LIS
+        uses knowledge of the access network topology and other information to generate location information for
         Devices. Devices within an access network are able to acquire location information from a
-        LIS. </t>
+        LIS. 
+      </t>
 
       <t>The relationship between a Device and an access network might be transient. Configuration
         of the correct LIS at the Device ensures that accurate location information is available.
@@ -240,8 +242,10 @@
           remotely, inevitably leading to some proportion that is not updated.
         </t>
 
-        <t>This document therefore describes a method which can be used by Devices to discover their
-          LIS without any assistance from the network.</t>
+        <t>
+          This document therefore describes a method that can be used by Devices to discover their
+          LIS without any assistance from the network.
+        </t>
 
       </section>
 
@@ -354,7 +358,7 @@
             </t>
 
             <t>
-              For IP version 6, the resulting domain SHOULD be shortened sucessively by 16, 18, 20
+              For IP version 6, the resulting domain SHOULD be shortened successively by 16, 18, 20
               and 24 labels and the query repeated. This corresponds to a search on a /64, /56, /48
               or /32 network prefix.
             </t>
@@ -489,11 +493,11 @@
 
         <t>
           NAPTR records can be provided for individual IP addresses. To limit the proliferation of
-          identical records, a single record can be placed at a the higher nodes of the tree
-          (corresponding to /24 and /16 for IPv4; /64, /48 and /32 for IPv6). A record at a higher
-          point in the tree (those with a shorter prefix) applies to all addresses lower in the tree
-          (those with a longer prefix); records at the lower point override those at higher points,
-          thus allowing for exceptions to be specified.
+          identical records, a single record can be placed at higher nodes of the tree
+          (corresponding to /24 and /16 for IPv4; /64, /56, /48 and /32 for IPv6). A record at a
+          higher point in the tree (those with a shorter prefix) applies to all addresses lower in
+          the tree (those with a longer prefix); records at the lower point override those at higher
+          points, thus allowing for exceptions to be specified.
         </t>
       </section>
 
@@ -547,10 +551,12 @@
       <t>The added ability for a third party to discover the identity of a LIS does not add any
         concerns, since the identity of a LIS is considered public information. </t>
 
-      <t>In addition to existing considerations, this document introduces further security
+      <t>
+        In addition to existing considerations, this document introduces further security
         considerations relating to the identification of the IP address. It is possible that an
-        attacker could attempt to provide a falsified IP addresses in an attempt to subvert the rest
-        of the process. </t>
+        attacker could attempt to provide a falsified IP address in an attempt to subvert the rest
+        of the process.
+      </t>
 
       <t>
         <xref target="RFC5389"/> describes attacks where an attacker is able to ensure that a Device
@@ -570,10 +576,15 @@
         verifiable) DNS records could indicate a malicious LIS that provides false location
         information. </t>
 
-      <t>In all cases of falsification, the best remedy is to perform some form of independent
+      <t>
+        In all cases of falsification, the best remedy is to perform some form of independent
         verification of the result. No specific mechanism is currently available to prevent attacks
         based on falsification of reflexive addresses; it is suggested that Devices attempt to
-        independently verify that the reflexive transport address provided is accurate.</t>
+        independently verify that the reflexive transport address provided is accurate.  An
+        independent, trusted source of location information could aid in verification, even in the
+        trusted source is unable to provide information with the same accuracy as the discovered
+        LIS.
+      </t>
 
       <t>Use of private address space effectively prevents use of the usual set of trust anchors for
         DNSSEC. Only a DNS server that is able to see the same private address space can provide
