@@ -18,6 +18,7 @@
 <!ENTITY RFC5986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5986.xml">
 <!ENTITY RFC6280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6280.xml">
 <!ENTITY I-D.cheshire-nat-pmp PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cheshire-nat-pmp.xml">
+<!ENTITY I-D.ietf-geopriv-held-measurements PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-geopriv-held-measurements.xml">
 ]>
 <?rfc rfcedstyle="no"?>
 <?rfc symrefs="yes"?>
@@ -387,7 +388,7 @@
         <t>
           The limited number of labels by which each name is shortened is intended to limit the
           number of DNS queries performed by Devices. If no LIS is discovered by this method, the
-          result will be that no more than four U-NAPTR resolutions are invoked for each IP
+          result will be that no more than five U-NAPTR resolutions are invoked for each IP
           address.
         </t>
       </section>
@@ -655,7 +656,7 @@
   <back>
 
     <references title="Normative References"> &RFC1035; &RFC2119; &RFC3596;
-      &RFC5986; </references>
+      &RFC5986; &I-D.ietf-geopriv-held-measurements; </references>
 
     <references title="Informative References"> &RFC1918; &RFC2131; &RFC3315; &RFC3424; &RFC3693; &RFC4848;
       &RFC5012; &RFC5389; &RFC5687; &RFC6280; <reference anchor="UPnP-IGD-WANIPConnection1">
