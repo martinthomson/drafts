@@ -562,9 +562,9 @@
         <xref target="RFC5389"/> describes attacks where an attacker is able to ensure that a Device
         receives a falsified reflexive address. An on-path attacker might be able to ensure that a
         falsified address is provided to the Device.  Even though STUN messages are protected by a
-        STUN MESSAGE-INTEGRITY attribute, which is an HMAC that uses a shared secret, an attacker
-        that can capture and modify packets can alter source and destination addresses to provide
-        falsified addresses.
+        STUN MESSAGE-INTEGRITY attribute, which is an HMAC that uses a shared secret, an on-path
+        attacker can capture and modify packets, altering source and destination addresses to
+        provide falsified addresses.
       </t>
 
       <t>This attack could result in an effective means of denial of service, or a means to provide
