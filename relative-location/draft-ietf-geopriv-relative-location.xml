@@ -1495,6 +1495,14 @@
       here.
     </t>
     <t>
+      To make this clear for future users of the registry, the following note is added to the "Civic
+      Address Types Registry (CAtypes)": The registration of new values should be accompanied by a
+      corresponding reservation in the "Relative Location Parameters" registry.  Similarly, the
+      "Relative Location Parameters" registry bears the note: The registration of new values should
+      be accompanied by a corresponding reservation in the "Civic Address Types Registry (CAtypes)"
+      registry.
+    </t>
+    <t>
       The values defined are:
     </t>
     <figure>
@@ -1573,7 +1581,7 @@
       This section registers an XML schema as per the procedures in
       <xref target="RFC3688"/>.
       <list style="hanging">
-        <t hangText="URI:">urn:ietf:params:xml:schema:pidf:geopriv10:relativeLocation</t>
+        <t hangText="URI:">urn:ietf:params:xml:schema:pidf:geopriv10:relative</t>
         <t hangText="Registratant Contact:">IETF, GEOPRIV working group (geopriv@ietf.org),
         Martin Thomson (martin.thomson@skype.net).</t>
         <t hangText="Schema">The XML for this schema is found in <xref target="schema"/> of this
