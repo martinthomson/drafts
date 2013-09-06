@@ -26,9 +26,9 @@ XSLT_HOME := ${XML_HOME}/rfc2629xslt
 HTML_XSLT := false
 IDNITS := ${XML_HOME}/idnits/idnits
 
-REV_CURRENT = $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
-REV_NEXT = $(shell printf "%02d" $$((${REV_CURRENT}+1)) )
-BASE_NEXT = ${BASE}-${REV_NEXT}
+REV_CURRENT := $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
+REV_NEXT := $(shell printf "%02d" $$((1${REV_CURRENT}-99)) )
+BASE_NEXT := ${BASE}-${REV_NEXT}
 
 TARGET ?= txt
 
@@ -110,8 +110,8 @@ validate: $(wildcard xml/*.xml example*.xml)
 
 submit: ${BASE_NEXT}.txt
 
-${BASE_NEXT}.xml:
-	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < ${BASE}.xml > ${BASE_NEXT}.xml
+${BASE_NEXT}.xml: ${BASE}.xml
+	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
 
 clean:
 	-rm -f $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
