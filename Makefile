@@ -124,7 +124,7 @@ validate: $(wildcard xml/*.xml example*.xml)
 submit: ${BASE_NEXT}.txt
 
 ${BASE_NEXT}.xml: ${BASE}.xml
-	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < ${BASE}.xml > ${BASE_NEXT}.xml
+	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
 
 clean:
 	-rm -f $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~

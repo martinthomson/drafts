@@ -10,7 +10,7 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-ietf-geopriv-held-measurements-08">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-geopriv-held-measurements-latest">
   <front>
     <title abbrev="Location Measurements">
       Using Device-provided Location-Related Measurements in Location Configuration Protocols
