@@ -42,10 +42,10 @@
 
     <abstract>
       <t>
-        Interactive Connectivity Establishment (ICE) has been selected as the basis for
-        establishing peer-to-peer UDP flows between Web Real-Time Communication (WebRTC) clients.
-        Using an unmodified ICE implementation in this context enables the use of the web platform
-        as a denial of service platform.  The risks and complications arising from this choice are
+        Interactive Connectivity Establishment (ICE) has been selected as the basis for establishing
+        peer-to-peer UDP flows between Web Real-Time Communication (WebRTC) clients.  Using an
+        unmodified ICE implementation in this context enables the use of the web platform as a
+        denial of service platform.  The risks and complications arising from this choice are
         discussed.  A modified algorithm for sending ICE connectivity checks from the web platform
         is described.
       </t>
@@ -146,8 +146,9 @@
             <t>
               The number of candidate pairs that are created.  An attacker can add extra remote
               candidates to inflate this number to tbe maximum supported.  RFC 5245 recommends a
-              default maximum of 100 candidate pairs, though reducing this number directly reduces
-              DoS potential.
+              default maximum of 100 candidate pairs.  Reducing this limit directly reduces DoS
+              potential, though it could affect success in some legitimate scenarios (see the
+              calculations in <xref target="ratecalc"/>).
             </t>
             <t>
               The time between consecutive connectivity checks.  Pacing of checks is discussed at
@@ -162,9 +163,11 @@
               target="size"/>.
             </t>
             <t>
-              The number of ICE agents that can be instantiated concurrently.  RFC 5245 does not
-              consider scenarios like WebRTC where it could be possible for multiple agents to be
-              instantiated.
+              The number of ICE agents that can be operated concurrently.  RFC 5245 does not
+              consider scenarios like WebRTC where it is not only possible for there to be multiple
+              agents.  The web security model allows for cases where multiple agents can be created
+              concurrently, often with a further restriction that a browser not leak information
+              between agents.
             </t>
           </list>
         </t>
@@ -189,17 +192,19 @@
             </list>
           </t>
           <t>
-            In the web context, any information about the expected bandwidth used by the session comes
-            from the web application.  Therefore, information about expected media bandwidth cannot be
-            used to determine the pacing of connectivity checks.  A fixed minimum interval between
-            connectivity checks becomes the primary mechanism for limiting the ability of web
-            applications to generate packets that are potentially congestion inducing.
+            In the web context, information about the expected bandwidth used by the session comes
+            from the web application.  Since the web application has to be regarded as potentially
+            malicious, information about expected media bandwidth cannot be used to determine the
+            pacing of connectivity checks.  A fixed minimum interval between connectivity checks
+            becomes the primary mechanism for limiting the ability of web applications to generate
+            packets that are potentially congestion inducing.
           </t>
           <t>
-            Increasing the minimum inter-check interval directly reduces this rate, though this only
-            reduces the peak bitrate that can be induced - the same amount of traffic is generated
-            over a longer period.  The cost of this is extended session setup times, where recent efforts
-            have been focused on reducing this time.
+            Increasing the pacing interval directly reduces the amount of congestion that
+            connectivity checks can generate, though this only reduces the peak bitrate that can be
+            induced - the same amount of traffic is generated over a longer period.  The cost of
+            this is extended session setup times, where recent efforts have been focused on reducing
+            this time.
           </t>
         </section>
 
@@ -228,17 +233,17 @@
 
         <section anchor="size" title="Connectivity Check Size">
           <t>
-            As currently specified, an attacker is only able to influence the
-            size of the USERNAME attribute.  <xref target="RFC5389"/> restricts USERNAME to a
-            maximum size of 512 octets, though the Session Description Protocol (SDP) signaling
-            described in <xref target="RFC5245"/> limits the size of the username fragment an
-            attacker can set to 256 bytes.
+            As currently specified, an attacker is only able to influence the size of the USERNAME
+            attribute.  <xref target="RFC5389"/> restricts USERNAME to a maximum size of 512 octets;
+            the Session Description Protocol (SDP) signaling described in <xref target="RFC5245"/>
+            limits the size of the username fragment an attacker can set to 256 bytes.
           </t>
           <t>
-            A browser could reduce its username fragment to as little as 4 bytes, limiting the overall
-            size of the attribute to 261 bytes.  A small username fragment does limit the collision
-            resilience of the field, which is a property that is important for detecting other forms
-            of attack (see Section 5.7.3 of <xref target="I-D.ietf-rtcweb-security-arch"/>).
+            A browser could reduce its username fragment to as little as 4 bytes, limiting the
+            overall size of the attribute to 261 bytes.  A small username fragment does limit the
+            collision resilience of the field, which is a property that is important for detecting
+            other forms of attack (see Section 5.7.3 of <xref
+            target="I-D.ietf-rtcweb-security-arch"/>).
           </t>
           <t>
             There is also the potential for new modifications to ICE that increase the packet size.
@@ -275,6 +280,15 @@
           connectivity checks over a short period.  These implementations do not pace retransmission
           of connectivity checks, resulting in significantly higher connectivity check rates during
           early rounds of retransmission.
+        </t>
+        <t>
+          <list>
+            <t> 
+              These implementations are ignoring the advice on calculating a minimum RTO from
+              Section 16.1 of <xref target="RFC5245"/>.  However, the shorter RTO allows ICE to
+              complete much faster, which is a significant advantage.
+            </t>
+          </list>
         </t>
         <t>
           Implementations that do not limit the number of ICE agents that can be instantiated, and
@@ -337,7 +351,7 @@
           <t>
             If there are items on the waiting queue, but no items on the check queue, the first
             candidate pair is taken from the waiting queue.
-            <list style="numbers">
+            <list style="letters">
               <t>
                 The candidate pair transitions from "Waiting" to "In-Progress".
               </t>
@@ -353,7 +367,7 @@
           <t>
             If there are items in the check queue, the ICE agent removes the first item and performs
             a connectivity check on the identified candidate pair.
-            <list style="numbers">
+            <list style="letters">
               <t>
                 The check counter associated with the candidate pair is incremented by one.
               </t>
@@ -383,9 +397,16 @@
         An important characteristic of this algorithm is that it - as much as possible - prefers
         retransmission of connectivity checks over the initiation of new connectivity checks.  This
         ensures that once an initial connectivity check has established any necessary middlebox
-        bindings retries are not delayed excessively, which could cause the binding to time out.
-        However, the global pacing can cause the time between retransmission of connectivity checks
-        to be extended as the check queue occasionally fills.
+        bindings, subsequent retries are not delayed excessively, which could cause the binding to
+        time out.  However, the global pacing can cause the time between retransmission of
+        connectivity checks to be extended as the check queue occasionally fills.
+      </t>
+      <t>
+        Favoring retransmission over initial checks directly contradicts the guidance on RTO
+        selection in Section 16.1 of <xref target="RFC5245"/>.  This is necessary due to the delays
+        induced by potential interactions between multiple ICE agents, which might otherwise cause
+        retries to be significantly delayed.  Improvements to candidate prioritization are expected
+        to reduce the impact of this change.
       </t>
       
       <section title="Trickled and Peer Reflexive Candidates">
@@ -405,7 +426,7 @@
           (Section 5.7.1 of <xref target="RFC5245"/>), and - if appropriate - entered into the
           "Waiting" state.  This causes the candidate pair to enter the waiting queue.  Candidate
           pairs in the waiting queue are not ordered based on arrival time, they are ordered based
-          on priority.
+          on priority alone.
         </t>
         <t>
           Trickling regular candidates does introduce the potential for a mismatch in the ordering
@@ -424,8 +445,9 @@
           <list><t>
             <cref>From Bernard Aboba: This seems like it is important enough to be RECOMMENDED
             rather than optional.  Also, any recommendations on the queuing delays? For example,
-            should this be based on RTT?  I’m anticipating a potential pushback on adding delays, so
-            perhaps some statements about risk and consequences might be needed to motivate that.
+            should this be based on [signaling] RTT?  I’m anticipating a potential pushback on
+            adding delays, so perhaps some statements about risk and consequences might be needed to
+            motivate that.
             </cref>
           </t></list>
         </t>
@@ -434,7 +456,9 @@
       <section title="Multiple ICE Agents">
         <t>
           In a system that has potentially more than one ICE agent, it's important that connectivity
-          checks from any given ICE agent cannot be blocked or starved by other ICE agents.
+          checks from any given ICE agent cannot be blocked or starved by other ICE agents.  It is
+          also important that an attacker is unable to circumvent any limits by instantiating
+          multiple ICE agents.
         </t>
         <t>
           To that end, a single pacing timer is maintained globally whenever multiple ICE agents are
@@ -514,7 +538,8 @@
             In some cases, it might be necessary to instantiate multiple ICE agents from the same
             application, between the same two peers.  An ICE agent MAY place candidate pairs in the
             "Frozen" state based on candidate pairs with the same foundation being "Waiting" or
-            "In-Progress" on another ICE agent.  This reduces the demand for connectivity checks.
+            "In-Progress" on another ICE agent.  This reduces the overall demand for connectivity
+            checks without any significant negative effect on the chances that ICE succeeds.
           </t>
           <t>
             In the browser context, information about the success of connectivity checks cannot leak
@@ -564,7 +589,7 @@
 
       <section title="Malicious Application Penalties">
         <t>
-          A ICE user that only wishes to generate traffic is unlikely to provide valid candidates
+          An attacker that only wishes to generate traffic is unlikely to provide valid candidates
           for two reasons:
           <list style="symbols">
             <t>
@@ -572,7 +597,7 @@
               checking
             </t>
             <t>
-              serving connectivity checks requires the dedication of greater resources than
+              serving connectivity checks requires the dedication of greater resources by the attacker
             </t>
           </list>
         </t>
