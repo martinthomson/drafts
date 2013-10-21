@@ -145,4 +145,4 @@ ghpages: recurse
 	git add *.txt *.html
 	git commit -am "Script updating page."
 	git checkout ${GITBRANCH}
-	-rf -rf ${GHPAGES_TMP}
+	-rm -rf ${GHPAGES_TMP}
