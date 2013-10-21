@@ -10,7 +10,7 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-thomson-mmusic-fingerprint" updates="4572">
+<rfc category="std" ipr="trust200902" docName="draft-thomson-mmusic-fingerprint-latest" updates="4572">
   <front>
     <title abbrev="SDP Certificate Fingerprints">
       Use of Fingerprints for Identifying Certificates in the Session Description Protocol (SDP)
