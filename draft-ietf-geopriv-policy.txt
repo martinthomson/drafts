@@ -1872,7 +1872,7 @@ Internet-Draft             Geolocation Policy                       2012
    [I-D.thomson-geopriv-uncertainty]
               Thomson, M. and J. Winterbottom, "Representation of
               Uncertainty and Confidence in PIDF-LO", draft-thomson-
-              geopriv-uncertainty-07 (work in progress), March 2012.
+              geopriv-uncertainty-08 (work in progress), August 2013.
 
    [RFC2392]  Levinson, E., "Content-ID and Message-ID Uniform Resource
               Locators", RFC 2392, August 1998.

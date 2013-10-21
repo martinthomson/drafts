@@ -5,11 +5,12 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                 Microsoft
 Intended status: Informational                           J. Winterbottom
-Expires: September 02, 2012                           Andrew Corporation
-                                                              March 2012
+Expires: April 24, 2014                               Andrew Corporation
+                                                        October 21, 2013
 
 
         Representation of Uncertainty and Confidence in PIDF-LO
+                draft-thomson-geopriv-uncertainty-latest
 
 Abstract
 
@@ -32,11 +33,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 02, 2012.
+   This Internet-Draft will expire on April 24, 2014.
 
 Copyright Notice
 
-   Copyright (c) 2012 IETF Trust and the persons identified as the
+   Copyright (c) 2013 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -52,10 +53,9 @@ Copyright Notice
 
 
 
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 1]
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 1]
 
-Internet-Draft          Uncertainty & Confidence              March 2012
+Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 Table of Contents
@@ -65,7 +65,7 @@ Table of Contents
    2.  A General Definition of Uncertainty . . . . . . . . . . . . .   3
      2.1.  Uncertainty as a Probability Distribution . . . . . . . .   4
      2.2.  Deprecation of the Terms Precision and Resolution . . . .   6
-     2.3.  Accuracy as a Qualitative Concept . . . . . . . . . . . .   6
+     2.3.  Accuracy as a Qualitative Concept . . . . . . . . . . . .   7
    3.  Uncertainty in Location . . . . . . . . . . . . . . . . . . .   7
      3.1.  Representation of Uncertainty and Confidence in PIDF-LO .   7
      3.2.  Uncertainty and Confidence for Civic Addresses  . . . . .   8
@@ -73,22 +73,22 @@ Table of Contents
    4.  Manipulation of Uncertainty . . . . . . . . . . . . . . . . .   9
      4.1.  Reduction of a Location Estimate to a Point . . . . . . .   9
        4.1.1.  Centroid Calculation  . . . . . . . . . . . . . . . .  10
-         4.1.1.1.  Arc-Band Centroid . . . . . . . . . . . . . . . .  10
+         4.1.1.1.  Arc-Band Centroid . . . . . . . . . . . . . . . .  11
          4.1.1.2.  Polygon Centroid  . . . . . . . . . . . . . . . .  11
      4.2.  Conversion to Circle or Sphere  . . . . . . . . . . . . .  14
      4.3.  Three-Dimensional to Two-Dimensional Conversion . . . . .  14
      4.4.  Increasing and Decreasing Uncertainty and Confidence  . .  15
-       4.4.1.  Rectangular Distributions . . . . . . . . . . . . . .  15
+       4.4.1.  Rectangular Distributions . . . . . . . . . . . . . .  16
        4.4.2.  Normal Distributions  . . . . . . . . . . . . . . . .  16
-     4.5.  Determining Whether a Location is Within a Given Region .  16
+     4.5.  Determining Whether a Location is Within a Given Region .  17
        4.5.1.  Determining the Area of Overlap for Two Circles . . .  18
        4.5.2.  Determining the Area of Overlap for Two Polygons  . .  19
    5.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . .  19
      5.1.  Reduction to a Point or Circle  . . . . . . . . . . . . .  19
-     5.2.  Increasing and Decreasing Confidence  . . . . . . . . . .  21
+     5.2.  Increasing and Decreasing Confidence  . . . . . . . . . .  22
      5.3.  Matching Location Estimates to Regions of Interest  . . .  22
    6.  Security Considerations . . . . . . . . . . . . . . . . . . .  22
-   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  22
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  23
    8.  Informative References  . . . . . . . . . . . . . . . . . . .  23
    Appendix A.  Conversion Between Cartesian and Geodetic
                 Coordinates in WGS84 . . . . . . . . . . . . . . . .  24
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson & Winterbottom Expires September 02, 2012               [Page 2]
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 2]
 
-Internet-Draft          Uncertainty & Confidence              March 2012
+Internet-Draft          Uncertainty & Confidence            October 2013
 
 
    the results of such a process are carried in IETF data formats and
@@ -135,8 +135,7 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    This document assumes a basic understanding of the principles of
    mathematics, particularly statistics and geometry.
 
-   Some terminology is borrowed from [RFC3693] and
-   [I-D.ietf-geopriv-arch].
+   Some terminology is borrowed from [RFC3693] and [RFC6280].
 
    Mathematical formulae are presented using the following notation: add
    "+", subtract "-", multiply "*", divide "/", power "^" and absolute
@@ -158,18 +157,23 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    distribution.  A probability distribution assigns a probability to
    possible values for the quantity.
 
+
+
+
+
+
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 3]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    A probability distribution describing a measured quantity can be
    arbitrarily complex and so it is desirable to find a simplified
    model.  One approach commonly taken is to reduce the probability
    distribution to a confidence interval.  Many alternative models are
-
-
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 3]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
-
    used in other areas, but study of those is not the focus of this
    document.
 
@@ -214,18 +218,18 @@ Internet-Draft          Uncertainty & Confidence              March 2012
       value used for the error range in a normal PDF is related to the
       standard deviation of the distribution.
 
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 4]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    o  A rectangular PDF is used where the errors are known to be
       consistent across a limited range.  A rectangular PDF can occur
       where a single error source, such as a rounding error, is
       significantly larger than other errors.  A rectangular PDF is
-
-
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 4]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
-
       often described by the half-width of the distribution; that is,
       half the width of the distribution.
 
@@ -270,17 +274,16 @@ Internet-Draft          Uncertainty & Confidence              March 2012
       is, the integral of the curve between the points).  For any given
       PDF, the area under the curve for the entire range from negative
       infinity to positive infinity is 1 or (100%).  Therefore, the
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 5]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
       confidence over any interval of uncertainty is always less than
       100%.
-
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 5]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
    Figure 2 shows how confidence is determined for a normal
    distribution.  The area of the shaded region gives the confidence (c)
@@ -322,6 +325,19 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    when discussing uncertainty and confidence in relation to location
    information.
 
+
+
+
+
+
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 6]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
 2.3.  Accuracy as a Qualitative Concept
 
    Uncertainty is a quantitative concept.  The term _accuracy_ is useful
@@ -329,14 +345,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    information.  Accuracy is generally useful when describing
    qualitative aspects of location estimates.  Accuracy is not a
    suitable term for use in a quantitative context.
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 6]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
    For instance, it could be appropriate to say that a location estimate
    with uncertainty "X" is more accurate than a location estimate with
@@ -377,6 +385,15 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    confidence is 95%, by definition in [RFC5491].  Similarly, the PIDF-
    LO format does not provide an indication of the shape of the PDF.
 
+
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 7]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    Absence of uncertainty information in a PIDF-LO document does not
    indicate that there is no uncertainty in the location estimate.
    Uncertainty might not have been calculated for the estimate, or it
@@ -386,13 +403,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    receiver can either assume a confidence of 0% or infinite
    uncertainty.  The same principle applies on the altitude axis for
    two-dimension shapes like the Circle.
-
-
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 7]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
 3.2.  Uncertainty and Confidence for Civic Addresses
 
@@ -432,23 +442,18 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    although, as spaces get smaller this distinction might have no
    practical significance and an approximation if a point could be used.
 
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 8]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    Uncertainty in civic addresses can be increased by removing elements.
    This doesn't necessarily improve confidence in the same way that
    arbitrarily increasing uncertainty in a geodetic location doesn't
    increase confidence.
-
-
-
-
-
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 8]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
 3.3.  DHCP Location Configuration Information and Uncertainty
 
@@ -491,6 +496,16 @@ Internet-Draft          Uncertainty & Confidence              March 2012
 
 4.1.  Reduction of a Location Estimate to a Point
 
+
+
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                 [Page 9]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    Manipulating location estimates that include uncertainty information
    requires additional complexity in systems.  In some cases, systems
    only operate on definitive values, that is, a single point.
@@ -498,14 +513,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    This section describes algorithms for reducing location estimates to
    a simple form without uncertainty information.  Having a consistent
    means for reducing location estimates allows for interaction between
-
-
-
-Thomson & Winterbottom Expires September 02, 2012               [Page 9]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
-
    applications that are able to use uncertainty information and those
    that cannot.
 
@@ -548,19 +555,17 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    the centroid of the area or volume minimizes the overall error.  This
    assumes that the PDF is rectangular.
 
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 10]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    Note:  The centroid of a concave Polygon or Arc-Band shape is not
       necessarily within the region of uncertainty.
 
 4.1.1.1.  Arc-Band Centroid
-
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 10]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
    The centroid of the Arc-Band shape is found along a line that bisects
    the arc.  The centroid can be found at the following distance from
@@ -606,17 +611,17 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    given "p = sqrt(Nx^2 + Ny^2)".  More transformations are provided
    later in this section for cases where "Nx" or "Ny" are zero.
 
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 11]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
        [   -Ny/p     Nx/p     0  ]         [ -Ny/p  -Nx*Nz/p  Nx ]
    T = [ -Nx*Nz/p  -Ny*Nz/p   p  ]    T' = [  Nx/p  -Ny*Nz/p  Ny ]
        [    Nx        Ny      Nz ]         [   0      p       Nz ]
               (Transform)                    (Reverse Transform)
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 11]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
                Figure 3: Recommended Transformation Matrices
 
@@ -661,18 +666,19 @@ Internet-Draft          Uncertainty & Confidence              March 2012
       value if the polygon is specified in clockwise direction.  This
       can be used to determine the orientation of the polygon.
 
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 12]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    The third row contains a distance from a plane parallel to the
    polygon.  If the polygon is coplanar, then the values for "z'" are
    identical; however, the constraints recommended in [RFC5491] mean
    that this is rarely the case.  To determine "Cz'", average these
    values:
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 12]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
       Cz' = sum z'[i] / n
 
@@ -715,20 +721,21 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    transform matrices in Figure 6 can be used.  The reverse transform is
    the transpose of this matrix.
 
+
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 13]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    if Nx == 0:                              | if Ny == 0:
        [ 0  -Nz  Ny ]       [  0   1  0  ]  |            [ -Nz  0  Nx ]
    T = [ 1   0   0  ]  T' = [ -Nz  0  Ny ]  |   T = T' = [  0   1  0  ]
        [ 0   Ny  Nz ]       [  Ny  0  Nz ]  |            [  Nx  0  Nz ]
 
                Figure 6: Alternative Transformation Matrices
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 13]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
 4.2.  Conversion to Circle or Sphere
 
@@ -771,6 +778,14 @@ Internet-Draft          Uncertainty & Confidence              March 2012
 
    A three-dimensional shape can be easily converted to a two-
    dimensional shape by removing the altitude component.  A sphere
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 14]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    becomes a circle; a prism becomes a polygon; an ellipsoid becomes an
    ellipse.  Each conversion is simple, requiring only the removal of
    those elements relating to altitude.
@@ -778,14 +793,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    The altitude is unspecified for a two-dimensional shape and therefore
    has unlimited uncertainty along the vertical axis.  The confidence
    for the two-dimensional shape is thus higher than the three-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 14]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
-
    dimensional shape.  Assuming equal confidence on each axis, the
    confidence of the circle can be increased using the following
    approximate formula:
@@ -828,19 +835,19 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    information is available, alternative methods might produce better
    results.
 
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 15]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
 4.4.1.  Rectangular Distributions
 
    Uncertainty that follows a rectangular distribution can only be
    decreased in size.  Since the PDF is constant over the region of
    uncertainty, the resulting confidence is determined by the following
    formula:
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 15]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
       Cr = Co * Ur / Uo
 
@@ -883,20 +890,20 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    Therefore, to find the uncertainty for each axis at a desired
    confidence, "Cd", apply the following formula:
 
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 16]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
       Ud[x] <= U[x] * (erfinv(Cd ^ (1/n)) / erfinv(Co ^ (1/n)))
 
    For regular shapes, this formula can be applied as a scaling factor
    in each dimension to reach a required confidence.
 
 4.5.  Determining Whether a Location is Within a Given Region
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 16]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
    A number of applications require that a judgement be made about
    whether a Target is within a given region of interest.  Given a
@@ -939,6 +946,14 @@ Internet-Draft          Uncertainty & Confidence              March 2012
       ,'     | :: Ao ::: `.   |
      /        \ :::::::::: \ /
     /          `._ :::::: _.X
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 17]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    |              `-....-'   |
    |                         |
    |                         |
@@ -946,13 +961,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
      `.                   .'  \_ Region of
        `._             _.'       Interest
           `--..___..--'
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 17]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
           Figure 7: Area of Overlap Between Two Circular Regions
 
@@ -994,6 +1002,14 @@ Internet-Draft          Uncertainty & Confidence              March 2012
 
          a = (r^2 - R^2 + d^2)/(2*d)
 
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 18]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
          Ao = r^2*acos(a/r) + R^2*acos((d - a)/R) - d*sqrt(r^2 - a^2)
 
    A value for "d" can be determined by converting the center points to
@@ -1001,14 +1017,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    center points:
 
       d = sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 18]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
 4.5.2.  Determining the Area of Overlap for Two Polygons
 
@@ -1050,6 +1058,14 @@ Internet-Draft          Uncertainty & Confidence              March 2012
          </gs:semiMinorAxis>
          <gs:verticalAxis uom="urn:ogc:def:uom:EPSG::9001">
            28.7
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 19]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
          </gs:verticalAxis>
          <gs:orientation uom="urn:ogc:def:uom:EPSG::9102">
            43
@@ -1058,13 +1074,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
      </gp:location-info>
      <gp:usage-rules/>
    </gp:geopriv>
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 19]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
                                  Figure 8
 
@@ -1106,6 +1115,13 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    numbers shown are all rounded; no rounding is possible during this
    process since rounding would contribute significant errors.
 
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 20]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    Polygon in ECEF coordinate space
       (repeated point omitted and transposed to fit):
             [ -4.6470e+06  2.5530e+06  -3.5333e+06 ]
@@ -1114,13 +1130,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
             [ -4.6469e+06  2.5531e+06  -3.5333e+06 ]
             [ -4.6469e+06  2.5531e+06  -3.5334e+06 ]
             [ -4.6469e+06  2.5531e+06  -3.5333e+06 ]
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 20]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
    Normal Vector: n = [ -0.72782  0.39987  -0.55712 ]
 
@@ -1160,6 +1169,15 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    coordinates from the center point to each of the points.  This
    results in a radius of 99.1 meters.  Confidence is unchanged.
 
+
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 21]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
 5.2.  Increasing and Decreasing Confidence
 
    Assuming that confidence is known to be 19% for Alice's location
@@ -1169,14 +1187,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    location estimate is quite low for many applications.  Since the
    estimate is known to follow a normal distribution, the method in
    Section 4.4.2 can be used.  Each axis can be scaled by:
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 21]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
       scale = erfinv(0.95^(1/3)) / erfinv(0.19^(1/3)) = 2.9937
 
@@ -1216,6 +1226,14 @@ Internet-Draft          Uncertainty & Confidence              March 2012
 
 6.  Security Considerations
 
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 22]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
+
    This document describes methods for managing and manipulating
    uncertainty in location.  No specific security concerns arise from
    most of the information provided.
@@ -1225,14 +1243,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
    Peter Rhodes provided assistance with some of the mathematical
    groundwork on this document.  Dan Cornford provided a detailed review
    and many terminology corrections.
-
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 22]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
 
 8.  Informative References
 
@@ -1244,20 +1254,6 @@ Internet-Draft          Uncertainty & Confidence              March 2012
               Application Schema for use by the Internet Engineering
               Task Force (IETF)", Candidate OpenGIS Implementation
               Specification 06-142r1, Version: 1.0, April 2007.
-
-   [I-D.ietf-geopriv-arch]
-              Barnes, R., Lepinski, M., Cooper, A., Morris, J.,
-              Tschofenig, H., and H. Schulzrinne, "An Architecture for
-              Location and Location Privacy in Internet Applications",
-              draft-ietf-geopriv-arch-03 (work in progress), October
-              2010.
-
-   [I-D.ietf-geopriv-policy]
-              Schulzrinne, H., Tschofenig, H., Cuellar, J., Polk, J.,
-              Morris, J., and M. Thomson, "Geolocation Policy: A
-              Document Format for Expressing Privacy Preferences for
-              Location Information", draft-ietf-geopriv-policy-27 (work
-              in progress), August 2012.
 
    [I-D.thomson-geopriv-location-obscuring]
               Thomson, M., "Obscuring Location", draft-thomson-geopriv-
@@ -1282,16 +1278,17 @@ Internet-Draft          Uncertainty & Confidence              March 2012
               Configuration Protocol Option for Coordinate-based
               Location Configuration Information", RFC 3825, July 2004.
 
-
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 23]
-
-Internet-Draft          Uncertainty & Confidence              March 2012
-
-
    [RFC4119]  Peterson, J., "A Presence-based GEOPRIV Location Object
               Format", RFC 4119, December 2005.
+
+
+
+
+
+Thomson & Winterbottom   Expires April 24, 2014                [Page 23]
+
+Internet-Draft          Uncertainty & Confidence            October 2013
+
 
    [RFC5139]  Thomson, M. and J. Winterbottom, "Revised Civic Location
               Format for Presence Information Data Format Location
@@ -1305,6 +1302,11 @@ Internet-Draft          Uncertainty & Confidence              March 2012
               Presence Information Data Format Location Object (PIDF-LO)
               Usage Clarification, Considerations, and Recommendations",
               RFC 5491, March 2009.
+
+   [RFC6280]  Barnes, R., Lepinski, M., Cooper, A., Morris, J.,
+              Tschofenig, H., and H. Schulzrinne, "An Architecture for
+              Location and Location Privacy in Internet Applications",
+              BCP 160, RFC 6280, July 2011.
 
    [Sunday02]
               Sunday, D., "Fast polygon area and Newell normal
@@ -1336,15 +1338,15 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
       {first eccentricity squared} e^2 = f * (2 - f)
 
-      {second eccentricity squared} e'^2 = e^2 * (1 - e^2)
 
 
 
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 24]
+Thomson & Winterbottom   Expires April 24, 2014                [Page 24]
 
-Internet-Draft          Uncertainty & Confidence              March 2012
+Internet-Draft          Uncertainty & Confidence            October 2013
 
+
+      {second eccentricity squared} e'^2 = e^2 * (1 - e^2)
 
    To convert geodetic coordinates (latitude, longitude, altitude) to
    ECEF coordinates (X, Y, Z), use the following relationships:
@@ -1395,11 +1397,9 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
 
 
-
-
-Thomson & Winterbottom Expires September 02, 2012              [Page 25]
+Thomson & Winterbottom   Expires April 24, 2014                [Page 25]
 
-Internet-Draft          Uncertainty & Confidence              March 2012
+Internet-Draft          Uncertainty & Confidence            October 2013
 
 
    This process requires a Cartesian coordinate system.  Therefore,
@@ -1430,7 +1430,7 @@ Internet-Draft          Uncertainty & Confidence              March 2012
 
 B.1.  Checking that a Polygon Upward Normal Points Up
 
-   RFC 5491 [RFC5491] mandates that polygons be presented in anti-
+   RFC 5491 [RFC5491] stipulates that polygons be presented in anti-
    clockwise direction so that the upward normal is in an upward
    direction.  Accidental reversal of points can invert this vector.
    This error can be hard to detect just by looking at the series of
@@ -1453,9 +1453,9 @@ B.1.  Checking that a Polygon Upward Normal Points Up
 
 
 
-Thomson & Winterbottom Expires September 02, 2012              [Page 26]
+Thomson & Winterbottom   Expires April 24, 2014                [Page 26]
 
-Internet-Draft          Uncertainty & Confidence              March 2012
+Internet-Draft          Uncertainty & Confidence            October 2013
 
 
    For polygons that span less than half the globe, any point in the
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Thomson & Winterbottom Expires September 02, 2012              [Page 27]
+Thomson & Winterbottom   Expires April 24, 2014                [Page 27]

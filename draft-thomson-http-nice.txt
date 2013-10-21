@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                 Microsoft
-Intended status: Standards Track                         August 21, 2013
-Expires: February 22, 2014
+Intended status: Standards Track                        October 21, 2013
+Expires: April 24, 2014
 
 
                   Marking HTTP Requests as Unimportant
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on February 22, 2014.
+   This Internet-Draft will expire on April 24, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires February 22, 2014               [Page 1]
+Thomson                  Expires April 24, 2014                 [Page 1]
 
-Internet-Draft                  HTTP Nice                    August 2013
+Internet-Draft                  HTTP Nice                   October 2013
 
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires February 22, 2014               [Page 2]
+Thomson                  Expires April 24, 2014                 [Page 2]
 
-Internet-Draft                  HTTP Nice                    August 2013
+Internet-Draft                  HTTP Nice                   October 2013
 
 
    Many constrained devices rely on intermediaries such as the CoAP-HTTP
@@ -165,9 +165,9 @@ Internet-Draft                  HTTP Nice                    August 2013
 
 
 
-Thomson                 Expires February 22, 2014               [Page 3]
+Thomson                  Expires April 24, 2014                 [Page 3]
 
-Internet-Draft                  HTTP Nice                    August 2013
+Internet-Draft                  HTTP Nice                   October 2013
 
 
    Multiple values for the header field MUST NOT be included.  If
@@ -221,9 +221,9 @@ Internet-Draft                  HTTP Nice                    August 2013
 
 
 
-Thomson                 Expires February 22, 2014               [Page 4]
+Thomson                  Expires April 24, 2014                 [Page 4]
 
-Internet-Draft                  HTTP Nice                    August 2013
+Internet-Draft                  HTTP Nice                   October 2013
 
 
    o  The last time that the server was in active communication.
@@ -277,9 +277,9 @@ Internet-Draft                  HTTP Nice                    August 2013
 
 
 
-Thomson                 Expires February 22, 2014               [Page 5]
+Thomson                  Expires April 24, 2014                 [Page 5]
 
-Internet-Draft                  HTTP Nice                    August 2013
+Internet-Draft                  HTTP Nice                   October 2013
 
 
    In some cases, origin server availability is predictable and known to
@@ -333,9 +333,9 @@ Internet-Draft                  HTTP Nice                    August 2013
 
 
 
-Thomson                 Expires February 22, 2014               [Page 6]
+Thomson                  Expires April 24, 2014                 [Page 6]
 
-Internet-Draft                  HTTP Nice                    August 2013
+Internet-Draft                  HTTP Nice                   October 2013
 
 
 5.  Acknowledgements
@@ -368,9 +368,9 @@ Internet-Draft                  HTTP Nice                    August 2013
 
    [I-D.ietf-core-http-mapping]
               Castellani, A., Loreto, S., Rahman, A., Fossati, T., and
-              E. Dijk, "Best Practices for HTTP-CoAP Mapping
-              Implementation", draft-ietf-core-http-mapping-01 (work in
-              progress), July 2013.
+              E. Dijk, "Guidelines for HTTP-CoAP Mapping
+              Implementations", draft-ietf-core-http-mapping-02 (work in
+              progress), October 2013.
 
    [I-D.snell-http-prefer]
               Snell, J., "Prefer Header for HTTP", draft-snell-http-
@@ -389,4 +389,4 @@ Author's Address
 
 
 
-Thomson                 Expires February 22, 2014               [Page 7]
+Thomson                  Expires April 24, 2014                 [Page 7]
