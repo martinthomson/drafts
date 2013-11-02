@@ -4,8 +4,8 @@
 
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                 Microsoft
-Intended status: Standards Track                        October 21, 2013
-Expires: April 24, 2014
+Intended status: Standards Track                       November 02, 2013
+Expires: May 06, 2014
 
 
                Expressing Confidence in a Location Object
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 24, 2014.
+   This Internet-Draft will expire on May 06, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 1]
+Thomson                   Expires May 06, 2014                  [Page 1]
 
-Internet-Draft                 Confidence                   October 2013
+Internet-Draft                 Confidence                  November 2013
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 2]
+Thomson                   Expires May 06, 2014                  [Page 2]
 
-Internet-Draft                 Confidence                   October 2013
+Internet-Draft                 Confidence                  November 2013
 
 
    o  The location server can scale regions of uncertainty in an attempt
@@ -165,9 +165,9 @@ Internet-Draft                 Confidence                   October 2013
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 3]
+Thomson                   Expires May 06, 2014                  [Page 3]
 
-Internet-Draft                 Confidence                   October 2013
+Internet-Draft                 Confidence                  November 2013
 
 
    If a PIDF-LO does not include the confidence element, confidence is
@@ -221,9 +221,9 @@ Internet-Draft                 Confidence                   October 2013
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 4]
+Thomson                   Expires May 06, 2014                  [Page 4]
 
-Internet-Draft                 Confidence                   October 2013
+Internet-Draft                 Confidence                  November 2013
 
 
 3.  Example
@@ -277,9 +277,9 @@ Internet-Draft                 Confidence                   October 2013
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 5]
+Thomson                   Expires May 06, 2014                  [Page 5]
 
-Internet-Draft                 Confidence                   October 2013
+Internet-Draft                 Confidence                  November 2013
 
 
            source="urn:ietf:params:xml:schema:geopriv:conf">
@@ -333,9 +333,9 @@ Internet-Draft                 Confidence                   October 2013
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 6]
+Thomson                   Expires May 06, 2014                  [Page 6]
 
-Internet-Draft                 Confidence                   October 2013
+Internet-Draft                 Confidence                  November 2013
 
 
       Registrant Contact: IETF, GEOPRIV working group,
@@ -389,9 +389,9 @@ Internet-Draft                 Confidence                   October 2013
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 7]
+Thomson                   Expires May 06, 2014                  [Page 7]
 
-Internet-Draft                 Confidence                   October 2013
+Internet-Draft                 Confidence                  November 2013
 
 
    [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
@@ -445,4 +445,4 @@ Author's Address
 
 
 
-Thomson                  Expires April 24, 2014                 [Page 8]
+Thomson                   Expires May 06, 2014                  [Page 8]

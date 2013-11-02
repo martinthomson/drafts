@@ -5,8 +5,8 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                 Microsoft
 Intended status: Informational                           J. Winterbottom
-Expires: April 24, 2014                               Andrew Corporation
-                                                        October 21, 2013
+Expires: May 06, 2014                                 Andrew Corporation
+                                                       November 02, 2013
 
 
         Representation of Uncertainty and Confidence in PIDF-LO
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 24, 2014.
+   This Internet-Draft will expire on May 06, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 1]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 1]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 2]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 2]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    the results of such a process are carried in IETF data formats and
@@ -165,9 +165,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 3]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 3]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    A probability distribution describing a measured quantity can be
@@ -221,9 +221,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 4]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 4]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    o  A rectangular PDF is used where the errors are known to be
@@ -277,9 +277,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 5]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 5]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
       confidence over any interval of uncertainty is always less than
@@ -333,9 +333,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 6]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 6]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 2.3.  Accuracy as a Qualitative Concept
@@ -389,9 +389,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 7]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 7]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    Absence of uncertainty information in a PIDF-LO document does not
@@ -445,9 +445,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 8]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 8]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    Uncertainty in civic addresses can be increased by removing elements.
@@ -501,9 +501,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                 [Page 9]
+Thomson & Winterbottom    Expires May 06, 2014                  [Page 9]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    Manipulating location estimates that include uncertainty information
@@ -557,9 +557,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 10]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 10]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    Note:  The centroid of a concave Polygon or Arc-Band shape is not
@@ -613,9 +613,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 11]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 11]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
        [   -Ny/p     Nx/p     0  ]         [ -Ny/p  -Nx*Nz/p  Nx ]
@@ -669,9 +669,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 12]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 12]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    The third row contains a distance from a plane parallel to the
@@ -725,9 +725,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 13]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 13]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    if Nx == 0:                              | if Ny == 0:
@@ -781,9 +781,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 14]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 14]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    becomes a circle; a prism becomes a polygon; an ellipsoid becomes an
@@ -837,9 +837,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 15]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 15]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 4.4.1.  Rectangular Distributions
@@ -893,9 +893,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 16]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 16]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
       Ud[x] <= U[x] * (erfinv(Cd ^ (1/n)) / erfinv(Co ^ (1/n)))
@@ -949,9 +949,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 17]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 17]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    |              `-....-'   |
@@ -1005,9 +1005,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 18]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 18]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
          Ao = r^2*acos(a/r) + R^2*acos((d - a)/R) - d*sqrt(r^2 - a^2)
@@ -1061,9 +1061,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 19]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 19]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
          </gs:verticalAxis>
@@ -1117,9 +1117,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 20]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 20]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    Polygon in ECEF coordinate space
@@ -1173,9 +1173,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 21]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 21]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 5.2.  Increasing and Decreasing Confidence
@@ -1229,9 +1229,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 22]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 22]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    This document describes methods for managing and manipulating
@@ -1285,9 +1285,9 @@ Internet-Draft          Uncertainty & Confidence            October 2013
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 23]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 23]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    [RFC5139]  Thomson, M. and J. Winterbottom, "Revised Civic Location
@@ -1341,9 +1341,9 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 24]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 24]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
       {second eccentricity squared} e'^2 = e^2 * (1 - e^2)
@@ -1397,9 +1397,9 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 25]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 25]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    This process requires a Cartesian coordinate system.  Therefore,
@@ -1453,9 +1453,9 @@ B.1.  Checking that a Polygon Upward Normal Points Up
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 26]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 26]
 
-Internet-Draft          Uncertainty & Confidence            October 2013
+Internet-Draft          Uncertainty & Confidence           November 2013
 
 
    For polygons that span less than half the globe, any point in the
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Thomson & Winterbottom   Expires April 24, 2014                [Page 27]
+Thomson & Winterbottom    Expires May 06, 2014                 [Page 27]
