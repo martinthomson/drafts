@@ -414,6 +414,13 @@
             </t>
           </list> 
         </t>
+	<t>
+	  This limited set of labels is intended to provide network operators with a degree of
+	  flexibility in where LIS discovery records can be placed without significantly increasing
+	  the number of DNS names that are searched.  This does not attach any other significance to
+	  these specific zone cuts, or create a classful addressing hierachy based off the reverse
+	  DNS tree.
+	</t>
         <t>
           For example, the IPv4 address <spanx style="verb">192.0.2.75</spanx> could result in
           queries to:
