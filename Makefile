@@ -39,7 +39,7 @@ TARGET ?= txt
 
 EXTRA := html pdf xhtml svg nr unpg
 
-.PHONY: default all extra nits validate clean submit recurse
+.PHONY: default all extra nits validate clean submit recurse tag
 ifeq "${TOP}" ""
 TOP := .
 default: recurse
@@ -128,6 +128,11 @@ ${BASE_NEXT}.xml: ${BASE}.xml
 
 clean:
 	-rm -f $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
+
+tag:
+	git tag ${BASE_NEXT}
+retag:
+	git tag ${BASE}-${REV_CURRENT}
 
 GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 .TRANSIENT: ${GHPAGES_TMP}
