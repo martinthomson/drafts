@@ -39,9 +39,10 @@ TARGET ?= txt
 
 EXTRA := html pdf xhtml svg nr unpg
 
-.PHONY: default all extra nits validate clean submit
+.PHONY: default all extra nits validate clean submit recurse
 ifeq "${TOP}" ""
-default:
+TOP := .
+default: recurse
 else
 default: ${TARGET}
 endif
