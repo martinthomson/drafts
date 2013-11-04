@@ -14,19 +14,18 @@ XML := ${BASE}.xml
 DTD := rfc2629.dtd
 XSLT := rfc2629.xslt
 
-XML_HOME := ${TOP}
-# SAXON := java -jar '$(subst \,\\,$(shell ${CYGPATH} ${XML_HOME}/saxon8.jar))'
-VALIDATE := ${XML_HOME}/validate
-SAXON := java -jar '$(shell ${CYGPATH} ${XML_HOME}/saxon8.jar)'
-XML2RFC_HOME := ${XML_HOME}/xml2rfc-1.35pre1
+# SAXON := java -jar '$(subst \,\\,$(shell ${CYGPATH} ${TOP}/saxon8.jar))'
+VALIDATE := ${TOP}/validate
+SAXON := java -jar '$(shell ${CYGPATH} ${TOP}/saxon8.jar)'
+XML2RFC_HOME := ${TOP}/xml2rfc-1.35pre1
 ifeq "${METHOD}" "direct"
 XML2RFC := ${XML2RFC_HOME}/xml2rfc.sh
 else
-XML2RFC := ${XML_HOME}/webxml2rfc.sh
+XML2RFC := ${TOP}/webxml2rfc.sh
 endif
-XSLT_HOME := ${XML_HOME}/rfc2629xslt
+XSLT_HOME := ${TOP}/rfc2629xslt
 HTML_XSLT := false
-IDNITS := ${XML_HOME}/idnits/idnits
+IDNITS := ${TOP}/idnits/idnits
 
 REV_CURRENT := $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
 ifeq "${REV_CURRENT}" ""
@@ -40,9 +39,10 @@ TARGET ?= txt
 
 EXTRA := html pdf xhtml svg nr unpg
 
-.PHONY: default all extra nits validate clean submit
+.PHONY: default all extra nits validate clean submit recurse tag
 ifeq "${TOP}" ""
-default:
+TOP := .
+default: recurse
 else
 default: ${TARGET}
 endif
@@ -129,6 +129,11 @@ ${BASE_NEXT}.xml: ${BASE}.xml
 clean:
 	-rm -f $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
 
+tag:
+	git tag ${BASE_NEXT}
+retag:
+	git tag ${BASE}-${REV_CURRENT}
+
 GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 .TRANSIENT: ${GHPAGES_TMP}
 GITBRANCH := $(shell git branch | grep '\*' | cut -c3- -)
@@ -137,12 +142,12 @@ recurse:
 
 ghpages: recurse
 	mkdir ${GHPAGES_TMP}
-	find . -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
+	find ${TOP} -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
 	@find ${GHPAGES_TMP}
 	git checkout gh-pages
 	git pull
-	mv -f ${GHPAGES_TMP}/* .
-	git add *.txt *.html
+	mv -f ${GHPAGES_TMP}/* ${TOP}
+	git add ${TOP}/*.txt ${TOP}/*.html
 	git commit -am "Script updating page."
 	git checkout ${GITBRANCH}
 	-rm -rf ${GHPAGES_TMP}
