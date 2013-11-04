@@ -5,8 +5,8 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                 Microsoft
 Intended status: Informational                           J. Winterbottom
-Expires: May 06, 2014                                 Andrew Corporation
-                                                       November 02, 2013
+Expires: May 08, 2014                                 Andrew Corporation
+                                                       November 04, 2013
 
 
         Representation of Uncertainty and Confidence in PIDF-LO
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 06, 2014.
+   This Internet-Draft will expire on May 08, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 1]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 1]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 2]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 2]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -165,7 +165,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 3]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 3]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -221,7 +221,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 4]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 4]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -277,7 +277,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 5]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 5]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -333,7 +333,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 6]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 6]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -389,7 +389,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 7]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 7]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -445,7 +445,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 8]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 8]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -501,7 +501,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                  [Page 9]
+Thomson & Winterbottom    Expires May 08, 2014                  [Page 9]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -557,7 +557,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 10]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 10]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -613,7 +613,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 11]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 11]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -669,7 +669,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 12]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 12]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -725,7 +725,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 13]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 13]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -781,7 +781,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 14]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 14]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -837,7 +837,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 15]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 15]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -893,7 +893,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 16]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 16]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -949,7 +949,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 17]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 17]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1005,7 +1005,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 18]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 18]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1061,7 +1061,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 19]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 19]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1117,7 +1117,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 20]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 20]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1173,7 +1173,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 21]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 21]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1229,7 +1229,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 22]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 22]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1285,7 +1285,7 @@ Internet-Draft          Uncertainty & Confidence           November 2013
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 23]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 23]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1341,7 +1341,7 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 24]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 24]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1397,7 +1397,7 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 25]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 25]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1453,7 +1453,7 @@ B.1.  Checking that a Polygon Upward Normal Points Up
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 26]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 26]
 
 Internet-Draft          Uncertainty & Confidence           November 2013
 
@@ -1509,4 +1509,4 @@ Authors' Addresses
 
 
 
-Thomson & Winterbottom    Expires May 06, 2014                 [Page 27]
+Thomson & Winterbottom    Expires May 08, 2014                 [Page 27]

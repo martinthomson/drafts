@@ -5,7 +5,7 @@
 rtcweb                                                        M. Thomson
 Internet-Draft                                                  B. Aboba
 Intended status: Standards Track                               Microsoft
-Expires: May 06, 2014                                  November 02, 2013
+Expires: May 08, 2014                                  November 04, 2013
 
 
   Bandwidth Constraints for Session Traversal Utilities for NAT (STUN)
@@ -34,7 +34,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 06, 2014.
+   This Internet-Draft will expire on May 08, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 1]
+Thomson & Aboba           Expires May 08, 2014                  [Page 1]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 2]
+Thomson & Aboba           Expires May 08, 2014                  [Page 2]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -165,7 +165,7 @@ Internet-Draft               STUN Bandwidth                November 2013
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 3]
+Thomson & Aboba           Expires May 08, 2014                  [Page 3]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -221,7 +221,7 @@ Internet-Draft               STUN Bandwidth                November 2013
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 4]
+Thomson & Aboba           Expires May 08, 2014                  [Page 4]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -277,7 +277,7 @@ Internet-Draft               STUN Bandwidth                November 2013
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 5]
+Thomson & Aboba           Expires May 08, 2014                  [Page 5]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -333,7 +333,7 @@ Internet-Draft               STUN Bandwidth                November 2013
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 6]
+Thomson & Aboba           Expires May 08, 2014                  [Page 6]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -389,7 +389,7 @@ Internet-Draft               STUN Bandwidth                November 2013
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 7]
+Thomson & Aboba           Expires May 08, 2014                  [Page 7]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -445,7 +445,7 @@ Authors' Addresses
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 8]
+Thomson & Aboba           Expires May 08, 2014                  [Page 8]
 
 Internet-Draft               STUN Bandwidth                November 2013
 
@@ -501,4 +501,4 @@ Internet-Draft               STUN Bandwidth                November 2013
 
 
 
-Thomson & Aboba           Expires May 06, 2014                  [Page 9]
+Thomson & Aboba           Expires May 08, 2014                  [Page 9]

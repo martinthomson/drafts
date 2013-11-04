@@ -5,18 +5,18 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                 Microsoft
 Intended status: Standards Track                                B. Rosen
-Expires: May 08, 2014                                            Neustar
+Expires: March 10, 2014                                          Neustar
                                                               D. Stanley
                                                           Aruba Networks
                                                                 G. Bajko
                                                                    Nokia
                                                               A. Thomson
                                                      Cisco Systems, Inc.
-                                                       November 04, 2013
+                                                      September 06, 2013
 
 
                     Relative Location Representation
-              draft-ietf-geopriv-relative-location-latest
+                draft-ietf-geopriv-relative-location-08
 
 Abstract
 
@@ -46,16 +46,16 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 08, 2014.
+   This Internet-Draft will expire on March 10, 2014.
 
 Copyright Notice
 
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 1]
+Thomson, et al.          Expires March 10, 2014                 [Page 1]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    Copyright (c) 2013 IETF Trust and the persons identified as the
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 2]
+Thomson, et al.          Expires March 10, 2014                 [Page 2]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
      8.1.  Relative Location Registry  . . . . . . . . . . . . . . .  29
@@ -165,9 +165,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 3]
+Thomson, et al.          Expires March 10, 2014                 [Page 3]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
           Reference
@@ -221,9 +221,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 4]
+Thomson, et al.          Expires March 10, 2014                 [Page 4]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    that contains the relative location, and the reference location could
@@ -277,9 +277,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 5]
+Thomson, et al.          Expires March 10, 2014                 [Page 5]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    relative to a civic location:
@@ -333,9 +333,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 6]
+Thomson, et al.          Expires March 10, 2014                 [Page 6]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
        <dm:timestamp>2007-06-22T20:57:29Z</dm:timestamp>
@@ -389,9 +389,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 7]
+Thomson, et al.          Expires March 10, 2014                 [Page 7]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    particularly important when there are dynamic components to these
@@ -445,9 +445,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 8]
+Thomson, et al.          Expires March 10, 2014                 [Page 8]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 4.4.  Distances and Angles
@@ -501,9 +501,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                  [Page 9]
+Thomson, et al.          Expires March 10, 2014                 [Page 9]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    +------+------+------+------+------+------+
@@ -557,9 +557,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 10]
+Thomson, et al.          Expires March 10, 2014                [Page 10]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 4.9.1.2.  TLV encoding
@@ -613,9 +613,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 11]
+Thomson, et al.          Expires March 10, 2014                [Page 11]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    <gs:Sphere xmlns:gml="http://www.opengis.net/gml"
@@ -669,9 +669,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 12]
+Thomson, et al.          Expires March 10, 2014                [Page 12]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    <gs:Ellipse xmlns:gml="http://www.opengis.net/gml"
@@ -725,9 +725,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 13]
+Thomson, et al.          Expires March 10, 2014                [Page 13]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    |  Coordinate-1             |
@@ -781,9 +781,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 14]
+Thomson, et al.          Expires March 10, 2014                [Page 14]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    Alternatively, a series of "pos" elements can be used in place of the
@@ -837,9 +837,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 15]
+Thomson, et al.          Expires March 10, 2014                [Page 15]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    A polygon containing 2D points uses a type code of 119.  A polygon
@@ -893,9 +893,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 16]
+Thomson, et al.          Expires March 10, 2014                [Page 16]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 4.9.5.1.  XML encoding
@@ -949,9 +949,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 17]
+Thomson, et al.          Expires March 10, 2014                [Page 17]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 4.10.  Dynamic Location TLVs
@@ -1005,9 +1005,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 18]
+Thomson, et al.          Expires March 10, 2014                [Page 18]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 4.11.  Secondary Map Metadata
@@ -1061,9 +1061,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 19]
+Thomson, et al.          Expires March 10, 2014                [Page 19]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    o  The CRS axes used and their orientation
@@ -1117,9 +1117,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 20]
+Thomson, et al.          Expires March 10, 2014                [Page 20]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    are required, the value of Coordinate-1 is used in place of
@@ -1173,9 +1173,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 21]
+Thomson, et al.          Expires March 10, 2014                [Page 21]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    Images that use a rows/columns coordinate system often use a left-
@@ -1229,9 +1229,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 22]
+Thomson, et al.          Expires March 10, 2014                [Page 22]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
        <gp:geopriv>
@@ -1285,9 +1285,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 23]
+Thomson, et al.          Expires March 10, 2014                [Page 23]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 5.2.  Geo PIDF with Circle Offset
@@ -1341,9 +1341,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 24]
+Thomson, et al.          Expires March 10, 2014                [Page 24]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
            <dm:timestamp>2007-06-22T20:57:29Z</dm:timestamp>
@@ -1397,9 +1397,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 25]
+Thomson, et al.          Expires March 10, 2014                [Page 25]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    Note:  The pattern value for "mimeType" has been folded onto multiple
@@ -1453,9 +1453,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 26]
+Thomson, et al.          Expires March 10, 2014                [Page 26]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
      <xs:complexType name="referenceType">
@@ -1509,9 +1509,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 27]
+Thomson, et al.          Expires March 10, 2014                [Page 27]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
      <xs:simpleType name="mimeType">
@@ -1565,9 +1565,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 28]
+Thomson, et al.          Expires March 10, 2014                [Page 28]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 8.1.  Relative Location Registry
@@ -1621,9 +1621,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 29]
+Thomson, et al.          Expires March 10, 2014                [Page 29]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    | 114    | relative location shape 3D point       | this RFC  |
@@ -1677,9 +1677,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 30]
+Thomson, et al.          Expires March 10, 2014                [Page 30]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
      [[NOTE TO RFC-EDITOR: Please replace all instances of RFCXXXX
@@ -1733,9 +1733,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 31]
+Thomson, et al.          Expires March 10, 2014                [Page 31]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    Description:  A summary description for the URN or URN prefix.
@@ -1789,9 +1789,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 32]
+Thomson, et al.          Expires March 10, 2014                [Page 32]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
 9.  Acknowledgements
@@ -1845,9 +1845,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 33]
+Thomson, et al.          Expires March 10, 2014                [Page 33]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
@@ -1901,9 +1901,9 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 34]
+Thomson, et al.          Expires March 10, 2014                [Page 34]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    [WGS84]    US National Imagery and Mapping Agency, "Department of
@@ -1957,9 +1957,9 @@ Authors' Addresses
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 35]
+Thomson, et al.          Expires March 10, 2014                [Page 35]
 
-Internet-Draft              Relative Location              November 2013
+Internet-Draft              Relative Location             September 2013
 
 
    Gabor Bajko
@@ -2013,4 +2013,4 @@ Internet-Draft              Relative Location              November 2013
 
 
 
-Thomson, et al.           Expires May 08, 2014                 [Page 36]
+Thomson, et al.          Expires March 10, 2014                [Page 36]

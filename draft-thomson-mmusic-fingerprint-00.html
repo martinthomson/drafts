@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>Use of Fingerprints for Identifying Certificates in the Session Description Protocol (SDP) </title>
+
+  <style type="text/css" title="Xml2Rfc (sans serif)">
+  /*<![CDATA[*/
+	  a {
+	  text-decoration: none;
+	  }
+	  a.smpl {
+	  color: black;
+	  }
+	  a:hover {
+	  text-decoration: underline;
+	  }
+	  a:active {
+	  text-decoration: underline;
+	  }
+	  address {
+	  margin-top: 1em;
+	  margin-left: 2em;
+	  font-style: normal;
+	  }
+	  body {
+	  color: black;
+	  font-family: verdana, helvetica, arial, sans-serif;
+	  font-size: 10pt;
+	  max-width: 55em;
+	  
+	  }
+	  cite {
+	  font-style: normal;
+	  }
+	  dd {
+	  margin-right: 2em;
+	  }
+	  dl {
+	  margin-left: 2em;
+	  }
+	
+	  ul.empty {
+	  list-style-type: none;
+	  }
+	  ul.empty li {
+	  margin-top: .5em;
+	  }
+	  dl p {
+	  margin-left: 0em;
+	  }
+	  dt {
+	  margin-top: .5em;
+	  }
+	  h1 {
+	  font-size: 14pt;
+	  line-height: 21pt;
+	  page-break-after: avoid;
+	  }
+	  h1.np {
+	  page-break-before: always;
+	  }
+	  h1 a {
+	  color: #333333;
+	  }
+	  h2 {
+	  font-size: 12pt;
+	  line-height: 15pt;
+	  page-break-after: avoid;
+	  }
+	  h3, h4, h5, h6 {
+	  font-size: 10pt;
+	  page-break-after: avoid;
+	  }
+	  h2 a, h3 a, h4 a, h5 a, h6 a {
+	  color: black;
+	  }
+	  img {
+	  margin-left: 3em;
+	  }
+	  li {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol p {
+	  margin-left: 0em;
+	  }
+	  p {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  pre {
+	  margin-left: 3em;
+	  background-color: lightyellow;
+	  padding: .25em;
+	  }
+	  pre.text2 {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f0f0f0;
+	  width: 69em;
+	  }
+	  pre.inline {
+	  background-color: white;
+	  padding: 0em;
+	  }
+	  pre.text {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  width: 69em;
+	  }
+	  pre.drawing {
+	  border-style: solid;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  padding: 2em;
+	  }
+	  table {
+	  margin-left: 2em;
+	  }
+	  table.tt {
+	  vertical-align: top;
+	  }
+	  table.full {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.headers {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.tt td {
+	  vertical-align: top;
+	  }
+	  table.full td {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.tt th {
+	  vertical-align: top;
+	  }
+	  table.full th {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.headers th {
+	  border-style: none none inset none;
+	  border-width: 1px;
+	  }
+	  table.left {
+	  margin-right: auto;
+	  }
+	  table.right {
+	  margin-left: auto;
+	  }
+	  table.center {
+	  margin-left: auto;
+	  margin-right: auto;
+	  }
+	  caption {
+	  caption-side: bottom;
+	  font-weight: bold;
+	  font-size: 9pt;
+	  margin-top: .5em;
+	  }
+	
+	  table.header {
+	  border-spacing: 1px;
+	  width: 95%;
+	  font-size: 10pt;
+	  color: white;
+	  }
+	  td.top {
+	  vertical-align: top;
+	  }
+	  td.topnowrap {
+	  vertical-align: top;
+	  white-space: nowrap; 
+	  }
+	  table.header td {
+	  background-color: gray;
+	  width: 50%;
+	  }
+	  table.header a {
+	  color: white;
+	  }
+	  td.reference {
+	  vertical-align: top;
+	  white-space: nowrap;
+	  padding-right: 1em;
+	  }
+	  thead {
+	  display:table-header-group;
+	  }
+	  ul.toc, ul.toc ul {
+	  list-style: none;
+	  margin-left: 1.5em;
+	  margin-right: 0em;
+	  padding-left: 0em;
+	  }
+	  ul.toc li {
+	  line-height: 150%;
+	  font-weight: bold;
+	  font-size: 10pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  ul.toc li li {
+	  line-height: normal;
+	  font-weight: normal;
+	  font-size: 9pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  li.excluded {
+	  font-size: 0pt;
+	  }
+	  ul p {
+	  margin-left: 0em;
+	  }
+	
+	  .comment {
+	  background-color: yellow;
+	  }
+	  .center {
+	  text-align: center;
+	  }
+	  .error {
+	  color: red;
+	  font-style: italic;
+	  font-weight: bold;
+	  }
+	  .figure {
+	  font-weight: bold;
+	  text-align: center;
+	  font-size: 9pt;
+	  }
+	  .filename {
+	  color: #333333;
+	  font-weight: bold;
+	  font-size: 12pt;
+	  line-height: 21pt;
+	  text-align: center;
+	  }
+	  .fn {
+	  font-weight: bold;
+	  }
+	  .hidden {
+	  display: none;
+	  }
+	  .left {
+	  text-align: left;
+	  }
+	  .right {
+	  text-align: right;
+	  }
+	  .title {
+	  color: #990000;
+	  font-size: 18pt;
+	  line-height: 18pt;
+	  font-weight: bold;
+	  text-align: center;
+	  margin-top: 36pt;
+	  }
+	  .vcardline {
+	  display: block;
+	  }
+	  .warning {
+	  font-size: 14pt;
+	  background-color: yellow;
+	  }
+	
+	
+	  @media print {
+	  .noprint {
+		display: none;
+	  }
+	
+	  a {
+		color: black;
+		text-decoration: none;
+	  }
+	
+	  table.header {
+		width: 90%;
+	  }
+	
+	  td.header {
+		width: 50%;
+		color: black;
+		background-color: white;
+		vertical-align: top;
+		font-size: 12pt;
+	  }
+	
+	  ul.toc a::after {
+		content: leader('.') target-counter(attr(href), page);
+	  }
+	
+	  ul.ind li li a {
+		content: target-counter(attr(href), page);
+	  }
+	
+	  .print2col {
+		column-count: 2;
+		-moz-column-count: 2;
+		column-fill: auto;
+	  }
+	  }
+	
+	  @page {
+	  @top-left {
+		   content: "Internet-Draft"; 
+	  } 
+	  @top-right {
+		   content: "December 2010"; 
+	  } 
+	  @top-center {
+		   content: "Abbreviated Title";3
+	  } 
+	  @bottom-left {
+		   content: "Doe"; 
+	  } 
+	  @bottom-center {
+		   content: "Expires June 2011"; 
+	  } 
+	  @bottom-right {
+		   content: "[Page " counter(page) "]"; 
+	  } 
+	  }
+	
+	  @page:first { 
+		@top-left {
+		  content: normal;
+		}
+		@top-right {
+		  content: normal;
+		}
+		@top-center {
+		  content: normal;
+		}
+	  }
+  /*]]>*/
+  </style><style tyle="text/css">body {   font: 11pt cambria, helvetica, arial, sans-serif;   font-size-adjust: 0.5;   line-height: 130%;   margin: 1em auto;   max-width: 700px; }  .title, .filename, h1, h2, h3, h4 {   font-family: candara, helvetica, arial, sans-serif;   font-size-adjust: 0.5; } .title { font-size: 150%; } h1 { font-size: 130%; } h2 { font-size: 120%; } h3, h4 { font-size: 110%; } ul.toc >li { font-size: 95%; } ul.toc >li >ul, .figure, caption { font-size: 90%; }  table {   margin-left: 0em; } table.header {   width: 100%; }  table.header td {   background-color: inherit;   color: black; }  samp, tt, code, pre {   font: 11pt consolas, monospace;   font-size-adjust: none; }  pre.text, pre.text2 {   width: 90%; }  dt {   float: left; clear: left;   margin: 0.5em 0.5em 0 0; } dt:first-child {   margin-top: 0; } dd {   margin: 0.5em 0 0 2em; } dd p, dd ul {   margin-top: 0; margin-bottom: 0; } dd *+p {   margin-top: 0.5em; }  ol, ul {   padding: 0;   margin: 0.5em 0 0.5em 2em; } ul.toc, ul.toc ul {    margin: 0 0 0 1.5em; } ul.toc a:first-child {    display: inline-block;    min-width: 1.2em; }</style>
+
+  <link href="#rfc.toc" rel="Contents"/>
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Conventions and Terminology"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Hash Agility"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Multiple Certificates"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 IANA Considerations"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="7 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References"/>
+<link href="#rfc.authors" rel="Chapter"/>
+
+
+  <meta name="generator" content="xml2rfc version 2.4.2 - http://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Thomson, M." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-mmusic-fingerprint-00" />
+  <meta name="dct.issued" scheme="ISO8601" content="2013-11-04" />
+  <meta name="dct.abstract" content="The Session Description Protocol (SDP) fingerprint attribute binds a session description to an X.509 certificate.  This document describes how hash agility is achieved without backwards compatibility issues.  This document also describes how the fingerprint attribute can be used to identify a set of valid certificates.  " />
+  <meta name="description" content="The Session Description Protocol (SDP) fingerprint attribute binds a session description to an X.509 certificate.  This document describes how hash agility is achieved without backwards compatibility issues.  This document also describes how the fingerprint attribute can be used to identify a set of valid certificates.  " />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+  <td class="left">MMUSIC</td>
+  <td class="right">M. Thomson</td>
+</tr>
+<tr>
+  <td class="left">Internet-Draft</td>
+  <td class="right">Microsoft</td>
+</tr>
+<tr>
+  <td class="left">Updates: 4572 (if approved)</td>
+  <td class="right">November 04, 2013</td>
+</tr>
+<tr>
+  <td class="left">Intended status: Standards Track</td>
+  <td class="right"></td>
+</tr>
+<tr>
+  <td class="left">Expires: May 08, 2014</td>
+  <td class="right"></td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">Use of Fingerprints for Identifying Certificates in the Session Description Protocol (SDP) <br />
+  <span class="filename">draft-thomson-mmusic-fingerprint-00</span></p>
+  
+  <h1 id="rfc.abstract">
+  <a href="#rfc.abstract">Abstract</a>
+</h1>
+<p>The Session Description Protocol (SDP) fingerprint attribute binds a session description to an X.509 certificate.  This document describes how hash agility is achieved without backwards compatibility issues.  This document also describes how the fingerprint attribute can be used to identify a set of valid certificates.  </p>
+<p>This document updates RFC4572.  </p>
+<h1 id="rfc.status">
+  <a href="#rfc.status">Status of This Memo</a>
+</h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on May 08, 2014.</p>
+<h1 id="rfc.copyrightnotice">
+  <a href="#rfc.copyrightnotice">Copyright Notice</a>
+</h1>
+<p>Copyright (c) 2013 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
+<li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
+<li>2.   <a href="#rfc.section.2">Hash Agility</a></li>
+<li>3.   <a href="#rfc.section.3">Multiple Certificates</a></li>
+<li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
+<li>5.   <a href="#rfc.section.5">IANA Considerations</a></li>
+<li>6.   <a href="#rfc.section.6">Acknowledgements</a></li>
+<li>7.   <a href="#rfc.references">References</a></li>
+<li>7.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>7.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li><a href="#rfc.authors">Author's Address</a></li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
+<p><a href="#RFC4572">RFC 4572</a> <cite title="NONE">[RFC4572]</cite> describes how the fingerprint <a href="#RFC4566">Session Description Protocol (SDP)</a> <cite title="NONE">[RFC4566]</cite> attribute binds a session description to an <a href="#X509">X.509 certificate</a> <cite title="NONE">[X509]</cite>.  Unfortunately, the only statement it makes regarding multiple fingerprints is the following: </p>
+
+<ul class="empty">
+  <li>A certificate fingerprint MUST be computed using the same one-way hash function as is used in the certificate's signature algorithm.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.1.p.2">This has the unfortunate consequence of unnecessarily coupling the security properties of the certificate to the hash function used in signing the certificate.  To maximize the chances of a certificate being accepted, the hash algorithm used in certificates tends to lag current best practice, potentially exposing sessions to attacks based on hash collision.  </p>
+<p id="rfc.section.1.p.3">The ability to use stronger cryptographic hash algorithms (hash agility) improves the integrity of the binding between the session description and the entity in possession of the private key.  Systems that rely on other bindings to the session (or the private keys used to establish it) do not benefit from these changes.  </p>
+<p id="rfc.section.1.p.4">This document also describes an optional mechanism that might be used to identify multiple certificates, in cases where the offered certificate might be selected from a small set.  This might have operational advantages where the endpoint answering a call is not known ahead of a session description being created.  </p>
+<h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
+<p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#agility" id="agility">Hash Agility</a></h1>
+<p id="rfc.section.2.p.1">The SDP fingerprint attribute is used to indicate the hash of the certificate - a certificate fingerprint - that is offered in the <a href="#RFC5246">TLS</a> <cite title="NONE">[RFC5246]</cite> or <a href="#RFC5764">DTLS</a> <cite title="NONE">[RFC5764]</cite> handshake.  The certificate fingerprint so included is used to bind the (D)TLS session to the session description.  </p>
+<p id="rfc.section.2.p.2">Multiple fingerprint attributes can be used to identify a certificate using alternative cryptographic hash algorithms.  This allows sessions descriptions to use alternative, potentially stronger, hash algorithms without risking interoperability failure.  A stronger hash algorithm is more resistant to collision attacks, which can be used to impersonate endpoints.  </p>
+<p id="rfc.section.2.p.3">To avoid cases where certificate fingerprints cannot be validated, implementations MUST support <a href="#FIPS2">SHA-256</a> <cite title="NONE">[FIPS2]</cite>.  That is, a fingerprint attribute using SHA-256 MUST be included in any place that includes fingerprint attributes and implementations MUST be able to validate SHA-256 fingerprints.  </p>
+<p id="rfc.section.2.p.4">Implementations or specific applications can specify that validation using a different hash algorithm be mandatory in order to achieve a desired level of collision resistance.  Implementations MUST NOT consider a session binding to be valid unless a certificate fingerprint using sufficiently strong hash algorithm matches one in the session description.  For example, an application might specify that certificates are validated using <a href="#FIPS2">SHA-384</a> <cite title="NONE">[FIPS2]</cite> in addition to, or instead of, SHA-256.  </p>
+<p id="rfc.section.2.p.5">Additional fingerprint attributes MAY be included using alternative hash algorithms.  An endpoint that validates a session using fingerprint attributes MUST report failure if any hash that it checks doesn't match.  </p>
+<p id="rfc.section.2.p.6">Endpoints can ignore fingerprint attributes that use hash algorithms it doesn't support or wish to validate.  </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#multiples" id="multiples">Multiple Certificates</a></h1>
+<p/>
+<p id="rfc.section.3.p.2">It might be that an application desires the ability to create session descriptions where the security context can be terminated using one of a small set of certificates.  </p>
+<p id="rfc.section.3.p.3">An endpoint that validates a session description with multiple values for the same hash algorithm MUST fail the validation unless a fingerprint matches for each hash algorithm validated.  Therefore, a session description that includes multiple a=fingerprint values for the same hash algorithm MUST include the same number of a=fingerprint values for every hash algorithm that is included.  </p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security" id="security">Security Considerations</a></h1>
+<p id="rfc.section.4.p.1">Over time, advances in cryptanalysis and computational power render hash algorithms increasingly prone to collision attacks.  A hash collision on a certificate fingerprint would allow for impersonation.  This document describes how to use different hash algorithms, independent of those selected for use in certificates.  </p>
+<p id="rfc.section.4.p.2">Hash agility does not reduce the need for session description integrity protection or any of the suggested supporting mechanisms described in <a href="#RFC4572">[RFC4572]</a>.  </p>
+<p id="rfc.section.4.p.3">Adding support for hash agility does not affect the properties gained through the use of other mechanisms like the use of other bindings between session and identity.  This document only improves the binding between a session and its description in SDP.  For example, mechanisms such as the one described in <a href="#I-D.ietf-rtcweb-security-arch">[I-D.ietf-rtcweb-security-arch]</a> require the implementation of equivalent processing rules to benefit from hash agility.  Systems relying on the X.509 certificate chain to a specific trust anchor are similarly unaffected.  </p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
+<p id="rfc.section.5.p.1">This document has no IANA actions.  </p>
+<p/>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
+<p id="rfc.section.6.p.1">Kevin Dempsey raised the original question that motivated this draft.  </p>
+<h1 id="rfc.references"><a href="#rfc.references">7.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">7.1.</a> Normative References</h1>
+<table>
+  <tbody>
+    <tr><td class="reference"><b id="FIPS2">[FIPS2]</b></td><td class="top"><a>Secure Hash Standard </a>", FIPS PUB 180-2, ISO Standard 9594-8, August 2002.</td>, "</tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2119">[RFC2119]</b>
+      </td>
+      <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4566">[RFC4566]</b>
+      </td>
+      <td class="top"><a>Handley, M.</a>, <a>Jacobson, V.</a> and <a>C. Perkins</a>, "<a href="http://tools.ietf.org/html/rfc4566">SDP: Session Description Protocol</a>", RFC 4566, July 2006.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4572">[RFC4572]</b>
+      </td>
+      <td class="top"><a>Lennox, J.</a>, "<a href="http://tools.ietf.org/html/rfc4572">Connection-Oriented Media Transport over the Transport Layer Security (TLS) Protocol in the Session Description Protocol (SDP)</a>", RFC 4572, July 2006.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5246">[RFC5246]</b>
+      </td>
+      <td class="top"><a>Dierks, T.</a> and <a>E. Rescorla</a>, "<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>", RFC 5246, August 2008.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5764">[RFC5764]</b>
+      </td>
+      <td class="top"><a>McGrew, D.</a> and <a>E. Rescorla</a>, "<a href="http://tools.ietf.org/html/rfc5764">Datagram Transport Layer Security (DTLS) Extension to Establish Keys for the Secure Real-time Transport Protocol (SRTP)</a>", RFC 5764, May 2010.</td>
+    </tr>
+    <tr><td class="reference"><b id="X509">[X509]</b></td><td class="top"><a>Information technology - Open Systems Interconnection - The Directory: Public-key and attribute certificate frameworks </a>", ITU-T Recommendation X.509, ISO Standard 9594-8, March 2000.</td>, "</tr>
+  </tbody>
+</table>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">7.2.</a> Informative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="I-D.ietf-rtcweb-security-arch">[I-D.ietf-rtcweb-security-arch]</b>
+      </td>
+      <td class="top"><a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-rtcweb-security-arch-07">WebRTC Security Architecture</a>", Internet-Draft draft-ietf-rtcweb-security-arch-07, July 2013.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.authors">
+  <a href="#rfc.authors">Author's Address</a>
+</h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Martin Thomson</span> 
+	  <span class="n hidden">
+		<span class="family-name">Thomson</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Microsoft</span>
+	<span class="adr">
+	  <span>3210 Porter Drive</span>
+
+	  <span class="vcardline">
+		<span class="locality">Palo Alto</span>,  
+		<span class="region">CA</span> 
+		<span class="code">94304</span>
+	  </span>
+	  <span class="country-name vcardline">US</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:martin.thomson@skype.net">martin.thomson@skype.net</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>
