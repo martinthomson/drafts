@@ -472,17 +472,18 @@
 <p id="rfc.section.2.2.p.2">If ICE is not employed, a DTLS server SHOULD use the denial of service countermeasures described in Section 4.2.1 of <a href="#RFC6347">[RFC6347]</a>; specifically the <samp>HelloVerifyRequest</samp> and the cookie that it carries.  </p>
 <h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> Relationship with Connection Liveness</h1>
 <p id="rfc.section.2.3.p.1">A connection is considered "live" if packets are received from a remote endpoint within an application-dependent period.  For WebRTC, a connection that is not live for 30 seconds loses consent.  </p>
-<p id="rfc.section.2.3.p.2">A WebRTC application can request a notification when there are no packets received for a certain period.  Similarly, an application can request that heartbeats are sent after an interval shorter than 10 seconds.  These two time intervals might use the same configuration item to control.  </p>
+<p id="rfc.section.2.3.p.2">A WebRTC application can request a notification when there are no packets received for a certain period.  Similarly, an application can request that heartbeats are sent after an interval shorter than 10 seconds.  These two time intervals might be controlled by the same configuration item.  </p>
+<p id="rfc.section.2.3.p.3">Sending heartbeats at a high rate could allow a malicious application to generate congestion.  A WebRTC application MUST NOT be able to send heartbeats at a rate higher than 1 per second.  </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#alpn" id="alpn">Application Layer Protocol Identifiers</a></h1>
 <p id="rfc.section.3.p.1">The following ALPN identifiers are defined: </p>
 
 <dl>
   <dt>RTP (0x52 0x54 0x50):</dt>
-  <dd style="margin-left: 8">This token indicates that <a href="#RFC5764">DTLS-SRTP</a> <cite title="NONE">[RFC5764]</cite> is acceptable.  </dd>
+  <dd style="margin-left: 8">This token indicates that <a href="#RFC5764">DTLS-SRTP</a> <cite title="NONE">[RFC5764]</cite> is acceptable or selected.  </dd>
   <dt>SCTP (0x53 0x43 0x54 0x50):</dt>
-  <dd style="margin-left: 8">This token indicates that <a href="#I-D.ietf-rtcweb-data-channel">WebRTC Data Channels</a> <cite title="NONE">[I-D.ietf-rtcweb-data-channel]</cite> is acceptable.  The DTLS record-layer carries encapsulated <a href="#RFC4960">Stream Control Transmission Protocol (SCTP)</a> <cite title="NONE">[RFC4960]</cite> packets as described in <a href="#I-D.ietf-tsvwg-sctp-dtls-encaps">[I-D.ietf-tsvwg-sctp-dtls-encaps]</a>.  </dd>
+  <dd style="margin-left: 8">This token indicates that <a href="#I-D.ietf-rtcweb-data-channel">WebRTC Data Channels</a> <cite title="NONE">[I-D.ietf-rtcweb-data-channel]</cite> is acceptable or accepted.  The DTLS record-layer carries encapsulated <a href="#RFC4960">Stream Control Transmission Protocol (SCTP)</a> <cite title="NONE">[RFC4960]</cite> packets as described in <a href="#I-D.ietf-tsvwg-sctp-dtls-encaps">[I-D.ietf-tsvwg-sctp-dtls-encaps]</a>.  </dd>
   <dt>RTP+SCTP (0x52 0x54 0x50 0x2b 0x53 0x43 0x54 0x50):</dt>
-  <dd style="margin-left: 8">This token indicates that both <a href="#RFC5764">DTLS-SRTP</a> <cite title="NONE">[RFC5764]</cite> and <a href="#I-D.ietf-rtcweb-data-channel">WebRTC Data Channels</a> <cite title="NONE">[I-D.ietf-rtcweb-data-channel]</cite> are acceptable.  The DTLS record-layer carries encapsulated SCTP packets as described in <a href="#I-D.ietf-tsvwg-sctp-dtls-encaps">[I-D.ietf-tsvwg-sctp-dtls-encaps]</a>; this is multiplexed with <a href="#RFC3711">SRTP</a> <cite title="NONE">[RFC3711]</cite> packets as described in <a href="#RFC5764">[RFC5764]</a>.  </dd>
+  <dd style="margin-left: 8">This token indicates that both <a href="#RFC5764">DTLS-SRTP</a> <cite title="NONE">[RFC5764]</cite> and <a href="#I-D.ietf-rtcweb-data-channel">WebRTC Data Channels</a> <cite title="NONE">[I-D.ietf-rtcweb-data-channel]</cite> are acceptable or selected.  The DTLS record-layer carries encapsulated SCTP packets as described in <a href="#I-D.ietf-tsvwg-sctp-dtls-encaps">[I-D.ietf-tsvwg-sctp-dtls-encaps]</a>; this is multiplexed with <a href="#RFC3711">SRTP</a> <cite title="NONE">[RFC3711]</cite> packets as described in <a href="#RFC5764">[RFC5764]</a>.  </dd>
 </dl>
 
 <p> </p>

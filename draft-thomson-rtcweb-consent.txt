@@ -173,28 +173,32 @@ Internet-Draft               Receive Consent               November 2013
    A WebRTC application can request a notification when there are no
    packets received for a certain period.  Similarly, an application can
    request that heartbeats are sent after an interval shorter than 10
-   seconds.  These two time intervals might use the same configuration
-   item to control.
+   seconds.  These two time intervals might be controlled by the same
+   configuration item.
+
+   Sending heartbeats at a high rate could allow a malicious application
+   to generate congestion.  A WebRTC application MUST NOT be able to
+   send heartbeats at a rate higher than 1 per second.
 
 3.  Application Layer Protocol Identifiers
 
    The following ALPN identifiers are defined:
 
    RTP (0x52 0x54 0x50):  This token indicates that DTLS-SRTP [RFC5764]
-      is acceptable.
+      is acceptable or selected.
 
    SCTP (0x53 0x43 0x54 0x50):  This token indicates that WebRTC Data
-      Channels [I-D.ietf-rtcweb-data-channel] is acceptable.  The DTLS
-      record-layer carries encapsulated Stream Control Transmission
-      Protocol (SCTP) [RFC4960] packets as described in
+      Channels [I-D.ietf-rtcweb-data-channel] is acceptable or accepted.
+      The DTLS record-layer carries encapsulated Stream Control
+      Transmission Protocol (SCTP) [RFC4960] packets as described in
       [I-D.ietf-tsvwg-sctp-dtls-encaps].
 
    RTP+SCTP (0x52 0x54 0x50 0x2b 0x53 0x43 0x54 0x50):  This token
       indicates that both DTLS-SRTP [RFC5764] and WebRTC Data Channels
-      [I-D.ietf-rtcweb-data-channel] are acceptable.  The DTLS record-
-      layer carries encapsulated SCTP packets as described in
-      [I-D.ietf-tsvwg-sctp-dtls-encaps]; this is multiplexed with SRTP
-      [RFC3711] packets as described in [RFC5764].
+      [I-D.ietf-rtcweb-data-channel] are acceptable or selected.  The
+      DTLS record-layer carries encapsulated SCTP packets as described
+      in [I-D.ietf-tsvwg-sctp-dtls-encaps]; this is multiplexed with
+      SRTP [RFC3711] packets as described in [RFC5764].
 
    An application that can use a multiplexed combination of SRTP and
    SCTP MUST select "RTP+SCTP" if it is available, even if it is not
@@ -214,10 +218,6 @@ Internet-Draft               Receive Consent               November 2013
 
 5.  IANA Considerations
 
-   This document registers three identifiers in the "Application Layer
-   Protocol Negotiation (ALPN) Protocol IDs" established by
-   [I-D.ietf-tls-applayerprotoneg].
-
 
 
 
@@ -225,6 +225,10 @@ Thomson & Jennings        Expires May 15, 2014                  [Page 4]
 
 Internet-Draft               Receive Consent               November 2013
 
+
+   This document registers three identifiers in the "Application Layer
+   Protocol Negotiation (ALPN) Protocol IDs" established by
+   [I-D.ietf-tls-applayerprotoneg].
 
    Protocol:  RTP over DTLS-SRTP
 
@@ -268,12 +272,8 @@ Internet-Draft               Receive Consent               November 2013
               (work in progress), October 2013.
 
    [I-D.ietf-tsvwg-sctp-dtls-encaps]
-              Tuexen, M., Stewart, R., Jesup, R., and S. Loreto, "DTLS
-              Encapsulation of SCTP Packets", draft-ietf-tsvwg-sctp-
-              dtls-encaps-02 (work in progress), October 2013.
 
-   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
-              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
 
 
 
@@ -281,6 +281,13 @@ Thomson & Jennings        Expires May 15, 2014                  [Page 5]
 
 Internet-Draft               Receive Consent               November 2013
 
+
+              Tuexen, M., Stewart, R., Jesup, R., and S. Loreto, "DTLS
+              Encapsulation of SCTP Packets", draft-ietf-tsvwg-sctp-
+              dtls-encaps-02 (work in progress), October 2013.
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
 
    [RFC3550]  Schulzrinne, H., Casner, S., Frederick, R., and V.
               Jacobson, "RTP: A Transport Protocol for Real-Time
@@ -321,13 +328,6 @@ Authors' Addresses
    US
 
    Email: martin.thomson@gmail.com
-
-
-
-
-
-
-
 
 
 
