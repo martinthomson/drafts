@@ -156,8 +156,13 @@
         <t>
           A WebRTC application can request a notification when there are no packets received for a
           certain period.  Similarly, an application can request that heartbeats are sent after an
-          interval shorter than 10 seconds.  These two time intervals might use the same configuration
-          item to control.
+          interval shorter than 10 seconds.  These two time intervals might be controlled by the
+          same configuration item.
+        </t>
+        <t>
+          Sending heartbeats at a high rate could allow a malicious application to generate
+          congestion.  A WebRTC application MUST NOT be able to send heartbeats at a rate higher
+          than 1 per second.
         </t>
       </section>
     </section>
@@ -167,18 +172,19 @@
         The following ALPN identifiers are defined:
         <list style="hanging">
           <t hangText="RTP (0x52 0x54 0x50):">
-            This token indicates that <xref target="RFC5764">DTLS-SRTP</xref> is acceptable.
+            This token indicates that <xref target="RFC5764">DTLS-SRTP</xref> is acceptable or
+            selected.
           </t>
           <t hangText="SCTP (0x53 0x43 0x54 0x50):">
             This token indicates that <xref target="I-D.ietf-rtcweb-data-channel">WebRTC Data
-            Channels</xref> is acceptable.  The DTLS record-layer carries encapsulated <xref
-            target="RFC4960">Stream Control Transmission Protocol (SCTP)</xref> packets as described
-            in <xref target="I-D.ietf-tsvwg-sctp-dtls-encaps"/>.
+            Channels</xref> is acceptable or accepted.  The DTLS record-layer carries encapsulated
+            <xref target="RFC4960">Stream Control Transmission Protocol (SCTP)</xref> packets as
+            described in <xref target="I-D.ietf-tsvwg-sctp-dtls-encaps"/>.
           </t>
           <t hangText="RTP+SCTP (0x52 0x54 0x50 0x2b 0x53 0x43 0x54 0x50):">
             This token indicates that both <xref target="RFC5764">DTLS-SRTP</xref> and <xref
-            target="I-D.ietf-rtcweb-data-channel">WebRTC Data Channels</xref> are acceptable.  The
-            DTLS record-layer carries encapsulated SCTP packets as described in <xref
+            target="I-D.ietf-rtcweb-data-channel">WebRTC Data Channels</xref> are acceptable or
+            selected.  The DTLS record-layer carries encapsulated SCTP packets as described in <xref
             target="I-D.ietf-tsvwg-sctp-dtls-encaps"/>; this is multiplexed with <xref
             target="RFC3711">SRTP</xref> packets as described in <xref target="RFC5764"/>.
           </t>
