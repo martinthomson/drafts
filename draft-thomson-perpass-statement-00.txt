@@ -49,7 +49,7 @@ Copyright Notice
 
 1.  Message
 
-   .
+   
 
 
 
@@ -58,7 +58,7 @@ Thomson                   Expires May 08, 2014                  [Page 1]
 Internet-Draft              Simple Statement               November 2013
 
 
-   .
+   
 
 
 
@@ -114,7 +114,7 @@ Thomson                   Expires May 08, 2014                  [Page 2]
 Internet-Draft              Simple Statement               November 2013
 
 
-   .
+   
 
 
 
@@ -170,7 +170,7 @@ Thomson                   Expires May 08, 2014                  [Page 3]
 Internet-Draft              Simple Statement               November 2013
 
 
-   .
+   
 
 
 
@@ -226,7 +226,7 @@ Thomson                   Expires May 08, 2014                  [Page 4]
 Internet-Draft              Simple Statement               November 2013
 
 
-   .
+   
 
 
 
@@ -282,7 +282,7 @@ Thomson                   Expires May 08, 2014                  [Page 5]
 Internet-Draft              Simple Statement               November 2013
 
 
-   .
+   
 
 
 
@@ -338,7 +338,7 @@ Thomson                   Expires May 08, 2014                  [Page 6]
 Internet-Draft              Simple Statement               November 2013
 
 
-   .
+   
 
 
 

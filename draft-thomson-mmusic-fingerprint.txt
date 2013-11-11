@@ -4,14 +4,14 @@
 
 MMUSIC                                                        M. Thomson
 Internet-Draft                                                 Microsoft
-Updates: 4572 (if approved)                             October 22, 2013
+Updates: 4572 (if approved)                            November 11, 2013
 Intended status: Standards Track
-Expires: April 25, 2014
+Expires: May 15, 2014
 
 
     Use of Fingerprints for Identifying Certificates in the Session
                        Description Protocol (SDP)
-                    draft-thomson-mmusic-fingerprint
+                draft-thomson-mmusic-fingerprint-latest
 
 Abstract
 
@@ -38,7 +38,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 25, 2014.
+   This Internet-Draft will expire on May 15, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                  Expires April 25, 2014                 [Page 1]
+Thomson                   Expires May 15, 2014                  [Page 1]
 
-Internet-Draft        SDP Certificate Fingerprints          October 2013
+Internet-Draft        SDP Certificate Fingerprints         November 2013
 
 
    to this document.  Code Components extracted from this document must
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                  Expires April 25, 2014                 [Page 2]
+Thomson                   Expires May 15, 2014                  [Page 2]
 
-Internet-Draft        SDP Certificate Fingerprints          October 2013
+Internet-Draft        SDP Certificate Fingerprints         November 2013
 
 
 1.1.  Conventions and Terminology
@@ -165,9 +165,9 @@ Internet-Draft        SDP Certificate Fingerprints          October 2013
 
 
 
-Thomson                  Expires April 25, 2014                 [Page 3]
+Thomson                   Expires May 15, 2014                  [Page 3]
 
-Internet-Draft        SDP Certificate Fingerprints          October 2013
+Internet-Draft        SDP Certificate Fingerprints         November 2013
 
 
    It might be that an application desires the ability to create session
@@ -221,9 +221,9 @@ Internet-Draft        SDP Certificate Fingerprints          October 2013
 
 
 
-Thomson                  Expires April 25, 2014                 [Page 4]
+Thomson                   Expires May 15, 2014                  [Page 4]
 
-Internet-Draft        SDP Certificate Fingerprints          October 2013
+Internet-Draft        SDP Certificate Fingerprints         November 2013
 
 
 7.1.  Normative References
@@ -277,4 +277,4 @@ Author's Address
 
 
 
-Thomson                  Expires April 25, 2014                 [Page 5]
+Thomson                   Expires May 15, 2014                  [Page 5]
