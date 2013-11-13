@@ -5,8 +5,8 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                 Microsoft
 Intended status: Standards Track                               R. Bellis
-Expires: May 15, 2014                                         Nominet UK
-                                                       November 11, 2013
+Expires: May 17, 2014                                         Nominet UK
+                                                       November 13, 2013
 
 
 Location Information Server (LIS) Discovery using IP address and Reverse
@@ -42,7 +42,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 15, 2014.
+   This Internet-Draft will expire on May 17, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 1]
+Thomson & Bellis          Expires May 17, 2014                  [Page 1]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 2]
+Thomson & Bellis          Expires May 17, 2014                  [Page 2]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -165,7 +165,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 3]
+Thomson & Bellis          Expires May 17, 2014                  [Page 3]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -221,7 +221,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 4]
+Thomson & Bellis          Expires May 17, 2014                  [Page 4]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -277,7 +277,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 5]
+Thomson & Bellis          Expires May 17, 2014                  [Page 5]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -333,7 +333,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 6]
+Thomson & Bellis          Expires May 17, 2014                  [Page 6]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -389,7 +389,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 7]
+Thomson & Bellis          Expires May 17, 2014                  [Page 7]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -445,7 +445,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 8]
+Thomson & Bellis          Expires May 17, 2014                  [Page 8]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -501,7 +501,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                  [Page 9]
+Thomson & Bellis          Expires May 17, 2014                  [Page 9]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -557,7 +557,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 10]
+Thomson & Bellis          Expires May 17, 2014                 [Page 10]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -613,7 +613,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 11]
+Thomson & Bellis          Expires May 17, 2014                 [Page 11]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -669,7 +669,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 12]
+Thomson & Bellis          Expires May 17, 2014                 [Page 12]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -725,7 +725,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 13]
+Thomson & Bellis          Expires May 17, 2014                 [Page 13]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -781,7 +781,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 14]
+Thomson & Bellis          Expires May 17, 2014                 [Page 14]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -837,7 +837,7 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 15]
+Thomson & Bellis          Expires May 17, 2014                 [Page 15]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -893,7 +893,7 @@ Authors' Addresses
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 16]
+Thomson & Bellis          Expires May 17, 2014                 [Page 16]
 
 Internet-Draft             LIS Discovery by IP             November 2013
 
@@ -949,4 +949,4 @@ Internet-Draft             LIS Discovery by IP             November 2013
 
 
 
-Thomson & Bellis          Expires May 15, 2014                 [Page 17]
+Thomson & Bellis          Expires May 17, 2014                 [Page 17]
