@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="std" ipr="trust200902" docName="draft-thomson-httpbis-deprecate-http-latest" updates="2616">
+  <front>
+    <title abbrev="Deprecating http:">
+      Deprecating the 'http:' URI Scheme
+    </title>
+
+    <author initials="M." surname="Thomson" fullname="Martin Thomson">
+      <organization>Microsoft</organization>
+      <address>
+        <postal>
+          <street>-</street>
+          <country>US</country>
+        </postal>
+        <email>martin.thomson@gmail.com</email>
+      </address>
+    </author>
+
+    <date year="2013"/>
+    <area>APPS</area>
+    <workgroup>HTTPBIS</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <keyword>http</keyword>
+
+    <abstract>
+      <t>
+        The http: URI scheme has proven to be problematic.  This document deprecates its use.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>
+        Anyone who uses <xref target="RFC2616">HTTP</xref> without <xref target="RFC5246">TLS</xref>
+        (i.e., <xref target="RFC2818">HTTPS</xref>) runs a very real risk of being pwned.
+      </t>
+
+      <t>
+        This document attempts to remedy this by making the <spanx style="verb">http:</spanx>
+        scheme historic.
+      </t>
+
+      <section anchor="terminology" title="Conventions and Terminology">
+        <t>
+          In cases where normative language needs to be emphasized, this document falls back on
+          established shorthands for expressing interoperability requirements on implementations:
+          the capitalized words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these is
+          described in <xref target="RFC2119"/>.
+        </t>
+      </section>
+    </section>
+
+    <section title="MUST NOT use http:">
+      <t>
+        HTTP clients and servers MUST NOT use <spanx style="verb">http:</spanx> resources.
+      </t>
+    </section>
+    
+    <section title="Why Not Opportunistically Encrypt?">
+      <t>
+        Opportunistic encryption is fine if your adversary isn't on-path.  It's pretty ineffectual
+        if your adversary is able to interspose themselves somehow.  There is now evidence to
+        suggest that interception capabilities are less difficult to achieve than originally
+        thought.
+      </t>
+    </section>
+
+    <section title="Why Not Trust on First Use?">
+      <t>
+        TOFU is unsatisfactory.  Because it is effectively a pin for the lifetime of a certificate,
+        it has several issues:
+        <list style="symbols">
+          <t>
+            Key rollover cannot occur without exposure to an active attack, or some form of
+            succession plan.  The typical key pinning succession plan involves providing alternative
+            pins under the protection of a trusted certificate.  This sort of plan cannot be enacted
+            without a lead time equal to the pin duration.  The successor key has to be available
+            for this entire period.
+            <vspace blankLines="1"/>
+            From an operational perspective, this is difficult.  In order to ensure that the risk of
+            exposure or exfiltration of the private key for the successor, the private key for the
+            successor needs to be backed up.  Any service that is unwilling to obtain third-party
+            validation of their certificates seems unlikely to be inclined to perform this step.
+          </t>
+          <t>
+            Pinning makes it difficult to scale out services without sharing of private keys.
+            Clients will reject connections that offer private keys other than the one they first
+            see.
+          </t>
+        </list>
+      </t>
+    </section>
+
+    <section title="Why Not Externalize the Consequences?">
+      <t>
+        That's what we've been doing for years.  That turned out to be a political nightmare once
+        people found out.
+      </t>
+    </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>
+        The IETF has partnered with several large organizations to perform enforcement.  Users of
+        <spanx style="verb">http:</spanx> URIs will be pwned.  Operators of sites that offer <spanx
+        style="verb">http:</spanx> resources will be pwned.
+      </t>
+    </section>
+<!--
+    <section anchor="ack" title="Acknowledgements">
+      <t>
+      </t>
+    </section>
+-->
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml"?>
+    </references>
+   <!-- <references title="Informative References">
+    </references>-->
+
+    <!--
+        <section title="Change Log">
+        <t>[[The RFC Editor is requested to remove this section at publication.]]</t>
+        <t>Changes since -0-1:
+        <list style="symbols">
+        <t>Document created.</t>
+        </list>
+        </t>
+        </section>
+    -->
+  </back>
+</rfc>
