@@ -48,8 +48,8 @@
       </t>
 
       <t>
-        This document attempts to remedy this by making the <spanx style="verb">http:</spanx>
-        scheme historic.
+        This document attempts to remedy this by prohibiting the use of the <spanx
+        style="verb">http:</spanx> scheme.
       </t>
 
       <section anchor="terminology" title="Conventions and Terminology">
@@ -64,7 +64,8 @@
 
     <section title="MUST NOT use http:">
       <t>
-        HTTP clients and servers MUST NOT use <spanx style="verb">http:</spanx> resources.
+        HTTP clients and servers MUST NOT access or provide resources over unsecured HTTP.  Thus,
+        resources identified with <spanx style="verb">http:</spanx> URIs cannot be used.
       </t>
     </section>
     
