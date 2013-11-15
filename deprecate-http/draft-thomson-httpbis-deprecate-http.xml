@@ -17,7 +17,7 @@
     </title>
 
     <author initials="M." surname="Thomson" fullname="Martin Thomson">
-      <organization>Microsoft</organization>
+      <organization></organization>
       <address>
         <postal>
           <street>-</street>
@@ -80,20 +80,21 @@
 
     <section title="Why Not Trust on First Use?">
       <t>
-        TOFU is unsatisfactory.  Because it is effectively a pin for the lifetime of a certificate,
-        it has several issues:
+        TOFU is unsatisfactory.  It is effectively a pin for the lifetime of a certificate, which
+        raises several issues:
         <list style="symbols">
           <t>
             Key rollover cannot occur without exposure to an active attack, or some form of
             succession plan.  The typical key pinning succession plan involves providing alternative
             pins under the protection of a trusted certificate.  This sort of plan cannot be enacted
-            without a lead time equal to the pin duration.  The successor key has to be available
-            for this entire period.
+            without a lead time of at least equal to the pin duration.  The successor key has to be
+            available for this entire period.
             <vspace blankLines="1"/>
             From an operational perspective, this is difficult.  In order to ensure that the risk of
-            exposure or exfiltration of the private key for the successor, the private key for the
-            successor needs to be backed up.  Any service that is unwilling to obtain third-party
-            validation of their certificates seems unlikely to be inclined to perform this step.
+            loss, exposure, or exfiltration of the private key for the successor, the private key
+            for the successor needs to be backed up and stored offline.  Any service that is
+            unwilling to obtain third-party validation of their certificates seems unlikely to be
+            inclined to perform this step.
           </t>
           <t>
             Pinning makes it difficult to scale out services without sharing of private keys.
