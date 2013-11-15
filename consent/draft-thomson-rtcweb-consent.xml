@@ -32,6 +32,21 @@
       </address>
     </author>
 
+    <author fullname="Dan Wing" initials="D." surname="Wing">
+      <organization abbrev="Cisco">Cisco Systems, Inc.</organization>
+      <address>
+        <postal>
+          <street>510 McCarthy Blvd.</street>
+          <city>Milpitas</city>
+          <region>CA</region>
+          <code>95035</code>
+          <country>US</country>
+        </postal>
+        <phone>(408) 853 4197</phone>
+        <email>dwing@cisco.com</email>
+      </address>
+    </author>
+
     <author fullname="Cullen Jennings" initials="C." surname="Jennings">
       <organization>Cisco</organization>
       <address>
@@ -71,13 +86,11 @@
         Establishment (ICE)</xref> has been used in real-time applications to establish that a peer
         is willing to receive packets.
       </t>
-
       <t>
         This document describes how <xref target="RFC6347">Datagram Transport Layer Security
         (DTLS)</xref> is sufficient for establishing consent to receive packets, plus how this
         consent can be continuously refreshed.
       </t>
-      
       <t>
         This also uses <xref target="I-D.ietf-tls-applayerprotoneg">Application-Layer Protocol
         Negotiation (ALPN)</xref> to restrict that consent to specific uses.  Application protocol
@@ -130,7 +143,7 @@
           WebRTC applications that intend to maintain a connection MUST send some data at least every
           10 seconds.  If there is no application data to send, the <xref target="RFC6520">DTLS
           heartbeat extension</xref> MUST be sent to maintain consent.  This reduces the probability
-          that transient network failures trigger consent behaviours.
+          that transient network failures cause consent expiration.
         </t>
       </section>
      
@@ -230,9 +243,8 @@
 
     <section anchor="ack" title="Acknowledgements">
       <t>
-        Dan Wing proposed that we use DTLS to maintain consent.  Muthu Arul Mozhi Perumal, Ram Mohan
-        Ravindranath, Tirumaleswar Reddy, and Dan Wing are the authors of the original draft that
-        dealt with managing consent.
+        Muthu Arul Mozhi Perumal, Ram Mohan Ravindranath, Tirumaleswar Reddy, and Dan Wing are the
+        authors of the original draft that dealt with managing consent.
       </t>
     </section>
 
