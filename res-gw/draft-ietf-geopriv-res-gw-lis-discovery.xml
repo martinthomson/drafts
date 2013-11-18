@@ -668,9 +668,9 @@
         verification of the result. No specific mechanism is currently available to prevent attacks
         based on falsification of reflexive addresses; it is suggested that Devices attempt to
         independently verify that the reflexive transport address provided is accurate.  An
-        independent, trusted source of location information could aid in verification, even in the
-        trusted source is unable to provide information with the same accuracy as the discovered
-        LIS.
+        independent, trusted source of location information could aid in verification, even if the
+        trusted source is unable to provide information with the same degree of accuracy as the
+        discovered LIS.
       </t>
 
       <t>
