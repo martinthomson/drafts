@@ -221,6 +221,15 @@
         tolerate can close the connection.  If the close message is lost, this can result in
         unwanted data being received until consent expires (i.e., 30 seconds).
       </t>
+      <t>
+	SRTP is encrypted and authenticated with symmetric keys; that is, both sender and receiver
+	know the keys.  With two party sessions, receipt of an authenticated packet from the single
+	remote party is a strong assurance the packet came from that party.  However, when a session
+	involves more than two parties, all of whom know each others keys, any of those parties
+	could have sent (or spoofed) the packet.  Such shared key distributions are possible with
+	some <xref target="RFC3830">MIKEY</xref> modes, <xref target="RFC4568">Security
+	Descriptions</xref>, and <xref target="I-D.ietf-avtcore-srtp-ekt">EKT</xref>.
+      </t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
@@ -275,7 +284,10 @@
     </references>
     <references title="Informative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.3711.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.3830.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.4568.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.4960.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-avtcore-srtp-ekt.xml"?>
     </references>
   </back>
 </rfc>
