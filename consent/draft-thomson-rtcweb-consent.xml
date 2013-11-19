@@ -120,30 +120,31 @@
       </t>
       <t>
         Consent expires after a fixed amount of time.  Explicit consent to receive is indicated by
-        sending on the connection.  An endpoint uses the receipt of packets as an indication that
-        the remote endpoint still consents to receive data.
+        the receiving endpoint sending authenticated packets from the inverted 5-tuple.  An endpoint
+        uses the receipt of packets as an indication that the remote endpoint still consents to
+        receive data.
       </t>
       <t>
-        Any packet received from the remote endpoint refreshes consent as long as it contains a
-        valid message authentication code (MAC).  Any DTLS message is sufficient to refresh consent,
-        since these contain a MAC.  For <xref target="RFC5764">DTLS-SRTP</xref>, receipt of an
-        authenticated SRTP packet is sufficient.
+        Any packet received from the inverted 5-tuple refreshes consent if the packet is
+        successfully validated by the protocol's authentication check (for instance, a MAC).  Any DTLS
+        message is sufficient to refresh consent, since these contain a MAC.  For <xref
+        target="RFC5764">DTLS-SRTP</xref>, receipt of an authenticated SRTP packet is sufficient.
       </t>
       <t>
-        Consent is ended immediately by closing the connection.  A TLS fatal alert also ends
-        consent.
+        Consent is ended immediately by receipt of a an authenticated message that closes the
+        connection (for instance, a TLS fatal alert).
       </t>
 
       <section title="Consent in WebRTC">
         <t>
           WebRTC applications MUST cease transmission on a connection if they have not received any
-          valid packets for 30 seconds.
+          valid, authenticated packets for 30 seconds.
         </t>
         <t>
-          WebRTC applications that intend to maintain a connection MUST send some data at least every
-          10 seconds.  If there is no application data to send, the <xref target="RFC6520">DTLS
-          heartbeat extension</xref> MUST be sent to maintain consent.  This reduces the probability
-          that transient network failures cause consent expiration.
+          WebRTC applications that intend to maintain consent MUST send an authenticated packet at
+          least every 10 seconds.  If there is no application data to send, the <xref
+          target="RFC6520">DTLS heartbeat extension</xref> MUST be sent to maintain consent.  This
+          reduces the probability that transient network failures cause consent expiration.
         </t>
       </section>
      
@@ -163,8 +164,7 @@
       <section title="Relationship with Connection Liveness">
         <t>
           A connection is considered "live" if packets are received from a remote endpoint within an
-          application-dependent period.  For WebRTC, a connection that is not live for 30 seconds
-          loses consent.
+          application-dependent period.
         </t>
         <t>
           A WebRTC application can request a notification when there are no packets received for a
