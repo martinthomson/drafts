@@ -134,6 +134,13 @@
         Consent is ended immediately by receipt of a an authenticated message that closes the
         connection (for instance, a TLS fatal alert).
       </t>
+      <t>
+	Receipt of an unauthenticated end-of-session message (e.g., TCP FIN) does not indicate loss
+	of consent.  Thus, an endpoint receiving an unauthenticated end-of-session message SHOULD
+	continue sending media (over connectionless transport) or attempt to re-establish the
+	connection (over connection-oriented transport) until consent expires or it receives an
+	authenticated message revoking consent.
+      </t>
 
       <section title="Consent in WebRTC">
         <t>
