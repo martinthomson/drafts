@@ -126,9 +126,10 @@
       </t>
       <t>
         Any packet received from the inverted 5-tuple refreshes consent if the packet is
-        successfully validated by the protocol's authentication check (for instance, a MAC).  Any DTLS
-        message is sufficient to refresh consent, since these contain a MAC.  For <xref
-        target="RFC5764">DTLS-SRTP</xref>, receipt of an authenticated SRTP packet is sufficient.
+        successfully validated by the protocol's authentication check (for instance, a MAC).  Any
+        DTLS message is sufficient to refresh consent, since these contain a MAC.  For <xref
+        target="RFC5764">DTLS-SRTP</xref>, receipt of an authenticated SRTP (or SRTCP) packet is
+        sufficient.
       </t>
       <t>
         Consent is ended immediately by receipt of a an authenticated message that closes the
@@ -229,13 +230,14 @@
         unwanted data being received until consent expires (i.e., 30 seconds).
       </t>
       <t>
-	SRTP is encrypted and authenticated with symmetric keys; that is, both sender and receiver
-	know the keys.  With two party sessions, receipt of an authenticated packet from the single
-	remote party is a strong assurance the packet came from that party.  However, when a session
-	involves more than two parties, all of whom know each others keys, any of those parties
-	could have sent (or spoofed) the packet.  Such shared key distributions are possible with
-	some <xref target="RFC3830">MIKEY</xref> modes, <xref target="RFC4568">Security
-	Descriptions</xref>, and <xref target="I-D.ietf-avtcore-srtp-ekt">EKT</xref>.
+	SRTP (and SRTCP) is encrypted and authenticated with symmetric keys; that is, both sender
+	and receiver know the keys.  With two party sessions, receipt of an authenticated packet
+	from the single remote party is a strong assurance the packet came from that party.
+	However, when a session involves more than two parties, all of whom know each others keys,
+	any of those parties could have sent (or spoofed) the packet.  Such shared key distributions
+	are possible with some <xref target="RFC3830">MIKEY</xref> modes, <xref
+	target="RFC4568">Security Descriptions</xref>, and <xref
+	target="I-D.ietf-avtcore-srtp-ekt">EKT</xref>.
       </t>
     </section>
 
