@@ -256,6 +256,9 @@
         unwanted data being received until consent expires (i.e., 30 seconds).
       </t>
       <t>
+	The DTLS heartbeat extension can be exploited to mount a padding oracle attack <xref
+	target="LUCKY13"/>.  Constant-time implementation of padding validation is an effective
+	countermeasure.
       </t>
     </section>
 
@@ -280,7 +283,8 @@
     <section anchor="ack" title="Acknowledgements">
       <t>
         Muthu Arul Mozhi Perumal, Ram Mohan Ravindranath, Tirumaleswar Reddy, and Dan Wing are the
-        authors of the original draft that dealt with managing consent.
+        authors of the original draft that dealt with managing consent.  Eric Rescorla pointed out
+        the padding oracle attack.
       </t>
     </section>
 
@@ -315,6 +319,18 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.4568.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.4960.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-avtcore-srtp-ekt.xml"?>
+      <reference anchor="LUCKY13" target="http://www.isg.rhul.ac.uk/tls/Lucky13.html">
+	<front>
+          <title abbrev="LUCKY13">Lucky Thirteen: Breaking the TLS and DTLS Record Protocols</title>
+          <author initials="N." surname="AlFardan" fullname="Nadhem J. AlFardan">
+            <organization>University of London</organization>
+          </author>
+          <author initials="K." surname="Paterson" fullname="Kenneth G. Paterson">
+            <organization>University of London</organization>
+          </author>
+          <date month="February" day="27" year="2013"/>
+        </front>
+      </reference>
     </references>
   </back>
 </rfc>
