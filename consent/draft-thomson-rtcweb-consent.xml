@@ -219,6 +219,32 @@
       </t>
     </section>
 
+    <section title="Shared Symmetric Keys">
+      <t>
+	SRTP (and SRTCP) is encrypted and authenticated with symmetric keys; that is, both sender
+	and receiver know the keys.  With two party sessions, receipt of an authenticated packet
+	from the single remote party is a strong assurance the packet came from that party.
+      </t>
+      <t>
+	However, when a session involves more than two parties, all of whom know each others keys,
+	any of those parties could have sent (or spoofed) the packet.  Such shared key distributions
+	are possible with some <xref target="RFC3830">MIKEY</xref> modes, <xref
+	target="RFC4568">Security Descriptions</xref>, and <xref
+	target="I-D.ietf-avtcore-srtp-ekt">Encrypted Key Transport (EKT)</xref>.
+      </t>
+      <t>
+	With schemes like EKT, endpoints are aware of changes in keying material.  A packet
+	authenticated with symmetric keys that have been changed using EKT or similar schemes MUST
+	NOT update consent.  If an endpoint is aware of a change in SRTP/SRTCP symmetric keys, it
+	MUST use the DTLS heartbeat to refresh consent.
+      </t>
+      <t>
+	Schemes that rely on sharing SRTP symmetric keys with others, such as Security Descriptions,
+	compromise the consent mechanism for both peers.  This can be done without the knowledge or
+	consent of a peer.  Endpoints MUST NOT distribute SRTP symmetric keys.
+      </t>
+    </section>
+
     <section anchor="security" title="Security Considerations">
       <t>
         This document defines a security mechanism.
@@ -230,14 +256,6 @@
         unwanted data being received until consent expires (i.e., 30 seconds).
       </t>
       <t>
-	SRTP (and SRTCP) is encrypted and authenticated with symmetric keys; that is, both sender
-	and receiver know the keys.  With two party sessions, receipt of an authenticated packet
-	from the single remote party is a strong assurance the packet came from that party.
-	However, when a session involves more than two parties, all of whom know each others keys,
-	any of those parties could have sent (or spoofed) the packet.  Such shared key distributions
-	are possible with some <xref target="RFC3830">MIKEY</xref> modes, <xref
-	target="RFC4568">Security Descriptions</xref>, and <xref
-	target="I-D.ietf-avtcore-srtp-ekt">EKT</xref>.
       </t>
     </section>
 
