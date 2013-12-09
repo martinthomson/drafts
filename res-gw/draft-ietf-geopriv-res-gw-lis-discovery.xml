@@ -572,6 +572,14 @@
           public, translated IP address for the network can still work, but it might result in a
           suboptimal LIS selection.
         </t>
+        <t>
+          A network that operates network address translation SHOULD provide NAPTR records that
+          reference a LIS endpoint with a public address.  This requires the reservation of an IP
+          and port for the LIS.  To ensure requests toward the LIS from within the private address
+          space do not traverse the NAT and have source addresses mapped by the NAT, networks can
+          provide direct route to the LIS.  Clients that perform discovery based on public DNS or
+          STUN servers are thereby easier to trace based on source address information.
+        </t>
 
         <t>
           NAPTR records can be provided for individual IP addresses. To limit the proliferation of
