@@ -17,6 +17,7 @@
 <!ENTITY RFC5985 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5985.xml">
 <!ENTITY RFC5986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5986.xml">
 <!ENTITY RFC6280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6280.xml">
+<!ENTITY RFC6887 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6887.xml">
 <!ENTITY I-D.cheshire-nat-pmp PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cheshire-nat-pmp.xml">
 <!ENTITY I-D.ietf-geopriv-held-measurements PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-geopriv-held-measurements.xml">
 ]>
@@ -360,6 +361,7 @@
 
         <t>
 	  Alternative methods for determining other IP addresses MAY be used by the Device. <xref
+	  target="RFC6887">Port Control Protocol (PCP)</xref>, <xref
 	  target="UPnP-IGD-WANIPConnection1">Universal Plug and Play (UPnP)</xref> and <xref
 	  target="I-D.cheshire-nat-pmp">NAT Port Mapping Protocol (NAT-PMP)</xref> are both able to
 	  provide the external address of a residential gateway device when enabled. These as well
@@ -761,7 +763,9 @@
       &RFC5986; &I-D.ietf-geopriv-held-measurements; </references>
 
     <references title="Informative References"> &RFC1918; &RFC2131; &RFC3315; &RFC3424; &RFC3693; &RFC4848;
-      &RFC5012; &RFC5389; &RFC5687; &RFC6280; <reference anchor="UPnP-IGD-WANIPConnection1">
+      &RFC5012; &RFC5389; &RFC5687; &RFC6280; 
+      &RFC6887;
+      <reference anchor="UPnP-IGD-WANIPConnection1">
         <front>
           <title> Internet Gateway Device (IGD) Standardized Device Control Protocol V 1.0:
             WANIPConnection:1 Service Template Version 1.01 For UPnP Version 1.0 </title>
