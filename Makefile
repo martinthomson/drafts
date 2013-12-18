@@ -132,7 +132,7 @@ clean:
 tag:
 	git tag ${BASE_NEXT}
 retag:
-	git tag ${BASE}-${REV_CURRENT}
+	git tag -f ${BASE}-${REV_CURRENT}
 
 GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 .TRANSIENT: ${GHPAGES_TMP}
