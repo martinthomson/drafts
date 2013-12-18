@@ -35,18 +35,17 @@
       address and Reverse DNS </title>
 
     <author initials="M." surname="Thomson" fullname="Martin Thomson">
-      <organization>Microsoft</organization>
-
+      <organization>Mozilla</organization>
       <address>
         <postal>
-          <street>3210 Porter Drive</street>
-          <city>Palo Alto</city>
+          <street>Suite 300</street>
+          <street>650 Castro Street</street>
+          <city>Mountain View</city>
           <region>CA</region>
-          <code>94304</code>
+          <code>94041</code>
           <country>US</country>
         </postal>
 
-        <phone>+1 650-353-1925</phone>
         <email>martin.thomson@gmail.com</email>
       </address>
     </author>
