@@ -17,12 +17,7 @@ XSLT := rfc2629.xslt
 # SAXON := java -jar '$(subst \,\\,$(shell ${CYGPATH} ${TOP}/saxon8.jar))'
 VALIDATE := ${TOP}/validate
 SAXON := java -jar '$(shell ${CYGPATH} ${TOP}/saxon8.jar)'
-XML2RFC_HOME := ${TOP}/xml2rfc-1.35pre1
-ifeq "${METHOD}" "direct"
-XML2RFC := ${XML2RFC_HOME}/xml2rfc.sh
-else
-XML2RFC := ${TOP}/webxml2rfc.sh
-endif
+XML2RFC ?= ${TOP}/webxml2rfc.sh
 XSLT_HOME := ${TOP}/rfc2629xslt
 HTML_XSLT := false
 IDNITS := ${TOP}/idnits/idnits
