@@ -1,0 +1,283 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="std" ipr="trust200902" docName="draft-thomson-httpbis-wow-latest">
+  <front>
+    <title abbrev="WOW Priority">
+      Weighted, Ordered, Weighted (WOW) Priority for HTTP/2.0
+    </title>
+
+    <author initials="M." surname="Thomson" fullname="Martin Thomson">
+      <organization>Mozilla</organization>
+      <address>
+        <postal>
+          <street>Suite 300</street>
+          <street>650 Castro Street</street>
+          <city>Mountain View</city>
+          <region>CA</region>
+          <code>94041</code>
+          <country>US</country>
+        </postal>
+
+        <email>martin.thomson@gmail.com</email>
+      </address>
+    </author>
+
+    <date year="2013"/>
+    <area>Application</area>
+    <workgroup>HTTPBIS</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <keyword>Priority</keyword>
+
+    <abstract>
+      <t>
+        This document provides an alternative description of priority semantics for HTTP/2.0.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+
+    <section anchor="intro" title="Introduction">
+      <t>
+        A client that is able to express a richer set of prioritization semantics to a server can
+        improve the overall efficiency of actions by ensuring that important data is available when
+        it is most needed.
+      </t>
+      <t>
+        This document describes a prioritization scheme that is relatively simple, yet capable of
+        describing priority with a relatively high degree of specificity.  Importantly, since
+        priority is advisory only, this scheme ensures that the cost to implementations that do not
+        require prioritization features is minimal.
+      </t>
+      <t>
+        The prioritization scheme operates in three layers:
+        <list style="symbols">
+          <t>
+            In the first layer, streams are given a relative weight.  This weighting indicates what
+            proportion of available resources are best allocated to each stream.
+          </t>
+          <t>
+            The second layer establishes a strict ordering between streams.  Stream later in the
+            ordering sequence are of no use until earlier streams are complete.
+          </t>
+          <t>
+            The third layer describes a weight for streams that are dependent on the same resource
+            completion.
+          </t>
+        </list>
+        This scheme is identical in function to the scheme described in <xref
+        target="I-D.chan-http-priority"/>.  The differences are largely in presentation and syntax.
+      </t>
+
+      <section anchor="terminology" title="Conventions and Terminology">
+       <t>
+         At times, this document falls back on shorthands for establishing interoperability
+         requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These
+         terms are defined in <xref target="RFC2119"/>.
+       </t>
+      </section>
+    </section>
+
+    <section anchor="wow" title="Weight, Order, Weight">
+      <t>
+        Each stream is given two priority values: weight and order.  These determine how resources
+        are best allocated to streams.
+      </t>
+      <t>
+        In many cases with HTTP/2.0, the "resource" that priority information controls (or guides)
+        will be the bandwidth from the server to the client.  Servers with data available for
+        multiple streams can select streams for which to send based on priority.
+      </t>
+      <t>
+        Weight is expressed a number between 1 and 256.  Ideally, a stream with weight 2 is given one
+        third of the resources that a stream with weight 6 is given.  Streams are given a weight of
+        32 if priority is not specified.
+      </t>
+      <t>
+        Order is specified by identifying another stream.  The special stream identifier of zero is
+        used to indicate that this stream is not dependent on the completion of any other stream.
+      </t>
+      <t>
+        Streams that specify an ordering dependency on other streams do not form a dependency tree.
+        Though an ordering dependency identifies a specific stream, all streams that depend on the
+        same stream are considered equivalent, except for those that depend on stream zero.  For
+        example, if stream B and C both depend on stream A, stream D can specify a dependency on
+        either B or C to the same effect.  This enables the use of simpler data structures for
+        tracking stream dependencies.
+      </t>
+      <t>
+        Rules for respecting these values are simple:
+        <list style="symbols">
+          <t>
+            Streams that depend on another stream block until the stream (or streams) that they
+            depend on closes.
+          </t>
+          <t>
+            Streams that depend on the same stream form a group from which resources are allocated
+            based on the relative weights assigned to those streams.  This includes streams
+            dependent on stream zero.  Streams within the same group are selected based on their
+            weight values, using systems like weighted fair queueing [REF], or lottery scheduling
+            [REF].
+          </t>
+          <t>
+            Once a stream is closed, any resources allocated to that stream are used for streams
+            that directly depend on it using these same rules, recursively.
+          </t>
+        </list>
+      </t>
+      <t>
+        Stream prioritization information is retained as long as possible, or until explicitly
+        released, see <xref target="gc"/>.
+      </t>
+
+      <section title="Stream Identification">
+        <t>
+          Stream prioritization, where used, is likely to be included with every stream.  Therefore,
+          there is a desire to minimize the number of bits used.  The stream identifier, at 31 bits,
+          represents information that is largely redundant, since it is unlikely that either streams
+          from a long time past, or future (and therefore non-existent) streams will be used.
+        </t>
+        <t>
+          This document describes an identifiation scheme that references streams relative to the
+          most recently opened stream in the corresponding direction.  The stream identifier used
+          contains the least significant bits from the stream identifier most recently opened in the
+          corresponding direction.  In the case of a HEADERS frame that opens a stream, the stream
+          identifier in the frame header is used.
+        </t>
+        <t>
+          This results in some uncertainty when identifying streams opened by the remote peer.  For
+          pushed streams, any number of streams can be opened and closed in the time that the
+          priority information is in transit, limited only by the ability of the peer to send data
+          for those streams.  There is no true guarantee against this problem, other than the size
+          of the ordering dependency field.  However, to limit the chances of this occurring,
+          implementations MUST NOT skip values when allocating stream identifiers.
+        </t>
+      </section>
+
+      <section title="Stream Retention" anchor="gc">
+        <t>
+          A prioritization scheme that relies on ordering requires that the prioritization
+          information for a stream live beyong the normal lifetime of the stream itself.  A stream
+          with dependencies necessarily passes relative weighting to its dependent streams; due to
+          transit delays, a stream can be closed at one endpoint at the same time that additional
+          dependencies are created upon it.  Therefore, it is RECOMMENDED that stream priority
+          information be retained beyond the normal lifecycle of a stream.
+        </t>
+        <t>
+          In order to support the ability of an endpoint to release resources, several bits are
+          added to the priority field to identify the highest numbered stream (for a given
+          direction) for which stream.  This value is expressed relative to the stream identified in
+          the current ordering dependency.
+        </t>
+        <t>
+          Streams that are part of the first weighted set (i.e., those that depend on stream 0)
+          SHOULD be retained in preference to streams with explicit ordering dependencies.  The
+          weighting values on those streams determines the proportional resource allocation to their
+          dependent streams at the connection level, which is likely to be important, particularly
+          in intermediation cases.
+        </t>
+      </section>
+   </section>
+
+   <section title="Priority Field">
+     <t>
+       The PRIORITY flag in a HEADERS frame determines whether a specific priority included.
+       Absence of this flag indicates that default (or pre-existing) values are to be used for
+       the stream.
+     </t>
+     <t>
+       Weight and order are then packed into the 32-bit field as follows:
+       <list style="hanging">
+         <t hangText="Weight (8 bits):">
+           The weight value occupies the first 8 bits.  To obtain the weight value between 1 and 256
+           (inclusive), one is added to the value of the field.
+         </t>
+         <t hangText="Order Present (1 bit):">
+           This bit, if set, indicates that the prioritized stream is dependent on another stream
+           and that Order field contains part of a stream identifier.  Or, from an alternative
+           perspective, a value of zero on this bit indicates that this stream depends only on the
+           special stream 0.
+         </t>
+         <t hangText="Order (19 bits):">
+           These bits contain the least significant bits of the stream identifier upon which this
+           stream depends.    If the Order Present bit is not set, these bits are used to determine
+           the basis for stream release.
+           <vspace blankLines="1"/>
+           The 12 high bits of the stream identifier are taken from the identifier of the
+           highest-numbered non-idle stream, which includes the current stream.  This value is
+           reduced (by 2^19 after assembly) if the resulting value is greater than the current
+           stream identifier.
+         </t>
+         <t hangText="Maximum Unused Stream Identifier (4 bits):">
+           The value of this field is determined by the formula: 2*(4^x).  The resulting value is
+           the difference between the stream identifier referenced in the Order field and the last
+           stream identifier for which the receiver can safely discard priority information.  This
+           constitutes a promise that the identified stream and all those with lower identifiers
+           will not be referenced in later prioritization indications.  A value of all ones (15) is
+           reserved to indicate an infinite value, or that no information can be discarded.
+         </t>
+       </list>
+     </t>
+   </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>
+        This prioritization scheme can cause the retention of state for a stream beyond the lifetime
+        of the stream.  A malicious endpoint could exploit this to cause a poorly protected
+        implementation to expend excessive resources tracking streams.
+      </t>
+      <t>
+        Priority is advisory only.  Implementations are able to safely discard priority information
+        at any time and the only conseuqence is inferior performance.  An implementation SHOULD
+        limit the resources it dedicates to tracking priority and discard prioritization information
+        if these limits are exceeded.  Implementations can choose to discard excess state based on
+        time, memory allocation limits, or the stream identifier ordinal value.
+      </t>
+    </section>
+
+    <section anchor="iana" title="IANA Considerations">
+      <t>
+        This document makes no request of IANA.
+      </t>
+    </section>
+
+    <section anchor="ack" title="Acknowledgements">
+      <t>
+        Will Chan and his peers did most of this work.  This document merely transcribes that work
+        and tweaks the formula a little.
+      </t>
+    </section>
+
+    <!--
+        <appendix title="Change Log">
+        <t>[[The RFC Editor is requested to remove this section at publication.]]</t>
+        <t>Changes since -0-1:
+        <list style="symbols">
+        <t>Document created.</t>
+        </list>
+        </t>
+        </appendix>
+    -->
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
+    </references>
+    <references title="Informative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.chan-http-priority.xml"?>
+    </references>
+  </back>
+</rfc>
