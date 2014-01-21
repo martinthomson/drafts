@@ -242,6 +242,15 @@
       <t>Areas or volumes that describe regions of uncertainty can be formed by the combination of two or three one-dimensional ranges, or more complex shapes could be described.
       </t>
 
+      <section title="Targets as Points in Space">
+        <t>This document makes a simplifying assumption that the Target of the PIDF-LO occupies just a single point in space.  While this is clearly false in virtually all scenarios with any practical application, it is often a reasonable assumption to make.
+        </t>
+        <t>To a large extent, whether this simplication is valid depends on the size of the target relative to the size of the uncertainty region.  When locating a personal device using contemporary location determination techniques, the space the device occupies relative to the uncertainty is proportionally quite small.  Even where that device is used as a proxy for a person, the proportions change little.
+        </t>
+        <t>This assumption is less useful as the Target of the PIDF-LO becomes large relative to the uncertainty region.  For instance, describing the location of a football stadium or small country would include a region of uncertainty that is infinitesimally larger than the Target itself.  In these cases, much of the guidance in this document is not applicable.  Indeed, as the accuracy of location determination technology improves, it could be that the advice this document contains becomes less relevant by the same measure.
+        </t>
+      </section>
+
       <section title="Representation of Uncertainty and Confidence in PIDF-LO">
         <t>A set of shapes suitable for the expression of uncertainty in location estimates in the Presence Information Data Format - Location Object (PIDF-LO) are described in <xref target="GeoShape"/>.  These shapes are the recommended form for the representation of uncertainty in <xref target="RFC4119">PIDF-LO</xref> documents.
         </t>
