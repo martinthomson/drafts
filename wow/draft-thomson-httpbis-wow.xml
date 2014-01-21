@@ -32,7 +32,7 @@
       </address>
     </author>
 
-    <date year="2013"/>
+    <date year="2014"/>
     <area>Application</area>
     <workgroup>HTTPBIS</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -76,7 +76,8 @@
           </t>
         </list>
         This scheme is identical in function to the scheme described in <xref
-        target="I-D.chan-http-priority"/>.  The differences are largely in presentation and syntax.
+        target="I-D.chan-http2-stream-dependencies"/>.  The differences are largely in presentation
+        and syntax.
       </t>
 
       <section anchor="terminology" title="Conventions and Terminology">
@@ -277,7 +278,7 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
     </references>
     <references title="Informative References">
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.chan-http-priority.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.chan-http2-stream-dependencies.xml"?>
     </references>
   </back>
 </rfc>
