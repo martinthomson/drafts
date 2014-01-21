@@ -1,0 +1,24 @@
+#!/bin/sh
+cat <<EOH
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Internet Drafts</title>
+    <style src="style.css"></style>
+  </head>
+  <body>
+    <h1>Work In Progress</h1>
+    <ul>
+EOH
+for i in *.txt; do
+    if [[ -f "${i%.txt}.html" ]]; then
+        echo "      <li><a href="'"'"${i%.txt}.html"'"'">${i%-txt}</a> (<a href="'"'"${i}"'"'">txt</a>)</li>"
+    else
+        echo "      <li><a href="'"'"${i}"'"'">${i}</a></li>"
+    fi
+done
+cat <<EOF
+    </ul>
+  </body>
+</html>
+EOF
