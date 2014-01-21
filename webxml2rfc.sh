@@ -23,7 +23,7 @@ FILE=/tmp/${0##*/}$$
 M=""
 
 OPTIONS=(--header "Content-Type: multipart/form-data; boundary=$BOUNDARY")
-OPTIONS=("${OPTIONS[@]}" --header 'Cache-Control: no-cache')
+OPTIONS=("${OPTIONS[@]}" --header 'Cache-Control: max-age=0')
 OPTIONS=("${OPTIONS[@]}" --referer 'http://xml.resource.org/')
 
 if which wget > /dev/null 2>&1; then
@@ -42,6 +42,10 @@ fi
 trap 'rm -f $FILE' EXIT INT
 
 cat <<EOF > "$FILE"
+--$BOUNDARY$M
+Content-Disposition: form-data; name="url"$M
+$M
+$M
 --$BOUNDARY$M
 Content-Disposition: form-data; name="modeAsFormat"$M
 $M
@@ -70,4 +74,3 @@ if grep -l -q '<title>\(Unable to Convert File\|You lose\)</title>' "$OUTPUT" 1>
     rm -f "$OUTPUT"
     exit 1
 fi
-
