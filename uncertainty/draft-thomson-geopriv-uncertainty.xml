@@ -32,23 +32,18 @@
     </author>
 
     <author initials="J." surname="Winterbottom" fullname="James Winterbottom">
-      <organization>Andrew Corporation</organization>
+      <organization>Unaffiliated</organization>
       <address>
         <postal>
-          <street>Andrew Building (39)</street>
-          <street>Wollongong University Campus</street>
-          <street>Northfields Avenue</street>
-          <city>Wollongong</city>
-          <region>NSW</region>
-          <code>2522</code>
+          <street></street>
           <country>AU</country>
         </postal>
-        <email>james.winterbottom@andrew.com</email>
+        <email>a.james.winterbottom@gmail.com</email>
       </address>
     </author>
 
-    <date year="2013"/>
-    <area>Application</area>
+    <date year="2014"/>
+    <area>RAI</area>
     <workgroup>GEOPRIV</workgroup>
     <keyword>Internet-Draft</keyword>
     <keyword>Uncertainty</keyword>
