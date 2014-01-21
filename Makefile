@@ -137,11 +137,12 @@ recurse:
 
 ghpages: recurse
 	mkdir ${GHPAGES_TMP}
-	find ${TOP} -type f \( -name '*.html' -o -name '*.txt' \) -exec mv {} ${GHPAGES_TMP} \;
+	find ${TOP} -type f \( -name '*.html' -o -name '*.txt' \) -exec cp {} ${GHPAGES_TMP} \;
 	@find ${GHPAGES_TMP}
 	git checkout gh-pages
 	git pull
 	mv -f ${GHPAGES_TMP}/* ${TOP}
+	./mkindex > index.html
 	git add ${TOP}/*.txt ${TOP}/*.html
 	git commit -am "Script updating page."
 	git checkout ${GITBRANCH}
