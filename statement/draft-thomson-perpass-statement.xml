@@ -7,10 +7,10 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-thomson-perpass-statement-latest">
+<rfc category="info" ipr="trust200902" docName="draft-thomson-perpass-statement-latest">
   <front>
-    <title abbrev="Simple Statement">
-      A Simple Statement
+    <title abbrev="Statement">
+      A Statement
     </title>
 
     <author initials="M." surname="Thomson" fullname="Martin Thomson">
@@ -26,7 +26,7 @@
       </address>
     </author>
 
-    <date year="2013"/>
+    <date year="2014"/>
     <area>All</area>
     <workgroup>PERPASS</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -37,14 +37,14 @@
 
     <abstract>
       <t>
-        This document contains a simple statement.
+        This document contains a response to revelations of systematic surveillance by state actors.
       </t>
     </abstract>
   </front>
 
   <middle>
 
-    <section anchor="message" title="Message">
+    <section anchor="statement" title="Statement">
       <figure><artwork><![CDATA[.
 
 .
@@ -356,12 +356,7 @@
     </section>
 
     <section anchor="security" title="Security Considerations">
-    </section>
-
-    <section anchor="ack" title="Acknowledgements">
-      <t>
-...
-      </t>
+      <t>Yes.</t>
     </section>
   </middle>
 
