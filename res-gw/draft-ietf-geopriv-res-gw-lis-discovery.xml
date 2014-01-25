@@ -17,6 +17,7 @@
 <!ENTITY RFC5985 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5985.xml">
 <!ENTITY RFC5986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5986.xml">
 <!ENTITY RFC6280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6280.xml">
+<!ENTITY RFC6303 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6303.xml">
 <!ENTITY RFC6887 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6887.xml">
 <!ENTITY RFC7105 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7105.xml">
 <!ENTITY I-D.cheshire-nat-pmp PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cheshire-nat-pmp.xml">
@@ -77,17 +78,17 @@
 
     <abstract>
       <t>
-	The residential gateway is a device that has become an integral part of home networking
-	equipment. Discovering a Location Information Server (LIS) is a necessary part of acquiring
-	location information for location-based services. However, discovering a LIS when a
-	residential gateway is present poses a configuration challenge, requiring a method that is
-	able to work around the obstacle presented by the gateway.
+        The residential gateway is a device that has become an integral part of home networking
+        equipment. Discovering a Location Information Server (LIS) is a necessary part of acquiring
+        location information for location-based services. However, discovering a LIS when a
+        residential gateway is present poses a configuration challenge, requiring a method that is
+        able to work around the obstacle presented by the gateway.
       </t>
 
       <t>
-	This document describes a solution to this problem. The solution provides alternative domain
-	names as input to the LIS discovery process based on the network addresses assigned to a
-	Device.
+        This document describes a solution to this problem. The solution provides alternative domain
+        names as input to the LIS discovery process based on the network addresses assigned to a
+        Device.
       </t>
     </abstract>
   </front>
@@ -103,57 +104,57 @@
       </t>
 
       <t>
-	The relationship between a Device and an access network might be transient. Configuration of
-	the correct LIS at the Device ensures that accurate location information is available.
-	Without location information, some network services are not available.
+        The relationship between a Device and an access network might be transient. Configuration of
+        the correct LIS at the Device ensures that accurate location information is available.
+        Without location information, some network services are not available.
       </t>
 
       <t>
-	The configuration of a LIS IP address on a Device requires some automated process. This is
-	particularly relevant when one considers that Devices might move between different access
-	networks served by different LISs. <xref target="RFC5986">LIS Discovery</xref> describes a
-	method that employs the Dynamic Host Configuration Protocol (<xref target="RFC2131"
-	>DHCPv4</xref>, <xref target="RFC3315">DHCPv6</xref>) as input to U-NAPTR <xref
-	target="RFC4848"/> discovery.
+        The configuration of a LIS IP address on a Device requires some automated process. This is
+        particularly relevant when one considers that Devices might move between different access
+        networks served by different LISs. <xref target="RFC5986">LIS Discovery</xref> describes a
+        method that employs the Dynamic Host Configuration Protocol (<xref target="RFC2131"
+        >DHCPv4</xref>, <xref target="RFC3315">DHCPv6</xref>) as input to U-NAPTR <xref
+        target="RFC4848"/> discovery.
       </t>
 
       <t>
-	A residential gateway, or home router, provides a range of networking functions for Devices
-	within the network it serves. Unfortunately in most cases these functions effectively
-	prevent the successful use of DHCP for LIS discovery.
+        A residential gateway, or home router, provides a range of networking functions for Devices
+        within the network it serves. Unfortunately in most cases these functions effectively
+        prevent the successful use of DHCP for LIS discovery.
       </t>
 
       <t>
-	One drawback with DHCP is that universal deployment of a new option takes a considerable
-	amount of time. Often, networking equipment needs to be updated in order to support the new
-	option. Of particular concern are the millions of residential gateway devices used to
-	provide Internet access to homes and businesses. While <xref target="RFC5986"/> describes
-	functions that can be provided by residential gateways to support LIS discovery, gateways
-	built before the publication of this specification are not expected (and are likely not
-	able) to provide these functions.
+        One drawback with DHCP is that universal deployment of a new option takes a considerable
+        amount of time. Often, networking equipment needs to be updated in order to support the new
+        option. Of particular concern are the millions of residential gateway devices used to
+        provide Internet access to homes and businesses. While <xref target="RFC5986"/> describes
+        functions that can be provided by residential gateways to support LIS discovery, gateways
+        built before the publication of this specification are not expected (and are likely not
+        able) to provide these functions.
       </t>
 
       <t>
-	This document explores the problem of configuring Devices with a LIS address when a
-	residential gateway is interposed between the Device and access network. <xref target="ps"/>
-	defines the problem and <xref target="ip-dns"/> describes a method for determining a domain
-	name that can be used for discovery of the LIS.
+        This document explores the problem of configuring Devices with a LIS address when a
+        residential gateway is interposed between the Device and access network. <xref target="ps"/>
+        defines the problem and <xref target="ip-dns"/> describes a method for determining a domain
+        name that can be used for discovery of the LIS.
       </t>
 
       <t>
-	In some cases, the solution described in this document is based on a <xref target="RFC3424"
-	>UNilateral Self-Address Fixing (UNSAF)</xref> method. For those cases, this solution is
-	considered transitional until such time as the recommendations for residential gateways in
-	<xref target="RFC5986"/> are more widely deployed. Considerations relating to UNSAF
-	applications are described in <xref target="iab"/>.
+        In some cases, the solution described in this document is based on a <xref target="RFC3424"
+        >UNilateral Self-Address Fixing (UNSAF)</xref> method. For those cases, this solution is
+        considered transitional until such time as the recommendations for residential gateways in
+        <xref target="RFC5986"/> are more widely deployed. Considerations relating to UNSAF
+        applications are described in <xref target="iab"/>.
       </t>
     </section>
 
     <section anchor="conventions" title="Conventions used in this document">
       <t>
-	The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
-	"RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in
-	<xref target="RFC2119"/>.
+        The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT",
+        "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in
+        <xref target="RFC2119"/>.
       </t>
 
       <t>
@@ -172,9 +173,9 @@
       </t>
 
       <t>
-	There are a number of variations on this arrangement, as documented in Section 3.1 of <xref
-	target="RFC5687"/>. In each of these variations the goal of LIS discovery is to identify the
-	LIS in the access network.
+        There are a number of variations on this arrangement, as documented in Section 3.1 of <xref
+        target="RFC5687"/>. In each of these variations the goal of LIS discovery is to identify the
+        LIS in the access network.
       </t>
 
       <figure anchor="topo" title="Simplified Network Topology">
@@ -213,59 +214,59 @@
 
 
       <t>
-	A particularly important characteristic of this arrangement is the relatively small
-	geographical area served by the residential gateway. Given a small enough area, it is
-	reasonable to delegate the responsibility for providing Devices within the residential
-	network with location information to the ISP. The ISP is able to provide location
-	information that identifies the residence, which should be adequate for a wide range of
-	purposes.
+        A particularly important characteristic of this arrangement is the relatively small
+        geographical area served by the residential gateway. Given a small enough area, it is
+        reasonable to delegate the responsibility for providing Devices within the residential
+        network with location information to the ISP. The ISP is able to provide location
+        information that identifies the residence, which should be adequate for a wide range of
+        purposes.
       </t>
 
       <t>
-	A residential network that covers a larger geographical area might require a dedicated LIS,
-	a case that is outside the scope of this document.
+        A residential network that covers a larger geographical area might require a dedicated LIS,
+        a case that is outside the scope of this document.
       </t>
 
       <t>
-	The goal of LIS discovery is to identify a LIS that is able to provide the Device with
-	accurate location information. In the network topology described, this means identifying the
-	LIS in the access network. The residential gateway is a major obstacle in achieving this
-	goal.
+        The goal of LIS discovery is to identify a LIS that is able to provide the Device with
+        accurate location information. In the network topology described, this means identifying the
+        LIS in the access network. The residential gateway is a major obstacle in achieving this
+        goal.
       </t>
 
       <section title="Residential Gateway">
         <t>
-	  A residential gateway can encompass several different functions including: modem, Ethernet
-	  switch, wireless access point, router, network address translation (NAT), DHCP server, DNS
-	  relay and firewall. Of the common functions provided, the NAT function of a residential
-	  gateway has the greatest impact on LIS discovery.
-	</t>
+          A residential gateway can encompass several different functions including: modem, Ethernet
+          switch, wireless access point, router, network address translation (NAT), DHCP server, DNS
+          relay and firewall. Of the common functions provided, the NAT function of a residential
+          gateway has the greatest impact on LIS discovery.
+        </t>
 
         <t>
-	  An ISP is typically parsimonious about their IP address allocations; each customer is
-	  allocated a limited number of IP addresses. Therefore, NAT is an extremely common function
-	  of gateways. NAT enables the use of multiple Devices within the residential network.
-	  However NAT also means that Devices within the residence are not configured by the ISP
-	  directly.
-	</t>
+          An ISP is typically parsimonious about their IP address allocations; each customer is
+          allocated a limited number of IP addresses. Therefore, NAT is an extremely common function
+          of gateways. NAT enables the use of multiple Devices within the residential network.
+          However NAT also means that Devices within the residence are not configured by the ISP
+          directly.
+        </t>
 
         <t>
-	  When it comes to discovering a LIS, the fact that Devices are not configured by the ISP
-	  causes a significant problem. Configuration is the ideal method of conveying the
-	  information necessary for discovery. Devices attached to residential gateways are usually
-	  given a generic configuration that includes no information about the ISP network. For
-	  instance, DNS configuration typically points to a DNS relay on the gateway device. This
-	  approach ensures that the local network served by the gateway is able to operate without a
-	  connection to the ISP, but it also means that Devices are effectively ignorant of the ISP
-	  network.
-	</t>
+          When it comes to discovering a LIS, the fact that Devices are not configured by the ISP
+          causes a significant problem. Configuration is the ideal method of conveying the
+          information necessary for discovery. Devices attached to residential gateways are usually
+          given a generic configuration that includes no information about the ISP network. For
+          instance, DNS configuration typically points to a DNS relay on the gateway device. This
+          approach ensures that the local network served by the gateway is able to operate without a
+          connection to the ISP, but it also means that Devices are effectively ignorant of the ISP
+          network.
+        </t>
 
         <t><xref target="RFC5986"/> describes several methods that can be applied by a residential
         gateway to assist Devices in acquiring location information. For instance, the residential
         gateway could forward LIS address information to hosts within the network it serves.
         Unfortunately, such an active involvement in the discovery process only works for new
         residential gateway devices that implement those recommendations.
-	</t>
+        </t>
 
         <t>
           Where residential gateways already exist, direct involvement of the gateway in LIS
@@ -286,12 +287,12 @@
 
       <section title="Residential Gateway Security Features">
         <t>
-	  A network firewall function is often provided by residential gateways as a security
-	  measure. Security features like intrusion detection systems help protect users from
-	  attacks. Amongst these protections is a port filter that prevents both inbound and
-	  outbound traffic on certain TCP and UDP ports. Therefore, any solution needs to consider
-	  the likelihood of traffic being blocked.
-	</t>
+          A network firewall function is often provided by residential gateways as a security
+          measure. Security features like intrusion detection systems help protect users from
+          attacks. Amongst these protections is a port filter that prevents both inbound and
+          outbound traffic on certain TCP and UDP ports. Therefore, any solution needs to consider
+          the likelihood of traffic being blocked.
+        </t>
       </section>
 
     </section>
@@ -337,60 +338,60 @@
       </t>
 
       <t>
-	A Device might be reachable at one of a number of IP addresses. In the process described, a
-	Device first identifies each IP address that it is potentially reachable from. From each of
-	these addresses, the Device then selects up to three domain names for use in discovery.
-	These domain names are then used as input to the DDDS process.
+        A Device might be reachable at one of a number of IP addresses. In the process described, a
+        Device first identifies each IP address that it is potentially reachable from. From each of
+        these addresses, the Device then selects up to three domain names for use in discovery.
+        These domain names are then used as input to the DDDS process.
       </t>
 
       <section anchor="getip" title="Identification of IP Addresses">
         <t>
-	  A Device identifies a set of potential IP addresses that currently result in packets being
-	  routed to it. These are ordered by proximity, with those addresses that are used in
-	  adjacent network segments being favoured over those used in public or remote networks. The
-	  first addresses in the set are those that are assigned to local network interfaces.
-	</t>
+          A Device identifies a set of potential IP addresses that currently result in packets being
+          routed to it. These are ordered by proximity, with those addresses that are used in
+          adjacent network segments being favoured over those used in public or remote networks. The
+          first addresses in the set are those that are assigned to local network interfaces.
+        </t>
 
         <t>
-	  A Device can use the Session Traversal Utilities for NAT (STUN) <xref target="RFC5389"/>
-	  mechanism to determine its public reflexive transport address. The host uses the <spanx
-	  style="verb">Binding Request</spanx> message and the resulting <spanx
-	  style="verb">XOR-MAPPED-ADDRESS</spanx> parameter that is returned in the response.
-	</t>
+          A Device can use the Session Traversal Utilities for NAT (STUN) <xref target="RFC5389"/>
+          mechanism to determine its public reflexive transport address. The host uses the <spanx
+          style="verb">Binding Request</spanx> message and the resulting <spanx
+          style="verb">XOR-MAPPED-ADDRESS</spanx> parameter that is returned in the response.
+        </t>
 
         <t>
-	  Alternative methods for determining other IP addresses MAY be used by the Device. <xref
-	  target="RFC6887">Port Control Protocol (PCP)</xref>, <xref
-	  target="UPnP-IGD-WANIPConnection1">Universal Plug and Play (UPnP)</xref> and <xref
-	  target="I-D.cheshire-nat-pmp">NAT Port Mapping Protocol (NAT-PMP)</xref> are both able to
-	  provide the external address of a residential gateway device when enabled. These as well
-	  as proprietary methods for determining other addresses might also be available.  Because
-	  there is no assurance that these methods will be supported by any access network, these
-	  methods are not mandated. Note also that in some cases, methods that rely on the view of
-	  the network from the residential gateway device could reveal an address in a private
-	  address range (see <xref target="assumptions"/>).
-	</t>
+          Alternative methods for determining other IP addresses MAY be used by the Device. <xref
+          target="RFC6887">Port Control Protocol (PCP)</xref>, <xref
+          target="UPnP-IGD-WANIPConnection1">Universal Plug and Play (UPnP)</xref> and <xref
+          target="I-D.cheshire-nat-pmp">NAT Port Mapping Protocol (NAT-PMP)</xref> are both able to
+          provide the external address of a residential gateway device when enabled. These as well
+          as proprietary methods for determining other addresses might also be available.  Because
+          there is no assurance that these methods will be supported by any access network, these
+          methods are not mandated. Note also that in some cases, methods that rely on the view of
+          the network from the residential gateway device could reveal an address in a private
+          address range (see <xref target="assumptions"/>).
+        </t>
 
         <t>
-	  In many instances, the IP address produced might be from a private address range. For
-	  instance, the address on a local network interface could be from a private range allocated
-	  by the residential gateway. In other cases, methods that rely on the view of the network
-	  (UPnP, NAT-PMP) from the residential gateway device could reveal an address in a private
-	  address range if the access network also uses NAT. For a private IP address, the derived
-	  domain name is only usable where the DNS server used contains data for the corresponding
-	  private IP address range.
-	</t>
+          In many instances, the IP address produced might be from a private address range. For
+          instance, the address on a local network interface could be from a private range allocated
+          by the residential gateway. In other cases, methods that rely on the view of the network
+          (UPnP, NAT-PMP) from the residential gateway device could reveal an address in a private
+          address range if the access network also uses NAT. For a private IP address, the derived
+          domain name is only usable where the DNS server used contains data for the corresponding
+          private IP address range.
+        </t>
       </section>
 
       <section anchor="dns-names" title="Domain Name Selection">
         <t>
-	  The domain name selected for each resulting IP address is the name that would be used for
-	  a reverse DNS lookup. The domain name derived from an IP version 4 address is in the
-	  <spanx style="verb">.in-addr.arpa.</spanx> tree and follows the construction rules in
-	  Section 3.5 of <xref target="RFC1035"/>. The domain name derived from an IP version 6
-	  address is in the <spanx style="verb">.ip6.arpa.</spanx> tree and follows the construction
-	  rules in Section 2.5 of <xref target="RFC3596"/>.
-	</t>
+          The domain name selected for each resulting IP address is the name that would be used for
+          a reverse DNS lookup. The domain name derived from an IP version 4 address is in the
+          <spanx style="verb">.in-addr.arpa.</spanx> tree and follows the construction rules in
+          Section 3.5 of <xref target="RFC1035"/>. The domain name derived from an IP version 6
+          address is in the <spanx style="verb">.ip6.arpa.</spanx> tree and follows the construction
+          rules in Section 2.5 of <xref target="RFC3596"/>.
+        </t>
       </section>
 
       <section anchor="shorten-dns" title="Shortened DNS Names">
@@ -413,25 +414,25 @@
               and 24 labels and the query repeated. This corresponds to a search on a /64, /56, /48
               or /32 network prefix.
             </t>
-          </list> 
+          </list>
         </t>
-	<t>
-	  This set of labels is intended to provide network operators with a degree of flexibility
-	  in where LIS discovery records can be placed without significantly increasing the number
-	  of DNS names that are searched.  This does not attach any other significance to these
-	  specific zone cuts, or create a classful addressing hierachy based on the reverse DNS
-	  tree.
-	</t>
+        <t>
+          This set of labels is intended to provide network operators with a degree of flexibility
+          in where LIS discovery records can be placed without significantly increasing the number
+          of DNS names that are searched.  This does not attach any other significance to these
+          specific zone cuts, or create a classful addressing hierachy based on the reverse DNS
+          tree.
+        </t>
         <t>
           For example, the IPv4 address <spanx style="verb">192.0.2.75</spanx> could result in
           queries to:
           <list style="symbols">
             <t>75.2.0.192.in-addr.arpa.
-	    </t>
+            </t>
             <t>2.0.192.in-addr.arpa.
-	    </t>
+            </t>
             <t>0.192.in-addr.arpa.
-	    </t>
+            </t>
           </list>
         </t>
         <t>
@@ -439,15 +440,15 @@
           could result in queries to:
           <list style="symbols">
             <t>5.b.f.d.9.2.4.4.3.9.a.3.4.e.8.2.0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2 .ip6.arpa.
-	    </t>
+            </t>
             <t>0.0.0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.
-	    </t>
+            </t>
             <t>0.0.0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.
-	    </t>
+            </t>
             <t>0.0.0.0.8.b.d.0.1.0.0.2.ip6.arpa.
-	    </t>
+            </t>
             <t>8.b.d.0.1.0.0.2.ip6.arpa.
-	    </t>
+            </t>
           </list>
         </t>
         <t>
@@ -459,30 +460,30 @@
 
       <section title="When To Use The Reverse DNS Method">
         <t>
-	  The DHCP method described in <xref target="RFC5986"/> MUST be attempted on all local
-	  network interfaces before attempting this method. This method is employed either because
-	  DHCP is unavailable, when the DHCP server does not provide a value for the access network
-	  domain name option, or if a request to the resulting LIS results in a HELD <spanx
-	  style="verb">notLocatable</spanx> error or equivalent.
-	</t>
+          The DHCP method described in <xref target="RFC5986"/> MUST be attempted on all local
+          network interfaces before attempting this method. This method is employed either because
+          DHCP is unavailable, when the DHCP server does not provide a value for the access network
+          domain name option, or if a request to the resulting LIS results in a HELD <spanx
+          style="verb">notLocatable</spanx> error or equivalent.
+        </t>
       </section>
 
       <section anchor="private-address" title="Private Address Spaces">
         <t>
-	  Addresses from a private use address space can be used as input to this method. In many
-	  cases, this applies to addresses defined in <xref target="RFC1918"/>, though other address
-	  ranges could have limited reachability where this advice also applies. This is only
-	  possible if a DNS server with a view of the same address space is used. Public DNS servers
-	  cannot provide useful records for private addresses.
-	</t>
+          Addresses from a private use address space can be used as input to this method. In many
+          cases, this applies to addresses defined in <xref target="RFC1918"/>, though other address
+          ranges could have limited reachability where this advice also applies. This is only
+          possible if a DNS server with a view of the same address space is used. Public DNS servers
+          cannot provide useful records for private addresses.
+        </t>
 
         <t>
-	  Using an address from a private space in discovery can provide a more specific answer if
-	  the DNS server has records for that space. <xref target="privatespace"/> shows a network
-	  configuration where addresses from an ISP network could better indicate the correct LIS.
-	  Records in DNS B can be provided for the 10.0.0.0/8 range, potentially dividing that range
-	  so that a more local LIS can be selected.
-	</t>
+          Using an address from a private space in discovery can provide a more specific answer if
+          the DNS server has records for that space. <xref target="privatespace"/> shows a network
+          configuration where addresses from an ISP network could better indicate the correct LIS.
+          Records in DNS B can be provided for the 10.0.0.0/8 range, potentially dividing that range
+          so that a more local LIS can be selected.
+        </t>
 
         <figure anchor="privatespace" title="Address Space Example">
           <artwork><![CDATA[
@@ -506,36 +507,36 @@
         </figure>
 
         <t>
-	  The goal of automatic DNS configuration is usually to select a local DNS, which suits
-	  configurations like the one shown. However, use of public DNS or STUN servers means that a
-	  public IP address is likely to be found. For STUN in particular, selecting a public server
-	  minimizes the need for reconfiguration when a Device moves. Adding records for the public
-	  address space used by an access network ensures that the discovery process succeeds when a
-	  public address is used.
-	</t>
+          The goal of automatic DNS configuration is usually to select a local DNS, which suits
+          configurations like the one shown. However, use of public DNS or STUN servers means that a
+          public IP address is likely to be found. For STUN in particular, selecting a public server
+          minimizes the need for reconfiguration when a Device moves. Adding records for the public
+          address space used by an access network ensures that the discovery process succeeds when a
+          public address is used.
+        </t>
       </section>
 
       <section anchor="assumptions" title="Necessary Assumptions and Restrictions">
         <t>
-	  When used by a Device for LIS discovery this is an UNSAF application and is subject to the
-	  limitations described in <xref target="iab"/>.
-	</t>
+          When used by a Device for LIS discovery this is an UNSAF application and is subject to the
+          limitations described in <xref target="iab"/>.
+        </t>
 
         <t>
-	  It is not necessary that the IP address used is unique to the Device, only that the
-	  address can be somehow related to the Device or the access network that serves the Device.
-	  This allows a degree of flexibility in determining this value, although <xref
-	  target="security">security considerations</xref> might require that the address be
-	  verified to limit the chance of falsification.
-	</t>
+          It is not necessary that the IP address used is unique to the Device, only that the
+          address can be somehow related to the Device or the access network that serves the Device.
+          This allows a degree of flexibility in determining this value, although <xref
+          target="security">security considerations</xref> might require that the address be
+          verified to limit the chance of falsification.
+        </t>
 
         <t>
-	  This solution assumes that the public reflexive transport address used by a Device is in
-	  some way controlled by the access network provider, or some other related party. This
-	  implies that the corresponding <spanx style="verb">.in-addr.arpa.</spanx> or <spanx
-	  style="verb">.ip6.arpa.</spanx> record can be updated by that entity to include a useful
-	  value for the LIS address.
-	</t>
+          This solution assumes that the public reflexive transport address used by a Device is in
+          some way controlled by the access network provider, or some other related party. This
+          implies that the corresponding <spanx style="verb">.in-addr.arpa.</spanx> or <spanx
+          style="verb">.ip6.arpa.</spanx> record can be updated by that entity to include a useful
+          value for the LIS address.
+        </t>
       </section>
 
       <section title="Failure Modes">
@@ -547,12 +548,12 @@
         </t>
 
         <t>
-	  In cases where a virtual private network (VPN) or other tunnel is used, the entity
-	  providing a public IP address might not be able to provide the Device with location
-	  information. It is assumed that this entity is able to identify this problem and indicate
-	  this to the Device (using the <spanx style="verb">notLocatable</spanx> HELD error, or
-	  similar). This problem is described in more detail in <xref target="RFC5985"/>.
-	</t>
+          In cases where a virtual private network (VPN) or other tunnel is used, the entity
+          providing a public IP address might not be able to provide the Device with location
+          information. It is assumed that this entity is able to identify this problem and indicate
+          this to the Device (using the <spanx style="verb">notLocatable</spanx> HELD error, or
+          similar). This problem is described in more detail in <xref target="RFC5985"/>.
+        </t>
       </section>
 
       <section title="Deployment Considerations">
@@ -594,7 +595,7 @@
 
     <section anchor="iana" title="IANA Considerations">
       <t>
-	This document has no IANA actions.
+        This document has no IANA actions.
       </t>
     </section>
 
@@ -624,7 +625,7 @@
         security requirements of the LCP it implements.  For HELD, these requirements are laid out
         in Section 9 of <xref target="RFC5985"/>.
       </t>
-      
+
       <t>
         A Device that discovers a LIS using the methods in this document MUST NOT provide that LIS
         with additional information that might reveal its position, such as the location
@@ -635,14 +636,14 @@
 
     <section anchor="security" title="Security Considerations">
       <t>
-	The security considerations described in <xref target="RFC5986"/> apply to the discovery
-	process as a whole. The primary security concern is with the potential for an attacker to
-	impersonate a LIS.
+        The security considerations described in <xref target="RFC5986"/> apply to the discovery
+        process as a whole. The primary security concern is with the potential for an attacker to
+        impersonate a LIS.
       </t>
 
       <t>
-	The added ability for a third party to discover the identity of a LIS does not add any
-	concerns, since the identity of a LIS is considered public information.
+        The added ability for a third party to discover the identity of a LIS does not add any
+        concerns, since the identity of a LIS is considered public information.
       </t>
 
       <t>
@@ -662,13 +663,13 @@
       </t>
 
       <t>
-	This attack could result in an effective means of denial of service, or a means to provide a
-	deliberately misleading service. Notably, any LIS that is identified based on a falsified IP
-	address could still be a valid LIS for the given IP address, just not one that is useful for
-	providing the Device with location information. In this case, the LIS provides a HELD <spanx
-	style="verb">notLocatable</spanx> error, or an equivalent. If the falsified IP address is
-	under the control of the attacker, it is possible that misleading (but verifiable) DNS
-	records could indicate a malicious LIS that provides false location information.
+        This attack could result in an effective means of denial of service, or a means to provide a
+        deliberately misleading service. Notably, any LIS that is identified based on a falsified IP
+        address could still be a valid LIS for the given IP address, just not one that is useful for
+        providing the Device with location information. In this case, the LIS provides a HELD <spanx
+        style="verb">notLocatable</spanx> error, or an equivalent. If the falsified IP address is
+        under the control of the attacker, it is possible that misleading (but verifiable) DNS
+        records could indicate a malicious LIS that provides false location information.
       </t>
 
       <t>
@@ -682,74 +683,78 @@
       </t>
 
       <t>
-	Use of private address space effectively prevents use of the usual set of trust anchors for
-	DNSSEC. Only a DNS server that is able to see the same private address space can provide
-	useful records. A Device that relies on DNS records in the private address space portion of
-	the <spanx style="verb">.in-addr.arpa.</spanx> or <spanx style="verb">.ip6.arpa.</spanx>
-	trees MUST either use an alternative trust anchor for these records or rely on other means
-	of ensuring the veracity of the DNS records.
+        Use of private address space effectively prevents use of the usual set of trust anchors for
+        DNSSEC. Only a DNS server that is able to see the same private address space can provide
+        useful records. A Device that relies on DNS records in the private address space portion of
+        the <spanx style="verb">.in-addr.arpa.</spanx> or <spanx style="verb">.ip6.arpa.</spanx>
+        trees MUST either use an alternative trust anchor for these records or rely on other means
+        of ensuring the veracity of the DNS records.
+      </t>
+
+      <t>
+        DNS queries that are not blocked as <xref target="RFC6303"/> demands, or directed to servers outside the network, can cause the addresses that are in use within the network to be exposed outside of the network.  For resolvers within the network, implementing <xref target="RFC6303"/> avoids this issue; otherwise, the problem cannot be avoided without blocking DNS queries to external servers.
       </t>
     </section>
 
     <section anchor="iab" title="IAB Considerations">
       <t>
-	The IAB has studied the problem of <xref target="RFC3424">Unilateral Self-Address Fixing
-	(UNSAF)</xref>, which is the general process by which a client attempts to determine its
-	address in another realm on the other side of a NAT through a collaborative protocol
-	reflection mechanism, such as STUN.
+        The IAB has studied the problem of <xref target="RFC3424">Unilateral Self-Address Fixing
+        (UNSAF)</xref>, which is the general process by which a client attempts to determine its
+        address in another realm on the other side of a NAT through a collaborative protocol
+        reflection mechanism, such as STUN.
       </t>
 
       <t>
-	This section only applies to the use of this method of LIS discovery by Devices and does not
-	apply to its use for third-party LIS discovery.
+        This section only applies to the use of this method of LIS discovery by Devices and does not
+        apply to its use for third-party LIS discovery.
       </t>
 
       <t>
-	The IAB requires that protocol specifications that define UNSAF mechanisms document a set of
-	considerations. <list style="numbers">
+        The IAB requires that protocol specifications that define UNSAF mechanisms document a set of
+        considerations. <list style="numbers">
           <t>
-	    Precise definition of a specific, limited-scope problem that is to be solved with the
-	    UNSAF proposal. <vspace blankLines="1"/> <xref target="ps"/> describes the limited scope
-	    of the problem addressed in this document.
-	  </t>
+            Precise definition of a specific, limited-scope problem that is to be solved with the
+            UNSAF proposal. <vspace blankLines="1"/> <xref target="ps"/> describes the limited scope
+            of the problem addressed in this document.
+          </t>
 
           <t>
-	    Description of an exit strategy/transition plan. <vspace blankLines="1"/> <xref
-	    target="RFC5986"/> describes behaviour that residential gateways require in order for
-	    this short term solution to be rendered unnecessary. When implementations of the
-	    recommendations in LIS discovery are widely available, this UNSAF mechanism can be made
-	    obsolete.
-	  </t>
+            Description of an exit strategy/transition plan. <vspace blankLines="1"/> <xref
+            target="RFC5986"/> describes behaviour that residential gateways require in order for
+            this short term solution to be rendered unnecessary. When implementations of the
+            recommendations in LIS discovery are widely available, this UNSAF mechanism can be made
+            obsolete.
+          </t>
 
           <t>
-	    Discussion of specific issues that may render systems more "brittle". <vspace
-	    blankLines="1"/> A description of the necessary assumptions and limitations of this
-	    solution are included in <xref target="assumptions"/>. <vspace blankLines="1"/> Use of
-	    STUN for discovery of a reflexive transport address is inherently brittle in the
-	    presence of multiple NATs or address realms. In particular, brittleness is added by the
-	    requirement of using a DNS server that is able to view the address realm that contains
-	    the IP address in question. If address realms use overlapping addressing space, then
-	    there is a risk that the DNS server provides information that is not useful to the
-	    Device.
-	  </t>
+            Discussion of specific issues that may render systems more "brittle". <vspace
+            blankLines="1"/> A description of the necessary assumptions and limitations of this
+            solution are included in <xref target="assumptions"/>. <vspace blankLines="1"/> Use of
+            STUN for discovery of a reflexive transport address is inherently brittle in the
+            presence of multiple NATs or address realms. In particular, brittleness is added by the
+            requirement of using a DNS server that is able to view the address realm that contains
+            the IP address in question. If address realms use overlapping addressing space, then
+            there is a risk that the DNS server provides information that is not useful to the
+            Device.
+          </t>
 
           <t>
-	    Identify requirements for longer term, sound technical solutions; contribute to the
-	    process of finding the right longer term solution. <vspace blankLines="1"/> A longer
-	    term solution is already provided in <xref target="RFC5986"/>. However, that solution
-	    relies on widespread deployment. The UNSAF solution provided here is provided as an
-	    interim solution that enables LIS access for Devices that are not able to benefit from
-	    deployment of the recommendations in <xref target="RFC5986"/>.
-	  </t>
+            Identify requirements for longer term, sound technical solutions; contribute to the
+            process of finding the right longer term solution. <vspace blankLines="1"/> A longer
+            term solution is already provided in <xref target="RFC5986"/>. However, that solution
+            relies on widespread deployment. The UNSAF solution provided here is provided as an
+            interim solution that enables LIS access for Devices that are not able to benefit from
+            deployment of the recommendations in <xref target="RFC5986"/>.
+          </t>
 
           <t>
-	    Discussion of the impact of the noted practical issues with existing deployed NATs and
-	    experience reports. <vspace blankLines="1"/> The UNSAF mechanism depends on the
-	    experience in deployment of <xref target="RFC5389">STUN</xref>. On the whole, existing
-	    residential gateway devices are able to provide access to STUN and DNS service reliably,
-	    although regard should be given to the size of the DNS response (see <xref
-	    target="RFC5625"/>).
-	  </t>
+            Discussion of the impact of the noted practical issues with existing deployed NATs and
+            experience reports. <vspace blankLines="1"/> The UNSAF mechanism depends on the
+            experience in deployment of <xref target="RFC5389">STUN</xref>. On the whole, existing
+            residential gateway devices are able to provide access to STUN and DNS service reliably,
+            although regard should be given to the size of the DNS response (see <xref
+            target="RFC5625"/>).
+          </t>
 
         </list>
       </t>
@@ -766,10 +771,10 @@
   <back>
 
     <references title="Normative References"> &RFC1035; &RFC2119; &RFC3596;
-      &RFC5986; &I-D.ietf-geopriv-held-measurements; </references>
+      &RFC5986; &RFC6303; &RFC7105; </references>
 
     <references title="Informative References"> &RFC1918; &RFC2131; &RFC3315; &RFC3424; &RFC3693; &RFC4848;
-      &RFC5012; &RFC5389; &RFC5687; &RFC6280; 
+      &RFC5012; &RFC5389; &RFC5687; &RFC6280;
       &RFC6887;
       <reference anchor="UPnP-IGD-WANIPConnection1">
         <front>
