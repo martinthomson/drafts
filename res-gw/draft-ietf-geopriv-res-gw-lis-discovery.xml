@@ -18,8 +18,8 @@
 <!ENTITY RFC5986 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.5986.xml">
 <!ENTITY RFC6280 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6280.xml">
 <!ENTITY RFC6887 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.6887.xml">
+<!ENTITY RFC7105 PUBLIC "" "http://xml.resource.org/public/rfc/bibxml/reference.RFC.7105.xml">
 <!ENTITY I-D.cheshire-nat-pmp PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.cheshire-nat-pmp.xml">
-<!ENTITY I-D.ietf-geopriv-held-measurements PUBLIC "" "http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-geopriv-held-measurements.xml">
 ]>
 <?rfc rfcedstyle="no"?>
 <?rfc symrefs="yes"?>
@@ -628,8 +628,8 @@
       <t>
         A Device that discovers a LIS using the methods in this document MUST NOT provide that LIS
         with additional information that might reveal its position, such as the location
-        measurements described in <xref target="I-D.ietf-geopriv-held-measurements"/>, unless it has
-        a secondary method for determining the authenticity of the LIS, such as a white list.
+        measurements described in <xref target="RFC7105"/>, unless it has a secondary method for
+        determining the authenticity of the LIS, such as a white list.
       </t>
     </section>
 
