@@ -45,13 +45,13 @@ extra: default ${EXTRA}
 all: extra nits validate
 
 .PHONY: txt html xhtml pdf svg nr unpg
-txt: ${BASE}.txt
-html: ${BASE}.html
-xhtml: ${BASE}.xhtml
-pdf: ${BASE}.pdf
-svg: ${BASE}.svg
-nr: ${BASE}.nr
-unpg: ${BASE}.unpg
+txt:: ${BASE}.txt
+html:: ${BASE}.html
+xhtml:: ${BASE}.xhtml
+pdf:: ${BASE}.pdf
+svg:: ${BASE}.svg
+nr:: ${BASE}.nr
+unpg:: ${BASE}.unpg
 
 .TRANSIENT: tmp.fo ${BASE}.svg~
 
@@ -116,7 +116,7 @@ validate: $(wildcard xml/*.xml example*.xml)
 	$(TOP)/xmlschema/build-strict
 	${VALIDATE} $^
 
-submit: ${BASE_NEXT}.txt
+submit:: ${BASE_NEXT}.txt
 
 ${BASE_NEXT}.xml: ${BASE}.xml
 	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
