@@ -122,7 +122,7 @@ ${BASE_NEXT}.xml: ${BASE}.xml
 	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
 
 clean:
-	-rm -f $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
+	-rm -f $(addprefix ${BASE}-${REV_CURRENT}.,${TARGET} ${EXTRA}) $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
 
 tag:
 	git tag ${BASE_NEXT}
