@@ -137,6 +137,14 @@
         the server in proving access to the private keys associated with their certificate twice in
         the case that the client opts for confidentiality protection on the client certificate.
       </t>
+      <t>
+        <xref target="I-D.ietf-httpbis-http2">HTTP/2</xref> allows clients to use the same
+        connection for multiple <xref target="RFC6454">origins</xref>.  Certificate-based client
+        authentication as defined by this specification is bound to a single origin.  This could
+        create issues whereby the security properties of a connection could become confused.
+        Clients MUST ensure that a client-authenticated connection is only used for the origin for
+        which it was created.
+      </t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
@@ -176,10 +184,12 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2617.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5234.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6454.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p7-auth.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.thomson-tls-care.xml"?>
    </references>
    <references title="Informational References">
+     <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.thomson-tls-care.xml"?>
    </references>
   </back>
