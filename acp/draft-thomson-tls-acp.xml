@@ -166,13 +166,13 @@ enum {
 
     <section anchor="iana" title="IANA Considerations">
       <t>
-        This document makes no request of IANA.
+        IANA has allocated a TLS extension code point of (TBD) for this extension.
       </t>
     </section>
 
     <section anchor="ack" title="Acknowledgements">
       <t>
-        You know.
+        Eric Rescorla helped identify the problem and formulate this mechanism.
       </t>
     </section>
 
