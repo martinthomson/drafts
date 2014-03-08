@@ -103,7 +103,7 @@
       <t>
         Renegotiation has the potential to create confusion at higher layers about the security
         properties that apply to the byte stream.  This is especially difficult when there are
-        protocol constructs that span the ChangeCipherSpec messages that represents a switch between
+        protocol constructs that span the ChangeCipherSpec messages that represent a switch between
         states.
       </t>
       <t>
