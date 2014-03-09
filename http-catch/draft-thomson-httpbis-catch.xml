@@ -186,11 +186,17 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6454.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p7-auth.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.thomson-tls-care.xml"?>
-   </references>
+    </references>
    <references title="Informational References">
      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
-     <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.thomson-tls-care.xml"?>
+     <reference anchor="I-D.thomson-tls-care">
+       <front>
+         <title></title>
+         <author initials="M." surname="Thomson" fullname="Martin Thomson"/>
+         <date month="March" year="2014" />
+       </front>
+       <seriesInfo name="Internet-Draft" value="draft-thomson-tls-care-00" />
+     </reference>
    </references>
   </back>
 </rfc>
