@@ -114,7 +114,7 @@
       <t>
         Since the server only conditionally requests client authentication and it has no context
         with which to decide that authentication is needed, the client needs to provide some
-        indication that it might need to be authentication.  The second, renegotiation handshake can
+        indication that it might need to be authenticated.  The second, renegotiation handshake can
         contain the <xref target="care">client authentication request extension</xref> to provide
         this indication.  As long as no application data is sent on the connection prior to
         completing renegotiation and sending the corresponding ChangeCipherSpec, there is no
