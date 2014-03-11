@@ -61,9 +61,9 @@
 
     <abstract>
       <t>
-        This document defines an HTTP header field that can be added to a response to indicate to a
-        client that a response will only be provided over a TLS connection, and only if the client
-        has provided a certificate on that connection.
+        This document defines an HTTP authentication scheme that can be added to a response to
+        indicate to a client that a response will only be provided over a TLS connection, and only
+        if the client has provided a certificate on that connection.
       </t>
     </abstract>
   </front>
@@ -73,9 +73,9 @@
     <section anchor="intro" title="Introduction">
       <t>
         Client authentication in HTTP sometimes relies on certificate-based authentication of
-        clients in TLS.  Some uses of client authentication rely on <xref target="RFC5246">Transport
-        Layer Security (TLS)</xref> renegotiation, triggering renegotiation in response to a request
-        for a particular resource.
+        clients in <xref target="RFC5246">Transport Layer Security (TLS)</xref>.  Some uses of
+        client authentication rely on TLS renegotiation, triggering renegotiation in response to a
+        request for a particular resource.
       </t>
       <t>
         <xref target="I-D.ietf-httpbis-http2">HTTP/2</xref> forbids the use of renegotiation, except
@@ -100,14 +100,14 @@
 
     <section title="Client Certificate Challenge">
       <t>
-        A new kind of authentication scheme (<xref
-        target="I-D.ietf-httpbis-p7-auth">auth-scheme</xref>) for the <spanx
-        style="verb">WWW-Authenticate</spanx> and <spanx style="verb">Proxy-Authenticate</spanx>
-        header fields is defined with the name <spanx style="verb">ClientCertificate</spanx>.
+        A new kind of authentication scheme (<xref target="I-D.ietf-httpbis-p7-auth"/>) for the
+        <spanx style="verb">WWW-Authenticate</spanx> and <spanx
+        style="verb">Proxy-Authenticate</spanx> header fields is defined with the name <spanx
+        style="verb">ClientCertificate</spanx>.
       </t>
       <t>
-        A challenge with this auth-scheme does not define the use of any parameters other than
-        <spanx style="verb">realm</spanx>.  Other parameters MAY be used to provide a client with
+        A challenge with this authentication scheme does not define any parameters except <spanx
+        style="verb">realm</spanx>.  Other parameters MAY be used to provide a client with
         information it can use to select an appropriate certificate.  Unknown parameters MUST be
         ignored.
       </t>
@@ -139,21 +139,20 @@
       </t>
       <t>
         <xref target="I-D.ietf-httpbis-http2">HTTP/2</xref> allows clients to use the same
-        connection for multiple <xref target="RFC6454">origins</xref>.  Certificate-based client
-        authentication as defined by this specification is bound to a single origin.  This could
-        create issues whereby the security properties of a connection could become confused.
-        Clients MUST ensure that a client-authenticated connection is only used for the origin for
-        which it was created.
+        connection for multiple canonical root URIs.  Certificate-based client authentication as
+        defined by this specification is bound to a single origin.  This could create issues whereby
+        the security properties of a connection could become confused.  Clients MUST ensure that a
+        client-authenticated connection is only used for the origin for which it was created.
       </t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
       <t>
-        IANA will [has] create[d] an entry in the HTTP Authentication Scheme Registry with the
+        IANA is requested to create an entry in the HTTP Authentication Scheme Registry with the
         following information:
         <list style="hanging:">
           <t hangText="Authentication Scheme Name:">ClientCertificate</t>
-          <t hangText="Pointer to specification text:">RFCXXXX (this document)</t>
+          <t hangText="Pointer to specification text:">This document</t>
           <t hangText="Notes">This scheme does not rely on the Authorization header field.</t>
         </list>
       </t>
@@ -162,7 +161,7 @@
     <section anchor="ack" title="Acknowledgements">
       <t>
         Eric Rescorla helped identify the problem and formulate this mechanism.  Julian Reschke
-        hasn't provided any contribution yet, but he will.
+        provided excellent feedback.
       </t>
     </section>
 
@@ -181,8 +180,6 @@
   <back>
     <references title="Normative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2617.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5234.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6454.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p7-auth.xml"?>
