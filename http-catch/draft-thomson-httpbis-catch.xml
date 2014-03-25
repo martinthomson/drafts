@@ -61,9 +61,9 @@
 
     <abstract>
       <t>
-        This document defines an HTTP authentication scheme that can be added to a response to
-        indicate to a client that a response will only be provided over a TLS connection, and only
-        if the client has provided a certificate on that connection.
+        This document defines an HTTP authentication scheme that can be added to an error response
+        to indicate to a client that a successful response will only be provided over a TLS
+        connection, and only if the client has provided a certificate on that connection.
       </t>
     </abstract>
   </front>
@@ -83,10 +83,11 @@
         use cases difficult.
       </t>
       <t>
-        This document defines a new type of authentication scheme, "ClientCertificate" for use in
-        <xref target="I-D.ietf-httpbis-p7-auth">HTTP authentication challenges</xref>.  In
-        combination with the 401 (Unauthorized) status code, this indicates that the resource
-        requires client authentication at the TLS layer in order to access it.
+        This document defines a new authentication scheme, <spanx
+        style="verb">ClientCertificate</spanx>, for use in <xref
+        target="I-D.ietf-httpbis-p7-auth">HTTP authentication challenges</xref>.  In combination
+        with the 401 (Unauthorized) status code, this indicates that the resource requires client
+        authentication at the TLS layer in order to access it.
       </t>
 
       <section title="Conventions and Terminology" anchor="terminology">
@@ -100,14 +101,15 @@
 
     <section title="Client Certificate Challenge">
       <t>
-        A new kind of authentication scheme (<xref target="I-D.ietf-httpbis-p7-auth"/>) for the
-        <spanx style="verb">WWW-Authenticate</spanx> and <spanx
-        style="verb">Proxy-Authenticate</spanx> header fields is defined with the name <spanx
-        style="verb">ClientCertificate</spanx>.
+        A new authentication scheme (<xref target="I-D.ietf-httpbis-p7-auth"/>) for the <spanx
+        style="verb">WWW-Authenticate</spanx> and <spanx style="verb">Proxy-Authenticate</spanx>
+        header fields is defined with the name <spanx style="verb">ClientCertificate</spanx>.
       </t>
       <t>
         A challenge with this authentication scheme does not define any parameters except <spanx
-        style="verb">realm</spanx>.  Other parameters MAY be used to provide a client with
+        style="verb">realm</spanx>.  The <spanx style="verb">realm</spanx> can be used to select an
+        appropriate certificate, or if a certificate is already in use, to indicate the need for a
+        different certificate.  Other challenge parameters MAY be used to provide a client with
         information it can use to select an appropriate certificate.  Unknown parameters MUST be
         ignored.
       </t>
@@ -118,8 +120,10 @@
         been provided by the client.
       </t>
       <t>
-        A client can use this information as a trigger to open a new connection and to use client
-        authentication on that connection.  The client can use the mechanism in <xref
+        To effectively use this authentication scheme, a new connection is needed for every
+        protection space used by a given origin server.  A client can use the <spanx
+        style="verb">ClientCertificate</spanx> challenge as a trigger to open a new connection and
+        to use client authentication on that connection.  The client can use the mechanism in <xref
         target="I-D.thomson-tls-care"/> to prompt the server to request a client certificate, to
         avoid the problem where the server doesn't know to make this request.
       </t>
@@ -160,8 +164,8 @@
 
     <section anchor="ack" title="Acknowledgements">
       <t>
-        Eric Rescorla helped identify the problem and formulate this mechanism.  Julian Reschke
-        provided excellent feedback.
+        Eric Rescorla helped identify the problem and formulate this mechanism.  Julian Reschke and
+        Michael Koeller provided excellent feedback.
       </t>
     </section>
 
