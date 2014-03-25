@@ -148,6 +148,11 @@ enum {
       <t>
         A server MUST NOT send this extension to a client.
       </t>
+      <t>
+        This extension can be used in either the initial handshake or subsequent renegotiation
+        handshakes.  This extension cannot be used during session resumption, since the resumption
+        handshake does not allow for authentication changes.
+      </t>
    </section>
 
     <section anchor="security" title="Security Considerations">
