@@ -4,8 +4,8 @@
 
 TLS                                                           M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                        January 22, 2014
-Expires: July 26, 2014
+Intended status: Standards Track                           April 8, 2014
+Expires: October 10, 2014
 
 
            Authenticated Content Promise Extension for (D)TLS
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on July 26, 2014.
+   This Internet-Draft will expire on October 10, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 1]
+Thomson                 Expires October 10, 2014                [Page 1]
 
-Internet-Draft                     ACP                      January 2014
+Internet-Draft                     ACP                        April 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 2]
+Thomson                 Expires October 10, 2014                [Page 2]
 
-Internet-Draft                     ACP                      January 2014
+Internet-Draft                     ACP                        April 2014
 
 
    that any indicators could not be erased or re-attributed to other
@@ -165,9 +165,9 @@ Internet-Draft                     ACP                      January 2014
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 3]
+Thomson                 Expires October 10, 2014                [Page 3]
 
-Internet-Draft                     ACP                      January 2014
+Internet-Draft                     ACP                        April 2014
 
 
 3.  Security Considerations
@@ -195,11 +195,13 @@ Internet-Draft                     ACP                      January 2014
 
 4.  IANA Considerations
 
-   This document makes no request of IANA.
+   IANA has allocated a TLS extension code point of (TBD) for this
+   extension.
 
 5.  Acknowledgements
 
-   You know.
+   Eric Rescorla helped identify the problem and formulate this
+   mechanism.
 
 6.  References
 
@@ -213,22 +215,25 @@ Internet-Draft                     ACP                      January 2014
 
 6.2.  Informative References
 
+
+
+
+
+
+
+Thomson                 Expires October 10, 2014                [Page 4]
+
+Internet-Draft                     ACP                        April 2014
+
+
    [I-D.ietf-rtcweb-overview]
               Alvestrand, H., "Overview: Real Time Protocols for Brower-
-              based Applications", draft-ietf-rtcweb-overview-08 (work
-              in progress), September 2013.
-
-
-
-
-Thomson                   Expires July 26, 2014                 [Page 4]
-
-Internet-Draft                     ACP                      January 2014
-
+              based Applications", draft-ietf-rtcweb-overview-09 (work
+              in progress), February 2014.
 
    [I-D.ietf-rtcweb-security-arch]
               Rescorla, E., "WebRTC Security Architecture", draft-ietf-
-              rtcweb-security-arch-07 (work in progress), July 2013.
+              rtcweb-security-arch-09 (work in progress), February 2014.
 
 Author's Address
 
@@ -272,9 +277,4 @@ Author's Address
 
 
 
-
-
-
-
-
-Thomson                   Expires July 26, 2014                 [Page 5]
+Thomson                 Expires October 10, 2014                [Page 5]

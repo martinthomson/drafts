@@ -4,16 +4,17 @@
 
 PERPASS                                                       M. Thomson
 Internet-Draft                                                         -
-Intended status: Standards Track                       November 13, 2013
-Expires: May 17, 2014
+Intended status: Informational                             April 8, 2014
+Expires: October 10, 2014
 
 
-                           A Simple Statement
+                              A Statement
                  draft-thomson-perpass-statement-latest
 
 Abstract
 
-   This document contains a simple statement.
+   This document contains a response to revelations of systematic
+   surveillance by state actors.
 
 Status of This Memo
 
@@ -30,11 +31,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 17, 2014.
+   This Internet-Draft will expire on October 10, 2014.
 
 Copyright Notice
 
-   Copyright (c) 2013 IETF Trust and the persons identified as the
+   Copyright (c) 2014 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -47,18 +48,19 @@ Copyright Notice
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
 
-1.  Message
-
-   .
 
 
 
-Thomson                   Expires May 17, 2014                  [Page 1]
+
+
+Thomson                 Expires October 10, 2014                [Page 1]
 
-Internet-Draft              Simple Statement               November 2013
+Internet-Draft                  Statement                     April 2014
 
 
-   .
+1.  Statement
+
+
 
 
 
@@ -107,14 +109,12 @@ Internet-Draft              Simple Statement               November 2013
 
 
 
-
-
-Thomson                   Expires May 17, 2014                  [Page 2]
+Thomson                 Expires October 10, 2014                [Page 2]
 
-Internet-Draft              Simple Statement               November 2013
+Internet-Draft                  Statement                     April 2014
 
 
-   .
+
 
 
 
@@ -165,12 +165,12 @@ Internet-Draft              Simple Statement               November 2013
 
 
 
-Thomson                   Expires May 17, 2014                  [Page 3]
+Thomson                 Expires October 10, 2014                [Page 3]
 
-Internet-Draft              Simple Statement               November 2013
+Internet-Draft                  Statement                     April 2014
 
 
-   .
+
 
 
 
@@ -221,12 +221,12 @@ Internet-Draft              Simple Statement               November 2013
 
 
 
-Thomson                   Expires May 17, 2014                  [Page 4]
+Thomson                 Expires October 10, 2014                [Page 4]
 
-Internet-Draft              Simple Statement               November 2013
+Internet-Draft                  Statement                     April 2014
 
 
-   .
+
 
 
 
@@ -277,12 +277,12 @@ Internet-Draft              Simple Statement               November 2013
 
 
 
-Thomson                   Expires May 17, 2014                  [Page 5]
+Thomson                 Expires October 10, 2014                [Page 5]
 
-Internet-Draft              Simple Statement               November 2013
+Internet-Draft                  Statement                     April 2014
 
 
-   .
+
 
 
 
@@ -333,12 +333,12 @@ Internet-Draft              Simple Statement               November 2013
 
 
 
-Thomson                   Expires May 17, 2014                  [Page 6]
+Thomson                 Expires October 10, 2014                [Page 6]
 
-Internet-Draft              Simple Statement               November 2013
+Internet-Draft                  Statement                     April 2014
 
 
-   .
+
 
 
 
@@ -389,18 +389,14 @@ Internet-Draft              Simple Statement               November 2013
 
 
 
-Thomson                   Expires May 17, 2014                  [Page 7]
+Thomson                 Expires October 10, 2014                [Page 7]
 
-Internet-Draft              Simple Statement               November 2013
+Internet-Draft                  Statement                     April 2014
 
 
 2.  Security Considerations
 
-3.  Acknowledgements
-
-   ...
-
-4.  References
+   Yes.
 
 Author's Address
 
@@ -445,4 +441,8 @@ Author's Address
 
 
 
-Thomson                   Expires May 17, 2014                  [Page 8]
+
+
+
+
+Thomson                 Expires October 10, 2014                [Page 8]

@@ -5,7 +5,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>A Statement </title>
+  <title>Client Authentication Request Extension for (D)TLS </title>
 
   <style type="text/css" title="Xml2Rfc (sans serif)">
   /*<![CDATA[*/
@@ -374,8 +374,14 @@
   </style><style tyle="text/css">body {   font: 11pt cambria, helvetica, arial, sans-serif;   font-size-adjust: 0.5;   line-height: 130%;   margin: 1em auto;   max-width: 700px; }  .title, .filename, h1, h2, h3, h4 {   font-family: candara, helvetica, arial, sans-serif;   font-size-adjust: 0.5; } .title { font-size: 150%; } h1 { font-size: 130%; } h2 { font-size: 120%; } h3, h4 { font-size: 110%; } ul.toc >li { font-size: 95%; } ul.toc >li >ul, .figure, caption { font-size: 90%; }  table {   margin-left: 0em; } table.header {   width: 100%; }  table.header td {   background-color: inherit;   color: black; }  samp, tt, code, pre {   font: 11pt consolas, monospace;   font-size-adjust: none; }  pre.text, pre.text2 {   width: 90%; }  dt {   float: left; clear: left;   margin: 0.5em 0.5em 0 0; } dt:first-child {   margin-top: 0; } dd {   margin: 0.5em 0 0 2em; } dd p, dd ul {   margin-top: 0; margin-bottom: 0; } dd *+p {   margin-top: 0.5em; }  ol, ul {   padding: 0;   margin: 0.5em 0 0.5em 2em; } ul.toc, ul.toc ul {    margin: 0 0 0 1.5em; } ul.toc a:first-child {    display: inline-block;    min-width: 1.2em; }</style>
 
   <link href="#rfc.toc" rel="Contents"/>
-<link href="#rfc.section.1" rel="Chapter" title="1 Statement"/>
-<link href="#rfc.section.2" rel="Chapter" title="2 Security Considerations"/>
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Conventions and Terminology"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Client Authentication and TLS Renegotiation"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Client Authentication Request Extension"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 IANA Considerations"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="7 Normative References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -383,10 +389,10 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-perpass-statement-latest" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-tls-care-latest" />
   <meta name="dct.issued" scheme="ISO8601" content="2014-4-8" />
-  <meta name="dct.abstract" content="This document contains a response to revelations of systematic surveillance by state actors.  " />
-  <meta name="description" content="This document contains a response to revelations of systematic surveillance by state actors.  " />
+  <meta name="dct.abstract" content="This document describes an extension to Transport Layer Security (TLS) and Datagram TLS (DTLS) that allows a client to indicate that it wants to provide a client certificate.  " />
+  <meta name="description" content="This document describes an extension to Transport Layer Security (TLS) and Datagram TLS (DTLS) that allows a client to indicate that it wants to provide a client certificate.  " />
 
 </head>
 
@@ -396,15 +402,15 @@
     <tbody>
     
     	<tr>
-  <td class="left">PERPASS</td>
+  <td class="left">TLS</td>
   <td class="right">M. Thomson</td>
 </tr>
 <tr>
   <td class="left">Internet-Draft</td>
-  <td class="right">-</td>
+  <td class="right">Mozilla</td>
 </tr>
 <tr>
-  <td class="left">Intended status: Informational</td>
+  <td class="left">Intended status: Standards Track</td>
   <td class="right">April 8, 2014</td>
 </tr>
 <tr>
@@ -416,13 +422,13 @@
     </tbody>
   </table>
 
-  <p class="title">A Statement <br />
-  <span class="filename">draft-thomson-perpass-statement-latest</span></p>
+  <p class="title">Client Authentication Request Extension for (D)TLS <br />
+  <span class="filename">draft-thomson-tls-care-latest</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>This document contains a response to revelations of systematic surveillance by state actors.  </p>
+<p>This document describes an extension to Transport Layer Security (TLS) and Datagram TLS (DTLS) that allows a client to indicate that it wants to provide a client certificate.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
@@ -435,315 +441,77 @@
 </h1>
 <p>Copyright (c) 2014 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
-<h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#statement" id="statement">Statement</a></h1>
-<pre>.
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
+<li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
+<li>2.   <a href="#rfc.section.2">Client Authentication and TLS Renegotiation</a></li>
+<li>3.   <a href="#rfc.section.3">Client Authentication Request Extension</a></li>
+<li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
+<li>5.   <a href="#rfc.section.5">IANA Considerations</a></li>
+<li>6.   <a href="#rfc.section.6">Acknowledgements</a></li>
+<li>7.   <a href="#rfc.references">Normative References</a></li>
+<li><a href="#rfc.authors">Author's Address</a></li>
 
 
+  </ul>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                         we had a good thing
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+  <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
+<p id="rfc.section.1.p.1">In <a href="#RFC5246">Transport Layer Security (TLS)</a> <cite title="NONE">[RFC5246]</cite> and <a href="#RFC6347">Datagram TLS (DTLS)</a> <cite title="NONE">[RFC6347]</cite> the server decides whether or not to request a certificate from clients.  </p>
+<p id="rfc.section.1.p.2">In TLS versions 1.2 and earlier, the Certificate message from a client is not encrypted and is therefore not confidential.  TLS renegotiation is frequently used to provide confidentiality for client credentials, since renegotiation handshakes are encrypted with the TLS session keys.  </p>
+<p id="rfc.section.1.p.3">A client that is aware of a need to authenticate can initiate renegotiation, but is unable to induce a CertificateRequest from the server.  The decision to request client authentication is one that can only be made by a server.  </p>
+<p id="rfc.section.1.p.4">This document defines a client authentication request extension that can be used by a client to request that the server send a CertificateRequest in its handshake.  </p>
+<h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
+<p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Client Authentication and TLS Renegotiation</h1>
+<p id="rfc.section.2.p.1">Renegotiation has the potential to create confusion at higher layers about the security properties that apply to the byte stream.  This is especially difficult when there are protocol constructs that span the ChangeCipherSpec messages that represent a switch between states.  </p>
+<p id="rfc.section.2.p.2">For that reason, a client can initiate a new connection when it detects a need to authenticate, initiating renegotiation to establish authentication credentials immediately after the initial handshake.  </p>
+<p id="rfc.section.2.p.3">Since the server only conditionally requests client authentication and it has no context with which to decide that authentication is needed, the client needs to provide some indication that it might need to be authenticated.  The second, renegotiation handshake can contain the <a href="#care">client authentication request extension</a> <cite title="NONE">[care]</cite> to provide this indication.  As long as no application data is sent on the connection prior to completing renegotiation and sending the corresponding ChangeCipherSpec, there is no possibility for confusion over the security properties of application content.  </p>
+<p id="rfc.section.2.p.4">This behavior could need to be triggered by a higher level protocol.  This document does not define how that happens.  </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#care" id="care">Client Authentication Request Extension</a></h1>
+<p id="rfc.section.3.p.1">A new extension type (<samp>client_authentication_request(TBD)</samp>) is defined.  If a client includes this extension in its ClientHello to indicate that it wishes the server to issue a CertificateRequest.  </p>
+<pre>
+enum {
+    client_authentication_request(TBD), (65535)
+} ExtensionType;
 </pre>
-<pre>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                          you messed it up
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre>
-<pre>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            for everyone
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre>
-<pre>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                           we trusted you
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre>
-<pre>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                           we were naive
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre>
-<pre>.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            never again
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</pre>
-<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#security" id="security">Security Considerations</a></h1>
-<p id="rfc.section.2.p.1">Yes.</p>
+<p id="rfc.section.3.p.2">The <samp>extension_data</samp> field of this extension MUST be empty.  </p>
+<p id="rfc.section.3.p.3">A server that supports client authentication based on certificates can use the presence of this extension to decide to include a CertificateRequest.  The server MAY choose to ignore this extension.  </p>
+<p id="rfc.section.3.p.4">A server MUST NOT send this extension to a client.  </p>
+<p id="rfc.section.3.p.5">This extension can be used in either the initial handshake or subsequent renegotiation handshakes.  This extension cannot be used during session resumption, since the resumption handshake does not allow for authentication changes.  </p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security" id="security">Security Considerations</a></h1>
+<p id="rfc.section.4.p.1">This document is entirely about security.  </p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
+<p id="rfc.section.5.p.1">IANA has allocated a TLS extension code point of (TBD) for this extension.  </p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
+<p id="rfc.section.6.p.1">Eric Rescorla helped identify the problem and formulate this mechanism.  </p>
+<h1 id="rfc.references"><a href="#rfc.references">7.</a> Normative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="RFC2119">[RFC2119]</b>
+      </td>
+      <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5246">[RFC5246]</b>
+      </td>
+      <td class="top"><a>Dierks, T.</a> and <a>E. Rescorla</a>, "<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>", RFC 5246, August 2008.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6347">[RFC6347]</b>
+      </td>
+      <td class="top"><a>Rescorla, E.</a> and <a>N. Modadugu</a>, "<a href="http://tools.ietf.org/html/rfc6347">Datagram Transport Layer Security Version 1.2</a>", RFC 6347, January 2012.</td>
+    </tr>
+  </tbody>
+</table>
 <h1 id="rfc.authors">
   <a href="#rfc.authors">Author's Address</a>
 </h1>
@@ -755,33 +523,22 @@
 		<span class="family-name">Thomson</span>
 	  </span>
 	</span>
-	<span class="org vcardline">-</span>
+	<span class="org vcardline">Mozilla</span>
 	<span class="adr">
-	  
+	  <span class="vcardline">Suite 300</span>
+<span class="vcardline">650 Castro Street</span>
+
 	  <span class="vcardline">
-		<span class="locality"></span> 
-		<span class="region"></span>
-		<span class="code"></span>
+		<span class="locality">Mountain View</span>,  
+		<span class="region">CA</span> 
+		<span class="code">94041</span>
 	  </span>
-	  <span class="country-name vcardline"></span>
+	  <span class="country-name vcardline">US</span>
 	</span>
 	<span class="vcardline">EMail: <a href="mailto:martin.thomson@gmail.com">martin.thomson@gmail.com</a></span>
 
   </address>
 </div>
-  
-  <hr class="noprint" />
-  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
-  <ul class="toc">
-
-  	<li>1.   <a href="#rfc.section.1">Statement</a></li>
-<li>2.   <a href="#rfc.section.2">Security Considerations</a></li>
-<li><a href="#rfc.authors">Author's Address</a></li>
-
-
-  </ul>
-
-  
 
 </body>
 </html>

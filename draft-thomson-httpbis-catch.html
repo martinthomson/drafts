@@ -5,7 +5,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>Authenticated Content Promise Extension for (D)TLS </title>
+  <title>Client Authentication over TLS Connection Header </title>
 
   <style type="text/css" title="Xml2Rfc (sans serif)">
   /*<![CDATA[*/
@@ -375,15 +375,14 @@
 
   <link href="#rfc.toc" rel="Contents"/>
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
-<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Authenticated Content Promise"/>
-<link href="#rfc.section.1.2" rel="Chapter" title="1.2 Conventions and Terminology"/>
-<link href="#rfc.section.2" rel="Chapter" title="2 Authenticated Content Promise"/>
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Conventions and Terminology"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Client Certificate Challenge"/>
 <link href="#rfc.section.3" rel="Chapter" title="3 Security Considerations"/>
 <link href="#rfc.section.4" rel="Chapter" title="4 IANA Considerations"/>
 <link href="#rfc.section.5" rel="Chapter" title="5 Acknowledgements"/>
 <link href="#rfc.references" rel="Chapter" title="6 References"/>
 <link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References"/>
-<link href="#rfc.references.2" rel="Chapter" title="6.2 Informative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="6.2 Informational References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -391,10 +390,10 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-tls-acp-latest" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-httpbis-catch-latest" />
   <meta name="dct.issued" scheme="ISO8601" content="2014-4-8" />
-  <meta name="dct.abstract" content="This document describes an extension to Transport Layer Security (TLS) and Datagram TLS (DTLS) that enables the negotiation of a promise to protect session content from modification and eavesdropping by third parties.  " />
-  <meta name="description" content="This document describes an extension to Transport Layer Security (TLS) and Datagram TLS (DTLS) that enables the negotiation of a promise to protect session content from modification and eavesdropping by third parties.  " />
+  <meta name="dct.abstract" content="This document defines an HTTP authentication scheme that can be added to an error response to indicate to a client that a successful response will only be provided over a TLS connection, and only if the client has provided a certificate on that connection.  " />
+  <meta name="description" content="This document defines an HTTP authentication scheme that can be added to an error response to indicate to a client that a successful response will only be provided over a TLS connection, and only if the client has provided a certificate on that connection.  " />
 
 </head>
 
@@ -404,7 +403,7 @@
     <tbody>
     
     	<tr>
-  <td class="left">TLS</td>
+  <td class="left">HTTPBIS</td>
   <td class="right">M. Thomson</td>
 </tr>
 <tr>
@@ -424,13 +423,13 @@
     </tbody>
   </table>
 
-  <p class="title">Authenticated Content Promise Extension for (D)TLS <br />
-  <span class="filename">draft-thomson-tls-acp-latest</span></p>
+  <p class="title">Client Authentication over TLS Connection Header <br />
+  <span class="filename">draft-thomson-httpbis-catch-latest</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>This document describes an extension to Transport Layer Security (TLS) and Datagram TLS (DTLS) that enables the negotiation of a promise to protect session content from modification and eavesdropping by third parties.  </p>
+<p>This document defines an HTTP authentication scheme that can be added to an error response to indicate to a client that a successful response will only be provided over a TLS connection, and only if the client has provided a certificate on that connection.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
@@ -450,65 +449,56 @@
   <ul class="toc">
 
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
-<li>1.1.   <a href="#rfc.section.1.1">Authenticated Content Promise</a></li>
-<li>1.2.   <a href="#rfc.section.1.2">Conventions and Terminology</a></li>
-<li>2.   <a href="#rfc.section.2">Authenticated Content Promise</a></li>
+<li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
+<li>2.   <a href="#rfc.section.2">Client Certificate Challenge</a></li>
 <li>3.   <a href="#rfc.section.3">Security Considerations</a></li>
 <li>4.   <a href="#rfc.section.4">IANA Considerations</a></li>
 <li>5.   <a href="#rfc.section.5">Acknowledgements</a></li>
 <li>6.   <a href="#rfc.references">References</a></li>
 <li>6.1.   <a href="#rfc.references.1">Normative References</a></li>
-<li>6.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li>6.2.   <a href="#rfc.references.2">Informational References</a></li>
 <li><a href="#rfc.authors">Author's Address</a></li>
 
 
   </ul>
 
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
-<p><a href="#I-D.ietf-rtcweb-overview">WebRTC</a> <cite title="NONE">[I-D.ietf-rtcweb-overview]</cite> creates a new understanding of the way that "user-generated content" is used on the world wide web.  The established definition identifies content that is generated by users and used by sites; after all, the primary mode of interaction on the web is between users and sites.  </p>
-<p id="rfc.section.1.p.2">WebRTC changes that by enabling users to communicate directly, with secure channels between established between user agents (or browsers).  These channels might be established with the aid of a web site, but the content of the communication session can be made inaccessible to the site <a href="#I-D.ietf-rtcweb-security-arch">[I-D.ietf-rtcweb-security-arch]</a>.  With peer authentication, each user is able to be sure that: </p>
-
-<ul>
-  <li>the content they are generating is only accessible to the authenticated peer; and </li>
-  <li>the content they are receiving can be attributed solely to the authenticated peer.  </li>
-</ul>
-
-<p> </p>
-<p id="rfc.section.1.p.3">On the originating end of a communications session, this guarantee is easy to provide.  A web site is able to provide instructions for session setup that allow the browser to protect content from the site, and to restrict where content is delivered based on identity.  </p>
-<p id="rfc.section.1.p.4">On the receiving side, this is more complicated.  Since there is a desire to enable use cases where sites do have access to content that is received, there is a need for a signal of some form to distinguish the cases.  </p>
-<p id="rfc.section.1.p.5">It is possible to use the WebRTC signaling channel for this purpose, but only with restrictions.  The signaling channel is considered untrustworthy, so additional protection would be required to ensure that any indicators could not be erased or re-attributed to other keying material.  Furthermore, this would also require protection against replay.  Prohibiting key reuse between confidential and non-confidential sessions would suffice for this purpose, though this is undesirable for other reasons.  </p>
-<h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> Authenticated Content Promise</h1>
-<p id="rfc.section.1.1.p.1">This document describes a <a href="#RFC5246">Transport Layer Security (TLS)</a> <cite title="NONE">[RFC5246]</cite> extension, which, if negotiated, establishes a session as being confidential.  Peers that negotiate this extension promise that: </p>
-
-<ul>
-  <li>Any content that is written to or read from the connection MUST be protected from modification by entities other than the one that is authenticated (i.e., the user).  </li>
-  <li>Any content that is written to or read from the connection MUST NOT be recorded or forwarded to any entity other than the one that is authenticated.  </li>
-</ul>
-
-<p> </p>
-<p id="rfc.section.1.1.p.2">In addition to establishing an authenticated channel for communications, this provides a key advantage over signaling-based methods for ensuring privacy.  Key continuity is possible, which allows clients to operate without identity providers and still have a stable basis for establishing continuity of identity with peers.  </p>
-<h1 id="rfc.section.1.2"><a href="#rfc.section.1.2">1.2.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
-<p id="rfc.section.1.2.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
-<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#acp" id="acp">Authenticated Content Promise</a></h1>
-<p id="rfc.section.2.p.1">A new extension type (<samp>authenticated_content_promise(TBD)</samp>) is defined.  If this extension is negotiated, both client and server are bound by a promise to protect content.  </p>
-<pre>
-enum {
-    authenticated_content_promise(TBD), (65535)
-} ExtensionType;
-</pre>
-<p id="rfc.section.2.p.2">The <samp>extension_data</samp> field of this extension MUST be empty.  </p>
+<p id="rfc.section.1.p.1">Client authentication in HTTP sometimes relies on certificate-based authentication of clients in <a href="#RFC5246">Transport Layer Security (TLS)</a> <cite title="NONE">[RFC5246]</cite>.  Some uses of client authentication rely on TLS renegotiation, triggering renegotiation in response to a request for a particular resource.  </p>
+<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> forbids the use of renegotiation, except for at the very beginning of a connection.  This makes addressing some client authentication use cases difficult.  </p>
+<p id="rfc.section.1.p.3">This document defines a new authentication scheme, <samp>ClientCertificate</samp>, for use in <a href="#I-D.ietf-httpbis-p7-auth">HTTP authentication challenges</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>.  In combination with the 401 (Unauthorized) status code, this indicates that the resource requires client authentication at the TLS layer in order to access it.  </p>
+<h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
+<p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Client Certificate Challenge</h1>
+<p id="rfc.section.2.p.1">A new authentication scheme (<a href="#I-D.ietf-httpbis-p7-auth">[I-D.ietf-httpbis-p7-auth]</a>) for the <samp>WWW-Authenticate</samp> and <samp>Proxy-Authenticate</samp> header fields is defined with the name <samp>ClientCertificate</samp>.  </p>
+<p id="rfc.section.2.p.2">A challenge with this authentication scheme does not define any parameters except <samp>realm</samp>.  The <samp>realm</samp> can be used to select an appropriate certificate, or if a certificate is already in use, to indicate the need for a different certificate.  Other challenge parameters MAY be used to provide a client with information it can use to select an appropriate certificate.  Unknown parameters MUST be ignored.  </p>
+<p id="rfc.section.2.p.3">This challenge cannot be satisfied by constructing an <a href="#I-D.ietf-httpbis-p7-auth">Authorization header field</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>, it can only be satisfied by making the request on a TLS connection where an appropriate certificate has been provided by the client.  </p>
+<p id="rfc.section.2.p.4">To effectively use this authentication scheme, a new connection is needed for every protection space used by a given origin server.  A client can use the <samp>ClientCertificate</samp> challenge as a trigger to open a new connection and to use client authentication on that connection.  The client can use the mechanism in <a href="#I-D.thomson-tls-care">[I-D.thomson-tls-care]</a> to prompt the server to request a client certificate, to avoid the problem where the server doesn't know to make this request.  </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#security" id="security">Security Considerations</a></h1>
-<p id="rfc.section.3.p.1">Endpoints need to take care to avoid rendering of authenticated content alongside other content in a way that could cause user confusion equivalent to the effect of modifying content.  For instance, unauthenticated audio could be played at higher volume levels than authenticated audio, potentially misleading users about what sounds can be attributed to each.  </p>
-<p id="rfc.section.3.p.2">This looks a little like digital rights management (DRM), but it really doesn't promise to protect content to the degree required by DRM schemes.  It relies solely on users and their trust each other (and their user agents, operating system and hardware).  Nothing in this mechanism stops a compromised end system from modifying or eavesdropping on communications, from information being overhead or seen by people nearby, or from any action taken on the part of the authentiated entities, such as screen recording.  </p>
-<p id="rfc.section.3.p.3">A little care is needed to avoid side channels, some of which are quite obvious.  For example, even with echo cancellation, audio played over speakers can be picked up by nearby microphones; video playback might be observable in a mirror.  </p>
+<p id="rfc.section.3.p.1">Clients that support this authentication scheme will create a new connection each time that they see a challenge.  This could be exploited in order to generate additional load in terms of connections on both server and client.  </p>
+<p id="rfc.section.3.p.2">Using new connections for client authentication has additional processing costs to the client in proving access to the private keys associated with the client certificate; and to the server in proving access to the private keys associated with their certificate twice in the case that the client opts for confidentiality protection on the client certificate.  </p>
+<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> allows clients to use the same connection for multiple canonical root URIs.  Certificate-based client authentication as defined by this specification is bound to a single origin.  This could create issues whereby the security properties of a connection could become confused.  Clients MUST ensure that a client-authenticated connection is only used for the origin for which it was created.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
-<p id="rfc.section.4.p.1">IANA has allocated a TLS extension code point of (TBD) for this extension.  </p>
+<p id="rfc.section.4.p.1">IANA is requested to create an entry in the HTTP Authentication Scheme Registry with the following information: </p>
+
+<ul class="empty">
+  <li>ClientCertificate</li>
+  <li>This document</li>
+  <li>This scheme does not rely on the Authorization header field.</li>
+</ul>
+
+<p> </p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
-<p id="rfc.section.5.p.1">Eric Rescorla helped identify the problem and formulate this mechanism.  </p>
+<p id="rfc.section.5.p.1">Eric Rescorla helped identify the problem and formulate this mechanism.  Julian Reschke and Michael Koeller provided excellent feedback.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">6.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">6.1.</a> Normative References</h1>
 <table>
   <tbody>
+    <tr>
+      <td class="reference">
+        <b id="I-D.ietf-httpbis-p7-auth">[I-D.ietf-httpbis-p7-auth]</b>
+      </td>
+      <td class="top"><a>Fielding, R.</a> and <a>J. Reschke</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-p7-auth-26">Hypertext Transfer Protocol (HTTP/1.1): Authentication</a>", Internet-Draft draft-ietf-httpbis-p7-auth-26, February 2014.</td>
+    </tr>
     <tr>
       <td class="reference">
         <b id="RFC2119">[RFC2119]</b>
@@ -521,22 +511,28 @@ enum {
       </td>
       <td class="top"><a>Dierks, T.</a> and <a>E. Rescorla</a>, "<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>", RFC 5246, August 2008.</td>
     </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6454">[RFC6454]</b>
+      </td>
+      <td class="top"><a>Barth, A.</a>, "<a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a>", RFC 6454, December 2011.</td>
+    </tr>
   </tbody>
 </table>
-<h1 id="rfc.references.2"><a href="#rfc.references.2">6.2.</a> Informative References</h1>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">6.2.</a> Informational References</h1>
 <table>
   <tbody>
     <tr>
       <td class="reference">
-        <b id="I-D.ietf-rtcweb-overview">[I-D.ietf-rtcweb-overview]</b>
+        <b id="I-D.ietf-httpbis-http2">[I-D.ietf-httpbis-http2]</b>
       </td>
-      <td class="top"><a>Alvestrand, H.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-rtcweb-overview-09">Overview: Real Time Protocols for Brower-based Applications</a>", Internet-Draft draft-ietf-rtcweb-overview-09, February 2014.</td>
+      <td class="top"><a>Belshe, M.</a>, <a>Peon, R.</a> and <a>M. Thomson</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-http2-11">Hypertext Transfer Protocol version 2</a>", Internet-Draft draft-ietf-httpbis-http2-11, April 2014.</td>
     </tr>
     <tr>
       <td class="reference">
-        <b id="I-D.ietf-rtcweb-security-arch">[I-D.ietf-rtcweb-security-arch]</b>
+        <b id="I-D.thomson-tls-care">[I-D.thomson-tls-care]</b>
       </td>
-      <td class="top"><a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/draft-ietf-rtcweb-security-arch-09">WebRTC Security Architecture</a>", Internet-Draft draft-ietf-rtcweb-security-arch-09, February 2014.</td>
+      <td class="top"><a>Thomson, M.</a>, "<a href="http://tools.ietf.org/html/draft-thomson-tls-care-00"></a>", Internet-Draft draft-thomson-tls-care-00, March 2014.</td>
     </tr>
   </tbody>
 </table>

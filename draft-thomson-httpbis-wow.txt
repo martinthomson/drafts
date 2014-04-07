@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                        January 22, 2014
-Expires: July 26, 2014
+Intended status: Standards Track                           April 8, 2014
+Expires: October 10, 2014
 
 
         Weighted, Ordered, Weighted (WOW) Priority for HTTP/2.0
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on July 26, 2014.
+   This Internet-Draft will expire on October 10, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 1]
+Thomson                 Expires October 10, 2014                [Page 1]
 
-Internet-Draft                WOW Priority                  January 2014
+Internet-Draft                WOW Priority                    April 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 2]
+Thomson                 Expires October 10, 2014                [Page 2]
 
-Internet-Draft                WOW Priority                  January 2014
+Internet-Draft                WOW Priority                    April 2014
 
 
 1.1.  Conventions and Terminology
@@ -165,9 +165,9 @@ Internet-Draft                WOW Priority                  January 2014
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 3]
+Thomson                 Expires October 10, 2014                [Page 3]
 
-Internet-Draft                WOW Priority                  January 2014
+Internet-Draft                WOW Priority                    April 2014
 
 
    o  Once a stream is closed, any resources allocated to that stream
@@ -221,9 +221,9 @@ Internet-Draft                WOW Priority                  January 2014
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 4]
+Thomson                 Expires October 10, 2014                [Page 4]
 
-Internet-Draft                WOW Priority                  January 2014
+Internet-Draft                WOW Priority                    April 2014
 
 
    is expressed relative to the stream identified in the current
@@ -277,9 +277,9 @@ Internet-Draft                WOW Priority                  January 2014
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 5]
+Thomson                 Expires October 10, 2014                [Page 5]
 
-Internet-Draft                WOW Priority                  January 2014
+Internet-Draft                WOW Priority                    April 2014
 
 
 4.  Security Considerations
@@ -311,9 +311,9 @@ Internet-Draft                WOW Priority                  January 2014
 7.1.  Normative References
 
    [I-D.ietf-httpbis-http2]
-              Belshe, M., Peon, R., Thomson, M., and A. Melnikov,
-              "Hypertext Transfer Protocol version 2.0", draft-ietf-
-              httpbis-http2-09 (work in progress), December 2013.
+              Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
+              Protocol version 2", draft-ietf-httpbis-http2-11 (work in
+              progress), April 2014.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -333,9 +333,9 @@ Author's Address
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 6]
+Thomson                 Expires October 10, 2014                [Page 6]
 
-Internet-Draft                WOW Priority                  January 2014
+Internet-Draft                WOW Priority                    April 2014
 
 
    Martin Thomson
@@ -389,4 +389,4 @@ Internet-Draft                WOW Priority                  January 2014
 
 
 
-Thomson                   Expires July 26, 2014                 [Page 7]
+Thomson                 Expires October 10, 2014                [Page 7]
