@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="std" ipr="trust200902" docName="draft-thomson-tls-care-latest">
+  <front>
+    <title abbrev="CARE">
+      Client Authentication Request Extension for (D)TLS
+    </title>
+
+    <author initials="M." surname="Thomson" fullname="Martin Thomson">
+      <organization>Mozilla</organization>
+      <address>
+        <postal>
+          <street>331 E Evelyn Street</street>
+          <city>Mountain View</city>
+          <region>CA</region>
+          <code>94041</code>
+          <country>US</country>
+        </postal>
+
+        <email>martin.thomson@gmail.com</email>
+      </address>
+    </author>
+
+    <date year="2014"/>
+    <area>RAI</area>
+    <workgroup>RTCWEB</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <keyword>ALPN</keyword>
+    <keyword>Protocol</keyword>
+    <keyword>Identifier</keyword>
+
+    <abstract>
+      <t>
+        Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web
+        Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).
+        Labels are provided for identifying a session that uses a combination of media and data, and
+        for identifying a session that uses media that requires confidentiality protection.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+
+    <section anchor="intro" title="Introduction">
+      <t>
+	<xref target="I-D.ietf-rtcweb-overview">Web Real-Time Communications (WebRTC)</xref> uses
+	<xref target="RFC6347">Datagram Transport Layer Security (DTLS)</xref> to secure all
+	peer-to-peer communications.
+      </t>
+      <t>
+	Identifying WebRTC protocol usage with <xref
+	target="I-D.ietf-tls-applayerprotoneg">Application Layer Protocol Negotiation (ALPN)</xref>
+	enables an endpoint to positively identify WebRTC uses and distinguish them from other DTLS
+	uses.
+      </t>
+      <t>
+	Different WebRTC uses can be advertised and behavior can be constrained to what is
+	appropriate to a given use.  In particular, this allows for the identifications of sessions
+	that require confidentiality.
+      </t>
+
+      <section title="Conventions and Terminology" anchor="terminology">
+       <t>
+         At times, this document falls back on shorthands for establishing interoperability
+         requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These
+         terms are defined in <xref target="RFC2119"/>.
+       </t>
+      </section>
+    </section>
+
+    <section title="ALPN Labels for WebRTC">
+      <t>
+	The following four labels are defined for use in ALPN:
+	<list style="hanging">
+	  <t hangText="webrtc">
+	    The DTLS session is used to establish keys for a Secure Real-time Transport Protocol
+	    (SRTP) - known as DTLS-SRTP - as described in <xref target="RFC5764"/>.  The DTLS record
+	    layer is used for <xref target="I-D.ietf-rtcweb-data-channel">WebRTC data
+	    channels</xref>.
+	  </t>
+	  <t hangText="c-webrtc">
+	    The DTLS session is used for confidential WebRTC communications, where peers agree to
+	    maintain the confidentiality of the communications, as described in <xref
+	    target="confidentiality"/>.
+	  </t>
+	</list>
+      </t>
+      <t>
+	A more thorough definition of what WebRTC communications entail is included in <xref
+	target="I-D.ietf-rtcweb-transports"/>.
+      </t>
+      <t>
+        <cref>Open issue: The single "webrtc" label could be further split into media, data, or
+        media+data.  That seems unlikely to be of any major benefit, but it might be worth
+        considering.</cref>
+      </t>
+    </section>
+
+    <section title="Media Confidentiality" anchor="confidentiality">
+      <t>
+	Private communications in WebRTC depend on separating control (i.e., signaling) capabilities
+	and access to media <xref target="I-D.ietf-rtcweb-security-arch"/>.  In this way, an
+	application can establish a session that is end-to-end confidential, where the ends in
+	question are user agents (or browsers) and not the signaling application.
+      </t>
+      <t>
+	A browser is required to enforce this control using isolation controls similar to those used
+	in cross-origin protections.  These protections ensure that media is protected from
+	applications.  Applications are not able to read or modify the contents of a protected flow
+	of media.  Media that is produced from a session using the <spanx
+	style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
+      </t>
+      <t>
+	A WebRTC implementation MUST only send media over a <spanx style="verb">c-webrtc</spanx>
+	session that comes from user-controlled sources.  Media from sources that are controlled by
+	third parties (such as the signaling application) could be used to create confusion about
+	the content and origin of data.  This cannot prevent confusion when rendered as a web page,
+	for example, but browsers are required to provide ways to identify media and its provenance
+	(see Section 5.5 of <xref target="I-D.ietf-rtcweb-security-arch"/>).
+      </t>
+      <t>
+	Confidentiality protections of this sort are not expected to be possible for data that is
+	sent using data channels.  Thus, it is expected that data channels will not be employed for
+	sessions that negotiate confidentiality.  In the browser context, confidential data depends
+	on having both data sources and consumers that are exclusively browser- or user-based.  No
+	mechanisms currently exist to take advantage of data confidentiality, though some use cases
+	suggest that this could be useful, for example, confidential peer-to-peer file transfer.
+      </t>
+      <t>
+	<cref>It's possible that we could allow an exception to the blanket confidentiality for data
+	channels here, and simply state that the PPIDs used by data channels are expressly
+	non-confidential.  It's more complex that way, but it would allow for the creation of a
+	non-confidential channel for things like chat or signaling without the overhead of a new
+	DTLS session.  That does mean that we will need to define the default confidentiality
+	characteristic of an unknown PPID; or expressly prohibit PPIDs outside the current set used
+	for data channels.</cref>
+      </t>
+      <t>
+	Generally speaking, ensuring confidentiality depends on authenticating the communications
+	peer.  However, this mechanism explicitly does not depend on authentication; a WebRTC
+	endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no
+	matter what identity is attributed to a peer.
+      </t>
+   </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>
+	Confidential communications depends on more than just an agreement from browsers.
+      </t>
+      <t>
+	Information is not confidential if it is displayed to those other than to whom it is
+	intended.  <xref target="I-D.ietf-rtcweb-security-arch">Peer authentication</xref> is
+	necessary to ensure that data is only sent to the intended peer.
+      </t>
+      <t>
+	This is not a digital rights management mechanism.  Even with an authenticated peer, a user
+	is not prevented from using other mechanisms to record or forward media.  This means that
+	(for example) screen recording devices, tape recorders, portable cameras, or a cunning
+	arrangement of mirrors could variously be used to record or redistribute media once
+	delivered.  Similarly, if media is visible or audible (or otherwise accessible) to others in
+	the vicinity, there are no technical measures that protect the confidentiality of that
+	media.  In other cases, effects might not be temporally localized: transmitted smells could
+	linger for a period after communications cease.
+      </t>
+      <t>
+	The only guarantee provided by this mechanism and the browser that implements it is that the
+	media was delivered to the user that was authenticated.  Individual users will still need to
+	make a judgment about how their peer intends to respect the confidentiality of any
+	information provided.
+      </t>
+      <t>
+	On a shared computing platform like a browser, other entities with access to that platform
+	(i.e., web applications), might be able to access information that would compromise the
+	confidentiality of communications.  Implementations MAY choose to limit concurrent access to
+	input devices during confidential communications session.
+      </t>
+      <t>
+	For instance, another application that is able to access a microphone might be able to
+	sample confidential audio that is playing through speakers.  This is true even if acoustic
+	echo cancellation, which attempts to prevent this from being possible, is used.  Similarly,
+	an application with access to a video camera might be able to use reflections to access
+	confidential video.
+      </t>
+    </section>
+
+    <section anchor="iana" title="IANA Considerations">
+      <t>
+	The following two entries are added to the "Application Layer Protocol Negotiation (ALPN)
+	Protocol IDs" registry established by <xref target="I-D.ietf-tls-applayerprotoneg"/>.
+      </t>
+      <t>
+	The <spanx style="verb">webrtc</spanx> identifies mixed media and data communications using
+	SRTP and data channels:
+	<list style="hanging">
+          <t hangText="Protocol:">WebRTC Media and Data</t>
+          <t hangText="Identification Sequence:">0x77 0x65 0x62 0x72 0x74 0x63 ("webrtc")</t>
+          <t hangText="Specification:">This document (RFCXXXX)</t>
+        </list>
+      </t>
+      <t>
+	The <spanx style="verb">c-webrtc</spanx> identifies confidential WebRTC communications:
+	<list style="hanging">
+          <t hangText="Protocol:">Confidential WebRTC Media and Data</t>
+          <t hangText="Identification Sequence:">0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
+          ("c-webrtc")</t>
+          <t hangText="Specification:">This document (RFCXXXX)</t>
+        </list>
+      </t>
+    </section>
+
+    <!--
+        <appendix title="Change Log">
+        <t>[[The RFC Editor is requested to remove this section at publication.]]</t>
+        <t>Changes since -0-1:
+        <list style="symbols">
+        <t>Document created.</t>
+        </list>
+        </t>
+        </appendix>
+    -->
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6347.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5764.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-tls-applayerprotoneg.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-data-channel.xml"?>
+    </references>
+
+    <references title="Informative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security-arch.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-transports.xml"?>
+    </references>
+  </back>
+</rfc>
