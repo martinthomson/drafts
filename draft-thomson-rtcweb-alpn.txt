@@ -10,7 +10,7 @@ Expires: October 11, 2014
 
 Application Layer Protocol Negotiation for Web Real-Time Communications
                                 (WebRTC)
-                     draft-thomson-tls-care-latest
+                    draft-thomson-rtcweb-alpn-latest
 
 Abstract
 
