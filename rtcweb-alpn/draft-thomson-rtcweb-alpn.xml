@@ -10,7 +10,7 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-thomson-tls-care-latest">
+<rfc category="std" ipr="trust200902" docName="draft-thomson-rtcweb-alpn-latest">
   <front>
     <title abbrev="ALPN for WebRTC">
       Application Layer Protocol Negotiation for Web Real-Time Communications (WebRTC)
