@@ -1,6 +1,0 @@
-HTTP/2 adds a compression feature for HTTP header fields.  HTTP requests carry a lot of redundant
-information and compression shows significant improvements.
-
-Compression creates a potential attack vector on the protocol.  CRIME demonstrated that a general
-purpose compressor (gzip in this case) can be exploited, with a practical attack being demonstrated
-on SPDY, the predecessor of HTTP/2.
