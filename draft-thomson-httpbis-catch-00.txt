@@ -4,19 +4,19 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           April 9, 2014
-Expires: October 11, 2014
+Intended status: Standards Track                           March 9, 2014
+Expires: September 10, 2014
 
 
             Client Authentication over TLS Connection Header
-                   draft-thomson-httpbis-catch-latest
+                     draft-thomson-httpbis-catch-00
 
 Abstract
 
-   This document defines an HTTP authentication scheme that can be added
-   to an error response to indicate to a client that a successful
-   response will only be provided over a TLS connection, and only if the
-   client has provided a certificate on that connection.
+   This document defines an HTTP header field that can be added to a
+   response to indicate to a client that a response will only be
+   provided over a TLS connection, and only if the client has provided a
+   certificate on that connection.
 
 Status of This Memo
 
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 11, 2014.
+   This Internet-Draft will expire on September 10, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires October 11, 2014                [Page 1]
+Thomson                Expires September 10, 2014               [Page 1]
 
-Internet-Draft                    CATCH                       April 2014
+Internet-Draft                    CATCH                       March 2014
 
 
 Table of Contents
@@ -74,17 +74,17 @@ Table of Contents
 1.  Introduction
 
    Client authentication in HTTP sometimes relies on certificate-based
-   authentication of clients in Transport Layer Security (TLS)
-   [RFC5246].  Some uses of client authentication rely on TLS
-   renegotiation, triggering renegotiation in response to a request for
-   a particular resource.
+   authentication of clients in TLS.  Some uses of client authentication
+   rely on Transport Layer Security (TLS) [RFC5246] renegotiation,
+   triggering renegotiation in response to a request for a particular
+   resource.
 
    HTTP/2 [I-D.ietf-httpbis-http2] forbids the use of renegotiation,
    except for at the very beginning of a connection.  This makes
    addressing some client authentication use cases difficult.
 
-   This document defines a new authentication scheme,
-   "ClientCertificate", for use in HTTP authentication challenges
+   This document defines a new type of authentication scheme,
+   "ClientCertificate" for use in HTTP authentication challenges
    [I-D.ietf-httpbis-p7-auth].  In combination with the 401
    (Unauthorized) status code, this indicates that the resource requires
    client authentication at the TLS layer in order to access it.
@@ -98,38 +98,35 @@ Table of Contents
 
 2.  Client Certificate Challenge
 
-   A new authentication scheme ([I-D.ietf-httpbis-p7-auth]) for the
-   "WWW-Authenticate" and "Proxy-Authenticate" header fields is defined
-   with the name "ClientCertificate".
+   A new kind of authentication scheme (auth-scheme
+   [I-D.ietf-httpbis-p7-auth]) for the "WWW-Authenticate" and "Proxy-
+   Authenticate" header fields is defined with the name
+   "ClientCertificate".
 
-   A challenge with this authentication scheme does not define any
-   parameters except "realm".  The "realm" can be used to select an
-   appropriate certificate, or if a certificate is already in use, to
-   indicate the need for a different certificate.  Other challenge
-
+   A challenge with this auth-scheme does not define the use of any
+   parameters other than "realm".  Other parameters MAY be used to
 
 
-Thomson                 Expires October 11, 2014                [Page 2]
+
+
+Thomson                Expires September 10, 2014               [Page 2]
 
-Internet-Draft                    CATCH                       April 2014
+Internet-Draft                    CATCH                       March 2014
 
 
-   parameters MAY be used to provide a client with information it can
-   use to select an appropriate certificate.  Unknown parameters MUST be
-   ignored.
+   provide a client with information it can use to select an appropriate
+   certificate.  Unknown parameters MUST be ignored.
 
    This challenge cannot be satisfied by constructing an Authorization
    header field [I-D.ietf-httpbis-p7-auth], it can only be satisfied by
    making the request on a TLS connection where an appropriate
    certificate has been provided by the client.
 
-   To effectively use this authentication scheme, a new connection is
-   needed for every protection space used by a given origin server.  A
-   client can use the "ClientCertificate" challenge as a trigger to open
-   a new connection and to use client authentication on that connection.
-   The client can use the mechanism in [I-D.thomson-tls-care] to prompt
-   the server to request a client certificate, to avoid the problem
-   where the server doesn't know to make this request.
+   A client can use this information as a trigger to open a new
+   connection and to use client authentication on that connection.  The
+   client can use the mechanism in [I-D.thomson-tls-care] to prompt the
+   server to request a client certificate, to avoid the problem where
+   the server doesn't know to make this request.
 
 3.  Security Considerations
 
@@ -146,37 +143,38 @@ Internet-Draft                    CATCH                       April 2014
    client certificate.
 
    HTTP/2 [I-D.ietf-httpbis-http2] allows clients to use the same
-   connection for multiple canonical root URIs.  Certificate-based
-   client authentication as defined by this specification is bound to a
-   single origin.  This could create issues whereby the security
-   properties of a connection could become confused.  Clients MUST
-   ensure that a client-authenticated connection is only used for the
-   origin for which it was created.
+   connection for multiple origins [RFC6454].  Certificate-based client
+   authentication as defined by this specification is bound to a single
+   origin.  This could create issues whereby the security properties of
+   a connection could become confused.  Clients MUST ensure that a
+   client-authenticated connection is only used for the origin for which
+   it was created.
 
 4.  IANA Considerations
 
-   IANA is requested to create an entry in the HTTP Authentication
-   Scheme Registry with the following information:
+   IANA will [has] create[d] an entry in the HTTP Authentication Scheme
+   Registry with the following information:
 
       ClientCertificate
 
-      This document
-
-
-
-
-Thomson                 Expires October 11, 2014                [Page 3]
-
-Internet-Draft                    CATCH                       April 2014
-
+      RFCXXXX (this document)
 
       This scheme does not rely on the Authorization header field.
+
+
+
+
+
+Thomson                Expires September 10, 2014               [Page 3]
+
+Internet-Draft                    CATCH                       March 2014
+
 
 5.  Acknowledgements
 
    Eric Rescorla helped identify the problem and formulate this
-   mechanism.  Julian Reschke and Michael Koeller provided excellent
-   feedback.
+   mechanism.  Julian Reschke hasn't provided any contribution yet, but
+   he will.
 
 6.  References
 
@@ -190,6 +188,14 @@ Internet-Draft                    CATCH                       April 2014
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
 
+   [RFC2617]  Franks, J., Hallam-Baker, P., Hostetler, J., Lawrence, S.,
+              Leach, P., Luotonen, A., and L. Stewart, "HTTP
+              Authentication: Basic and Digest Access Authentication",
+              RFC 2617, June 1999.
+
+   [RFC5234]  Crocker, D. and P. Overell, "Augmented BNF for Syntax
+              Specifications: ABNF", STD 68, RFC 5234, January 2008.
+
    [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
               (TLS) Protocol Version 1.2", RFC 5246, August 2008.
 
@@ -200,14 +206,25 @@ Internet-Draft                    CATCH                       April 2014
 
    [I-D.ietf-httpbis-http2]
               Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
-              Protocol version 2", draft-ietf-httpbis-http2-11 (work in
-              progress), April 2014.
+              Protocol version 2", draft-ietf-httpbis-http2-10 (work in
+              progress), February 2014.
 
    [I-D.thomson-tls-care]
               Thomson, M., draft-thomson-tls-care-00 (work in progress),
               March 2014.
 
 Author's Address
+
+
+
+
+
+
+
+Thomson                Expires September 10, 2014               [Page 4]
+
+Internet-Draft                    CATCH                       March 2014
+
 
    Martin Thomson
    Mozilla
@@ -221,4 +238,43 @@ Author's Address
 
 
 
-Thomson                 Expires October 11, 2014                [Page 4]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson                Expires September 10, 2014               [Page 5]

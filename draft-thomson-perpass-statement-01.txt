@@ -9,7 +9,7 @@ Expires: July 31, 2014
 
 
                               A Statement
-                 draft-thomson-perpass-statement-latest
+                   draft-thomson-perpass-statement-01
 
 Abstract
 

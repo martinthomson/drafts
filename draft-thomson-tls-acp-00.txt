@@ -9,7 +9,7 @@ Expires: September 7, 2014
 
 
            Authenticated Content Promise Extension for (D)TLS
-                      draft-thomson-tls-acp-latest
+                        draft-thomson-tls-acp-00
 
 Abstract
 
