@@ -38,8 +38,10 @@ EXTRA := html pdf xhtml svg nr unpg
 ifeq "${TOP}" ""
 TOP := .
 default: recurse
+clean: rclean
 else
 default: ${TARGET}
+clean: cleandir
 endif
 extra: default ${EXTRA}
 all: extra nits validate
@@ -121,8 +123,10 @@ submit:: ${BASE_NEXT}.txt
 ${BASE_NEXT}.xml: ${BASE}.xml
 	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
 
-clean:
+cleandir:
 	-rm -f $(addprefix ${BASE}-${REV_CURRENT}.,${TARGET} ${EXTRA}) $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
+rclean:
+	for i in *; do [ ! -d $$i ] || (cd $$i && $(MAKE) clean); done
 
 tag:
 	git tag ${BASE_NEXT}
