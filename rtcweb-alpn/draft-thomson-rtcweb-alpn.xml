@@ -80,7 +80,7 @@
 
     <section title="ALPN Labels for WebRTC">
       <t>
-        The following four labels are defined for use in ALPN:
+        The following identifiers are defined for use in ALPN:
         <list style="hanging">
           <t hangText="webrtc">
             The DTLS session is used to establish keys for a Secure Real-time Transport Protocol
@@ -96,13 +96,34 @@
         </list>
       </t>
       <t>
+        <cref>Open issue: The single "webrtc" label could be further split into media, data, or
+        media+data.  That seems unlikely to be of any major benefit, but it might be worth
+        considering.</cref>
+      </t>
+      <t>
+        Both identifiers describe the same basic protocol: a DTLS session that is used to provide
+        keys for an SRTP session in combination with WebRTC data channels.  Either SRTP or data
+        channels MAY be absent.  The data channels send <xref target="RFC4960">Stream Control
+        Transmission Protocol (SCTP)</xref> over the DTLS record layer, which can be multiplexed
+        with SRTP on the same UDP flow.  WebRTC requires the use of <xref
+        target="RFC5245">Interactive Communication Establishment (ICE)</xref> to establish the UDP
+        flow, but this is not covered by the identifier.
+      </t>
+      <t>
         A more thorough definition of what WebRTC communications entail is included in <xref
         target="I-D.ietf-rtcweb-transports"/>.
       </t>
       <t>
-        <cref>Open issue: The single "webrtc" label could be further split into media, data, or
-        media+data.  That seems unlikely to be of any major benefit, but it might be worth
-        considering.</cref>
+        There is no functional difference between the identifiers except with respect to the promise
+        that an endpoint makes with respect to the confidentiality of session content.  An endpoint
+        negotiating <spanx style="verb">c-webrtc</spanx> makes a promise to preserve the
+        confidentiality of the data it receives.
+      </t>
+      <t>
+        Only one of these labels can be used for any given session.  A peer acting in the client
+        role MUST NOT offer both identifiers.  A peer in the server role that receives a ClientHello
+        containing both labels MUST reject the session, though it MAY accept the confidential option
+        and protect content accordingly.
       </t>
     </section>
 
@@ -157,6 +178,12 @@
         peer.  However, this mechanism explicitly does not depend on authentication; a WebRTC
         endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no
         matter what identity is attributed to a peer.
+      </t>
+      <t>
+        RTP middleboxes and entities that forward media or data cannot promise to maintain
+        confidentiality.  Any entity that forwards content, or records content for later access by
+        entities other than the authenticated peer, MUST NOT offer or accept a session with the
+        <spanx style="verb">c-webrtc</spanx> identifier.
       </t>
    </section>
 
@@ -248,6 +275,8 @@
     </references>
 
     <references title="Informative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.4960.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5245.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security-arch.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-transports.xml"?>
