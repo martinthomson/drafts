@@ -3,6 +3,13 @@
      targetNamespace="box"
      xmlns:xs="http://www.w3.org/2001/XMLSchema"
      elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="xml.xsd"/>
+  <xs:import namespace="urn:ietf:params:xml:ns:pidf" schemaLocation="pidf.xsd"/>
+  <xs:import namespace="urn:ietf:params:xml:ns:pidf:data-model" schemaLocation="pidf-dm.xsd"/>
+  <xs:import namespace="http://www.opengis.net/pidflo/1.0" schemaLocation="geoshape.xsd"/>
+  <xs:import namespace="urn:ietf:params:xml:ns:pidf:geopriv10" schemaLocation="geopriv10.xsd"/>
+  <xs:import namespace="urn:ietf:params:xml:ns:pidf:geopriv10:basicPolicy" schemaLocation="geopriv10-basicPolicy.xsd"/>
+  <xs:import namespace="http://www.opengis.net/gml" schemaLocation="geometryBasic2d.xsd"/>
   <xs:element name="box">
     <xs:complexType>
       <xs:sequence>

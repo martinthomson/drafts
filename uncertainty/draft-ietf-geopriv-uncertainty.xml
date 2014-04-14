@@ -319,7 +319,7 @@
       </t>
 
       <section anchor="conf" title="The &quot;confidence&quot; Element">
-        <t>The confidence element MAY be added to the <spanx style="verb">location-info</spanx> element of the <xref target="RFC4119">Presence Information Data Format - Location Object (PIDF-LO)</xref> document.  This element expresses the confidence in the associated location information as a percentage.
+        <t>The confidence element MAY be added to the <spanx style="verb">location-info</spanx> element of the <xref target="RFC4119">Presence Information Data Format - Location Object (PIDF-LO)</xref> document.  This element expresses the confidence in the associated location information as a percentage.  A special <spanx style="verb">unknown</spanx> value is reserved to indicate that confidence is supported, but not known to the Location Generator.
         </t>
 
         <t>The confidence element optionally includes an attribute that indicates the shape of the probability density function (PDF) of the associated region of uncertainty.  Three values are possible: unknown, normal and rectangular.
@@ -337,7 +337,7 @@
       <section title="Generating Locations with Confidence">
         <t>Location generators SHOULD attempt to ensure that confidence is equal in each dimension when generating location information.  This restriction, while not always practical, allows for more accurate scaling, if scaling is necessary.
         </t>
-        <t>Confidence MUST be included for all location information.
+        <t>A confidence element MUST be included with all location information that includes uncertainty (i.e., all forms other than a point).  A special <spanx style="verb">unknown</spanx> MAY be used if confidence is not known.
         </t>
       </section>
 
@@ -937,9 +937,13 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
     </xs:simpleContent>
   </xs:complexType>
   <xs:simpleType name="confidenceBase">
+  <xs:union>
     <xs:restriction base="xs:decimal">
       <xs:minExclusive value="0.0"/>
       <xs:maxExclusive value="100.0"/>
+    </xs:restriction>
+    <xs:restriction base="xs:token">
+      <xs:enumeration value="unknown"/>
     </xs:restriction>
   </xs:simpleType>
   <xs:simpleType name="pdfType">
