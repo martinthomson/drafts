@@ -542,7 +542,7 @@
 <p id="rfc.section.1.p.1">Location information represents an estimation of the position of a <a href="#RFC6280">Target</a> <cite title="NONE">[RFC6280]</cite>.  Under ideal circumstances, a location estimate precisely reflects the actual location of the Target.  In reality, there are many factors that introduce errors into the measurements that are used to determine location estimates.  </p>
 <p id="rfc.section.1.p.2">The process by which measurements are combined to generate a location estimate is outside of the scope of work within the IETF.  However, the results of such a process are carried in IETF data formats and protocols.  This document outlines how uncertainty, and its associated datum, confidence, are expressed and interpreted.  </p>
 <p id="rfc.section.1.p.3">This document provides a common nomenclature for discussing uncertainty and confidence as they relate to location information.  </p>
-<p id="rfc.section.1.p.4">This document also provides guidance on how to manage location information that includes uncertainty.  Methods for expanding or reducing uncertainty to obtain a required level of confidence are described.  Methods for determining the probability that a Target is within a specified region based on their location estimate are described.  These methods are simplified by making certain assumptions about the location estimate and are designed to be applicable to location estimates in a relatively small area.  </p>
+<p id="rfc.section.1.p.4">This document also provides guidance on how to manage location information that includes uncertainty.  Methods for expanding or reducing uncertainty to obtain a required level of confidence are described.  Methods for determining the probability that a Target is within a specified region based on their location estimate are described.  These methods are simplified by making certain assumptions about the location estimate and are designed to be applicable to location estimates in a relatively small geographic area.  </p>
 <p id="rfc.section.1.p.5">A confidence extension for the <a href="#RFC4119">Presence Information Data Format - Location Object (PIDF-LO)</a> <cite title="NONE">[RFC4119]</cite> is described.  </p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
 <p id="rfc.section.1.1.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#RFC2119">[RFC2119]</a>.  </p>
@@ -553,7 +553,7 @@
 <p id="rfc.section.2.p.1">Uncertainty results from the limitations of measurement.  In measuring any observable quantity, errors from a range of sources affect the result.  Uncertainty is a quantification of what is known about the observed quantity, either through the limitations of measurement or through inherent variability of the quantity.  </p>
 <p id="rfc.section.2.p.2">Uncertainty is most completely described by a probability distribution.  A probability distribution assigns a probability to possible values for the quantity.  </p>
 <p id="rfc.section.2.p.3">A probability distribution describing a measured quantity can be arbitrarily complex and so it is desirable to find a simplified model.  One approach commonly taken is to reduce the probability distribution to a confidence interval.  Many alternative models are used in other areas, but study of those is not the focus of this document.  </p>
-<p id="rfc.section.2.p.4">In addition to the central estimate of the observed quantity, a confidence interval is succintly described by two values: an error range and a confidence.  The error range describes an interval and the confidence describes an estimated upper bound on the probability that a "true" value is found within the extents defined by the error.  </p>
+<p id="rfc.section.2.p.4">In addition to the central estimate of the observed quantity, a confidence interval is succinctly described by two values: an error range and a confidence.  The error range describes an interval and the confidence describes an estimated upper bound on the probability that a "true" value is found within the extents defined by the error.  </p>
 <p id="rfc.section.2.p.5">In the following example, a measurement result for a length is shown as a nominal value with additional information on error range (0.0043 meters) and confidence (95%).  <samp>x</samp> between 1.00312 and 1.01172 meters with 95% probability.  No other assertion is made: in particular, this does not assert that x is 1.00742.  </p>
 
 <ul class="empty">
@@ -563,7 +563,7 @@
 <p> This result indicates that the measurement indicates that the value of </p>
 <p id="rfc.section.2.p.6">Uncertainty and confidence for location estimates can be derived in a number of ways.  This document does not attempt to enumerate the many methods for determining uncertainty.  <a href="#ISO.GUM">[ISO.GUM]</a> and <a href="#NIST.TN1297">[NIST.TN1297]</a> provide a set of general guidelines for determining and manipulating measurement uncertainty.  This document applies that general guidance for consumers of location information.  </p>
 <h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> Uncertainty as a Probability Distribution</h1>
-<p id="rfc.section.2.1.p.1">The Probability Density Function (PDF) that is described by uncertainty indicates the probability that the "true" value lies at any one point.  The shape of the probability distribution can vary depending on the method that is used to determine the result.  The two probability density functions most generally applicable most applicable to location information are considered in this document: </p>
+<p id="rfc.section.2.1.p.1">The Probability Density Function (PDF) that is described by uncertainty indicates the probability that the "true" value lies at any one point.  The shape of the probability distribution can vary depending on the method that is used to determine the result.  The two probability density functions most generally applicable to location information are considered in this document: </p>
 
 <ul>
   <li>The normal PDF (also referred to as a Gaussian PDF) is used where a large number of small random factors contribute to errors.  The value used for the error range in a normal PDF is related to the standard deviation of the distribution.  </li>
@@ -640,14 +640,14 @@
 <h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> Targets as Points in Space</h1>
 <p id="rfc.section.3.1.p.1">This document makes a simplifying assumption that the Target of the PIDF-LO occupies just a single point in space.  While this is clearly false in virtually all scenarios with any practical application, it is often a reasonable simplifying assumption to make.  </p>
 <p id="rfc.section.3.1.p.2">To a large extent, whether this simplification is valid depends on the size of the target relative to the size of the uncertainty region.  When locating a personal device using contemporary location determination techniques, the space the device occupies relative to the uncertainty is proportionally quite small.  Even where that device is used as a proxy for a person, the proportions change little.  </p>
-<p id="rfc.section.3.1.p.3">This assumption is less useful as uncertainty becomes small relative to the size of the Target of the PIDF-LO.  For instance, describing the location of a football stadium or small country would include a region of uncertainty that is infinitesimally larger than the Target itself.  In these cases, much of the guidance in this document is not applicable.  Indeed, as the accuracy of location determination technology improves, it could be that the advice this document contains becomes less relevant by the same measure.  </p>
+<p id="rfc.section.3.1.p.3">This assumption is less useful as uncertainty becomes small relative to the size of the Target of the PIDF-LO (or conversely, as uncertainty becomes small relative to the Target).  For instance, describing the location of a football stadium or small country would include a region of uncertainty that is infinitesimally larger than the Target itself.  In these cases, much of the guidance in this document is not applicable.  Indeed, as the accuracy of location determination technology improves, it could be that the advice this document contains becomes less relevant by the same measure.  </p>
 <h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> Representation of Uncertainty and Confidence in PIDF-LO</h1>
 <p id="rfc.section.3.2.p.1">A set of shapes suitable for the expression of uncertainty in location estimates in the Presence Information Data Format - Location Object (PIDF-LO) are described in <a href="#GeoShape">[GeoShape]</a>.  These shapes are the recommended form for the representation of uncertainty in <a href="#RFC4119">PIDF-LO</a> <cite title="NONE">[RFC4119]</cite> documents.  </p>
-<p id="rfc.section.3.2.p.2">The PIDF-LO does not include an indication of confidence, but that confidence is 95%, by definition in <a href="#RFC5491">[RFC5491]</a>.  Similarly, the PIDF-LO format does not provide an indication of the shape of the PDF.  <a href="#confidence">Section 4</a> defines elements to convey this information.  </p>
+<p id="rfc.section.3.2.p.2">The PIDF-LO can contain uncertainty, but does not include an indication of confidence.  <a href="#RFC5491">[RFC5491]</a> defines a fixed value of 95%.  Similarly, the PIDF-LO format does not provide an indication of the shape of the PDF.  <a href="#confidence">Section 4</a> defines elements to convey this information in PIDF-LO.  </p>
 <p id="rfc.section.3.2.p.3">Absence of uncertainty information in a PIDF-LO document does not indicate that there is no uncertainty in the location estimate.  Uncertainty might not have been calculated for the estimate, or it may be withheld for privacy purposes.  </p>
 <p id="rfc.section.3.2.p.4">If the Point shape is used, confidence and uncertainty are unknown; a receiver can either assume a confidence of 0% or infinite uncertainty.  The same principle applies on the altitude axis for two-dimension shapes like the Circle.  </p>
 <h1 id="rfc.section.3.3"><a href="#rfc.section.3.3">3.3.</a> Uncertainty and Confidence for Civic Addresses</h1>
-<p><a href="#RFC5139">Civic addresses</a> <cite title="NONE">[RFC5139]</cite> inherently include uncertainty, based on the area of the most precise element that is specified.  Uncertainty is effectively defined by the presence or absence of elements -- elements that are not present are deemed to be uncertain.  </p>
+<p><a href="#RFC5139">Civic addresses</a> <cite title="NONE">[RFC5139]</cite> inherently include uncertainty, based on the area of the most precise element that is specified.  In this case, uncertainty is effectively described by the presence or absence of elements -- elements that are not present are deemed to be uncertain.  </p>
 <p id="rfc.section.3.3.p.2">To apply the concept of uncertainty to civic addresses, it is helpful to unify the conceptual models of civic address with geodetic location information.  </p>
 
 <dl>
@@ -656,9 +656,9 @@
 </dl>
 
 <p> </p>
-<p id="rfc.section.3.3.p.3">In the unified view, a civic address defines a series of (sometimes non-orthogonal) spatial partitions.  The first is the implicit partition that identifies the surface of the earth and the space near the surface.  The second is the country.  Each label that is included in a civic address provides information about a different set of spatial partitions.  Some partions require slight adjustments from a standard interpretation: for instance, a road includes all properties that adjoin the street.  Each label might need to be interpreted with other values to provide context.  </p>
+<p id="rfc.section.3.3.p.3">In the unified view, a civic address defines a series of (sometimes non-orthogonal) spatial partitions.  The first is the implicit partition that identifies the surface of the earth and the space near the surface.  The second is the country.  Each label that is included in a civic address provides information about a different set of spatial partitions.  Some partitions require slight adjustments from a standard interpretation: for instance, a road includes all properties that adjoin the street.  Each label might need to be interpreted with other values to provide context.  </p>
 <p id="rfc.section.3.3.p.4">As a value at each level is interpreted, one or more spatial partitions at that level are selected, and all other partitions of that type are excluded.  For non-orthogonal partitions, only the portion of the partition that fits within the existing space is selected.  This is what distinguishes King Street in Sydney from King Street in Melbourne.  Each defined element selects a partition of space.  The resulting location is the intersection of all selected spaces.  </p>
-<p id="rfc.section.3.3.p.5">The resulting spatial partition can be considered to represent a region of uncertainty.  At no stage does this process select a point; although, as spaces get smaller this distinction might have no practical significance and an approximation of a point could be used.  </p>
+<p id="rfc.section.3.3.p.5">The resulting spatial partition can be considered as a region of uncertainty.  </p>
 <p id="rfc.section.3.3.p.6">Uncertainty in civic addresses can be increased by removing elements.  This does not increase confidence unless additional information is used.  Similarly, arbitrarily increasing uncertainty in a geodetic location does not increase confidence.  </p>
 <h1 id="rfc.section.3.4"><a href="#rfc.section.3.4">3.4.</a> DHCP Location Configuration Information and Uncertainty</h1>
 <p id="rfc.section.3.4.p.1">Location information is often measured in two or three dimensions; expressions of uncertainty in one dimension only are rare.  The "resolution" parameters in <a href="#RFC6225">[RFC6225]</a> provide an indication of how many bits of a number are valid, which could be interpreted as an expression of uncertainty in one dimension.  </p>
@@ -669,20 +669,21 @@
 <p id="rfc.section.4.p.3">The addition of a confidence element provides information that was previously unavailable to recipients of location information.  Without this information, a location server or generator that has access to location information with a confidence lower than 95% has two options: </p>
 
 <ul>
-  <li>The location server can scale regions of uncertainty in an attempt to acheive 95% confidence.  This scaling process significantly degrades the quality of the information, because the location server might not have the necessary information to scale appropriately; the location server is forced to make assumptions that are likely result in either an overly conservative estimate with high uncertainty or a overestimate of confidence.  </li>
+  <li>The location server can scale regions of uncertainty in an attempt to acheive 95% confidence.  This scaling process significantly degrades the quality of the information, because the location server might not have the necessary information to scale appropriately; the location server is forced to make assumptions that are likely to result in either an overly conservative estimate with high uncertainty or a overestimate of confidence.  </li>
   <li>The location server can ignore the confidence entirely, which results in giving the recipient a false impression of its quality.  </li>
 </ul>
 
 <p> Both of these choices degrade the quality of the information provided.  </p>
-<p id="rfc.section.4.p.4">The addition of a confidence element avoids this problem entirely if a location recipient supports and understands the element.  A recipient that does not understand, and hence ignores, the confidence element is in no worse a position than if the location server ignored confidence.  </p>
+<p id="rfc.section.4.p.4">The addition of a confidence element avoids this problem entirely if a location recipient supports and understands the element.  A recipient that does not understand - and hence ignores - the confidence element is in no worse a position than if the location server ignored confidence.  </p>
 <h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> <a href="#conf" id="conf">The "confidence" Element</a></h1>
-<p id="rfc.section.4.1.p.1">The confidence element MAY be added to the <samp>location-info</samp> element of the <a href="#RFC4119">Presence Information Data Format - Location Object (PIDF-LO)</a> <cite title="NONE">[RFC4119]</cite> document.  This element expresses the confidence in the associated location information as a percentage.  </p>
+<p id="rfc.section.4.1.p.1">The confidence element MAY be added to the <samp>location-info</samp> element of the <a href="#RFC4119">Presence Information Data Format - Location Object (PIDF-LO)</a> <cite title="NONE">[RFC4119]</cite> document.  This element expresses the confidence in the associated location information as a percentage.  A special <samp>unknown</samp> value is reserved to indicate that confidence is supported, but not known to the Location Generator.  </p>
 <p id="rfc.section.4.1.p.2">The confidence element optionally includes an attribute that indicates the shape of the probability density function (PDF) of the associated region of uncertainty.  Three values are possible: unknown, normal and rectangular.  </p>
 <p id="rfc.section.4.1.p.3">Indicating a particular PDF only indicates that the distribution approximately fits the given shape based on the methods used to generate the location information.  The PDF is normal if there are a large number of small, independent sources of error; rectangular if all points within the area have roughly equal probability of being the actual location of the Target; otherwise, the PDF MUST either be set to unknown or omitted.  </p>
-<p id="rfc.section.4.1.p.4">If a PIDF-LO does not include the confidence element, confidence is 95% <a href="#RFC5491">[RFC5491]</a>.  A Point shape does not have uncertainty (or it has infinite uncertainty), so confidence is meaningless for a point; therefore, this element MUST be omitted if only a point is provided.  </p>
+<p id="rfc.section.4.1.p.4">If a PIDF-LO does not include the confidence element, the confidence of the location estimate is 95%, as defined in <a href="#RFC5491">[RFC5491]</a>.  </p>
+<p id="rfc.section.4.1.p.5">A Point shape does not have uncertainty (or it has infinite uncertainty), so confidence is meaningless for a point; therefore, this element MUST be omitted if only a point is provided.  </p>
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Generating Locations with Confidence</h1>
 <p id="rfc.section.4.2.p.1">Location generators SHOULD attempt to ensure that confidence is equal in each dimension when generating location information.  This restriction, while not always practical, allows for more accurate scaling, if scaling is necessary.  </p>
-<p id="rfc.section.4.2.p.2">Confidence MUST be included for all location information.  </p>
+<p id="rfc.section.4.2.p.2">A confidence element MUST be included with all location information that includes uncertainty (i.e., all forms other than a point).  A special <samp>unknown</samp> MAY be used if confidence is not known.  </p>
 <h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Consuming and Presenting Confidence</h1>
 <p id="rfc.section.4.3.p.1">The inclusion of confidence that is anything other than 95% presents a potentially difficult usability problem for applications that use location information.  Effectively communicating the probability that a location is incorrect to a user can be difficult.  </p>
 <p id="rfc.section.4.3.p.2">It is inadvisable to simply display locations of any confidence, or to display confidence in a separate or non-obvious fashion.  If locations with different confidence levels are displayed such that the distinction is subtle or easy to overlook - such as using fine graduations of color or transparency for graphical uncertainty regions, or displaying uncertainty graphically, but providing confidence as supplementary text - a user could fail to notice a difference in the quality of the location information that might be significant.  </p>
@@ -709,7 +710,7 @@
 
 <p> </p>
 <p id="rfc.section.5.1.p.4">Several different approaches can be taken when reducing a location estimate to a point.  Different methods each make a set of assumptions about the properties of the PDF and the selected point; no one method is more "correct" than any other.  For any given region of uncertainty, selecting an arbitrary point within the area could be considered valid; however, given the aforementioned problems with point locations, a more rigorous approach is appropriate.  </p>
-<p id="rfc.section.5.1.p.5">Given a result with a known distribution, selecting the point within the area that has the highest probability is a more rigorous method.  Alternatively, a point could be selected that minimizes the overall error; that is, it minimises the expected value of the difference between the selected point and the "true" value.  </p>
+<p id="rfc.section.5.1.p.5">Given a result with a known distribution, selecting the point within the area that has the highest probability is a more rigorous method.  Alternatively, a point could be selected that minimizes the overall error; that is, it minimizes the expected value of the difference between the selected point and the "true" value.  </p>
 <p id="rfc.section.5.1.p.6">If a rectangular distribution is assumed, the centroid of the area or volume minimizes the overall error.  Minimizing the error for a normal distribution is mathematically complex.  Therefore, this document opts to select the centroid of the region of uncertainty when selecting a point.  </p>
 <h1 id="rfc.section.5.1.1"><a href="#rfc.section.5.1.1">5.1.1.</a> <a href="#centroid" id="centroid">Centroid Calculation</a></h1>
 <p id="rfc.section.5.1.1.p.1">For regular shapes, such as Circle, Sphere, Ellipse and Ellipsoid, this approach equates to the center point of the region.  For regions of uncertainty that are expressed as regular Polygons and Prisms the center point is also the most appropriate selection.  </p>
@@ -857,13 +858,13 @@
 
 <p> </p>
 <h1 id="rfc.section.5.4"><a href="#rfc.section.5.4">5.4.</a> <a href="#scaling" id="scaling">Increasing and Decreasing Uncertainty and Confidence</a></h1>
-<p id="rfc.section.5.4.p.1">The combination of uncertainty and confidence provide a great deal of information about the nature of the data that is being measured.  If both uncertainty, confidence and PDF are known, certain information can be extrapolated.  In particular, the uncertainty can be scaled to meet a desired confidence or the confidence for a particular region of uncertainty can be found.  </p>
+<p id="rfc.section.5.4.p.1">The combination of uncertainty and confidence provide a great deal of information about the nature of the data that is being measured.  If uncertainty, confidence and PDF are known, certain information can be extrapolated.  In particular, the uncertainty can be scaled to meet a desired confidence or the confidence for a particular region of uncertainty can be found.  </p>
 <p id="rfc.section.5.4.p.2">In general, confidence decreases as the region of uncertainty decreases in size and confidence increases as the region of uncertainty increases in size.  However, this depends on the PDF; expanding the region of uncertainty for a rectangular distribution has no effect on confidence without additional information.  If the region of uncertainty is increased during the process of obfuscation (see <a href="#I-D.thomson-geopriv-location-obscuring">[I-D.thomson-geopriv-location-obscuring]</a>), then the confidence cannot be increased.  </p>
 <p id="rfc.section.5.4.p.3">A region of uncertainty that is reduced in size always has a lower confidence.  </p>
 <p id="rfc.section.5.4.p.4">A region of uncertainty that has an unknown PDF shape cannot be reduced in size reliably.  The region of uncertainty can be expanded, but only if confidence is not increased.  </p>
 <p id="rfc.section.5.4.p.5">This section makes the simplifying assumption that location information is symmetrically and evenly distributed in each dimension.  This is not necessarily true in practice.  If better information is available, alternative methods might produce better results.  </p>
 <h1 id="rfc.section.5.4.1"><a href="#rfc.section.5.4.1">5.4.1.</a> <a href="#scale-rectangular" id="scale-rectangular">Rectangular Distributions</a></h1>
-<p id="rfc.section.5.4.1.p.1">Uncertainty that follows a rectangular distribution can only be decreased in size.  Since the PDF is constant over the region of uncertainty, the resulting confidence is determined by the following formula: <samp>Uo</samp> and <samp>Ur</samp> are the sizes of the original and reduced regions of uncertainty (either the area or the volume of the region); <samp>Co</samp> and <samp>Cb</samp> are the confidence values associated with each region.  </p>
+<p id="rfc.section.5.4.1.p.1">Uncertainty that follows a rectangular distribution can only be decreased in size.  Increasing uncertainty has no value, since it has no effect on confidence.  Since the PDF is constant over the region of uncertainty, the resulting confidence is determined by the following formula: <samp>Uo</samp> and <samp>Ur</samp> are the sizes of the original and reduced regions of uncertainty (either the area or the volume of the region); <samp>Co</samp> and <samp>Cb</samp> are the confidence values associated with each region.  </p>
 
 <ul class="empty">
   <li>Cr = Co * Ur / Uo</li>
@@ -873,14 +874,14 @@
 <p id="rfc.section.5.4.1.p.2">Information is lost by decreasing the region of uncertainty for a rectangular distribution.  Once reduced in size, the uncertainty region cannot subsequently be increased in size.  </p>
 <h1 id="rfc.section.5.4.2"><a href="#rfc.section.5.4.2">5.4.2.</a> <a href="#scale-normal" id="scale-normal">Normal Distributions</a></h1>
 <p id="rfc.section.5.4.2.p.1">Uncertainty and confidence can be both increased and decreased for a normal distribution.  This calculation depends on the number of dimensions of the uncertainty region.  </p>
-<p id="rfc.section.5.4.2.p.2">For a normal distribution, uncertainty and confidence are related to the standard deviation of the function.  The following function defines the relationship between standard deviation, uncertainty and confidence along a single axis: <samp>S[x]</samp> is the standard deviation, <samp>U[x]</samp> is the uncertainty and <samp>C[x]</samp> is the confidence along a single axis.  <samp>erfinv</samp> is the inverse error function.  </p>
+<p id="rfc.section.5.4.2.p.2">For a normal distribution, uncertainty and confidence are related to the standard deviation of the function.  The following function defines the relationship between standard deviation, uncertainty, and confidence along a single axis: <samp>S[x]</samp> is the standard deviation, <samp>U[x]</samp> is the uncertainty, and <samp>C[x]</samp> is the confidence along a single axis.  <samp>erfinv</samp> is the inverse error function.  </p>
 
 <ul class="empty">
   <li>S[x] = U[x] / ( sqrt(2) * erfinv(C[x]) )</li>
 </ul>
 
 <p> Where </p>
-<p id="rfc.section.5.4.2.p.3">Scaling a normal distribution in two dimensions requires several assumptions.  Firstly, it is assumed that the distribution along each axis is independent.  Secondly, the confidence for each axis is the same.  Therefore, the confidence along each axis can be assumed to be: <samp>C[x]</samp> is the confidence along a single axis and <samp>Co</samp> is the overall confidence and <samp>n</samp> is the number of dimensions in the uncertainty.  </p>
+<p id="rfc.section.5.4.2.p.3">Scaling a normal distribution in two dimensions requires several assumptions.  Firstly, it is assumed that the distribution along each axis is independent.  Secondly, the confidence for each axis is assumed to be the same.  Therefore, the confidence along each axis can be assumed to be: <samp>C[x]</samp> is the confidence along a single axis and <samp>Co</samp> is the overall confidence and <samp>n</samp> is the number of dimensions in the uncertainty.  </p>
 
 <ul class="empty">
   <li>C[x] = Co ^ (1/n)</li>
@@ -895,7 +896,7 @@
 
 <p> For regular shapes, this formula can be applied as a scaling factor in each dimension to reach a required confidence.  </p>
 <h1 id="rfc.section.5.5"><a href="#rfc.section.5.5">5.5.</a> <a href="#inarea" id="inarea">Determining Whether a Location is Within a Given Region</a></h1>
-<p id="rfc.section.5.5.p.1">A number of applications require that a judgement be made about whether a Target is within a given region of interest.  Given a location estimate with uncertainty, this judgement can be difficult.  A location estimate represents a probability distribution, and the true location of the Target cannot be definitively known.  Therefore, the judgement relies on determining the probability that the Target is within the region.  </p>
+<p id="rfc.section.5.5.p.1">A number of applications require that a judgment be made about whether a Target is within a given region of interest.  Given a location estimate with uncertainty, this judgment can be difficult.  A location estimate represents a probability distribution, and the true location of the Target cannot be definitively known.  Therefore, the judgment relies on determining the probability that the Target is within the region.  </p>
 <p id="rfc.section.5.5.p.2">The probability that the Target is within a particular region is found by integrating the PDF over the region.  For a normal distribution, there are no analytical methods that can be used to determine the integral of the two or three dimensional PDF over an arbitrary region.  The complexity of numerical methods is also too great to be useful in many applications; for example, finding the integral of the PDF in two or three dimensions across the overlap between the uncertainty region and the target region.  If the PDF is unknown, no determination can be made without a simplifying assumption.  </p>
 <p id="rfc.section.5.5.p.3">When judging whether a location is within a given region, this document assumes that uncertainties are rectangular.  This introduces errors, but simplifies the calculations significantly.  Prior to applying this assumption, confidence should be scaled to 95%.  </p>
 
@@ -956,7 +957,7 @@
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#examples" id="examples">Examples</a></h1>
 <p id="rfc.section.6.p.1">This section presents some examples of how to apply the methods described in <a href="#manipulation">Section 5</a>.  </p>
 <h1 id="rfc.section.6.1"><a href="#rfc.section.6.1">6.1.</a> Reduction to a Point or Circle</h1>
-<p id="rfc.section.6.1.p.1">Alice receives a location estimate from her LIS that contains a ellipsoidal region of uncertainty.  This information is provided at 19% confidence with a normal PDF.  A PIDF-LO extract for this information is shown in <a href="#ex-ellipse">Figure 8</a>.  </p>
+<p id="rfc.section.6.1.p.1">Alice receives a location estimate from her LIS that contains an ellipsoidal region of uncertainty.  This information is provided at 19% confidence with a normal PDF.  A PIDF-LO extract for this information is shown in <a href="#ex-ellipse">Figure 8</a>.  </p>
 <div id="rfc.figure.8"/>
 <div id="ex-ellipse"/>
 <pre>
@@ -1003,7 +1004,7 @@
   &lt;/gml:Polygon&gt;
 </pre>
 <p class="figure">Figure 9</p>
-<p id="rfc.section.6.1.p.6">To convert this to a polygon, each point is firstly assigned an altitude of zero and converted to ECEF coordinates (see <a href="#ecef2geo">Appendix A</a>).  Then a normal vector for this polygon is found (see <a href="#polygonupnormal">Appendix B</a>).  The results of each of these stages is shown in <a href="#ex-poly-convert">Figure 10</a>.  Note that the numbers shown are all rounded; no rounding is possible during this process since rounding would contribute significant errors.  </p>
+<p id="rfc.section.6.1.p.6">To convert this to a polygon, each point is firstly assigned an altitude of zero and converted to ECEF coordinates (see <a href="#ecef2geo">Appendix A</a>).  Then a normal vector for this polygon is found (see <a href="#polygonupnormal">Appendix B</a>).  The result of each of these stages is shown in <a href="#ex-poly-convert">Figure 10</a>.  Note that the numbers shown are all rounded; no rounding is possible during this process since rounding would contribute significant errors.  </p>
 <div id="rfc.figure.10"/>
 <div id="ex-poly-convert"/>
 <pre>
@@ -1048,7 +1049,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
 <p id="rfc.section.6.1.p.7">The point conversion for the polygon uses the final result, <samp>Cg</samp>, ignoring the altitude since the original shape did not include altitude.  </p>
 <p id="rfc.section.6.1.p.8">To convert this to a circle, take the maximum distance in ECEF coordinates from the center point to each of the points.  This results in a radius of 99.1 meters.  Confidence is unchanged.  </p>
 <h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> Increasing and Decreasing Confidence</h1>
-<p id="rfc.section.6.2.p.1">Assuming that confidence is known to be 19% for Alice's location information.  This is typical value for a three-dimensional ellipsoid uncertainty of normal distribution where the standard deviation is supplied in each dimension.  The confidence associated with Alice's location estimate is quite low for many applications.  Since the estimate is known to follow a normal distribution, the method in <a href="#scale-normal">Section 5.4.2</a> can be used.  Each axis can be scaled by: </p>
+<p id="rfc.section.6.2.p.1">Assuming that confidence is known to be 19% for Alice's location information.  This is a typical value for a three-dimensional ellipsoid uncertainty of normal distribution where the standard deviation is used directly for uncertainty in each dimension.  The confidence associated with Alice's location estimate is quite low for many applications.  Since the estimate is known to follow a normal distribution, the method in <a href="#scale-normal">Section 5.4.2</a> can be used.  Each axis can be scaled by: </p>
 
 <ul class="empty">
   <li>scale = erfinv(0.95^(1/3)) / erfinv(0.19^(1/3)) = 2.9937 </li>
@@ -1057,7 +1058,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
 <p> Ensuring that rounding always increases uncertainty, the location estimate at 95% includes a semi-major axis of 23.1, a semi-minor axis of 10 and a vertical axis of 86.  </p>
 <p id="rfc.section.6.2.p.2">Bob's location estimate (from the previous example) covers an area of approximately 12600 square meters.  If the estimate follows a rectangular distribution, the region of uncertainty can be reduced in size.  Here we find the confidence that Bob is within the smaller area of the concert hall.  For the concert hall, the polygon [-33.856473,&#160;151.215257; -33.856322,&#160;151.214973; -33.856424,&#160;151.21471; -33.857248,&#160;151.214753; -33.857413,&#160;151.214941; -33.857311,&#160;151.215128] is used.  To use this new region of uncertainty, find its area using the same translation method described in <a href="#centroid-polygon">Section 5.1.1.2</a>, which produces 4566.2 square meters.  Given that the concert hall is entirely within Bob's original location estimate, the confidence associated with the smaller area is therefore 95% * 4566.2 / 12600 = 34%.  </p>
 <h1 id="rfc.section.6.3"><a href="#rfc.section.6.3">6.3.</a> Matching Location Estimates to Regions of Interest</h1>
-<p id="rfc.section.6.3.p.1">Suppose than a circular area is defined centered at [-33.872754,&#160;151.20683] with a radius of 1950 meters.  To determine whether Bob is found within this area - given that Bob is at [-34.407242,&#160;150.882518] with an uncertainty radius 7.7156 meters - we apply the method in <a href="#inarea">Section 5.5</a>.  Using the converted Circle shape for Bob's location, the distance between these points is found to be 1915.26 meters.  The area of overlap between Bob's location estimate and the region of interest is therefore 2209 square meters and the area of Bob's location estimate is 30853 square meters.  This gives the estimated probability that Bob is less than 1950 meters from the selected point as 67.8%.  </p>
+<p id="rfc.section.6.3.p.1">Suppose that a circular area is defined centered at [-33.872754,&#160;151.20683] with a radius of 1950 meters.  To determine whether Bob is found within this area - given that Bob is at [-34.407242,&#160;150.882518] with an uncertainty radius 7.7156 meters - we apply the method in <a href="#inarea">Section 5.5</a>.  Using the converted Circle shape for Bob's location, the distance between these points is found to be 1915.26 meters.  The area of overlap between Bob's location estimate and the region of interest is therefore 2209 square meters and the area of Bob's location estimate is 30853 square meters.  This gives the estimated probability that Bob is less than 1950 meters from the selected point as 67.8%.  </p>
 <p id="rfc.section.6.3.p.2">Note that if 1920 meters were chosen for the distance from the selected point, the area of overlap is only 16196 square meters and the confidence is 49.8%.  Therefore, it is marginally more likely that Bob is outside the region of interest, despite the center point of his location estimate being within the region.  </p>
 <h1 id="rfc.section.6.4"><a href="#rfc.section.6.4">6.4.</a> PIDF-LO With Confidence Example</h1>
 <p id="rfc.section.6.4.p.1">The PIDF-LO document in <a href="#ex-conf">Figure 11</a> includes a representation of uncertainty as a circular area.  The confidence element (on the line marked with a comment) indicates that the confidence is 67% and that it follows a normal distribution.  </p>
@@ -1125,9 +1126,13 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
     &lt;/xs:simpleContent&gt;
   &lt;/xs:complexType&gt;
   &lt;xs:simpleType name="confidenceBase"&gt;
+  &lt;xs:union&gt;
     &lt;xs:restriction base="xs:decimal"&gt;
       &lt;xs:minExclusive value="0.0"/&gt;
       &lt;xs:maxExclusive value="100.0"/&gt;
+    &lt;/xs:restriction&gt;
+    &lt;xs:restriction base="xs:token"&gt;
+      &lt;xs:enumeration value="unknown"/&gt;
     &lt;/xs:restriction&gt;
   &lt;/xs:simpleType&gt;
   &lt;xs:simpleType name="pdfType"&gt;
@@ -1164,7 +1169,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
 
 <ul class="empty">
   <li>URI: urn:ietf:params:xml:ns:geopriv:conf</li>
-  <li>Registrant Contact: IETF, GEOPRIV working group, (geopriv@ietf.org), Martin Thomson (martin.thomson@andrew.com).</li>
+  <li>Registrant Contact: IETF, GEOPRIV working group, (geopriv@ietf.org), Martin Thomson (martin.thomson@gmail.com).</li>
   <li>XML: </li>
 </ul>
 
@@ -1176,7 +1181,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
   <dt>URI:</dt>
   <dd style="margin-left: 8">urn:ietf:params:xml:schema:geopriv:conf</dd>
   <dt>Registrant Contact:</dt>
-  <dd style="margin-left: 8">IETF, GEOPRIV working group, (geopriv@ietf.org), Martin Thomson (martin.thomson@andrew.com).</dd>
+  <dd style="margin-left: 8">IETF, GEOPRIV working group, (geopriv@ietf.org), Martin Thomson (martin.thomson@gmail.com).</dd>
   <dt>Schema:</dt>
   <dd style="margin-left: 8">The XML for this schema can be found as the entirety of <a href="#schema">Section 7</a> of this document.  </dd>
 </dl>
