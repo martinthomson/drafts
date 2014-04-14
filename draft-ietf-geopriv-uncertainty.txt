@@ -5,8 +5,8 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                         J. Winterbottom
-Expires: October 13, 2014                                   Unaffiliated
-                                                          April 11, 2014
+Expires: October 16, 2014                                   Unaffiliated
+                                                          April 14, 2014
 
 
         Representation of Uncertainty and Confidence in PIDF-LO
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 13, 2014.
+   This Internet-Draft will expire on October 16, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 1]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 1]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -87,43 +87,43 @@ Table of Contents
        5.4.2.  Normal Distributions  . . . . . . . . . . . . . . . .  20
      5.5.  Determining Whether a Location is Within a Given Region .  20
        5.5.1.  Determining the Area of Overlap for Two Circles . . .  22
-       5.5.2.  Determining the Area of Overlap for Two Polygons  . .  22
+       5.5.2.  Determining the Area of Overlap for Two Polygons  . .  23
    6.  Examples  . . . . . . . . . . . . . . . . . . . . . . . . . .  23
      6.1.  Reduction to a Point or Circle  . . . . . . . . . . . . .  23
-     6.2.  Increasing and Decreasing Confidence  . . . . . . . . . .  26
-     6.3.  Matching Location Estimates to Regions of Interest  . . .  26
-     6.4.  PIDF-LO With Confidence Example . . . . . . . . . . . . .  27
-   7.  Confidence Schema . . . . . . . . . . . . . . . . . . . . . .  27
-   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  29
+     6.2.  Increasing and Decreasing Confidence  . . . . . . . . . .  27
+     6.3.  Matching Location Estimates to Regions of Interest  . . .  27
+     6.4.  PIDF-LO With Confidence Example . . . . . . . . . . . . .  28
+   7.  Confidence Schema . . . . . . . . . . . . . . . . . . . . . .  28
+   8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  30
      8.1.  URN Sub-Namespace Registration for
-           urn:ietf:params:xml:ns:geopriv:conf . . . . . . . . . . .  29
-     8.2.  XML Schema Registration . . . . . . . . . . . . . . . . .  29
-   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  30
-   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  30
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  30
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  30
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  30
+           urn:ietf:params:xml:ns:geopriv:conf . . . . . . . . . . .  30
+     8.2.  XML Schema Registration . . . . . . . . . . . . . . . . .  30
+   9.  Security Considerations . . . . . . . . . . . . . . . . . . .  31
+   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  31
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  31
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  31
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  31
    Appendix A.  Conversion Between Cartesian and Geodetic
-                Coordinates in WGS84 . . . . . . . . . . . . . . . .  32
-   Appendix B.  Calculating the Upward Normal of a Polygon . . . . .  33
+                Coordinates in WGS84 . . . . . . . . . . . . . . . .  33
+   Appendix B.  Calculating the Upward Normal of a Polygon . . . . .  34
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 2]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 2]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
 
-     B.1.  Checking that a Polygon Upward Normal Points Up . . . . .  34
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  34
+     B.1.  Checking that a Polygon Upward Normal Points Up . . . . .  35
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  35
 
 1.  Introduction
 
    Location information represents an estimation of the position of a
-   Target.  Under ideal circumstances, a location estimate precisely
-   reflects the actual location of the Target.  In reality, there are
-   many factors that introduce errors into the measurements that are
-   used to determine location estimates.
+   Target [RFC6280].  Under ideal circumstances, a location estimate
+   precisely reflects the actual location of the Target.  In reality,
+   there are many factors that introduce errors into the measurements
+   that are used to determine location estimates.
 
    The process by which measurements are combined to generate a location
    estimate is outside of the scope of work within the IETF.  However,
@@ -155,21 +155,22 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    This document assumes a basic understanding of the principles of
    mathematics, particularly statistics and geometry.
 
-   Some terminology is borrowed from [RFC3693] and [RFC6280].
+   Some terminology is borrowed from [RFC3693] and [RFC6280], in
+   particular Target.
 
    Mathematical formulae are presented using the following notation: add
    "+", subtract "-", multiply "*", divide "/", power "^" and absolute
    value "|x|".  Precedence is indicated using parentheses.
    Mathematical functions are represented by common abbreviations:
-   square root "sqrt(x)", sine "sin(x)", cosine "cos(x)", inverse cosine
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 3]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 3]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
 
+   square root "sqrt(x)", sine "sin(x)", cosine "cos(x)", inverse cosine
    "acos(x)", tangent "tan(x)", inverse tangent "atan(x)", error
    function "erf(x)", and inverse error function "erfinv(x)".
 
@@ -209,9 +210,6 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    other assertion is made: in particular, this does not assert that x
    is 1.00742.
 
-   This document uses the term _uncertainty_ to refer in general to the
-   concept as well as more specifically to refer to the error increment.
-
    Uncertainty and confidence for location estimates can be derived in a
    number of ways.  This document does not attempt to enumerate the many
    methods for determining uncertainty.  [ISO.GUM] and [NIST.TN1297]
@@ -221,7 +219,9 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 4]
+
+
+Thomson & Winterbottom  Expires October 16, 2014                [Page 4]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -277,7 +277,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 5]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 5]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -333,7 +333,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 6]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 6]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -389,7 +389,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 7]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 7]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -406,8 +406,8 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    property like length, a location estimate is specified in two or
    three dimensions.
 
-   Uncertainty in 2- or 3-dimensional locations can be described using
-   confidence intervals.  The confidence interval for a location
+   Uncertainty in two or three dimensional locations can be described
+   using confidence intervals.  The confidence interval for a location
    estimate in two or three dimensional space is expressed as a subset
    of that space.  This document uses the term _region of uncertainty_
    to refer to the area or volume that describes the confidence
@@ -415,14 +415,15 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
    Areas or volumes that describe regions of uncertainty can be formed
    by the combination of two or three one-dimensional ranges, or more
-   complex shapes could be described.
+   complex shapes could be described (for example, the shapes in
+   [RFC5491]).
 
 3.1.  Targets as Points in Space
 
    This document makes a simplifying assumption that the Target of the
    PIDF-LO occupies just a single point in space.  While this is clearly
    false in virtually all scenarios with any practical application, it
-   is often a reasonable assumption to make.
+   is often a reasonable simplifying assumption to make.
 
    To a large extent, whether this simplification is valid depends on
    the size of the target relative to the size of the uncertainty
@@ -432,8 +433,8 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    device is used as a proxy for a person, the proportions change
    little.
 
-   This assumption is less useful as the Target of the PIDF-LO becomes
-   large relative to the uncertainty region.  For instance, describing
+   This assumption is less useful as uncertainty becomes small relative
+   to the size of the Target of the PIDF-LO.  For instance, describing
    the location of a football stadium or small country would include a
    region of uncertainty that is infinitesimally larger than the Target
    itself.  In these cases, much of the guidance in this document is not
@@ -444,8 +445,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-
-Thomson & Winterbottom  Expires October 13, 2014                [Page 8]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 8]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -501,7 +501,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014                [Page 9]
+Thomson & Winterbottom  Expires October 16, 2014                [Page 9]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -518,25 +518,27 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    The resulting spatial partition can be considered to represent a
    region of uncertainty.  At no stage does this process select a point;
    although, as spaces get smaller this distinction might have no
-   practical significance and an approximation if a point could be used.
+   practical significance and an approximation of a point could be used.
 
    Uncertainty in civic addresses can be increased by removing elements.
-   This doesn't necessarily improve confidence in the same way that
-   arbitrarily increasing uncertainty in a geodetic location doesn't
-   increase confidence.
+   This does not increase confidence unless additional information is
+   used.  Similarly, arbitrarily increasing uncertainty in a geodetic
+   location does not increase confidence.
 
 3.4.  DHCP Location Configuration Information and Uncertainty
 
    Location information is often measured in two or three dimensions;
    expressions of uncertainty in one dimension only are rare.  The
-   "resolution" parameters in [RFC3825] provide an indication of
-   uncertainty in one dimension.
+   "resolution" parameters in [RFC6225] provide an indication of how
+   many bits of a number are valid, which could be interpreted as an
+   expression of uncertainty in one dimension.
 
-   [RFC3825] defines a means for representing uncertainty, but a value
+   [RFC6225] defines a means for representing uncertainty, but a value
    for confidence is not specified.  A default value of 95% confidence
-   can be assumed for the combination of the uncertainty on each axis.
-   That is, the confidence of the resultant rectangular polygon or prism
-   is 95%.
+   is assumed for the combination of the uncertainty on each axis.  This
+   is consistent with the transformation of those forms into the
+   uncertainty representations from [RFC5491].  That is, the confidence
+   of the resultant rectangular polygon or prism is assumed to be 95%.
 
 4.  Representation of Confidence in PIDF-LO
 
@@ -551,16 +553,17 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    location generators might unable to provide location information with
    consistent confidence.  Existing systems sometimes specify confidence
    at 38%, 67% or 90%.  Existing forms of expressing location
-   information, such as that defined in [TS-3GPP-23_032], contain
-   elements that express the confidence in the result.
 
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 10]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 10]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
+
+   information, such as that defined in [TS-3GPP-23_032], contain
+   elements that express the confidence in the result.
 
    The addition of a confidence element provides information that was
    previously unavailable to recipients of location information.
@@ -608,16 +611,15 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    the actual location of the Target; otherwise, the PDF MUST either be
    set to unknown or omitted.
 
-   If a PIDF-LO does not include the confidence element, confidence is
-   95% [RFC5491].  A Point shape does not have uncertainty (or it has
 
 
-
-Thomson & Winterbottom  Expires October 13, 2014               [Page 11]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 11]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
 
+   If a PIDF-LO does not include the confidence element, confidence is
+   95% [RFC5491].  A Point shape does not have uncertainty (or it has
    infinite uncertainty), so confidence is meaningless for a point;
    therefore, this element MUST be omitted if only a point is provided.
 
@@ -628,8 +630,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    restriction, while not always practical, allows for more accurate
    scaling, if scaling is necessary.
 
-   Confidence MUST NOT be included unless location information cannot be
-   acquired with 95% confidence.
+   Confidence MUST be included for all location information.
 
 4.3.  Consuming and Presenting Confidence
 
@@ -668,8 +669,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-
-Thomson & Winterbottom  Expires October 13, 2014               [Page 12]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 12]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -725,7 +725,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 13]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 13]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -773,15 +773,15 @@ Internet-Draft          Uncertainty & Confidence              April 2014
       d = 4 * sin(o/2) * (R*R + R*r + r*r) / (3*o*(R + r))
 
    This point can be found along the line that bisects the arc; that is,
-   the line at an angle of "a + (o/2)".  Negative values are possible if
-   the angle of opening is greater than 180 degrees; negative values
-   indicate that the centroid is found along the angle "a + (o/
-   2) + 180".
+   the line at an angle of "a + (o/2)".
 
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 14]
+
+
+
+Thomson & Winterbottom  Expires October 16, 2014               [Page 14]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -837,7 +837,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 15]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 15]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -893,7 +893,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 16]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 16]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -949,7 +949,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 17]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 17]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1005,7 +1005,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 18]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 18]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1061,7 +1061,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 19]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 19]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1073,7 +1073,8 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 5.4.2.  Normal Distributions
 
    Uncertainty and confidence can be both increased and decreased for a
-   normal distribution.  However, the process is more complicated.
+   normal distribution.  This calculation depends on the number of
+   dimensions of the uncertainty region.
 
    For a normal distribution, uncertainty and confidence are related to
    the standard deviation of the function.  The following function
@@ -1116,8 +1117,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-
-Thomson & Winterbottom  Expires October 13, 2014               [Page 20]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 20]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1133,10 +1133,13 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    great to be useful in many applications; for example, finding the
    integral of the PDF in two or three dimensions across the overlap
    between the uncertainty region and the target region.  If the PDF is
-   unknown, no determination can be made.  When judging whether a
-   location is within a given region, uncertainties using these PDFs can
-   be assumed to be rectangular.  If this assumption is made, the
-   confidence should be scaled to 95%, if possible.
+   unknown, no determination can be made without a simplifying
+   assumption.
+
+   When judging whether a location is within a given region, this
+   document assumes that uncertainties are rectangular.  This introduces
+   errors, but simplifies the calculations significantly.  Prior to
+   applying this assumption, confidence should be scaled to 95%.
 
       Note: The selection of confidence has a significant impact on the
       final result.  Only use a different confidence if an uncertainty
@@ -1168,15 +1171,15 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
           Figure 7: Area of Overlap Between Two Circular Regions
 
-   Once the area of overlap, "Ao", is known, the probability that the
-   Target is within the region of interest, "Pi", is:
 
 
-
-Thomson & Winterbottom  Expires October 13, 2014               [Page 21]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 21]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
+
+   Once the area of overlap, "Ao", is known, the probability that the
+   Target is within the region of interest, "Pi", is:
 
       Pi = Co * Ao / Au
 
@@ -1221,19 +1224,20 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
       d = sqrt((x1-x2)^2 + (y1-y2)^2 + (z1-z2)^2)
 
-5.5.2.  Determining the Area of Overlap for Two Polygons
-
-   A calculation of overlap based on polygons can give better results
-   than the circle-based method.  However, efficient calculation of
 
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 22]
+
+Thomson & Winterbottom  Expires October 16, 2014               [Page 22]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
 
+5.5.2.  Determining the Area of Overlap for Two Polygons
+
+   A calculation of overlap based on polygons can give better results
+   than the circle-based method.  However, efficient calculation of
    overlapping area is non-trivial.  Algorithms such as Vatti's clipping
    algorithm [Vatti92] can be used.
 
@@ -1258,6 +1262,34 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    19% confidence with a normal PDF.  A PIDF-LO extract for this
    information is shown in Figure 8.
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson & Winterbottom  Expires October 16, 2014               [Page 23]
+
+Internet-Draft          Uncertainty & Confidence              April 2014
+
+
      <gp:geopriv>
        <gp:location-info>
          <gs:Ellipsoid srsName="urn:ogc:def:crs:EPSG::4979">
@@ -1281,15 +1313,6 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
                                  Figure 8
 
-
-
-
-
-Thomson & Winterbottom  Expires October 13, 2014               [Page 23]
-
-Internet-Draft          Uncertainty & Confidence              April 2014
-
-
    This information can be reduced to a point simply by extracting the
    center point, that is [-34.407242, 150.882518, 34].
 
@@ -1305,6 +1328,23 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
    Bob receives a location estimate with a Polygon shape.  This
    information is shown in Figure 9.
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson & Winterbottom  Expires October 16, 2014               [Page 24]
+
+Internet-Draft          Uncertainty & Confidence              April 2014
+
 
      <gml:Polygon srsName="urn:ogc:def:crs:EPSG::4326">
        <gml:exterior>
@@ -1341,7 +1381,23 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 24]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson & Winterbottom  Expires October 16, 2014               [Page 25]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1397,7 +1453,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 25]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 26]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1418,45 +1474,48 @@ Internet-Draft          Uncertainty & Confidence              April 2014
    estimate at 95% includes a semi-major axis of 23.1, a semi-minor axis
    of 10 and a vertical axis of 86.
 
-   Bob's location estimate covers an area of approximately 12600 square
-   meters.  If the estimate follows a rectangular distribution, the
-   region of uncertainty can be reduced in size.  To find the confidence
-   that he is within the smaller area of the concert hall, given by the
-   polygon [-33.856473, 151.215257; -33.856322, 151.214973;
+   Bob's location estimate (from the previous example) covers an area of
+   approximately 12600 square meters.  If the estimate follows a
+   rectangular distribution, the region of uncertainty can be reduced in
+   size.  Here we find the confidence that Bob is within the smaller
+   area of the concert hall.  For the concert hall, the polygon
+   [-33.856473, 151.215257; -33.856322, 151.214973;
    -33.856424, 151.21471; -33.857248, 151.214753;
-   -33.857413, 151.214941; -33.857311, 151.215128].  To use this new
-   region of uncertainty, find its area using the same translation
-   method described in Section 5.1.1.2, which is 4566.2 square meters.
-   The confidence associated with the smaller area is therefore 95% *
-   4566.2 / 12600 = 34%.
+   -33.857413, 151.214941; -33.857311, 151.215128] is used.  To use this
+   new region of uncertainty, find its area using the same translation
+   method described in Section 5.1.1.2, which produces 4566.2 square
+   meters.  Given that the concert hall is entirely within Bob's
+   original location estimate, the confidence associated with the
+   smaller area is therefore 95% * 4566.2 / 12600 = 34%.
 
 6.3.  Matching Location Estimates to Regions of Interest
 
    Suppose than a circular area is defined centered at
    [-33.872754, 151.20683] with a radius of 1950 meters.  To determine
-   whether Bob is found within this area, we apply the method in
-   Section 5.5.  Using the converted Circle shape for Bob's location,
-   the distance between these points is found to be 1915.26 meters.  The
-   area of overlap between Bob's location estimate and the region of
-   interest is therefore 2209 square meters and the area of Bob's
-   location estimate is 30853 square meters.  This gives the probability
-   that Bob is less than 1950 meters from the selected point as 67.8%.
+   whether Bob is found within this area - given that Bob is at
+   [-34.407242, 150.882518] with an uncertainty radius 7.7156 meters -
+   we apply the method in Section 5.5.  Using the converted Circle shape
+   for Bob's location, the distance between these points is found to be
+   1915.26 meters.  The area of overlap between Bob's location estimate
+   and the region of interest is therefore 2209 square meters and the
+   area of Bob's location estimate is 30853 square meters.  This gives
+   the estimated probability that Bob is less than 1950 meters from the
+   selected point as 67.8%.
 
    Note that if 1920 meters were chosen for the distance from the
    selected point, the area of overlap is only 16196 square meters and
    the confidence is 49.8%.  Therefore, it is marginally more likely
-   that Bob is outside the region of interest, despite the center point
-   of his location estimate being within the region.
 
 
 
 
-
-
-Thomson & Winterbottom  Expires October 13, 2014               [Page 26]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 27]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
+
+   that Bob is outside the region of interest, despite the center point
+   of his location estimate being within the region.
 
 6.4.  PIDF-LO With Confidence Example
 
@@ -1506,10 +1565,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-
-
-
-Thomson & Winterbottom  Expires October 13, 2014               [Page 27]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 28]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1565,7 +1621,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 28]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 29]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1621,7 +1677,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 29]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 30]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1677,7 +1733,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 30]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 31]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1697,10 +1753,6 @@ Internet-Draft          Uncertainty & Confidence              April 2014
               "Threat Analysis of the Geopriv Protocol", RFC 3694,
               February 2004.
 
-   [RFC3825]  Polk, J., Schnizlein, J., and M. Linsner, "Dynamic Host
-              Configuration Protocol Option for Coordinate-based
-              Location Configuration Information", RFC 3825, July 2004.
-
    [RFC5139]  Thomson, M. and J. Winterbottom, "Revised Civic Location
               Format for Presence Information Data Format Location
               Object (PIDF-LO)", RFC 5139, February 2008.
@@ -1713,6 +1765,10 @@ Internet-Draft          Uncertainty & Confidence              April 2014
               Presence Information Data Format Location Object (PIDF-LO)
               Usage Clarification, Considerations, and Recommendations",
               RFC 5491, March 2009.
+
+   [RFC6225]  Polk, J., Linsner, M., Thomson, M., and B. Aboba, "Dynamic
+              Host Configuration Protocol Options for Coordinate-Based
+              Location Configuration Information", RFC 6225, July 2011.
 
    [RFC6280]  Barnes, R., Lepinski, M., Cooper, A., Morris, J.,
               Tschofenig, H., and H. Schulzrinne, "An Architecture for
@@ -1733,7 +1789,7 @@ Internet-Draft          Uncertainty & Confidence              April 2014
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 31]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 32]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1789,7 +1845,7 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 32]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 33]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1845,7 +1901,7 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 33]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 34]
 
 Internet-Draft          Uncertainty & Confidence              April 2014
 
@@ -1901,4 +1957,4 @@ Authors' Addresses
 
 
 
-Thomson & Winterbottom  Expires October 13, 2014               [Page 34]
+Thomson & Winterbottom  Expires October 16, 2014               [Page 35]
