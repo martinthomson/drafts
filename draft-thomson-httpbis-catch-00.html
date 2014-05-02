@@ -5,7 +5,7 @@
 <head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
   <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
 
-  <title>Deprecating the 'http:' URI Scheme </title>
+  <title>Client Authentication over TLS Connection Header </title>
 
   <style type="text/css" title="Xml2Rfc (sans serif)">
   /*<![CDATA[*/
@@ -376,12 +376,13 @@
   <link href="#rfc.toc" rel="Contents"/>
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
 <link href="#rfc.section.1.1" rel="Chapter" title="1.1 Conventions and Terminology"/>
-<link href="#rfc.section.2" rel="Chapter" title="2 MUST NOT use http:"/>
-<link href="#rfc.section.3" rel="Chapter" title="3 Why Not Opportunistically Encrypt?"/>
-<link href="#rfc.section.4" rel="Chapter" title="4 Why Not Trust on First Use?"/>
-<link href="#rfc.section.5" rel="Chapter" title="5 Why Not Externalize the Consequences?"/>
-<link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations"/>
-<link href="#rfc.references" rel="Chapter" title="7 Normative References"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Client Certificate Challenge"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Security Considerations"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 IANA Considerations"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="6 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="6.2 Informational References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -389,10 +390,10 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-httpbis-deprecate-http-latest" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-httpbis-catch-00" />
   <meta name="dct.issued" scheme="ISO8601" content="2014-5-2" />
-  <meta name="dct.abstract" content="The http: URI scheme has proven to be problematic.  This document deprecates its use.  " />
-  <meta name="description" content="The http: URI scheme has proven to be problematic.  This document deprecates its use.  " />
+  <meta name="dct.abstract" content="This document defines an HTTP header field that can be added to a response to indicate to a client that a response will only be provided over a TLS connection, and only if the client has provided a certificate on that connection.  " />
+  <meta name="description" content="This document defines an HTTP header field that can be added to a response to indicate to a client that a response will only be provided over a TLS connection, and only if the client has provided a certificate on that connection.  " />
 
 </head>
 
@@ -407,15 +408,11 @@
 </tr>
 <tr>
   <td class="left">Internet-Draft</td>
-  <td class="right"></td>
-</tr>
-<tr>
-  <td class="left">Updates: 2616 (if approved)</td>
-  <td class="right">May 2, 2014</td>
+  <td class="right">Mozilla</td>
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right"></td>
+  <td class="right">May 2, 2014</td>
 </tr>
 <tr>
   <td class="left">Expires: November 3, 2014</td>
@@ -426,13 +423,13 @@
     </tbody>
   </table>
 
-  <p class="title">Deprecating the 'http:' URI Scheme <br />
-  <span class="filename">draft-thomson-httpbis-deprecate-http-latest</span></p>
+  <p class="title">Client Authentication over TLS Connection Header <br />
+  <span class="filename">draft-thomson-httpbis-catch-00</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>The http: URI scheme has proven to be problematic.  This document deprecates its use.  </p>
+<p>This document defines an HTTP header field that can be added to a response to indicate to a client that a response will only be provided over a TLS connection, and only if the client has provided a certificate on that connection.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
@@ -453,42 +450,55 @@
 
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
 <li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
-<li>2.   <a href="#rfc.section.2">MUST NOT use http:</a></li>
-<li>3.   <a href="#rfc.section.3">Why Not Opportunistically Encrypt?</a></li>
-<li>4.   <a href="#rfc.section.4">Why Not Trust on First Use?</a></li>
-<li>5.   <a href="#rfc.section.5">Why Not Externalize the Consequences?</a></li>
-<li>6.   <a href="#rfc.section.6">Security Considerations</a></li>
-<li>7.   <a href="#rfc.references">Normative References</a></li>
+<li>2.   <a href="#rfc.section.2">Client Certificate Challenge</a></li>
+<li>3.   <a href="#rfc.section.3">Security Considerations</a></li>
+<li>4.   <a href="#rfc.section.4">IANA Considerations</a></li>
+<li>5.   <a href="#rfc.section.5">Acknowledgements</a></li>
+<li>6.   <a href="#rfc.references">References</a></li>
+<li>6.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>6.2.   <a href="#rfc.references.2">Informational References</a></li>
 <li><a href="#rfc.authors">Author's Address</a></li>
 
 
   </ul>
 
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
-<p id="rfc.section.1.p.1">Anyone who uses <a href="#RFC2616">HTTP</a> <cite title="NONE">[RFC2616]</cite> without <a href="#RFC5246">TLS</a> <cite title="NONE">[RFC5246]</cite> (i.e., <a href="#RFC2818">HTTPS</a> <cite title="NONE">[RFC2818]</cite>) runs a very real risk of being pwned.  </p>
-<p id="rfc.section.1.p.2">This document attempts to remedy this by prohibiting the use of the <samp>http:</samp> scheme.  </p>
+<p id="rfc.section.1.p.1">Client authentication in HTTP sometimes relies on certificate-based authentication of clients in TLS.  Some uses of client authentication rely on <a href="#RFC5246">Transport Layer Security (TLS)</a> <cite title="NONE">[RFC5246]</cite> renegotiation, triggering renegotiation in response to a request for a particular resource.  </p>
+<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> forbids the use of renegotiation, except for at the very beginning of a connection.  This makes addressing some client authentication use cases difficult.  </p>
+<p id="rfc.section.1.p.3">This document defines a new type of authentication scheme, "ClientCertificate" for use in <a href="#I-D.ietf-httpbis-p7-auth">HTTP authentication challenges</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>.  In combination with the 401 (Unauthorized) status code, this indicates that the resource requires client authentication at the TLS layer in order to access it.  </p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
-<p id="rfc.section.1.1.p.1">In cases where normative language needs to be emphasized, this document falls back on established shorthands for expressing interoperability requirements on implementations: the capitalized words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these is described in <a href="#RFC2119">[RFC2119]</a>.  </p>
-<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> MUST NOT use http:</h1>
-<p id="rfc.section.2.p.1">HTTP clients and servers MUST NOT access or provide resources over unsecured HTTP.  Thus, resources identified with <samp>http:</samp> URIs cannot be used.  </p>
-<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Why Not Opportunistically Encrypt?</h1>
-<p id="rfc.section.3.p.1">Opportunistic encryption is fine if your adversary isn't on-path.  It's pretty ineffectual if your adversary is able to interspose themselves somehow.  There is now evidence to suggest that interception capabilities are less difficult to achieve than originally thought.  </p>
-<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Why Not Trust on First Use?</h1>
-<p id="rfc.section.4.p.1">TOFU is unsatisfactory.  It is effectively a pin for the lifetime of a certificate, which raises several issues: </p>
+<p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Client Certificate Challenge</h1>
+<p id="rfc.section.2.p.1">A new kind of authentication scheme (<a href="#I-D.ietf-httpbis-p7-auth">auth-scheme</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>) for the <samp>WWW-Authenticate</samp> and <samp>Proxy-Authenticate</samp> header fields is defined with the name <samp>ClientCertificate</samp>.  </p>
+<p id="rfc.section.2.p.2">A challenge with this auth-scheme does not define the use of any parameters other than <samp>realm</samp>.  Other parameters MAY be used to provide a client with information it can use to select an appropriate certificate.  Unknown parameters MUST be ignored.  </p>
+<p id="rfc.section.2.p.3">This challenge cannot be satisfied by constructing an <a href="#I-D.ietf-httpbis-p7-auth">Authorization header field</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>, it can only be satisfied by making the request on a TLS connection where an appropriate certificate has been provided by the client.  </p>
+<p id="rfc.section.2.p.4">A client can use this information as a trigger to open a new connection and to use client authentication on that connection.  The client can use the mechanism in <a href="#I-D.thomson-tls-care">[I-D.thomson-tls-care]</a> to prompt the server to request a client certificate, to avoid the problem where the server doesn't know to make this request.  </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#security" id="security">Security Considerations</a></h1>
+<p id="rfc.section.3.p.1">Clients that support this authentication scheme will create a new connection each time that they see a challenge.  This could be exploited in order to generate additional load in terms of connections on both server and client.  </p>
+<p id="rfc.section.3.p.2">Using new connections for client authentication has additional processing costs to the client in proving access to the private keys associated with the client certificate; and to the server in proving access to the private keys associated with their certificate twice in the case that the client opts for confidentiality protection on the client certificate.  </p>
+<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> allows clients to use the same connection for multiple <a href="#RFC6454">origins</a> <cite title="NONE">[RFC6454]</cite>.  Certificate-based client authentication as defined by this specification is bound to a single origin.  This could create issues whereby the security properties of a connection could become confused.  Clients MUST ensure that a client-authenticated connection is only used for the origin for which it was created.  </p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
+<p id="rfc.section.4.p.1">IANA will [has] create[d] an entry in the HTTP Authentication Scheme Registry with the following information: </p>
 
-<ul>
-  <li>Key rollover cannot occur without exposure to an active attack, or some form of succession plan.  The typical key pinning succession plan involves providing alternative pins under the protection of a trusted certificate.  This sort of plan cannot be enacted without a lead time of at least equal to the pin duration.  The successor key has to be available for this entire period.  <br/><br/> From an operational perspective, this is difficult.  In order to ensure that the risk of loss, exposure, or exfiltration of the private key for the successor, the private key for the successor needs to be backed up and stored offline.  Any service that is unwilling to obtain third-party validation of their certificates seems unlikely to be inclined to perform this step.  </li>
-  <li>Pinning makes it difficult to scale out services without sharing of private keys.  Clients will reject connections that offer private keys other than the one they first see.  </li>
+<ul class="empty">
+  <li>ClientCertificate</li>
+  <li>RFCXXXX (this document)</li>
+  <li>This scheme does not rely on the Authorization header field.</li>
 </ul>
 
 <p> </p>
-<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> Why Not Externalize the Consequences?</h1>
-<p id="rfc.section.5.p.1">That's what we've been doing for years.  That turned out to be a political nightmare once people found out.  </p>
-<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#security" id="security">Security Considerations</a></h1>
-<p id="rfc.section.6.p.1">The IETF has partnered with several large organizations to perform enforcement.  Users of <samp>http:</samp> URIs will be pwned.  Operators of sites that offer <samp>http:</samp> resources will be pwned.  </p>
-<h1 id="rfc.references"><a href="#rfc.references">7.</a> Normative References</h1>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
+<p id="rfc.section.5.p.1">Eric Rescorla helped identify the problem and formulate this mechanism.  Julian Reschke hasn't provided any contribution yet, but he will.  </p>
+<h1 id="rfc.references"><a href="#rfc.references">6.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">6.1.</a> Normative References</h1>
 <table>
   <tbody>
+    <tr>
+      <td class="reference">
+        <b id="I-D.ietf-httpbis-p7-auth">[I-D.ietf-httpbis-p7-auth]</b>
+      </td>
+      <td class="top"><a>Fielding, R.</a> and <a>J. Reschke</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-p7-auth-26">Hypertext Transfer Protocol (HTTP/1.1): Authentication</a>", Internet-Draft draft-ietf-httpbis-p7-auth-26, February 2014.</td>
+    </tr>
     <tr>
       <td class="reference">
         <b id="RFC2119">[RFC2119]</b>
@@ -497,21 +507,44 @@
     </tr>
     <tr>
       <td class="reference">
-        <b id="RFC2616">[RFC2616]</b>
+        <b id="RFC2617">[RFC2617]</b>
       </td>
-      <td class="top"><a href="mailto:fielding@ics.uci.edu" title="Department of Information and Computer Science">Fielding, R.</a>, <a href="mailto:jg@w3.org" title="World Wide Web Consortium">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com" title="Compaq Computer Corporation">Mogul, J.</a>, <a href="mailto:frystyk@w3.org" title="World Wide Web Consortium">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com" title="Xerox Corporation">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com" title="Microsoft Corporation">Leach, P.</a> and <a href="mailto:timbl@w3.org" title="World Wide Web Consortium">T. Berners-Lee</a>, "<a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a>", RFC 2616, June 1999.</td>
+      <td class="top"><a href="mailto:john@math.nwu.edu" title="Northwestern University, Department of Mathematics">Franks, J.</a>, <a href="mailto:pbaker@verisign.com" title="Verisign Inc.">Hallam-Baker, P.</a>, <a href="mailto:jeff@AbiSource.com" title="AbiSource, Inc.">Hostetler, J.</a>, <a href="mailto:lawrence@agranat.com" title="Agranat Systems, Inc.">Lawrence, S.</a>, <a href="mailto:paulle@microsoft.com" title="Microsoft Corporation">Leach, P.</a>, <a title="Netscape Communications Corporation">Luotonen, A.</a> and <a href="mailto:stewart@OpenMarket.com" title="Open Market, Inc.">L. Stewart</a>, "<a href="http://tools.ietf.org/html/rfc2617">HTTP Authentication: Basic and Digest Access Authentication</a>", RFC 2617, June 1999.</td>
     </tr>
     <tr>
       <td class="reference">
-        <b id="RFC2818">[RFC2818]</b>
+        <b id="RFC5234">[RFC5234]</b>
       </td>
-      <td class="top"><a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/rfc2818">HTTP Over TLS</a>", RFC 2818, May 2000.</td>
+      <td class="top"><a>Crocker, D.</a> and <a>P. Overell</a>, "<a href="http://tools.ietf.org/html/rfc5234">Augmented BNF for Syntax Specifications: ABNF</a>", STD 68, RFC 5234, January 2008.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="RFC5246">[RFC5246]</b>
       </td>
       <td class="top"><a>Dierks, T.</a> and <a>E. Rescorla</a>, "<a href="http://tools.ietf.org/html/rfc5246">The Transport Layer Security (TLS) Protocol Version 1.2</a>", RFC 5246, August 2008.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC6454">[RFC6454]</b>
+      </td>
+      <td class="top"><a>Barth, A.</a>, "<a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a>", RFC 6454, December 2011.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">6.2.</a> Informational References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="I-D.ietf-httpbis-http2">[I-D.ietf-httpbis-http2]</b>
+      </td>
+      <td class="top"><a>Belshe, M.</a>, <a>Peon, R.</a> and <a>M. Thomson</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-http2-12">Hypertext Transfer Protocol version 2</a>", Internet-Draft draft-ietf-httpbis-http2-12, April 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="I-D.thomson-tls-care">[I-D.thomson-tls-care]</b>
+      </td>
+      <td class="top"><a>Thomson, M.</a>, "<a href="http://tools.ietf.org/html/draft-thomson-tls-care-00"></a>", Internet-Draft draft-thomson-tls-care-00, March 2014.</td>
     </tr>
   </tbody>
 </table>
@@ -526,14 +559,15 @@
 		<span class="family-name">Thomson</span>
 	  </span>
 	</span>
-	<span class="org vcardline"></span>
+	<span class="org vcardline">Mozilla</span>
 	<span class="adr">
-	  <span class="vcardline">-</span>
+	  <span class="vcardline">Suite 300</span>
+<span class="vcardline">650 Castro Street</span>
 
 	  <span class="vcardline">
-		<span class="locality"></span> 
-		<span class="region"></span>
-		<span class="code"></span>
+		<span class="locality">Mountain View</span>,  
+		<span class="region">CA</span> 
+		<span class="code">94041</span>
 	  </span>
 	  <span class="country-name vcardline">US</span>
 	</span>
