@@ -4,8 +4,8 @@
 
 TLS                                                           M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                          April 14, 2014
-Expires: October 16, 2014
+Intended status: Standards Track                             May 2, 2014
+Expires: November 3, 2014
 
 
            Client Authentication Request Extension for (D)TLS
@@ -32,7 +32,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 16, 2014.
+   This Internet-Draft will expire on November 3, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires October 16, 2014                [Page 1]
+Thomson                 Expires November 3, 2014                [Page 1]
 
-Internet-Draft                    CARE                        April 2014
+Internet-Draft                    CARE                          May 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires October 16, 2014                [Page 2]
+Thomson                 Expires November 3, 2014                [Page 2]
 
-Internet-Draft                    CARE                        April 2014
+Internet-Draft                    CARE                          May 2014
 
 
    For that reason, a client can initiate a new connection when it
@@ -165,9 +165,9 @@ Internet-Draft                    CARE                        April 2014
 
 
 
-Thomson                 Expires October 16, 2014                [Page 3]
+Thomson                 Expires November 3, 2014                [Page 3]
 
-Internet-Draft                    CARE                        April 2014
+Internet-Draft                    CARE                          May 2014
 
 
 5.  IANA Considerations
@@ -221,4 +221,4 @@ Author's Address
 
 
 
-Thomson                 Expires October 16, 2014                [Page 4]
+Thomson                 Expires November 3, 2014                [Page 4]

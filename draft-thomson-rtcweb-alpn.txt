@@ -4,8 +4,8 @@
 
 RTCWEB                                                        M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                          April 14, 2014
-Expires: October 16, 2014
+Intended status: Standards Track                             May 2, 2014
+Expires: November 3, 2014
 
 
 Application Layer Protocol Negotiation for Web Real-Time Communications
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 16, 2014.
+   This Internet-Draft will expire on November 3, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires October 16, 2014                [Page 1]
+Thomson                 Expires November 3, 2014                [Page 1]
 
-Internet-Draft               ALPN for WebRTC                  April 2014
+Internet-Draft               ALPN for WebRTC                    May 2014
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires October 16, 2014                [Page 2]
+Thomson                 Expires November 3, 2014                [Page 2]
 
-Internet-Draft               ALPN for WebRTC                  April 2014
+Internet-Draft               ALPN for WebRTC                    May 2014
 
 
    c-webrtc  The DTLS session is used for confidential WebRTC
@@ -165,9 +165,9 @@ Internet-Draft               ALPN for WebRTC                  April 2014
 
 
 
-Thomson                 Expires October 16, 2014                [Page 3]
+Thomson                 Expires November 3, 2014                [Page 3]
 
-Internet-Draft               ALPN for WebRTC                  April 2014
+Internet-Draft               ALPN for WebRTC                    May 2014
 
 
    is produced from a session using the "c-webrtc" identifier MUST only
@@ -221,9 +221,9 @@ Internet-Draft               ALPN for WebRTC                  April 2014
 
 
 
-Thomson                 Expires October 16, 2014                [Page 4]
+Thomson                 Expires November 3, 2014                [Page 4]
 
-Internet-Draft               ALPN for WebRTC                  April 2014
+Internet-Draft               ALPN for WebRTC                    May 2014
 
 
    cunning arrangement of mirrors could variously be used to record or
@@ -277,9 +277,9 @@ Internet-Draft               ALPN for WebRTC                  April 2014
 
 
 
-Thomson                 Expires October 16, 2014                [Page 5]
+Thomson                 Expires November 3, 2014                [Page 5]
 
-Internet-Draft               ALPN for WebRTC                  April 2014
+Internet-Draft               ALPN for WebRTC                    May 2014
 
 
    Specification:  This document (RFCXXXX)
@@ -326,16 +326,16 @@ Internet-Draft               ALPN for WebRTC                  April 2014
 
    [I-D.ietf-rtcweb-transports]
               Alvestrand, H., "Transports for RTCWEB", draft-ietf-
-              rtcweb-transports-03 (work in progress), March 2014.
+              rtcweb-transports-04 (work in progress), April 2014.
 
    [RFC4960]  Stewart, R., "Stream Control Transmission Protocol", RFC
               4960, September 2007.
 
 
 
-Thomson                 Expires October 16, 2014                [Page 6]
+Thomson                 Expires November 3, 2014                [Page 6]
 
-Internet-Draft               ALPN for WebRTC                  April 2014
+Internet-Draft               ALPN for WebRTC                    May 2014
 
 
    [RFC5245]  Rosenberg, J., "Interactive Connectivity Establishment
@@ -389,4 +389,4 @@ Author's Address
 
 
 
-Thomson                 Expires October 16, 2014                [Page 7]
+Thomson                 Expires November 3, 2014                [Page 7]
