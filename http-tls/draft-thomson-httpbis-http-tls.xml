@@ -1,0 +1,274 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="std" ipr="trust200902" docName="draft-thomson-httpbis-http-tls-latest">
+  <front>
+    <title abbrev="TLS for http:">
+      Using Transport Layer Security for http URIs
+    </title>
+
+
+    <author initials="M." surname="Thomson" fullname="Martin Thomson">
+      <organization>Mozilla</organization>
+      <address>
+        <postal>
+          <street>Suite 300</street>
+          <street>331 E Evelyn Street</street>
+          <city>Mountain View</city>
+          <region>CA</region>
+          <code>94041</code>
+          <country>US</country>
+        </postal>
+        <email>martin.thomson@gmail.com</email>
+      </address>
+    </author>
+
+    <date year="2014"/>
+    <area>APPS</area>
+    <workgroup>HTTPBIS</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <keyword>HTTP</keyword>
+    <keyword>TLS</keyword>
+    <keyword>UTA</keyword>
+
+    <abstract>
+      <t>
+        This describes how HTTP URIs can be resolved using Transport Layer Security (TLS).
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>
+        The resolution of <xref target="I-D.ietf-httpbis-p1-messaging">HTTP URIs</xref> provides no
+        security guarantees whatsoever.  This document describes a mechanism that would grant a
+        measure of protection against passive monitoring by opportunistically using <xref
+        target="RFC5246">Transport Layer Security (TLS)</xref>.
+      </t>
+      <t>
+        This document describes a ways that <xref target="I-D.ietf-httpbis-alt-svc">alternative
+        services</xref> can be used in combination with <xref
+        target="I-D.ietf-httpbis-http2">HTTP/2</xref> or <xref
+        target="I-D.ietf-httpbis-p1-messaging">HTTP/1.1</xref> <xref target="RFC2818">over
+        TLS</xref> to resolve HTTP URIs using TLS.
+      </t>
+      <t>
+        A secondary method is defined where clients opportunistically use a connection to port 443.
+      </t>
+
+      <t>
+        A strawman proposal that enables some protection against active attacks, is included in
+        <xref target="persistence"/>.
+      </t>
+
+      <section anchor="terminology" title="Conventions and Terminology">
+        <t>
+         At times, this document falls back on shorthands for establishing interoperability
+         requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These
+         terms are defined in <xref target="RFC2119"/>.
+       </t>
+      </section>
+    </section>
+
+    <section title="Alternative Services">
+      <t>
+        A server that supports the resolution of HTTP URIs can provide an <xref
+        target="I-D.ietf-httpbis-alt-svc">alternative service advertisement</xref> for a protocol
+        that uses TLS, such as "h2" (<xref target="I-D.ietf-httpbis-http2"/>), or "http/1.1" (<xref
+        target="RFC2818"/>).
+      </t>
+      <t>
+        A client that sees this advertisement can direct future requests for the associated origin
+        to the alternative service.
+      </t>
+      <t>
+        A client that places the importance of passive protections over performance might choose to
+        send no further requests over cleartext connections if it detects the alternative service
+        advertisement.  If the alternative service cannot be successfully connected, the client
+        might resume its use of the cleartext connection.
+      </t>
+      <t>
+        A client can also explicitly probe for an alternative service advertisement by sending a
+        request that bears little or no sensitive information, such as one with the <spanx
+        style="verb">OPTIONS</spanx> method.  Clients with expired alternative services information
+        could make a similar request in parallel to an attempt to contact an alternative service, to
+        minimize the delays that might be incurred by failing to contact the alternative service.
+      </t>
+    </section>
+
+    <section title="Detecting Alternatives by Inference">
+      <t>
+        A client that resolves an HTTP URI that does not explicitly include a port (for example,
+        <spanx style="verb">http://example.com/en/index.html</spanx>) MAY attempt to send requests
+        for that resource to TCP port 443 using either <xref
+        target="I-D.ietf-httpbis-http2">HTTP/2</xref> or <xref target="RFC2818">HTTP/1.1 over
+        TLS</xref>.
+      </t>
+      <t>
+        A client can take an inability to establish a TCP connection on port 443 or a 421 status
+        code (see <xref target="I-D.ietf-httpbis-alt-svc"/>) as a strong signal that the server does
+        not support requests for HTTP URIs on this port.
+      </t>
+      <t>
+        A server that provides a 404 or 501 status code could be unable to service requests for HTTP
+        URIs over TLS.  Clients SHOULD avoid sending further requests for HTTP URIs over TLS to that
+        server.
+      </t>
+    </section>
+
+    <section title="Server Authentication">
+      <t>
+        There are no expectations with respect to security when it comes to resolving HTTP URIs.
+        Requiring server authentication, as described in <xref target="RFC2818"/>, creates a number
+        of deployment challenges.
+      </t>
+      <t>
+        When connecting to a service, clients do not perform the server authentication procedure
+        described in Section 3.1 of <xref target="RFC2818"/>.  A server is therefore able to provide
+        any certificate, or even select TLS cipher suites that do not include authentication.
+      </t>
+      <t>
+        A client MAY perform additional checks on the certificate that it is offered (if the server
+        does not select an unauthenticated TLS cipher suite).  For instance, a client could examine
+        the certificate to see if it has changed over time.
+      </t>
+
+      <section title="Interaction with HTTPS URIs">
+        <t>
+          A service that is discovered to support HTTP URIs might concurrently support HTTPS URIs.
+          If a connection is initially created without authenticating the server, requests for HTTPS
+          resources cannot be sent over that connection until the server certificate is successfully
+          authenticated (as described in Section 3.1 of <xref target="RFC2818"/>).
+        </t>
+      </section>
+    </section>
+
+    <section anchor="persistence" title="Persisting use of TLS">
+      <t>
+        [[Open Issue: it seems desirable that this could become sticky to avoid downgrade attacks.
+        Here's a strawman proposal for dealing with that.]]
+      </t>
+      <t>
+        Two factors ensure that active attacks are trivial to mount:
+        <list style="symbols">
+          <t>
+            A client that doesn't perform authentication is easily made victim of server impersonation.
+          </t>
+          <t>
+            A client that is willing to use cleartext to resolve the resource will do so if access
+            to any TLS-enabled alternative services is blocked at the network layer.
+          </t>
+        </list>
+      </t>
+
+      <t>
+        Both of these issues can be limited by having a server make a commitment to providing
+        service over TLS in future requests.  A server makes this commitment by sending a <spanx
+        style="verb">HTTP-TLS</spanx> header field.
+      </t>
+      <figure>
+        <artwork type="inline"><![CDATA[
+HTTP/1.1 200 OK
+Content-Type: text/html
+Cache-Control: 600
+Age: 30
+Date: Thu, 1 May 2014 16:20:09 GMT
+HTTP-TLS: ma=3600
+]]></artwork>
+      </figure>
+      <t>
+        A client that has has not authenticated the server MAY do so when it sees the <spanx
+        style="verb">HTTP-TLS</spanx> header field.  The procedure described in Section 3.1 of <xref
+        target="RFC2818"/> MUST be used, without regard to the value of the alternative services.
+        If server authentication is successful, the client can persistently store a record that the
+        requested <xref target="RFC6454">origin</xref> can be retrieved over TLS.
+      </t>
+      <figure>
+        <artwork type="inline"><![CDATA[
+   HTTP-TLS     = 1#parameter
+]]></artwork>
+      </figure>
+      <t>
+        Persisted information expires after a period determined by the value of the "ma" parameter.
+        See Section 4.2.3 of <xref target="I-D.ietf-httpbis-p6-cache"/> for details of
+        determining response age.
+      </t>
+      <figure>
+        <artwork type="inline"><![CDATA[
+   ma-parameter     = delta-seconds
+]]></artwork>
+      </figure>
+      <t>
+        Requests for an origin that has a persisted, unexpired value for <spanx
+        style="verb">HTTP-TLS</spanx> MUST fail if they cannot be made over TLS.
+      </t>
+      <t>
+        Once a server has indicated that it will support authenticated TLS, a client MAY use <xref
+        target="I-D.ietf-websec-key-pinning">key pinning</xref> or any other mechanism that would
+        otherwise be restricted to use with HTTPS URIs, provided that the mechanism can be
+        restricted to a single HTTP origin.
+      </t>
+    </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>
+        The basic mechanisms here do absolutely nothing against an active attack.  <xref
+        target="persistence"/> describes a system whereby return business can be protected from
+        active attack.
+      </t>
+    </section>
+
+    <section anchor="iana" title="IANA Considerations">
+      <t>
+        Register HTTP-TLS if it makes sense to do so.
+      </t>
+    </section>
+
+    <section anchor="ack" title="Acknowledgements">
+      <t>
+        Mark Nottingham provided useful input, in particular <xref
+        target="I-D.nottingham-http2-encryption"/>.
+      </t>
+    </section>
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-alt-svc.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p1-messaging.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p6-cache.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5246.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6454.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6797.xml"?>
+    </references>
+    <references title="Informative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-websec-key-pinning.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.nottingham-http2-encryption.xml"?>
+    </references>
+
+    <!--
+        <section title="Change Log">
+        <t>[[The RFC Editor is requested to remove this section at publication.]]</t>
+        <t>Changes since -0-1:
+        <list style="symbols">
+        <t>Document created.</t>
+        </list>
+        </t>
+        </section>
+    -->
+  </back>
+</rfc>
