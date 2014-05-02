@@ -10,10 +10,10 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-thomson-httpbis-catch-latest">
+<rfc category="std" ipr="trust200902" docName="draft-thomson-httpbis-cant-latest">
   <front>
-    <title abbrev="CATCH">
-      Client Authentication over TLS Connection Header
+    <title abbrev="CANT">
+      Client Authentication over New TLS Connection
     </title>
 
     <author initials="M." surname="Thomson" fullname="Martin Thomson">
@@ -62,7 +62,7 @@
     <abstract>
       <t>
         This document defines an HTTP authentication scheme that can be added to an error response
-        to indicate to a client that a successful response will only be provided over a TLS
+        to indicate to a client that a successful response will only be provided over a new TLS
         connection, and only if the client has provided a certificate on that connection.
       </t>
     </abstract>
