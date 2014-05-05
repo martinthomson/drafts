@@ -377,16 +377,15 @@
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
 <link href="#rfc.section.1.1" rel="Chapter" title="1.1 Conventions and Terminology"/>
 <link href="#rfc.section.2" rel="Chapter" title="2 Alternative Services"/>
-<link href="#rfc.section.3" rel="Chapter" title="3 Detecting Alternatives by Inference"/>
-<link href="#rfc.section.4" rel="Chapter" title="4 Server Authentication"/>
-<link href="#rfc.section.4.1" rel="Chapter" title="4.1 Interaction with HTTPS URIs"/>
-<link href="#rfc.section.5" rel="Chapter" title="5 Persisting use of TLS"/>
-<link href="#rfc.section.6" rel="Chapter" title="6 Security Considerations"/>
-<link href="#rfc.section.7" rel="Chapter" title="7 IANA Considerations"/>
-<link href="#rfc.section.8" rel="Chapter" title="8 Acknowledgements"/>
-<link href="#rfc.references" rel="Chapter" title="9 References"/>
-<link href="#rfc.references.1" rel="Chapter" title="9.1 Normative References"/>
-<link href="#rfc.references.2" rel="Chapter" title="9.2 Informative References"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Server Authentication"/>
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Interaction with HTTPS URIs"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Persisting use of TLS"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Security Considerations"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
+<link href="#rfc.section.7" rel="Chapter" title="7 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="8 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="8.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="8.2 Informative References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -395,7 +394,7 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-httpbis-http-tls-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-5-2" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-5-5" />
   <meta name="dct.abstract" content="This describes how HTTP URIs can be resolved using Transport Layer Security (TLS).  " />
   <meta name="description" content="This describes how HTTP URIs can be resolved using Transport Layer Security (TLS).  " />
 
@@ -416,10 +415,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">May 2, 2014</td>
+  <td class="right">May 5, 2014</td>
 </tr>
 <tr>
-  <td class="left">Expires: November 3, 2014</td>
+  <td class="left">Expires: November 6, 2014</td>
   <td class="right"></td>
 </tr>
 
@@ -440,7 +439,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 3, 2014.</p>
+<p>This Internet-Draft will expire on November 6, 2014.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -455,16 +454,15 @@
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
 <li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
 <li>2.   <a href="#rfc.section.2">Alternative Services</a></li>
-<li>3.   <a href="#rfc.section.3">Detecting Alternatives by Inference</a></li>
-<li>4.   <a href="#rfc.section.4">Server Authentication</a></li>
-<li>4.1.   <a href="#rfc.section.4.1">Interaction with HTTPS URIs</a></li>
-<li>5.   <a href="#rfc.section.5">Persisting use of TLS</a></li>
-<li>6.   <a href="#rfc.section.6">Security Considerations</a></li>
-<li>7.   <a href="#rfc.section.7">IANA Considerations</a></li>
-<li>8.   <a href="#rfc.section.8">Acknowledgements</a></li>
-<li>9.   <a href="#rfc.references">References</a></li>
-<li>9.1.   <a href="#rfc.references.1">Normative References</a></li>
-<li>9.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li>3.   <a href="#rfc.section.3">Server Authentication</a></li>
+<li>3.1.   <a href="#rfc.section.3.1">Interaction with HTTPS URIs</a></li>
+<li>4.   <a href="#rfc.section.4">Persisting use of TLS</a></li>
+<li>5.   <a href="#rfc.section.5">Security Considerations</a></li>
+<li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
+<li>7.   <a href="#rfc.section.7">Acknowledgements</a></li>
+<li>8.   <a href="#rfc.references">References</a></li>
+<li>8.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>8.2.   <a href="#rfc.references.2">Informative References</a></li>
 <li><a href="#rfc.authors">Author's Address</a></li>
 
 
@@ -473,8 +471,7 @@
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
 <p id="rfc.section.1.p.1">The resolution of <a href="#I-D.ietf-httpbis-p1-messaging">HTTP URIs</a> <cite title="NONE">[I-D.ietf-httpbis-p1-messaging]</cite> provides no security guarantees whatsoever.  This document describes a mechanism that would grant a measure of protection against passive monitoring by opportunistically using <a href="#RFC5246">Transport Layer Security (TLS)</a> <cite title="NONE">[RFC5246]</cite>.  </p>
 <p id="rfc.section.1.p.2">This document describes a ways that <a href="#I-D.ietf-httpbis-alt-svc">alternative services</a> <cite title="NONE">[I-D.ietf-httpbis-alt-svc]</cite> can be used in combination with <a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> or <a href="#I-D.ietf-httpbis-p1-messaging">HTTP/1.1</a> <cite title="NONE">[I-D.ietf-httpbis-p1-messaging]</cite> <a href="#RFC2818">over TLS</a> <cite title="NONE">[RFC2818]</cite> to resolve HTTP URIs using TLS.  </p>
-<p id="rfc.section.1.p.3">A secondary method is defined where clients opportunistically use a connection to port 443.  </p>
-<p id="rfc.section.1.p.4">A strawman proposal that enables some protection against active attacks, is included in <a href="#persistence">Section 5</a>.  </p>
+<p id="rfc.section.1.p.3">A strawman proposal that enables some protection against active attacks, is included in <a href="#persistence">Section 4</a>.  </p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
 <p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Alternative Services</h1>
@@ -482,19 +479,15 @@
 <p id="rfc.section.2.p.2">A client that sees this advertisement can direct future requests for the associated origin to the alternative service.  </p>
 <p id="rfc.section.2.p.3">A client that places the importance of passive protections over performance might choose to send no further requests over cleartext connections if it detects the alternative service advertisement.  If the alternative service cannot be successfully connected, the client might resume its use of the cleartext connection.  </p>
 <p id="rfc.section.2.p.4">A client can also explicitly probe for an alternative service advertisement by sending a request that bears little or no sensitive information, such as one with the <samp>OPTIONS</samp> method.  Clients with expired alternative services information could make a similar request in parallel to an attempt to contact an alternative service, to minimize the delays that might be incurred by failing to contact the alternative service.  </p>
-<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Detecting Alternatives by Inference</h1>
-<p id="rfc.section.3.p.1">A client that resolves an HTTP URI that does not explicitly include a port (for example, <samp>http://example.com/en/index.html</samp>) MAY attempt to send requests for that resource to TCP port 443 using either <a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> or <a href="#RFC2818">HTTP/1.1 over TLS</a> <cite title="NONE">[RFC2818]</cite>.  </p>
-<p id="rfc.section.3.p.2">A client can take an inability to establish a TCP connection on port 443 or a 421 status code (see <a href="#I-D.ietf-httpbis-alt-svc">[I-D.ietf-httpbis-alt-svc]</a>) as a strong signal that the server does not support requests for HTTP URIs on this port.  </p>
-<p id="rfc.section.3.p.3">A server that provides a 404 or 501 status code could be unable to service requests for HTTP URIs over TLS.  Clients SHOULD avoid sending further requests for HTTP URIs over TLS to that server.  </p>
-<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> Server Authentication</h1>
-<p id="rfc.section.4.p.1">There are no expectations with respect to security when it comes to resolving HTTP URIs.  Requiring server authentication, as described in <a href="#RFC2818">[RFC2818]</a>, creates a number of deployment challenges.  </p>
-<p id="rfc.section.4.p.2">When connecting to a service, clients do not perform the server authentication procedure described in Section 3.1 of <a href="#RFC2818">[RFC2818]</a>.  A server is therefore able to provide any certificate, or even select TLS cipher suites that do not include authentication.  </p>
-<p id="rfc.section.4.p.3">A client MAY perform additional checks on the certificate that it is offered (if the server does not select an unauthenticated TLS cipher suite).  For instance, a client could examine the certificate to see if it has changed over time.  </p>
-<h1 id="rfc.section.4.1"><a href="#rfc.section.4.1">4.1.</a> Interaction with HTTPS URIs</h1>
-<p id="rfc.section.4.1.p.1">A service that is discovered to support HTTP URIs might concurrently support HTTPS URIs.  If a connection is initially created without authenticating the server, requests for HTTPS resources cannot be sent over that connection until the server certificate is successfully authenticated (as described in Section 3.1 of <a href="#RFC2818">[RFC2818]</a>).  </p>
-<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#persistence" id="persistence">Persisting use of TLS</a></h1>
-<p id="rfc.section.5.p.1">[[Open Issue: it seems desirable that this could become sticky to avoid downgrade attacks.  Here's a strawman proposal for dealing with that.]] </p>
-<p id="rfc.section.5.p.2">Two factors ensure that active attacks are trivial to mount: </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Server Authentication</h1>
+<p id="rfc.section.3.p.1">There are no expectations with respect to security when it comes to resolving HTTP URIs.  Requiring server authentication, as described in <a href="#RFC2818">[RFC2818]</a>, creates a number of deployment challenges.  </p>
+<p id="rfc.section.3.p.2">When connecting to a service, clients do not perform the server authentication procedure described in Section 3.1 of <a href="#RFC2818">[RFC2818]</a>.  A server is therefore able to provide any certificate, or even select TLS cipher suites that do not include authentication.  </p>
+<p id="rfc.section.3.p.3">A client MAY perform additional checks on the certificate that it is offered (if the server does not select an unauthenticated TLS cipher suite).  For instance, a client could examine the certificate to see if it has changed over time.  </p>
+<h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> Interaction with HTTPS URIs</h1>
+<p id="rfc.section.3.1.p.1">A service that is discovered to support HTTP URIs might concurrently support HTTPS URIs.  If a connection is initially created without authenticating the server, requests for HTTPS resources cannot be sent over that connection until the server certificate is successfully authenticated (as described in Section 3.1 of <a href="#RFC2818">[RFC2818]</a>).  </p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#persistence" id="persistence">Persisting use of TLS</a></h1>
+<p id="rfc.section.4.p.1">[[Open Issue: it seems desirable that this could become sticky to avoid downgrade attacks.  Here's a strawman proposal for dealing with that.]] </p>
+<p id="rfc.section.4.p.2">Two factors ensure that active attacks are trivial to mount: </p>
 
 <ul>
   <li>A client that doesn't perform authentication is easily made victim of server impersonation.  </li>
@@ -502,7 +495,7 @@
 </ul>
 
 <p> </p>
-<p id="rfc.section.5.p.3">Both of these issues can be limited by having a server make a commitment to providing service over TLS in future requests.  A server makes this commitment by sending a <samp>HTTP-TLS</samp> header field.  </p>
+<p id="rfc.section.4.p.3">Both of these issues can be limited by having a server make a commitment to providing service over TLS in future requests.  A server makes this commitment by sending a <samp>HTTP-TLS</samp> header field.  </p>
 <pre>
 HTTP/1.1 200 OK
 Content-Type: text/html
@@ -511,24 +504,26 @@ Age: 30
 Date: Thu, 1 May 2014 16:20:09 GMT
 HTTP-TLS: ma=3600
 </pre>
-<p id="rfc.section.5.p.4">A client that has has not authenticated the server MAY do so when it sees the <samp>HTTP-TLS</samp> header field.  The procedure described in Section 3.1 of <a href="#RFC2818">[RFC2818]</a> MUST be used, without regard to the value of the alternative services.  If server authentication is successful, the client can persistently store a record that the requested <a href="#RFC6454">origin</a> <cite title="NONE">[RFC6454]</cite> can be retrieved over TLS.  </p>
+<p id="rfc.section.4.p.4">A client that has has not authenticated the server MAY do so when it sees the <samp>HTTP-TLS</samp> header field.  The procedure described in Section 3.1 of <a href="#RFC2818">[RFC2818]</a> MUST be used, without regard to the value of the alternative services.  If server authentication is successful, the client can persistently store a record that the requested <a href="#RFC6454">origin</a> <cite title="NONE">[RFC6454]</cite> can be retrieved over TLS.  </p>
 <pre>
    HTTP-TLS     = 1#parameter
 </pre>
-<p id="rfc.section.5.p.5">Persisted information expires after a period determined by the value of the "ma" parameter.  See Section 4.2.3 of <a href="#I-D.ietf-httpbis-p6-cache">[I-D.ietf-httpbis-p6-cache]</a> for details of determining response age.  </p>
+<p id="rfc.section.4.p.5">Persisted information expires after a period determined by the value of the "ma" parameter.  See Section 4.2.3 of <a href="#I-D.ietf-httpbis-p6-cache">[I-D.ietf-httpbis-p6-cache]</a> for details of determining response age.  </p>
 <pre>
    ma-parameter     = delta-seconds
 </pre>
-<p id="rfc.section.5.p.6">Requests for an origin that has a persisted, unexpired value for <samp>HTTP-TLS</samp> MUST fail if they cannot be made over TLS.  </p>
-<p id="rfc.section.5.p.7">Once a server has indicated that it will support authenticated TLS, a client MAY use <a href="#I-D.ietf-websec-key-pinning">key pinning</a> <cite title="NONE">[I-D.ietf-websec-key-pinning]</cite> or any other mechanism that would otherwise be restricted to use with HTTPS URIs, provided that the mechanism can be restricted to a single HTTP origin.  </p>
-<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#security" id="security">Security Considerations</a></h1>
-<p id="rfc.section.6.p.1">The basic mechanisms here do absolutely nothing against an active attack.  <a href="#persistence">Section 5</a> describes a system whereby return business can be protected from active attack.  </p>
-<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
-<p id="rfc.section.7.p.1">Register HTTP-TLS if it makes sense to do so.  </p>
-<h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
-<p id="rfc.section.8.p.1">Mark Nottingham provided useful input, in particular <a href="#I-D.nottingham-http2-encryption">[I-D.nottingham-http2-encryption]</a>.  </p>
-<h1 id="rfc.references"><a href="#rfc.references">9.</a> References</h1>
-<h1 id="rfc.references.1"><a href="#rfc.references.1">9.1.</a> Normative References</h1>
+<p id="rfc.section.4.p.6">Requests for an origin that has a persisted, unexpired value for <samp>HTTP-TLS</samp> MUST fail if they cannot be made over TLS.  </p>
+<p id="rfc.section.4.p.7">To avoid situations where a persisted value of <samp>HTTP-TLS</samp> causes a client to be unable to contact a site, clients SHOULD limit the time that a value is persisted for a given origin.  A hard limit might be set to a month.  A lower limit might be appropriate for initial occurrences of <samp>HTTP-TLS</samp>; the certainty that a site has set a correct value - and the corresponding limit on persistence - can increase as the value is seen more over time.  </p>
+<p id="rfc.section.4.p.8">Once a server has indicated that it will support authenticated TLS, a client MAY use <a href="#I-D.ietf-websec-key-pinning">key pinning</a> <cite title="NONE">[I-D.ietf-websec-key-pinning]</cite> or any other mechanism that would otherwise be restricted to use with HTTPS URIs, provided that the mechanism can be restricted to a single HTTP origin.  </p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#security" id="security">Security Considerations</a></h1>
+<p id="rfc.section.5.p.1">The basic mechanisms here do absolutely nothing against an active attack.  <a href="#persistence">Section 4</a> describes a system whereby return business can be protected from active attack.  </p>
+<p id="rfc.section.5.p.2">Clients that persist state for origins can be tracked over time based on their use of this information.  Persisted information can be cleared.  A browser client MUST included this information when clearing other origin-based state (i.e., cookies).  </p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
+<p id="rfc.section.6.p.1">Register HTTP-TLS if it makes sense to do so.  </p>
+<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
+<p id="rfc.section.7.p.1">Mark Nottingham provided useful input, in particular <a href="#I-D.nottingham-http2-encryption">[I-D.nottingham-http2-encryption]</a>.  </p>
+<h1 id="rfc.references"><a href="#rfc.references">8.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">8.1.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -587,7 +582,7 @@ HTTP-TLS: ma=3600
     </tr>
   </tbody>
 </table>
-<h1 id="rfc.references.2"><a href="#rfc.references.2">9.2.</a> Informative References</h1>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">8.2.</a> Informative References</h1>
 <table>
   <tbody>
     <tr>

@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                             May 2, 2014
-Expires: November 3, 2014
+Intended status: Standards Track                             May 5, 2014
+Expires: November 6, 2014
 
 
               Using Transport Layer Security for http URIs
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 3, 2014.
+   This Internet-Draft will expire on November 6, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                 Expires November 3, 2014                [Page 1]
+Thomson                 Expires November 6, 2014                [Page 1]
 
 Internet-Draft                TLS for http:                     May 2014
 
@@ -63,16 +63,15 @@ Table of Contents
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
      1.1.  Conventions and Terminology . . . . . . . . . . . . . . .   2
    2.  Alternative Services  . . . . . . . . . . . . . . . . . . . .   2
-   3.  Detecting Alternatives by Inference . . . . . . . . . . . . .   3
-   4.  Server Authentication . . . . . . . . . . . . . . . . . . . .   3
-     4.1.  Interaction with HTTPS URIs . . . . . . . . . . . . . . .   4
-   5.  Persisting use of TLS . . . . . . . . . . . . . . . . . . . .   4
-   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   7.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
-   8.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   5
-   9.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
-     9.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
-     9.2.  Informative References  . . . . . . . . . . . . . . . . .   6
+   3.  Server Authentication . . . . . . . . . . . . . . . . . . . .   3
+     3.1.  Interaction with HTTPS URIs . . . . . . . . . . . . . . .   3
+   4.  Persisting use of TLS . . . . . . . . . . . . . . . . . . . .   3
+   5.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
+   6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   5
+   7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   5
+   8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   5
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   5
+     8.2.  Informative References  . . . . . . . . . . . . . . . . .   6
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   6
 
 1.  Introduction
@@ -88,11 +87,8 @@ Table of Contents
    [I-D.ietf-httpbis-http2] or HTTP/1.1 [I-D.ietf-httpbis-p1-messaging]
    over TLS [RFC2818] to resolve HTTP URIs using TLS.
 
-   A secondary method is defined where clients opportunistically use a
-   connection to port 443.
-
    A strawman proposal that enables some protection against active
-   attacks, is included in Section 5.
+   attacks, is included in Section 4.
 
 1.1.  Conventions and Terminology
 
@@ -105,20 +101,18 @@ Table of Contents
 
    A server that supports the resolution of HTTP URIs can provide an
    alternative service advertisement [I-D.ietf-httpbis-alt-svc] for a
-
-
-
-
-Thomson                 Expires November 3, 2014                [Page 2]
-
-Internet-Draft                TLS for http:                     May 2014
-
-
    protocol that uses TLS, such as "h2" ([I-D.ietf-httpbis-http2]), or
    "http/1.1" ([RFC2818]).
 
    A client that sees this advertisement can direct future requests for
    the associated origin to the alternative service.
+
+
+
+Thomson                 Expires November 6, 2014                [Page 2]
+
+Internet-Draft                TLS for http:                     May 2014
+
 
    A client that places the importance of passive protections over
    performance might choose to send no further requests over cleartext
@@ -134,23 +128,7 @@ Internet-Draft                TLS for http:                     May 2014
    minimize the delays that might be incurred by failing to contact the
    alternative service.
 
-3.  Detecting Alternatives by Inference
-
-   A client that resolves an HTTP URI that does not explicitly include a
-   port (for example, "http://example.com/en/index.html") MAY attempt to
-   send requests for that resource to TCP port 443 using either HTTP/2
-   [I-D.ietf-httpbis-http2] or HTTP/1.1 over TLS [RFC2818].
-
-   A client can take an inability to establish a TCP connection on port
-   443 or a 421 status code (see [I-D.ietf-httpbis-alt-svc]) as a strong
-   signal that the server does not support requests for HTTP URIs on
-   this port.
-
-   A server that provides a 404 or 501 status code could be unable to
-   service requests for HTTP URIs over TLS.  Clients SHOULD avoid
-   sending further requests for HTTP URIs over TLS to that server.
-
-4.  Server Authentication
+3.  Server Authentication
 
    There are no expectations with respect to security when it comes to
    resolving HTTP URIs.  Requiring server authentication, as described
@@ -161,21 +139,12 @@ Internet-Draft                TLS for http:                     May 2014
    server is therefore able to provide any certificate, or even select
    TLS cipher suites that do not include authentication.
 
-
-
-
-
-Thomson                 Expires November 3, 2014                [Page 3]
-
-Internet-Draft                TLS for http:                     May 2014
-
-
    A client MAY perform additional checks on the certificate that it is
    offered (if the server does not select an unauthenticated TLS cipher
    suite).  For instance, a client could examine the certificate to see
    if it has changed over time.
 
-4.1.  Interaction with HTTPS URIs
+3.1.  Interaction with HTTPS URIs
 
    A service that is discovered to support HTTP URIs might concurrently
    support HTTPS URIs.  If a connection is initially created without
@@ -184,13 +153,22 @@ Internet-Draft                TLS for http:                     May 2014
    successfully authenticated (as described in Section 3.1 of
    [RFC2818]).
 
-5.  Persisting use of TLS
+4.  Persisting use of TLS
 
    [[Open Issue: it seems desirable that this could become sticky to
    avoid downgrade attacks.  Here's a strawman proposal for dealing with
    that.]]
 
    Two factors ensure that active attacks are trivial to mount:
+
+
+
+
+
+Thomson                 Expires November 6, 2014                [Page 3]
+
+Internet-Draft                TLS for http:                     May 2014
+
 
    o  A client that doesn't perform authentication is easily made victim
       of server impersonation.
@@ -219,13 +197,6 @@ Internet-Draft                TLS for http:                     May 2014
 
       HTTP-TLS     = 1#parameter
 
-
-
-Thomson                 Expires November 3, 2014                [Page 4]
-
-Internet-Draft                TLS for http:                     May 2014
-
-
    Persisted information expires after a period determined by the value
    of the "ma" parameter.  See Section 4.2.3 of
    [I-D.ietf-httpbis-p6-cache] for details of determining response age.
@@ -235,30 +206,52 @@ Internet-Draft                TLS for http:                     May 2014
    Requests for an origin that has a persisted, unexpired value for
    "HTTP-TLS" MUST fail if they cannot be made over TLS.
 
+   To avoid situations where a persisted value of "HTTP-TLS" causes a
+   client to be unable to contact a site, clients SHOULD limit the time
+   that a value is persisted for a given origin.  A hard limit might be
+   set to a month.  A lower limit might be appropriate for initial
+   occurrences of "HTTP-TLS"; the certainty that a site has set a
+   correct value - and the corresponding limit on persistence - can
+   increase as the value is seen more over time.
+
    Once a server has indicated that it will support authenticated TLS, a
    client MAY use key pinning [I-D.ietf-websec-key-pinning] or any other
    mechanism that would otherwise be restricted to use with HTTPS URIs,
+
+
+
+
+Thomson                 Expires November 6, 2014                [Page 4]
+
+Internet-Draft                TLS for http:                     May 2014
+
+
    provided that the mechanism can be restricted to a single HTTP
    origin.
 
-6.  Security Considerations
+5.  Security Considerations
 
    The basic mechanisms here do absolutely nothing against an active
-   attack.  Section 5 describes a system whereby return business can be
+   attack.  Section 4 describes a system whereby return business can be
    protected from active attack.
 
-7.  IANA Considerations
+   Clients that persist state for origins can be tracked over time based
+   on their use of this information.  Persisted information can be
+   cleared.  A browser client MUST included this information when
+   clearing other origin-based state (i.e., cookies).
+
+6.  IANA Considerations
 
    Register HTTP-TLS if it makes sense to do so.
 
-8.  Acknowledgements
+7.  Acknowledgements
 
    Mark Nottingham provided useful input, in particular
    [I-D.nottingham-http2-encryption].
 
-9.  References
+8.  References
 
-9.1.  Normative References
+8.1.  Normative References
 
    [I-D.ietf-httpbis-alt-svc]
               mnot, m., McManus, P., and J. Reschke, "HTTP Alternative
@@ -275,17 +268,19 @@ Internet-Draft                TLS for http:                     May 2014
               (HTTP/1.1): Message Syntax and Routing", draft-ietf-
               httpbis-p1-messaging-26 (work in progress), February 2014.
 
-
-
-Thomson                 Expires November 3, 2014                [Page 5]
-
-Internet-Draft                TLS for http:                     May 2014
-
-
    [I-D.ietf-httpbis-p6-cache]
               Fielding, R., mnot, m., and J. Reschke, "Hypertext
               Transfer Protocol (HTTP/1.1): Caching", draft-ietf-
               httpbis-p6-cache-26 (work in progress), February 2014.
+
+
+
+
+
+Thomson                 Expires November 6, 2014                [Page 5]
+
+Internet-Draft                TLS for http:                     May 2014
+
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -301,7 +296,7 @@ Internet-Draft                TLS for http:                     May 2014
    [RFC6797]  Hodges, J., Jackson, C., and A. Barth, "HTTP Strict
               Transport Security (HSTS)", RFC 6797, November 2012.
 
-9.2.  Informative References
+8.2.  Informative References
 
    [I-D.ietf-websec-key-pinning]
               Evans, C., Palmer, C., and R. Sleevi, "Public Key Pinning
@@ -333,4 +328,9 @@ Author's Address
 
 
 
-Thomson                 Expires November 3, 2014                [Page 6]
+
+
+
+
+
+Thomson                 Expires November 6, 2014                [Page 6]
