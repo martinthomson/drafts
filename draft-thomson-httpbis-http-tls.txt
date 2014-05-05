@@ -237,7 +237,8 @@ Internet-Draft                TLS for http:                     May 2014
 
    Clients that persist state for origins can be tracked over time based
    on their use of this information.  Persisted information can be
-   cleared.  A browser client MUST included this information when
+   cleared to reduce the ability of servers to track clients.  A browser
+   client MUST clear persisted all alternative service information when
    clearing other origin-based state (i.e., cookies).
 
 6.  IANA Considerations
@@ -272,7 +273,6 @@ Internet-Draft                TLS for http:                     May 2014
               Fielding, R., mnot, m., and J. Reschke, "Hypertext
               Transfer Protocol (HTTP/1.1): Caching", draft-ietf-
               httpbis-p6-cache-26 (work in progress), February 2014.
-
 
 
 

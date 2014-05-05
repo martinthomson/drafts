@@ -517,7 +517,7 @@ HTTP-TLS: ma=3600
 <p id="rfc.section.4.p.8">Once a server has indicated that it will support authenticated TLS, a client MAY use <a href="#I-D.ietf-websec-key-pinning">key pinning</a> <cite title="NONE">[I-D.ietf-websec-key-pinning]</cite> or any other mechanism that would otherwise be restricted to use with HTTPS URIs, provided that the mechanism can be restricted to a single HTTP origin.  </p>
 <h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.5.p.1">The basic mechanisms here do absolutely nothing against an active attack.  <a href="#persistence">Section 4</a> describes a system whereby return business can be protected from active attack.  </p>
-<p id="rfc.section.5.p.2">Clients that persist state for origins can be tracked over time based on their use of this information.  Persisted information can be cleared.  A browser client MUST included this information when clearing other origin-based state (i.e., cookies).  </p>
+<p id="rfc.section.5.p.2">Clients that persist state for origins can be tracked over time based on their use of this information.  Persisted information can be cleared to reduce the ability of servers to track clients.  A browser client MUST clear persisted all alternative service information when clearing other origin-based state (i.e., cookies).  </p>
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
 <p id="rfc.section.6.p.1">Register HTTP-TLS if it makes sense to do so.  </p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
