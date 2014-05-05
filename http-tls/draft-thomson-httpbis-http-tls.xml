@@ -62,9 +62,6 @@
         target="I-D.ietf-httpbis-p1-messaging">HTTP/1.1</xref> <xref target="RFC2818">over
         TLS</xref> to resolve HTTP URIs using TLS.
       </t>
-      <t>
-        A secondary method is defined where clients opportunistically use a connection to port 443.
-      </t>
 
       <t>
         A strawman proposal that enables some protection against active attacks, is included in
@@ -103,26 +100,6 @@
         style="verb">OPTIONS</spanx> method.  Clients with expired alternative services information
         could make a similar request in parallel to an attempt to contact an alternative service, to
         minimize the delays that might be incurred by failing to contact the alternative service.
-      </t>
-    </section>
-
-    <section title="Detecting Alternatives by Inference">
-      <t>
-        A client that resolves an HTTP URI that does not explicitly include a port (for example,
-        <spanx style="verb">http://example.com/en/index.html</spanx>) MAY attempt to send requests
-        for that resource to TCP port 443 using either <xref
-        target="I-D.ietf-httpbis-http2">HTTP/2</xref> or <xref target="RFC2818">HTTP/1.1 over
-        TLS</xref>.
-      </t>
-      <t>
-        A client can take an inability to establish a TCP connection on port 443 or a 421 status
-        code (see <xref target="I-D.ietf-httpbis-alt-svc"/>) as a strong signal that the server does
-        not support requests for HTTP URIs on this port.
-      </t>
-      <t>
-        A server that provides a 404 or 501 status code could be unable to service requests for HTTP
-        URIs over TLS.  Clients SHOULD avoid sending further requests for HTTP URIs over TLS to that
-        server.
       </t>
     </section>
 
