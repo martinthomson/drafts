@@ -190,6 +190,14 @@ HTTP-TLS: ma=3600
         style="verb">HTTP-TLS</spanx> MUST fail if they cannot be made over TLS.
       </t>
       <t>
+        To avoid situations where a persisted value of <spanx style="verb">HTTP-TLS</spanx> causes a
+        client to be unable to contact a site, clients SHOULD limit the time that a value is
+        persisted for a given origin.  A hard limit might be set to a month.  A lower limit might be
+        appropriate for initial occurrences of <spanx style="verb">HTTP-TLS</spanx>; the certainty
+        that a site has set a correct value - and the corresponding limit on persistence - can
+        increase as the value is seen more over time.
+      </t>
+      <t>
         Once a server has indicated that it will support authenticated TLS, a client MAY use <xref
         target="I-D.ietf-websec-key-pinning">key pinning</xref> or any other mechanism that would
         otherwise be restricted to use with HTTPS URIs, provided that the mechanism can be
@@ -202,6 +210,11 @@ HTTP-TLS: ma=3600
         The basic mechanisms here do absolutely nothing against an active attack.  <xref
         target="persistence"/> describes a system whereby return business can be protected from
         active attack.
+      </t>
+      <t>
+        Clients that persist state for origins can be tracked over time based on their use of this
+        information.  Persisted information can be cleared.  A browser client MUST included this
+        information when clearing other origin-based state (i.e., cookies).
       </t>
     </section>
 
