@@ -10,7 +10,7 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-thomson-httpbis-deprecate-http-latest" updates="2616">
+<rfc category="std" ipr="trust200902" docName="draft-thomson-webpush-http2-latest">
   <front>
     <title abbrev="HTTP Push">
       Generic Event Delivery Using HTTP Push
