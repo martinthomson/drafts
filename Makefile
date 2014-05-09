@@ -30,23 +30,29 @@ REV_NEXT ?= $(shell printf "%.2d" $$((1${REV_CURRENT}-99)))
 endif
 BASE_NEXT := ${BASE}-${REV_NEXT}
 
-TARGET ?= txt
-
-EXTRA := html pdf xhtml svg nr unpg
-
 .PHONY: default all extra nits validate clean submit recurse tag
-ifeq "${TOP}" ""
+ifeq (,${TOP})
 TOP := .
 default: recurse
 clean: rclean
 else
-default: ${TARGET}
+default: txt
 clean: cleandir
 endif
-extra: default ${EXTRA}
+extra: default html pdf xhtml svg nr unpg
 all: extra nits validate
 
 .PHONY: txt html xhtml pdf svg nr unpg
+default: skipdir
+ifeq (,$(shell grep 'date' ${BASE}.xml | grep 'year="$(shell date +%Y)"' 2>&1))
+txt:: skipdir
+html:: skipdir
+xhtml:: skipdir
+pdf:: skipdir
+svg:: skipdir
+nr:: skipdir
+unpg:: skipdir
+else
 txt:: ${BASE}.txt
 html:: ${BASE}.html
 xhtml:: ${BASE}.xhtml
@@ -54,6 +60,7 @@ pdf:: ${BASE}.pdf
 svg:: ${BASE}.svg
 nr:: ${BASE}.nr
 unpg:: ${BASE}.unpg
+endif
 
 .TRANSIENT: tmp.fo ${BASE}.svg~
 
@@ -110,7 +117,7 @@ rfc2629-xhtml.ent: ${XSLT_HOME}/rfc2629-xhtml.ent
 rfc2629-other.ent: ${XSLT_HOME}/rfc2629-other.ent
 	cp $< $@
 
-.PHONY: nits validate
+.PHONY: nits validate skipdir
 nits: ${BASE}.txt
 	${IDNITS} --verbose $<
 
@@ -118,13 +125,17 @@ validate: $(wildcard xml/*.xml example*.xml)
 	$(TOP)/xmlschema/build-strict
 	${VALIDATE} $^
 
+skipdir:
+	@echo Skipping old ${BASE}.xml
+
 submit:: ${BASE_NEXT}.txt
 
 ${BASE_NEXT}.xml: ${BASE}.xml
 	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
 
+SUFFIXES := txt html xhtml unpg nr ps svg pdf
 cleandir:
-	-rm -f $(addprefix ${BASE}-${REV_CURRENT}.,${TARGET} ${EXTRA}) $(addprefix ${BASE}.,${TARGET} ${EXTRA}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
+	-rm -f $(addprefix ${BASE}-[0-9][0-9].,xml ${SUFFIXES}) $(addprefix ${BASE}.,${SUFFIXES}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
 rclean:
 	for i in *; do [ ! -d $$i ] || (cd $$i && $(MAKE) clean); done
 
