@@ -43,7 +43,6 @@ extra: default html pdf xhtml svg nr unpg
 all: extra nits validate
 
 .PHONY: txt html xhtml pdf svg nr unpg
-default: skipdir
 ifeq (,$(shell grep 'date' ${BASE}.xml | grep 'year="$(shell date +%Y)"' 2>&1))
 txt:: skipdir
 html:: skipdir

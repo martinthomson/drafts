@@ -48,8 +48,8 @@
   <middle>
     <section anchor="intro" title="Introduction">
       <t>
-        The resolution of <xref target="I-D.ietf-httpbis-p1-messaging">HTTP URIs</xref> provides no
-        security guarantees whatsoever.  This document describes a mechanism that would grant a
+        The resolution of <xref target="I-D.ietf-httpbis-p1-messaging">HTTP URIs</xref> provides
+        essentially no security guarantees.  This document describes a mechanism that would grant a
         measure of protection against passive monitoring by opportunistically using <xref
         target="RFC5246">Transport Layer Security (TLS)</xref>.
       </t>
