@@ -17,21 +17,20 @@
     </title>
 
     <author initials="M." surname="Thomson" fullname="Martin Thomson">
-      <organization>Microsoft</organization>
+      <organization>Mozilla</organization>
       <address>
         <postal>
-          <street>3210 Porter Drive</street>
-          <city>Palo Alto</city>
+          <street>331 E Evelyn Street</street>
+          <city>Mountain View</city>
           <region>CA</region>
-          <code>94304</code>
+          <code>94041</code>
           <country>US</country>
         </postal>
-
-        <email>martin.thomson@skype.net</email>
+        <email>martin.thomson@gmail.com</email>
       </address>
     </author>
 
-    <date year="2013"/>
+    <date year="2014"/>
     <area>Application</area>
     <workgroup>HTTPBIS</workgroup>
     <keyword>Internet-Draft</keyword>
@@ -44,10 +43,11 @@
 
     <abstract>
       <t>
-        An HTTP <spanx style="verb">Nice</spanx> header field is defined that marks a request as low
-        priority.  Intermediaries can choose to discard the request or serve it from cache rather
-        than forwarding it to an origin server.  This enables constrained origin servers, such as
-        those that rely on battery power, to avoid expending limited resources on serving requests.
+        An HTTP <spanx style="verb">Nice</spanx> header field is defined.  <spanx
+        style="verb">Nice</spanx> marks a request as low priority.  Gateways can choose to discard
+        or delay the request, or provide a response from cache rather than forwarding it to an
+        origin server.  This enables constrained origin servers, such as those that rely on battery
+        power, to avoid expending limited resources on serving requests.
       </t>
     </abstract>
   </front>
@@ -80,25 +80,31 @@
         Many constrained devices rely on intermediaries such as the CoAP-HTTP gateway to terminate
         requests and mediate access.  Clients that access the services provided by such limited
         devices can be unaware of the limited nature of the device serving the request, since they
-        actually interact with the intermediary.  Even when the client is aware of these limitatons,
+        actually interact with the gateway.  Even when the client is aware of these limitatons,
         it is not always possible for clients to learn whether any given request would cause
         significant expenditure of resources at the constrained device.
       </t>
       <t>
+        A <xref target="I-D.thomson-webpush-http2">push server</xref> provides similar functionality
+        for devices with constrained resources.  Providing a standard way to indicate that a request
+        is not urgent would allow a push server to discriminate between urgent and unimportant
+        requests.
+      </t>
+      <t>
         This document defines an HTTP header field, <spanx style="verb">Nice</spanx> that can be
         used by clients to indicate that a request is not urgent or important enough to cause a
-        constrained server to expend special effort to serve.  An intermediary that is aware that
+        constrained server to expend special effort to serve.  An gateway that is aware that
         the origin server is unable to handle the request can instead terminate the request.  The
         request is forwarded as normal to an origin server that is available.
       </t>
       <t>
-        An intermediary can generate an error or 203 (Non-Authoritative Information) response in
+        An gateway can generate an error or 203 (Non-Authoritative Information) response in
         response to a nice request, avoiding the need to contact the constrained origin server.
-        Alternatively, the intermediary could delay the request until the origin server becomes
+        Alternatively, the gateway could delay the request until the origin server becomes
         available or serve a response from cache if that is possible.
       </t>
       <t>
-        No specific mechanism is defined for an origin server to inform intermediaries of absence or
+        No specific mechanism is defined for an origin server to inform gateways of absence or
         other indisposition.
       </t>
 
@@ -107,6 +113,10 @@
          At times, this document falls back on shorthands for establishing interoperability
          requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  The
          meaning of these is described in <xref target="RFC2119"/>.
+       </t>
+       <t>
+         The terms "intermediary" and "gateway" are defined in <xref
+         target="I-D.ietf-httpbis-p1-messaging"/>.
        </t>
       </section>
 
@@ -129,7 +139,7 @@ Nice  = "Nice" ":" ("3" / "2" / "1" / "0")
 ]]></artwork></figure>
       <t>
         Multiple values for the header field MUST NOT be included.  If multiple values are present,
-        an intermediary MAY choose to treat the request in any way it chooses.
+        a gateway MAY choose to treat the request in any way it chooses.
       </t>
 
       <figure>
@@ -145,12 +155,12 @@ Nice: 2
 
       <figure>
         <preamble>
-          An intermediary might reject this request, indicating that the origin server is not
+          An gateway might reject this request, indicating that the origin server is not
           available using a 503 status code.
         </preamble>
         <artwork><![CDATA[
 HTTP/1.1 503 Service Unavailable
-Date: Fri, 26 Jul 2013 
+Date: Fri, 26 Jul 2013
 Content-Type: text/plain;charset=utf8
 Content-Length: 63
 
@@ -167,10 +177,10 @@ The server is asleep, don't disturb it unless it's urgent.
 
       <section title="Policies for Treatment of Nice Requests">
         <t>
-          An origin server or intermediary might use several inputs in determing the threshold at
+          An origin server or gateway might use several inputs in determing the threshold at
           which a request is forwarded to the origin server.  An origin server might either directly
-          instruct the intermediary about the threshold, or it might be provide specific information
-          that can be used, in conjunction with knowledge the intermediary has of the origin server,
+          instruct the gateway about the threshold, or it might be provide specific information
+          that can be used, in conjunction with knowledge the gateway has of the origin server,
           as input to an algorithm for determining the threshold.  Potential inputs include:
           <list style="symbols">
             <t>
@@ -194,17 +204,17 @@ The server is asleep, don't disturb it unless it's urgent.
           <list style="format nice: %d =">
             <t>
               The client regards the request as relatively urgent, but not critically so.  An
-              intermediary might use a heuristic with a moderate risk of false positives in
-              determining whether the server is available.  An intermediary might also forward a
-              request so marked to a dormant device that has a relatively low activation cost.
+              gateway might use a heuristic with a moderate risk of false positives in determining
+              whether the server is available.  A gateway might also forward a request so marked to
+              a dormant device that has a relatively low activation cost.
             </t>
             <t>
-              The client regards the request as not urgent.  An intermediary might attempt to
-              minimize the probability that it awakens a server, if it uses a heuristic in
-              determining whether to forward requests.
+              The client regards the request as not urgent.  A gateway might attempt to minimize the
+              probability that it awakens a server, if it uses a heuristic in determining whether to
+              forward requests.
             </t>
             <t>
-              The client regards the request as being of trivial importance.  An intermediary might
+              The client regards the request as being of trivial importance.  A gateway might
               avoid forwarding requests unless there is strong indication that the origin server is
               available and willing to communicate.
             </t>
@@ -216,6 +226,7 @@ The server is asleep, don't disturb it unless it's urgent.
           Specific applications might define a means for providing more specific policies.
         </t>
       </section>
+
       <section title="Polling with Nice Requests">
         <t>
           Marking a request as nice is quite useful for requests that do not require immediate
@@ -224,11 +235,11 @@ The server is asleep, don't disturb it unless it's urgent.
           succeed.
         </t>
         <t>
-          In some cases, origin server availability is predictable and known to the intermediary.
-          Some devices have predictable cycles of availability, which are used for brief bursts of
-          communication.  If the next time that the origin server is available is known, an
-          intermediary can include a <spanx style="verb">Retry-After</spanx> header field in a
-          generated error response.
+          In some cases, origin server availability is predictable and known to the gateway.  Some
+          devices have predictable cycles of availability, which are used for brief bursts of
+          communication.  If the next time that the origin server is available is known, a gateway
+          can include a <spanx style="verb">Retry-After</spanx> header field in a generated error
+          response.
         </t>
         <figure>
           <preamble>For example:</preamble>
@@ -238,13 +249,23 @@ Date: Fri, 26 Jul 2013 03:34:19 GMT
 Retry-After: 4
 ]]></artwork>
         </figure>
+      </section>
+
+      <section title="Store and Forward">
         <t>
-          Alternatively, requests can be held for an amount of time by the intermediary to be
-          forwarded when the origin server becomes available.  Including a <spanx
-          style="verb">Prefer</spanx> header field <xref target="I-D.snell-http-prefer"/> with the
-          <spanx style="verb">wait</spanx> tag provides the intermediary information about how long
-          the client is prepared to await a response.  This could allow the intermediary to reject
-          the request immediately if the device is known to be unreachable for the entire duration.
+          A gateway MAY hold requests for a limited amount of time, to be forwarded when the origin
+          server becomes available (i.e., a "store and forward" mode of operation).  Including a
+          <spanx style="verb">Prefer</spanx> header field <xref target="I-D.snell-http-prefer"/>
+          with the <spanx style="verb">wait</spanx> tag provides the gateway information about
+          how long the client is prepared to await a response.  This could allow the gateway to
+          reject the request immediately if the device is known to be unreachable for the entire
+          duration.
+        </t>
+        <t>
+          Gateways MAY alternatively accept a request and return an immediate response, such as a
+          202 (Accepted) status code.  Use of the <spanx style="verb">respond-async</spanx> token in
+          the <spanx style="verb">Prefer</spanx> header field allows clients to expressly request
+          this behavior.
         </t>
       </section>
     </section>
@@ -308,16 +329,17 @@ Retry-After: 4
   </middle>
 
   <back>
-
     <references title="Normative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.3864.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p1-messaging.xml"?>
     </references>
     <references title="Informative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.snell-http-prefer.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-core-coap.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-core-http-mapping.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.thomson-webpush-http2.xml"?>
     </references>
   </back>
 </rfc>
