@@ -105,7 +105,8 @@
       <t>
         There are no expectations with respect to security when it comes to resolving HTTP URIs.
         Requiring server authentication, as described in <xref target="RFC2818"/>, creates a number
-        of deployment challenges.
+        of deployment challenges that would adversely affect adoption.  Therefore, server
+        authentication is not mandatory for HTTP URIs.
       </t>
       <t>
         When connecting to a service, clients do not perform the server authentication procedure
@@ -121,9 +122,16 @@
       <section title="Interaction with HTTPS URIs">
         <t>
           A service that is discovered to support HTTP URIs might concurrently support HTTPS URIs.
-          If a connection is initially created without authenticating the server, requests for HTTPS
-          resources cannot be sent over that connection until the server certificate is successfully
-          authenticated (as described in Section 3.1 of <xref target="RFC2818"/>).
+          HTTP/2 permits the sending of requests for multiple origins (see <xref target="RFC6454"/>)
+          on the one connection.  When using alternative services, both HTTP and HTTPS URIs can be
+          sent on the same connection.
+        </t>
+        <t>
+          HTTPS URIs rely on server authentication.  Therefore, if a connection is initially created
+          without authenticating the server, requests for HTTPS resources cannot be sent over that
+          connection until the server certificate is successfully authenticated.  Section 3.1 of
+          <xref target="RFC2818"/> describes the basic mechanism, though the authentication
+          considerations in <xref target="I-D.ietf-httpbis-alt-svc"/> could also apply.
         </t>
       </section>
     </section>
@@ -137,7 +145,8 @@
         Two factors ensure that active attacks are trivial to mount:
         <list style="symbols">
           <t>
-            A client that doesn't perform authentication is easily made victim of server impersonation.
+            A client that doesn't perform authentication an easy victim of server impersonation,
+            through man-in-the-middle attacks.
           </t>
           <t>
             A client that is willing to use cleartext to resolve the resource will do so if access
@@ -219,7 +228,7 @@ HTTP-TLS: ma=3600
 
     <section anchor="iana" title="IANA Considerations">
       <t>
-        Register HTTP-TLS if it makes sense to do so.
+        TODO: Register HTTP-TLS if it makes sense to do so.
       </t>
     </section>
 
