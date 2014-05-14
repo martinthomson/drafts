@@ -9,7 +9,7 @@ else
     sed_i := sed -i
 endif
 
-BASE := $(lastword $(basename $(wildcard draft-*.xml)))
+BASE := $(firstword $(basename $(wildcard draft-*.xml)))
 XML := ${BASE}.xml
 DTD := rfc2629.dtd
 XSLT := rfc2629.xslt
