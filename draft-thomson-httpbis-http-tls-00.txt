@@ -9,7 +9,7 @@ Expires: November 15, 2014
 
 
               Using Transport Layer Security for http URIs
-                 draft-thomson-httpbis-http-tls-latest
+                   draft-thomson-httpbis-http-tls-00
 
 Abstract
 

@@ -377,12 +377,16 @@
 <link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
 <link href="#rfc.section.1.1" rel="Chapter" title="1.1 Conventions and Terminology"/>
 <link href="#rfc.section.2" rel="Chapter" title="2 Client Certificate Challenge"/>
-<link href="#rfc.section.3" rel="Chapter" title="3 Security Considerations"/>
-<link href="#rfc.section.4" rel="Chapter" title="4 IANA Considerations"/>
-<link href="#rfc.section.5" rel="Chapter" title="5 Acknowledgements"/>
-<link href="#rfc.references" rel="Chapter" title="6 References"/>
-<link href="#rfc.references.1" rel="Chapter" title="6.1 Normative References"/>
-<link href="#rfc.references.2" rel="Chapter" title="6.2 Informational References"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Client Certificate Challenge Parameters"/>
+<link href="#rfc.section.3.1" rel="Chapter" title="3.1 Distinguished Name Parameter (&quot;dn&quot;)"/>
+<link href="#rfc.section.3.2" rel="Chapter" title="3.2 Fingerprint Parameters (&quot;sha-256&quot;, ...)"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 Privacy Considerations"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 IANA Considerations"/>
+<link href="#rfc.section.7" rel="Chapter" title="7 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="8 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="8.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="8.2 Informational References"/>
 <link href="#rfc.authors" rel="Chapter"/>
 
 
@@ -391,7 +395,7 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-httpbis-cant-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-5-9" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-5-19" />
   <meta name="dct.abstract" content="This document defines an HTTP authentication scheme that can be added to an error response to indicate to a client that a successful response will only be provided over a new TLS connection, and only if the client has provided a certificate on that connection.  " />
   <meta name="description" content="This document defines an HTTP authentication scheme that can be added to an error response to indicate to a client that a successful response will only be provided over a new TLS connection, and only if the client has provided a certificate on that connection.  " />
 
@@ -412,10 +416,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">May 9, 2014</td>
+  <td class="right">May 19, 2014</td>
 </tr>
 <tr>
-  <td class="left">Expires: November 10, 2014</td>
+  <td class="left">Expires: November 20, 2014</td>
   <td class="right"></td>
 </tr>
 
@@ -436,7 +440,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 10, 2014.</p>
+<p>This Internet-Draft will expire on November 20, 2014.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -451,34 +455,69 @@
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
 <li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
 <li>2.   <a href="#rfc.section.2">Client Certificate Challenge</a></li>
-<li>3.   <a href="#rfc.section.3">Security Considerations</a></li>
-<li>4.   <a href="#rfc.section.4">IANA Considerations</a></li>
-<li>5.   <a href="#rfc.section.5">Acknowledgements</a></li>
-<li>6.   <a href="#rfc.references">References</a></li>
-<li>6.1.   <a href="#rfc.references.1">Normative References</a></li>
-<li>6.2.   <a href="#rfc.references.2">Informational References</a></li>
+<li>3.   <a href="#rfc.section.3">Client Certificate Challenge Parameters</a></li>
+<li>3.1.   <a href="#rfc.section.3.1">Distinguished Name Parameter ("dn")</a></li>
+<li>3.2.   <a href="#rfc.section.3.2">Fingerprint Parameters ("sha-256", ...)</a></li>
+<li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
+<li>5.   <a href="#rfc.section.5">Privacy Considerations</a></li>
+<li>6.   <a href="#rfc.section.6">IANA Considerations</a></li>
+<li>7.   <a href="#rfc.section.7">Acknowledgements</a></li>
+<li>8.   <a href="#rfc.references">References</a></li>
+<li>8.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>8.2.   <a href="#rfc.references.2">Informational References</a></li>
 <li><a href="#rfc.authors">Author's Address</a></li>
 
 
   </ul>
 
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
-<p id="rfc.section.1.p.1">Client authentication in HTTP sometimes relies on certificate-based authentication of clients in <a href="#RFC5246">Transport Layer Security (TLS)</a> <cite title="NONE">[RFC5246]</cite>.  Some uses of client authentication rely on TLS renegotiation, triggering renegotiation in response to a request for a particular resource.  </p>
-<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> forbids the use of renegotiation, except for at the very beginning of a connection.  This makes addressing some client authentication use cases difficult.  </p>
-<p id="rfc.section.1.p.3">This document defines a new authentication scheme, <samp>ClientCertificate</samp>, for use in <a href="#I-D.ietf-httpbis-p7-auth">HTTP authentication challenges</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>.  In combination with the 401 (Unauthorized) status code, this indicates that the resource requires client authentication at the TLS layer in order to access it.  </p>
+<p id="rfc.section.1.p.1">Client authentication in HTTP sometimes relies on certificate-based authentication of clients in Transport Layer Security (TLS) (<a href="#RFC5246">[RFC5246]</a>, <a href="#I-D.ietf-tls-tls13">[I-D.ietf-tls-tls13]</a>).  Some existing uses of client authentication rely on TLS renegotiation, triggering renegotiation and a request for a client certificate in response to a request for a particular resource.  </p>
+<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> forbids the use of renegotiation, except for at the very beginning of a connection.  <a href="#I-D.ietf-tls-tls13">TLS 1.3</a> <cite title="NONE">[I-D.ietf-tls-tls13]</cite> does not support renegotiation at all.  Both of these restrictions result in a server being unable to use renegotiation to conditionally request certificate-based authentication for clients in those protocol versions.  </p>
+<p id="rfc.section.1.p.3">This document defines a new authentication scheme, <samp>ClientCertificate</samp>, for use in <a href="#I-D.ietf-httpbis-p7-auth">HTTP authentication challenges</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>.  In combination with the 401 (Unauthorized) status code, this indicates that client authentication at the TLS layer is required in order to access the resource.  </p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
 <p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> Client Certificate Challenge</h1>
 <p id="rfc.section.2.p.1">A new authentication scheme (<a href="#I-D.ietf-httpbis-p7-auth">[I-D.ietf-httpbis-p7-auth]</a>) for the <samp>WWW-Authenticate</samp> and <samp>Proxy-Authenticate</samp> header fields is defined with the name <samp>ClientCertificate</samp>.  </p>
-<p id="rfc.section.2.p.2">A challenge with this authentication scheme does not define any parameters except <samp>realm</samp>.  The <samp>realm</samp> can be used to select an appropriate certificate, or if a certificate is already in use, to indicate the need for a different certificate.  Other challenge parameters MAY be used to provide a client with information it can use to select an appropriate certificate.  Unknown parameters MUST be ignored.  </p>
-<p id="rfc.section.2.p.3">This challenge cannot be satisfied by constructing an <a href="#I-D.ietf-httpbis-p7-auth">Authorization header field</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>, it can only be satisfied by making the request on a TLS connection where an appropriate certificate has been provided by the client.  </p>
-<p id="rfc.section.2.p.4">To effectively use this authentication scheme, a new connection is needed for every protection space used by a given origin server.  A client can use the <samp>ClientCertificate</samp> challenge as a trigger to open a new connection and to use client authentication on that connection.  The client can use the mechanism in <a href="#I-D.thomson-tls-care">[I-D.thomson-tls-care]</a> to prompt the server to request a client certificate, to avoid the problem where the server doesn't know to make this request.  </p>
-<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#security" id="security">Security Considerations</a></h1>
-<p id="rfc.section.3.p.1">Clients that support this authentication scheme will create a new connection each time that they see a challenge.  This could be exploited in order to generate additional load in terms of connections on both server and client.  </p>
-<p id="rfc.section.3.p.2">Using new connections for client authentication has additional processing costs to the client in proving access to the private keys associated with the client certificate; and to the server in proving access to the private keys associated with their certificate twice in the case that the client opts for confidentiality protection on the client certificate.  </p>
-<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> allows clients to use the same connection for multiple canonical root URIs.  Certificate-based client authentication as defined by this specification is bound to a single origin.  This could create issues whereby the security properties of a connection could become confused.  Clients MUST ensure that a client-authenticated connection is only used for the origin for which it was created.  </p>
-<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
-<p id="rfc.section.4.p.1">IANA is requested to create an entry in the HTTP Authentication Scheme Registry with the following information: </p>
+<p id="rfc.section.2.p.2">This challenge cannot be satisfied by constructing an <a href="#I-D.ietf-httpbis-p7-auth">Authorization header field</a> <cite title="NONE">[I-D.ietf-httpbis-p7-auth]</cite>, it can only be satisfied by making the request on a TLS connection where an appropriate certificate has been provided by the client.  </p>
+<p id="rfc.section.2.p.3">This authentication scheme cannot be used for <samp>http</samp> URIs.  </p>
+<p id="rfc.section.2.p.4">To effectively use this authentication scheme, a new connection is needed for every protection space used by a given origin server.  A client can use the <samp>ClientCertificate</samp> challenge as a trigger to open a new connection and to use client authentication on that connection.  </p>
+<p id="rfc.section.2.p.5">For the new connection, a client can use the mechanism in <a href="#I-D.thomson-tls-care">[I-D.thomson-tls-care]</a> to prompt the server to request a client certificate, to avoid the problem where the server doesn't know to make a CertificateRequest.  [[TBD: In TLS 1.3 a client can unilaterally provide authentication information without a request from the server.]] </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Client Certificate Challenge Parameters</h1>
+<p id="rfc.section.3.p.1">In addition to the <samp>realm</samp> parameter, a challenge with this authentication scheme MAY include parameters that provide a client with information that assists with selecting an appropriate certificate to offer.  This can be necessary, since the necessary context that the server relies on is derived from the request and this is not available at the server when establishing a new connection.  </p>
+<h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> Distinguished Name Parameter ("dn")</h1>
+<p id="rfc.section.3.1.p.1">The <samp>dn</samp> attribute includes a distinguished name for the certificate authority.  This matches the <samp>certificate_authorities</samp> value sent in a TLS CertificateRequest handshake message.  The <samp>dn</samp> parameter is repeated for every distinguished name that is permitted.  </p>
+<p id="rfc.section.3.1.p.2">A distinguished name is defined in Abstract Syntax Notation number 1 (ASN.1) <a href="#X680">[X680]</a> and encoded using Distinguished Encoding Rules (DER) <a href="#X690">[X690]</a> when used in TLS.  The value of the <samp>dn</samp> parameter is a DER-encoded distinguished name that is further encoded using <a href="#RFC4648">base 64</a> <cite title="NONE">[RFC4648]</cite> with the URL and filename safe alphabet.  Multiple alternative distinguished names are carried by repeating the <samp>dn</samp> parameter.  </p>
+<pre>
+dn-parameter = base64url
+base64url    = ALPHA / DIGIT / "_" / "~"
+</pre>
+<p id="rfc.section.3.1.p.3">[[ Issue: We could use the string encoding defined in RFC 4514, which could be friendlier for production and consumption.  That means that this would need to use quoted-string, RFC 4514 escaping would need to be escaped twice, and non-ASCII characters in the DN would need to be escaped.  Since the fingerprint parameters are strictly better anyway, and it's also highly likely that selection criteria are unnecessary due to clients rarely having more than one certificate for any given site, I'm not inclined to support that level of complication. ]] </p>
+<h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> Fingerprint Parameters ("sha-256", ...)</h1>
+<p id="rfc.section.3.2.p.1">A server can instead include the fingerprint of a certificate that is on the certificate chain of an acceptable client certificate.  For instance, this might include the fingerprint of an acceptable end-entity certificate, though what is more likely is that this includes the fingerprint of a certificate issuer.  </p>
+<p id="rfc.section.3.2.p.2">The name of fingerprint parameters is taken from the hash function textual names registry defined in <a href="#RFC4572">[RFC4572]</a>.  Clients MUST support a "sha-256" parameter, which indicates that the fingerprint is calculated using <a href="#RFC6234">SHA-256</a> <cite title="NONE">[RFC6234]</cite>.  The value of a fingerprint parameter is encoded using <a href="#RFC4648">base 64</a> <cite title="NONE">[RFC4648]</cite> with the URL and filename safe alphabet.  </p>
+<pre>
+sha-256-parameter = base64url
+</pre>
+<p id="rfc.section.3.2.p.3">Like the <samp>dn</samp> parameter, fingerprint parameters can be repeated to provide clients with alternative values.  </p>
+<p>For example, a server could indicate that a set of permissible certificates based on a SHA-256 fingerprint, as follows: </p>
+<pre>
+WWW-Authenticate: ClientCertificate realm="home",
+                    sha-256=NjUwZjA0Mzcy..., sha-256=MzJiMTQ3ODF...
+</pre>
+<p>These fingerprint values could be matched against an end-entity certificate or any issuer in the certificate chain.  Note that line breaks are added to this example for formatting reasons only.  </p>
+<p id="rfc.section.3.2.p.4">Where fingerprints are provided with multiple hash function names, a client can use any of the provided algorithms to determine which certificate to provide.  </p>
+<p id="rfc.section.3.2.p.5">Note that strong collision-resistance is not important for the hash function that is used for certificate fingerprints, since clients only use this value to select between available certificates.  The only consequence of a collision is that it becomes more difficult for the client to select the correct certificate.  </p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security" id="security">Security Considerations</a></h1>
+<p id="rfc.section.4.p.1">Clients that support this authentication scheme will create a new connection each time that they see a challenge.  This could be exploited in order to generate additional load from connections on both server and client.  This authentication scheme MUST only be used for <samp>https</samp> URIs.  </p>
+<p id="rfc.section.4.p.2">Using new connections for client authentication has additional processing costs to the client in proving access to the private keys associated with the client certificate; and to the server in proving access to the private keys associated with their certificate twice in the case that the client opts for confidentiality protection on the client certificate (though only for TLS versions prior to 1.3, see <a href="#privacy">Section 5</a>).  </p>
+<p><a href="#I-D.ietf-httpbis-http2">HTTP/2</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> allows clients to use the same connection for multiple domains.  Certificate-based client authentication as defined by this specification is bound to a single canonical root URI (see <a href="#I-D.ietf-httpbis-p7-auth">[I-D.ietf-httpbis-p7-auth]</a>).  This could create issues where the security properties of a connection become unclear.  Clients MUST ensure that a client-authenticated connection is only used for the canonical root URI for which it was created.  </p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#privacy" id="privacy">Privacy Considerations</a></h1>
+<p id="rfc.section.5.p.1">TLS version 1.2 and prior do not provide confidentiality protection for client certificates in the initial handshake.  Confidentiality protection for handshake messages, including the client certificate, is provided only for renegotiation handshakes.  </p>
+<p id="rfc.section.5.p.2">Clients can initiate renegotiation immediately after the TLS connection is established to ensure that passive observers aren't able to view the selected certificate.  </p>
+<p id="rfc.section.5.p.3">Revealing that a certificate is in use could alert a passive observer to the fact that a client has requested particular resources, thereby aiding traffic analysis.  While renegotiation hides the contents of a client certificate, the presence of a new connection could reveal that some form of client authentication is being used.  This is an especially strong signal in HTTP/2, where new connections are discouraged and are therefore exceptional.  </p>
+<p id="rfc.section.5.p.4">Clients MUST avoid offering their client certificate if it will lack confidentiality protection, unless they are explicitly configured to send credentials in the clear.  </p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
+<p id="rfc.section.6.p.1">IANA is requested to create an entry in the HTTP Authentication Scheme Registry with the following information: </p>
 
 <ul class="empty">
   <li>ClientCertificate</li>
@@ -487,10 +526,10 @@
 </ul>
 
 <p> </p>
-<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
-<p id="rfc.section.5.p.1">Eric Rescorla helped identify the problem and formulate this mechanism.  Julian Reschke and Michael Koeller provided excellent feedback.  </p>
-<h1 id="rfc.references"><a href="#rfc.references">6.</a> References</h1>
-<h1 id="rfc.references.1"><a href="#rfc.references.1">6.1.</a> Normative References</h1>
+<h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
+<p id="rfc.section.7.p.1">Eric Rescorla helped identify the problem and formulate this mechanism.  Julian Reschke and Michael Koeller provided excellent feedback.  Andrei Popov observed that the information in the TLS CertificateRequest message is needed so that clients can select an appropriate certificate.  </p>
+<h1 id="rfc.references"><a href="#rfc.references">8.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">8.1.</a> Normative References</h1>
 <table>
   <tbody>
     <tr>
@@ -501,9 +540,27 @@
     </tr>
     <tr>
       <td class="reference">
+        <b id="I-D.ietf-tls-tls13">[I-D.ietf-tls-tls13]</b>
+      </td>
+      <td class="top"><a>Dierks, T.</a> and <a>E. Rescorla</a>, "<a href="http://tools.ietf.org/html/draft-ietf-tls-tls13-01">The Transport Layer Security (TLS) Protocol Version 1.3</a>", Internet-Draft draft-ietf-tls-tls13-01, April 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
         <b id="RFC2119">[RFC2119]</b>
       </td>
       <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4572">[RFC4572]</b>
+      </td>
+      <td class="top"><a>Lennox, J.</a>, "<a href="http://tools.ietf.org/html/rfc4572">Connection-Oriented Media Transport over the Transport Layer Security (TLS) Protocol in the Session Description Protocol (SDP)</a>", RFC 4572, July 2006.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC4648">[RFC4648]</b>
+      </td>
+      <td class="top"><a>Josefsson, S.</a>, "<a href="http://tools.ietf.org/html/rfc4648">The Base16, Base32, and Base64 Data Encodings</a>", RFC 4648, October 2006.</td>
     </tr>
     <tr>
       <td class="reference">
@@ -513,13 +570,25 @@
     </tr>
     <tr>
       <td class="reference">
-        <b id="RFC6454">[RFC6454]</b>
+        <b id="RFC6234">[RFC6234]</b>
       </td>
-      <td class="top"><a>Barth, A.</a>, "<a href="http://tools.ietf.org/html/rfc6454">The Web Origin Concept</a>", RFC 6454, December 2011.</td>
+      <td class="top"><a>Eastlake, D.</a> and <a>T. Hansen</a>, "<a href="http://tools.ietf.org/html/rfc6234">US Secure Hash Algorithms (SHA and SHA-based HMAC and HKDF)</a>", RFC 6234, May 2011.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="X680">[X680]</b>
+      </td>
+      <td class="top"><a>ITU-T</a>, "<a>Information technology - Abstract Syntax Notation One (ASN.1): Specification of basic notation</a>", ISO/IEC 8824-1:2002, 2002.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="X690">[X690]</b>
+      </td>
+      <td class="top"><a>ITU-T</a>, "<a>Information technology - ASN.1 encoding Rules: Specification of Basic Encoding Rules (BER), Canonical Encoding Rules (CER) and Distinguished Encoding Rules (DER)</a>", ISO/IEC 8825-1:2002, 2002.</td>
     </tr>
   </tbody>
 </table>
-<h1 id="rfc.references.2"><a href="#rfc.references.2">6.2.</a> Informational References</h1>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">8.2.</a> Informational References</h1>
 <table>
   <tbody>
     <tr>
@@ -532,7 +601,7 @@
       <td class="reference">
         <b id="I-D.thomson-tls-care">[I-D.thomson-tls-care]</b>
       </td>
-      <td class="top"><a>Thomson, M.</a>, "<a href="http://tools.ietf.org/html/draft-thomson-tls-care-00"></a>", Internet-Draft draft-thomson-tls-care-00, March 2014.</td>
+      <td class="top"><a>Thomson, M.</a>, "<a href="http://tools.ietf.org/html/draft-thomson-tls-care-00">Client Authentication Request Extension for (D)TLS</a>", Internet-Draft draft-thomson-tls-care-00, March 2014.</td>
     </tr>
   </tbody>
 </table>
@@ -549,8 +618,7 @@
 	</span>
 	<span class="org vcardline">Mozilla</span>
 	<span class="adr">
-	  <span class="vcardline">Suite 300</span>
-<span class="vcardline">650 Castro Street</span>
+	  <span class="vcardline">331 E Evelyn Street</span>
 
 	  <span class="vcardline">
 		<span class="locality">Mountain View</span>,  

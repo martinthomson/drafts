@@ -9,7 +9,7 @@ Expires: November 13, 2014
 
 
                  Generic Event Delivery Using HTTP Push
-                   draft-thomson-webpush-http2-latest
+                     draft-thomson-webpush-http2-00
 
 Abstract
 
