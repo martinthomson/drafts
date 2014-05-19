@@ -20,8 +20,7 @@
       <organization>Mozilla</organization>
       <address>
         <postal>
-          <street>Suite 300</street>
-          <street>650 Castro Street</street>
+          <street>331 E Evelyn Street</street>
           <city>Mountain View</city>
           <region>CA</region>
           <code>94041</code>
@@ -146,18 +145,26 @@ enum {
         this extension.
       </t>
       <t>
-        A server MUST NOT send this extension to a client.
-      </t>
-      <t>
         This extension can be used in either the initial handshake or subsequent renegotiation
         handshakes.  This extension cannot be used during session resumption, since the resumption
         handshake does not allow for authentication changes.
+      </t>
+      <t>
+        A server can send this extension to a client to indicate support for the extension, even if
+        the server does not choose to send a CertificateRequest.  A server might choose to indicate
+        support so that client certificates can be afforded confidentiality protection, by sending
+        the certificate in a subsequent renegotiation handshake.
       </t>
    </section>
 
     <section anchor="security" title="Security Considerations">
       <t>
-        This document is entirely about security.
+        The use of this extension could reveal to a passive observer that client authentication
+        might be in use.  <xref target="I-D.ietf-tls-tls13">TLS 1.3</xref> offers a mode where the
+        use of this extension and any resulting messages can have confidentiality protection.  In
+        earlier versions of TLS, renegotiation is required to provide confidentiality protection for
+        an entire handshake.  Without either of these mechanisms, this extension, and the client
+        certificate lack confidentiality protection.
       </t>
     </section>
 
