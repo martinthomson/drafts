@@ -82,13 +82,13 @@
       <t>
         The following identifiers are defined for use in ALPN:
         <list style="hanging">
-          <t hangText="webrtc">
+          <t hangText="webrtc:">
             The DTLS session is used to establish keys for a Secure Real-time Transport Protocol
             (SRTP) - known as DTLS-SRTP - as described in <xref target="RFC5764"/>.  The DTLS record
             layer is used for <xref target="I-D.ietf-rtcweb-data-channel">WebRTC data
             channels</xref>.
           </t>
-          <t hangText="c-webrtc">
+          <t hangText="c-webrtc:">
             The DTLS session is used for confidential WebRTC communications, where peers agree to
             maintain the confidentiality of the communications, as described in <xref
             target="confidentiality"/>.
