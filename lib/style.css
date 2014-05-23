@@ -59,6 +59,9 @@ ol, ul {
   padding: 0;
   margin: 0.5em 0 0.5em 2em;
 }
+ol ol, ol ul, ul ul, ul ol {
+  margin-left: 0;
+}
 ul.toc, ul.toc ul { 
   margin: 0 0 0 1.5em;
 }

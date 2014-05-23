@@ -17,7 +17,11 @@ XSLT := rfc2629.xslt
 # SAXON := java -jar '$(subst \,\\,$(shell ${CYGPATH} ${TOP}/saxon8.jar))'
 VALIDATE := ${TOP}/validate
 SAXON := java -jar '$(shell ${CYGPATH} ${TOP}/saxon8.jar)'
+ifeq (,$(shell which xml2rfc 2>/dev/null))
 XML2RFC ?= ${TOP}/webxml2rfc.sh
+else
+XML2RFC ?= xml2rfc
+endif
 XSLT_HOME := ${TOP}/rfc2629xslt
 HTML_XSLT := false
 IDNITS := ${TOP}/idnits/idnits
@@ -66,14 +70,16 @@ endif
 ifeq "${HTML_XSLT}" "false"
 extra_css := ${TOP}/lib/style.css
 css_content = $(shell cat $(extra_css))
-%.html: %.xml $(extra_css)
-	${XML2RFC} $< $@
-	$(sed_i) -e's~</style>~</style><style tyle="text/css">$(css_content)</style>~' $@
+%.htmltmp: %.xml $(extra_css)
+	${XML2RFC} --html $< -o $@
 else
-%.html: %.xml ${DTD} ${XSLT}
+%.htmltmp: %.xml ${DTD} ${XSLT}
 #	${SAXON} '$(subst \,\\,$(shell ${CYGPATH} $<))' '$(subst \,\\,$(shell ${CYGPATH} ${XSLT_HOME}/${XSLT}))' > $@
 	${SAXON} $< ${XSLT_HOME}/${XSLT} > $@
 endif
+
+%.html: %.htmltmp $(extra_css)
+	sed -e's~</style>~</style><style tyle="text/css">$(css_content)</style>~' $< > $@
 
 %.xhtml: %.xml ${DTD} ${XSLT}
 	${SAXON} '$(subst \,\\,$(shell ${CYGPATH} $<))' '$(subst \,\\,$(shell ${CYGPATH} ${XSLT_HOME}/rfc2629toXHTML.xslt))' > $@

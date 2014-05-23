@@ -1560,7 +1560,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
   <xs:simpleType name="confidenceBase">
   <xs:union>
     <xs:restriction base="xs:decimal">
-      <xs:minExclusive value="0.0"/>
+      <xs:minInclusive value="0.0"/>
       <xs:maxInclusive value="100.0"/>
     </xs:restriction>
     <xs:restriction base="xs:token">
