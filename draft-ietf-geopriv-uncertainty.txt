@@ -5,8 +5,8 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                         J. Winterbottom
-Expires: November 20, 2014                                  Unaffiliated
-                                                            May 19, 2014
+Expires: November 24, 2014                                  Unaffiliated
+                                                            May 23, 2014
 
 
         Representation of Uncertainty and Confidence in PIDF-LO
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on November 20, 2014.
+   This Internet-Draft will expire on November 24, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014               [Page 1]
+Thomson & Winterbottom  Expires November 24, 2014               [Page 1]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014               [Page 2]
+Thomson & Winterbottom  Expires November 24, 2014               [Page 2]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -121,9 +121,10 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
    Location information represents an estimation of the position of a
    Target [RFC6280].  Under ideal circumstances, a location estimate
-   precisely reflects the actual location of the Target.  In reality,
-   there are many factors that introduce errors into the measurements
-   that are used to determine location estimates.
+   precisely reflects the actual location of the Target.  For automated
+   systems that determine location, there are many factors that
+   introduce errors into the measurements that are used to determine
+   location estimates.
 
    The process by which measurements are combined to generate a location
    estimate is outside of the scope of work within the IETF.  However,
@@ -147,6 +148,10 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    A confidence extension for the Presence Information Data Format -
    Location Object (PIDF-LO) [RFC4119] is described.
 
+   This document describes methods that can be used in combination with
+   automatically determined location information.  These are
+   statistically-based methods.
+
 1.1.  Conventions and Terminology
 
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
@@ -156,20 +161,21 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    This document assumes a basic understanding of the principles of
    mathematics, particularly statistics and geometry.
 
+
+
+
+
+Thomson & Winterbottom  Expires November 24, 2014               [Page 3]
+
+Internet-Draft          Uncertainty & Confidence                May 2014
+
+
    Some terminology is borrowed from [RFC3693] and [RFC6280], in
    particular Target.
 
    Mathematical formulae are presented using the following notation: add
    "+", subtract "-", multiply "*", divide "/", power "^" and absolute
    value "|x|".  Precedence is indicated using parentheses.
-
-
-
-Thomson & Winterbottom  Expires November 20, 2014               [Page 3]
-
-Internet-Draft          Uncertainty & Confidence                May 2014
-
-
    Mathematical functions are represented by common abbreviations:
    square root "sqrt(x)", sine "sin(x)", cosine "cos(x)", inverse cosine
    "acos(x)", tangent "tan(x)", inverse tangent "atan(x)", error
@@ -211,6 +217,15 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    other assertion is made: in particular, this does not assert that x
    is 1.00742.
 
+
+
+
+
+Thomson & Winterbottom  Expires November 24, 2014               [Page 4]
+
+Internet-Draft          Uncertainty & Confidence                May 2014
+
+
    Uncertainty and confidence for location estimates can be derived in a
    number of ways.  This document does not attempt to enumerate the many
    methods for determining uncertainty.  [ISO.GUM] and [NIST.TN1297]
@@ -218,13 +233,15 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    measurement uncertainty.  This document applies that general guidance
    for consumers of location information.
 
+   As a statistical measure, values determined for uncertainty are
+   determined based on information in the aggregate, across numerous
+   individual estimates.  An individual estimate might be determined to
+   be "correct" - by using a survey to validate the result, for example
+   - without invalidating the statistical assertion.
 
-
-
-Thomson & Winterbottom  Expires November 20, 2014               [Page 4]
-
-Internet-Draft          Uncertainty & Confidence                May 2014
-
+   This understanding of estimates in the statistical sense explains why
+   asserting a confidence of 100%, which might seem intuitively correct,
+   is rarely advisable.
 
 2.1.  Uncertainty as a Probability Distribution
 
@@ -260,24 +277,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Thomson & Winterbottom  Expires November 20, 2014               [Page 5]
+Thomson & Winterbottom  Expires November 24, 2014               [Page 5]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -333,7 +333,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014               [Page 6]
+Thomson & Winterbottom  Expires November 24, 2014               [Page 6]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -389,7 +389,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014               [Page 7]
+Thomson & Winterbottom  Expires November 24, 2014               [Page 7]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -445,7 +445,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014               [Page 8]
+Thomson & Winterbottom  Expires November 24, 2014               [Page 8]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -476,18 +476,18 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 3.3.  Uncertainty and Confidence for Civic Addresses
 
-   Civic addresses [RFC5139] inherently include uncertainty, based on
-   the area of the most precise element that is specified.  In this
-   case, uncertainty is effectively described by the presence or absence
-   of elements -- elements that are not present are deemed to be
-   uncertain.
+   Automatically determined civic addresses [RFC5139] inherently include
+   uncertainty, based on the area of the most precise element that is
+   specified.  In this case, uncertainty is effectively described by the
+   presence or absence of elements -- elements that are not present are
+   deemed to be uncertain.
 
    To apply the concept of uncertainty to civic addresses, it is helpful
    to unify the conceptual models of civic address with geodetic
-   location information.
-
-   Note:  This view is one perspective on the process of geo-coding -
-      the translation of a civic address to a geodetic location.
+   location information.  This is particularly useful when considering
+   civic addresses that are determined using reverse geocoding (that is,
+   the process of translating geodetic information into civic
+   addresses).
 
    In the unified view, a civic address defines a series of (sometimes
    non-orthogonal) spatial partitions.  The first is the implicit
@@ -501,7 +501,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014               [Page 9]
+Thomson & Winterbottom  Expires November 24, 2014               [Page 9]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -517,6 +517,10 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
    The resulting spatial partition can be considered as a region of
    uncertainty.
+
+   Note:  This view is a potential perspective on the process of geo-
+      coding - the translation of a civic address to a geodetic
+      location.
 
    Uncertainty in civic addresses can be increased by removing elements.
    This does not increase confidence unless additional information is
@@ -550,17 +554,17 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    In some circumstances - particularly with pre-existing systems -
    location generators might unable to provide location information with
    consistent confidence.  Existing systems sometimes specify confidence
-   at 38%, 67% or 90%.  Existing forms of expressing location
-   information, such as that defined in [TS-3GPP-23_032], contain
-   elements that express the confidence in the result.
 
 
 
-
-Thomson & Winterbottom  Expires November 20, 2014              [Page 10]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 10]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
+
+   at 38%, 67% or 90%.  Existing forms of expressing location
+   information, such as that defined in [TS-3GPP-23_032], contain
+   elements that express the confidence in the result.
 
    The addition of a confidence element provides information that was
    previously unavailable to recipients of location information.
@@ -606,17 +610,17 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    approximately fits the given shape based on the methods used to
    generate the location information.  The PDF is normal if there are a
    large number of small, independent sources of error; rectangular if
-   all points within the area have roughly equal probability of being
-   the actual location of the Target; otherwise, the PDF MUST either be
-   set to unknown or omitted.
 
 
 
-
-Thomson & Winterbottom  Expires November 20, 2014              [Page 11]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 11]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
+
+   all points within the area have roughly equal probability of being
+   the actual location of the Target; otherwise, the PDF MUST either be
+   set to unknown or omitted.
 
    If a PIDF-LO does not include the confidence element, the confidence
    of the location estimate is 95%, as defined in [RFC5491].
@@ -633,7 +637,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    scaling, if scaling is necessary.
 
    A confidence element MUST be included with all location information
-   that includes uncertainty (i.e., all forms other than a point).  A
+   that includes uncertainty (that is, all forms other than a point).  A
    special "unknown" MAY be used if confidence is not known.
 
 4.3.  Consuming and Presenting Confidence
@@ -663,17 +667,15 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    discard or suppress the display of location information if confidence
    does not meet a pre-determined threshold.
 
-   In settings where there is an opportunity for user training, some of
-   these problems might be mitigated by defining different operational
 
 
-
-
-Thomson & Winterbottom  Expires November 20, 2014              [Page 12]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 12]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
 
+   In settings where there is an opportunity for user training, some of
+   these problems might be mitigated by defining different operational
    procedures for handling location information at different confidence
    levels.
 
@@ -720,15 +722,16 @@ Internet-Draft          Uncertainty & Confidence                May 2014
       degrade results in some applications.  Also, there is a natural
       tendency to misinterpret a point location as representing a
       location without uncertainty.  This could lead to more serious
-      errors.  Therefore, these algorithms should only be applied where
-      necessary.
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 13]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 13]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
+
+      errors.  Therefore, these algorithms should only be applied where
+      necessary.
 
    Several different approaches can be taken when reducing a location
    estimate to a point.  Different methods each make a set of
@@ -774,17 +777,17 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
       d = 4 * sin(o/2) * (R*R + R*r + r*r) / (3*o*(R + r))
 
-   This point can be found along the line that bisects the arc; that is,
-   the line at an angle of "a + (o/2)".
 
 
 
 
-
-Thomson & Winterbottom  Expires November 20, 2014              [Page 14]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 14]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
+
+   This point can be found along the line that bisects the arc; that is,
+   the line at an angle of "a + (o/2)".
 
 5.1.1.2.  Polygon Centroid
 
@@ -834,10 +837,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-
-
-
-Thomson & Winterbottom  Expires November 20, 2014              [Page 15]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 15]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -893,7 +893,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 16]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 16]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -949,7 +949,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 17]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 17]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1005,7 +1005,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 18]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 18]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1061,7 +1061,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 19]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 19]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1117,7 +1117,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 20]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 20]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1148,7 +1148,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    errors, but simplifies the calculations significantly.  Prior to
    applying this assumption, confidence should be scaled to 95%.
 
-      Note: The selection of confidence has a significant impact on the
+   Note:  The selection of confidence has a significant impact on the
       final result.  Only use a different confidence if an uncertainty
       value for 95% confidence cannot be found.
 
@@ -1173,7 +1173,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 21]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 21]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1229,7 +1229,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 22]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 22]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1285,7 +1285,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 23]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 23]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1341,7 +1341,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 24]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 24]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1397,7 +1397,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 25]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 25]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1453,7 +1453,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 26]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 26]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1509,7 +1509,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 27]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 27]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1565,7 +1565,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 28]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 28]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1603,8 +1603,8 @@ Internet-Draft          Uncertainty & Confidence                May 2014
      <xs:simpleType name="confidenceBase">
      <xs:union>
        <xs:restriction base="xs:decimal">
-         <xs:minExclusive value="0.0"/>
-         <xs:maxExclusive value="100.0"/>
+         <xs:minInclusive value="0.0"/>
+         <xs:maxInclusive value="100.0"/>
        </xs:restriction>
        <xs:restriction base="xs:token">
          <xs:enumeration value="unknown"/>
@@ -1621,7 +1621,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 29]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 29]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1635,12 +1635,12 @@ Internet-Draft          Uncertainty & Confidence                May 2014
    "urn:ietf:params:xml:ns:geopriv:conf", as per the guidelines in
    [RFC3688].
 
-      URI: urn:ietf:params:xml:ns:geopriv:conf
+   URI:  urn:ietf:params:xml:ns:geopriv:conf
 
-      Registrant Contact: IETF, GEOPRIV working group,
-      (geopriv@ietf.org), Martin Thomson (martin.thomson@gmail.com).
+   Registrant Contact:  IETF, GEOPRIV working group, (geopriv@ietf.org),
+      Martin Thomson (martin.thomson@gmail.com).
 
-      XML:
+   XML:
 
          BEGIN
            <?xml version="1.0"?>
@@ -1677,7 +1677,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 30]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 30]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1733,7 +1733,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 31]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 31]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1789,7 +1789,7 @@ Internet-Draft          Uncertainty & Confidence                May 2014
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 32]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 32]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1845,13 +1845,13 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 33]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 33]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
 
-      latitude = atan((Z + e'^2 * (1-f) * R * sin(u)^3) /
-       (p - e^2 * R * cos(u)^3))
+      latitude = atan((Z + e'^2 * (1-f) * R * sin(u)^3)
+      / (p - e^2 * R * cos(u)^3))
 
       longitude = atan(Y / X)
 
@@ -1901,7 +1901,7 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 34]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 34]
 
 Internet-Draft          Uncertainty & Confidence                May 2014
 
@@ -1957,4 +1957,4 @@ Authors' Addresses
 
 
 
-Thomson & Winterbottom  Expires November 20, 2014              [Page 35]
+Thomson & Winterbottom  Expires November 24, 2014              [Page 35]
