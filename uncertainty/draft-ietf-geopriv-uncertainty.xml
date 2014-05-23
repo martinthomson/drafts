@@ -70,8 +70,9 @@
       <t>
         Location information represents an estimation of the position of a <xref
         target="RFC6280">Target</xref>.  Under ideal circumstances, a location estimate precisely
-        reflects the actual location of the Target.  In reality, there are many factors that
-        introduce errors into the measurements that are used to determine location estimates.
+        reflects the actual location of the Target.  For automated systems that determine location,
+        there are many factors that introduce errors into the measurements that are used to
+        determine location estimates.
       </t>
 
       <t>
@@ -100,20 +101,25 @@
         Location Object (PIDF-LO)</xref> is described.
       </t>
 
+      <t>
+        This document describes methods that can be used in combination with automatically
+        determined location information.  These are statistically-based methods.
+      </t>
+
       <section anchor="terminology" title="Conventions and Terminology">
         <t>
           The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD
           NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as
           described in <xref target="RFC2119"/>.
         </t>
-       <t>
-         This document assumes a basic understanding of the principles of mathematics, particularly
-         statistics and geometry.
-        </t>
-
         <t>
-        Some terminology is borrowed from <xref target="RFC3693"/> and <xref target="RFC6280"/>, in
-        particular Target.</t>
+          This document assumes a basic understanding of the principles of mathematics, particularly
+          statistics and geometry.
+        </t>
+        <t>
+          Some terminology is borrowed from <xref target="RFC3693"/> and <xref target="RFC6280"/>,
+          in particular Target.
+        </t>
 
         <t>
           Mathematical formulae are presented using the following notation: add <spanx
@@ -178,6 +184,17 @@
         target="ISO.GUM"/> and <xref target="NIST.TN1297"/> provide a set of general guidelines for
         determining and manipulating measurement uncertainty.  This document applies that general
         guidance for consumers of location information.
+      </t>
+
+      <t>
+        As a statistical measure, values determined for uncertainty are determined based on
+        information in the aggregate, across numerous individual estimates.  An individual estimate
+        might be determined to be "correct" - by using a survey to validate the result, for example
+        - without invalidating the statistical assertion.
+      </t>
+      <t>
+        This understanding of estimates in the statistical sense explains why asserting a confidence
+        of 100%, which might seem intuitively correct, is rarely advisable.
       </t>
 
       <section title="Uncertainty as a Probability Distribution">
@@ -413,21 +430,17 @@
 
       <section title="Uncertainty and Confidence for Civic Addresses">
         <t>
-          <xref target="RFC5139">Civic addresses</xref> inherently include uncertainty, based on the
-          area of the most precise element that is specified.  In this case, uncertainty is
-          effectively described by the presence or absence of elements -- elements that are not
-          present are deemed to be uncertain.
+          Automatically determined <xref target="RFC5139">civic addresses</xref> inherently include
+          uncertainty, based on the area of the most precise element that is specified.  In this
+          case, uncertainty is effectively described by the presence or absence of elements --
+          elements that are not present are deemed to be uncertain.
         </t>
 
         <t>
           To apply the concept of uncertainty to civic addresses, it is helpful to unify the
-          conceptual models of civic address with geodetic location information.
-          <list style="hanging">
-            <t hangText="Note:">
-              This view is one perspective on the process of geo-coding - the translation of a civic
-              address to a geodetic location.
-            </t>
-          </list>
+          conceptual models of civic address with geodetic location information.  This is
+          particularly useful when considering civic addresses that are determined using reverse
+          geocoding (that is, the process of translating geodetic information into civic addresses).
         </t>
 
         <t>
@@ -451,6 +464,12 @@
 
         <t>
           The resulting spatial partition can be considered as a region of uncertainty.
+          <list style="hanging">
+            <t hangText="Note:">
+              This view is a potential perspective on the process of geo-coding - the translation of
+              a civic address to a geodetic location.
+            </t>
+          </list>
         </t>
 
         <t>
@@ -569,7 +588,7 @@
         </t>
         <t>
           A confidence element MUST be included with all location information that includes
-          uncertainty (i.e., all forms other than a point).  A special <spanx
+          uncertainty (that is, all forms other than a point).  A special <spanx
           style="verb">unknown</spanx> MAY be used if confidence is not known.
         </t>
       </section>
@@ -1542,7 +1561,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
   <xs:union>
     <xs:restriction base="xs:decimal">
       <xs:minExclusive value="0.0"/>
-      <xs:maxExclusive value="100.0"/>
+      <xs:maxInclusive value="100.0"/>
     </xs:restriction>
     <xs:restriction base="xs:token">
       <xs:enumeration value="unknown"/>
