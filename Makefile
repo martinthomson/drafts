@@ -52,7 +52,7 @@ ifneq (,$(or $(IS_LOCAL),$(IS_MASTER)))
 	mv -f ${GHPAGES_TMP}/* ${TOP}
 	./mkindex > index.html
 	git add ${TOP}/*.txt ${TOP}/*.html
-	git commit -am "Script updating page."
+	if test `git status -s | wc -l` -gt 0; then git commit -m "Script updating page."; fi
 ifeq (false,$(TRAVIS_PULL_REQUEST))
 	git push https://$(GH_TOKEN)@github.com/martinthomson/drafts.git ghpages
 endif
