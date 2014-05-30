@@ -1,0 +1,8 @@
+language: python
+python:
+- '2.7'
+install: pip install xml2rfc
+script: make ghpages
+env:
+  global:
+  - secure: dRL4rgAMmKMXbd0ecgSvS+vw6JjYkQV+f71k+0LMoUirAxZXSXzlru7YZfA/VvHCmkbMm15Fo6rxWmre0XJ3tvlMSAc7ATDak8GEQpPen1Luk/22oqzEIIXmWeBcrwE9sv0aKhRYobdkqsCJ46tdp9ARxtq8EJ8Dgdm+l1CQ5k0=

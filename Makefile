@@ -3,11 +3,6 @@ ifeq "$(shell uname -o 2>/dev/null)" "Cygwin"
 else
     CYGPATH := echo
 endif
-ifeq "$(shell uname -s 2>/dev/null)" "Darwin"
-    sed_i := sed -i ''
-else
-    sed_i := sed -i
-endif
 
 BASE := $(firstword $(basename $(wildcard draft-*.xml)))
 XML := ${BASE}.xml
@@ -26,6 +21,53 @@ XSLT_HOME := ${TOP}/rfc2629xslt
 HTML_XSLT := false
 IDNITS := ${TOP}/idnits/idnits
 
+.PHONY: default all clean
+ifeq (,${TOP})
+### Targets for the top dir
+TOP := .
+default: all
+all::
+	for i in *; do [ ! -f $$i/Makefile ] || $(MAKE) -C $$i txt html || exit $$?; done
+clean::
+	for i in *; do [ ! -f $$i/Makefile ] || $(MAKE) -C $$i clean; done
+
+GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
+.TRANSIENT: ${GHPAGES_TMP}
+GITBRANCH := $(shell git branch | grep '\*' | cut -c3- -)
+
+IS_LOCAL := $(if ${TRAVIS},true,)
+ifeq (master,$(TRAVIS_BRANCH))
+IS_MASTER := $(if $(findstring false,${TRAVIS_PULL_REQUEST}))
+else
+IS_MASTER := true
+endif
+
+ghpages: all
+ifneq (,$(or $(IS_LOCAL),$(IS_MASTER)))
+	mkdir ${GHPAGES_TMP}
+	find ${TOP} -type f \( -name '*.html' -o -name '*.txt' \) -exec cp {} ${GHPAGES_TMP} \;
+	@find ${GHPAGES_TMP}
+	git checkout gh-pages
+	git pull
+	mv -f ${GHPAGES_TMP}/* ${TOP}
+	./mkindex > index.html
+	git add ${TOP}/*.txt ${TOP}/*.html
+	git commit -am "Script updating page."
+ifeq (false,$(TRAVIS_PULL_REQUEST))
+	git push https://$(GH_TOKEN)@github.com/martinthomson/drafts.git ghpages
+endif
+	git checkout ${GITBRANCH}
+	-rm -rf ${GHPAGES_TMP}
+endif
+
+else
+### Targets for subdirs
+.PHONY: extra nits validate submit tag
+default: txt
+
+extra: default html pdf xhtml svg nr unpg
+all:: extra nits validate
+
 REV_CURRENT := $(shell git tag | grep "${BASE}" | tail -1 | sed -e"s/.*-//")
 ifeq "${REV_CURRENT}" ""
 REV_NEXT ?= 00
@@ -33,18 +75,6 @@ else
 REV_NEXT ?= $(shell printf "%.2d" $$((1${REV_CURRENT}-99)))
 endif
 BASE_NEXT := ${BASE}-${REV_NEXT}
-
-.PHONY: default all extra nits validate clean submit recurse tag
-ifeq (,${TOP})
-TOP := .
-default: recurse
-clean: rclean
-else
-default: txt
-clean: cleandir
-endif
-extra: default html pdf xhtml svg nr unpg
-all: extra nits validate
 
 .PHONY: txt html xhtml pdf svg nr unpg
 ifeq (,$(shell grep 'date' ${BASE}.xml | grep 'year="$(shell date +%Y)"' 2>&1))
@@ -139,31 +169,14 @@ ${BASE_NEXT}.xml: ${BASE}.xml
 	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
 
 SUFFIXES := txt html xhtml unpg nr ps svg pdf
-cleandir:
+clean::
 	-rm -f $(addprefix ${BASE}-[0-9][0-9].,xml ${SUFFIXES}) $(addprefix ${BASE}.,${SUFFIXES}) *.fo rfc2629-*.ent *.stackdump rfc2629.* *~
-rclean:
-	for i in *; do [ ! -d $$i ] || (cd $$i && $(MAKE) clean); done
+
+endif
+
 
 tag:
 	git tag ${BASE_NEXT}
 retag:
 	git tag -f ${BASE}-${REV_CURRENT}
 
-GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
-.TRANSIENT: ${GHPAGES_TMP}
-GITBRANCH := $(shell git branch | grep '\*' | cut -c3- -)
-recurse:
-	for i in *; do [ ! -d $$i ] || (cd $$i && $(MAKE) txt html); done
-
-ghpages: recurse
-	mkdir ${GHPAGES_TMP}
-	find ${TOP} -type f \( -name '*.html' -o -name '*.txt' \) -exec cp {} ${GHPAGES_TMP} \;
-	@find ${GHPAGES_TMP}
-	git checkout gh-pages
-	git pull
-	mv -f ${GHPAGES_TMP}/* ${TOP}
-	./mkindex > index.html
-	git add ${TOP}/*.txt ${TOP}/*.html
-	git commit -am "Script updating page."
-	git checkout ${GITBRANCH}
-	-rm -rf ${GHPAGES_TMP}
