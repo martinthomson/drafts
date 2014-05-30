@@ -56,8 +56,8 @@ ifeq (true,${TRAVIS})
 	git pull -f origin gh-pages --depth=5
 else
 	git checkout gh-pages
-endif
 	git pull
+endif
 	mv -f ${GHPAGES_TMP}/* ${TOP}
 	./mkindex > index.html
 	git add ${TOP}/*.txt ${TOP}/*.html
