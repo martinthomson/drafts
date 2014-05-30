@@ -48,6 +48,8 @@ ifneq (,$(or $(IS_LOCAL),$(IS_MASTER)))
 	find ${TOP} -type f \( -name '*.html' -o -name '*.txt' \) -exec cp {} ${GHPAGES_TMP} \;
 	@find ${GHPAGES_TMP}
 ifeq (true,${TRAVIS})
+	git config user.email "user@example.com"
+	git config user.name "Travis CI Builder"
 	git checkout --orphan gh-pages
 	git rm -r --cached .
 	git clean -f -d
