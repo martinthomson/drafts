@@ -37,7 +37,7 @@ GITBRANCH := $(shell git branch | grep '\*' | cut -c3- -)
 
 IS_LOCAL := $(if ${TRAVIS},true,)
 ifeq (master,$(TRAVIS_BRANCH))
-IS_MASTER := $(if $(findstring false,${TRAVIS_PULL_REQUEST}))
+IS_MASTER := $(findstring false,${TRAVIS_PULL_REQUEST})
 else
 IS_MASTER := true
 endif
