@@ -11,7 +11,7 @@ cat <<EOH
     <ul>
 EOH
 for i in *.txt; do
-    if [[ -f "${i%.txt}.html" ]]; then
+    if [ -f "${i%.txt}.html" ]; then
         echo "      <li><a href="'"'"${i%.txt}.html"'"'">${i%.txt}</a> (<a href="'"'"${i}"'"'">txt</a>)</li>"
     else
         echo "      <li><a href="'"'"${i}"'"'">${i}</a></li>"
