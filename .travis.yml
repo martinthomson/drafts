@@ -5,4 +5,4 @@ install: pip install xml2rfc
 script: make ghpages
 env:
   global:
-  - secure: dRL4rgAMmKMXbd0ecgSvS+vw6JjYkQV+f71k+0LMoUirAxZXSXzlru7YZfA/VvHCmkbMm15Fo6rxWmre0XJ3tvlMSAc7ATDak8GEQpPen1Luk/22oqzEIIXmWeBcrwE9sv0aKhRYobdkqsCJ46tdp9ARxtq8EJ8Dgdm+l1CQ5k0=
+  - secure: HMOHra6dAOT39fXB10PIUHWM0hsAzdq0CpPgabXioPWuXupiLxp/HLe4uMjzr07rQ2FSCzIYh0UbsH4RmW4yd1yPLokDa8tD0SOIf6AUfHIyNUyW/kl2UkFLLwwY+NQHzXt9WYqh9Dxv5xUSeQAp51wrL5DYBZzu3Q5Opo3LHPY=
