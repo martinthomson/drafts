@@ -33,7 +33,7 @@ clean::
 
 GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 .TRANSIENT: ${GHPAGES_TMP}
-GITBRANCH := $(shell git branch | grep '\*' | cut -c3- -)
+GITORIG := $(shell git show-ref --head -s | head -1)
 
 IS_LOCAL := $(if ${TRAVIS},true,)
 ifeq (master,$(TRAVIS_BRANCH))
@@ -50,10 +50,10 @@ ifneq (,$(or $(IS_LOCAL),$(IS_MASTER)))
 ifeq (true,${TRAVIS})
 	git config user.email "martin.thomson@gmail.com"
 	git config user.name "Travis CI Builder"
-	git checkout --orphan gh-pages
-	git rm -r --cached .
-	git clean -f -d
-	git pull -f origin gh-pages --depth=5
+	git checkout -q --orphan gh-pages
+	git rm -qr --cached .
+	git clean -qfd
+	git pull -qf origin gh-pages --depth=5
 else
 	git checkout gh-pages
 	git pull
@@ -65,7 +65,9 @@ endif
 ifeq (false,$(TRAVIS_PULL_REQUEST))
 	@git push https://$(GH_TOKEN)@github.com/martinthomson/drafts.git gh-pages
 endif
-	git checkout ${GITBRANCH}
+ifneq (true,${TRAVIS})
+	git checkout ${GITORIG}
+endif
 	-rm -rf ${GHPAGES_TMP}
 endif
 
