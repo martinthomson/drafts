@@ -2,7 +2,7 @@
 
 Work in progress.  Pull requests accepted.
 
-[Current versions](https://martinthomson.github.io/drafts) (intermittently updated).
+[Current versions](https://martinthomson.github.io/drafts)
 
 # Submitting
 
