@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                            May 31, 2014
-Expires: December 2, 2014
+Intended status: Standards Track                            June 8, 2014
+Expires: December 10, 2014
 
 
                   Marking HTTP Requests as Unimportant
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 2, 2014.
+   This Internet-Draft will expire on December 10, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires December 2, 2014                [Page 1]
+Thomson                 Expires December 10, 2014               [Page 1]
 
-Internet-Draft                  HTTP Nice                       May 2014
+Internet-Draft                  HTTP Nice                      June 2014
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires December 2, 2014                [Page 2]
+Thomson                 Expires December 10, 2014               [Page 2]
 
-Internet-Draft                  HTTP Nice                       May 2014
+Internet-Draft                  HTTP Nice                      June 2014
 
 
    whether any given request would cause significant expenditure of
@@ -165,9 +165,9 @@ Internet-Draft                  HTTP Nice                       May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 3]
+Thomson                 Expires December 10, 2014               [Page 3]
 
-Internet-Draft                  HTTP Nice                       May 2014
+Internet-Draft                  HTTP Nice                      June 2014
 
 
    Multiple values for the header field MUST NOT be included.  If
@@ -221,9 +221,9 @@ Internet-Draft                  HTTP Nice                       May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 4]
+Thomson                 Expires December 10, 2014               [Page 4]
 
-Internet-Draft                  HTTP Nice                       May 2014
+Internet-Draft                  HTTP Nice                      June 2014
 
 
    o  Application preferences or context.  For example, a server might
@@ -277,9 +277,9 @@ Internet-Draft                  HTTP Nice                       May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 5]
+Thomson                 Expires December 10, 2014               [Page 5]
 
-Internet-Draft                  HTTP Nice                       May 2014
+Internet-Draft                  HTTP Nice                      June 2014
 
 
 2.3.  Store and Forward
@@ -333,9 +333,9 @@ Internet-Draft                  HTTP Nice                       May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 6]
+Thomson                 Expires December 10, 2014               [Page 6]
 
-Internet-Draft                  HTTP Nice                       May 2014
+Internet-Draft                  HTTP Nice                      June 2014
 
 
 6.  References
@@ -389,9 +389,9 @@ Author's Address
 
 
 
-Thomson                 Expires December 2, 2014                [Page 7]
+Thomson                 Expires December 10, 2014               [Page 7]
 
-Internet-Draft                  HTTP Nice                       May 2014
+Internet-Draft                  HTTP Nice                      June 2014
 
 
    Martin Thomson
@@ -445,4 +445,4 @@ Internet-Draft                  HTTP Nice                       May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 8]
+Thomson                 Expires December 10, 2014               [Page 8]

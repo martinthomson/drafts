@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                            May 31, 2014
-Expires: December 2, 2014
+Intended status: Standards Track                            June 8, 2014
+Expires: December 10, 2014
 
 
              Client Authentication over New TLS Connection
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 2, 2014.
+   This Internet-Draft will expire on December 10, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires December 2, 2014                [Page 1]
+Thomson                 Expires December 10, 2014               [Page 1]
 
-Internet-Draft                    CANT                          May 2014
+Internet-Draft                    CANT                         June 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires December 2, 2014                [Page 2]
+Thomson                 Expires December 10, 2014               [Page 2]
 
-Internet-Draft                    CANT                          May 2014
+Internet-Draft                    CANT                         June 2014
 
 
 2.  Client Certificate Challenge
@@ -165,9 +165,9 @@ Internet-Draft                    CANT                          May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 3]
+Thomson                 Expires December 10, 2014               [Page 3]
 
-Internet-Draft                    CANT                          May 2014
+Internet-Draft                    CANT                         June 2014
 
 
    alternative distinguished names are carried by repeating the "dn"
@@ -221,9 +221,9 @@ Internet-Draft                    CANT                          May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 4]
+Thomson                 Expires December 10, 2014               [Page 4]
 
-Internet-Draft                    CANT                          May 2014
+Internet-Draft                    CANT                         June 2014
 
 
    Where fingerprints are provided with multiple hash function names, a
@@ -277,9 +277,9 @@ Internet-Draft                    CANT                          May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 5]
+Thomson                 Expires December 10, 2014               [Page 5]
 
-Internet-Draft                    CANT                          May 2014
+Internet-Draft                    CANT                         June 2014
 
 
    client certificate, the presence of a new connection could reveal
@@ -333,9 +333,9 @@ Internet-Draft                    CANT                          May 2014
 
 
 
-Thomson                 Expires December 2, 2014                [Page 6]
+Thomson                 Expires December 10, 2014               [Page 6]
 
-Internet-Draft                    CANT                          May 2014
+Internet-Draft                    CANT                         June 2014
 
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
@@ -389,4 +389,4 @@ Author's Address
 
 
 
-Thomson                 Expires December 2, 2014                [Page 7]
+Thomson                 Expires December 10, 2014               [Page 7]
