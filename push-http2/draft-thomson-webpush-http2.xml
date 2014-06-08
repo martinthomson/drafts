@@ -1,0 +1,399 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="rfc2629.xslt"?>
+<!DOCTYPE rfc SYSTEM "rfc2629.dtd">
+
+<?rfc strict="yes" ?>
+<?rfc toc="yes"?>
+<?rfc tocdepth="4"?>
+<?rfc symrefs="yes"?>
+<?rfc sortrefs="yes" ?>
+<?rfc compact="yes" ?>
+<?rfc subcompact="no" ?>
+
+<rfc category="std" ipr="trust200902" docName="draft-thomson-webpush-http2-latest">
+  <front>
+    <title abbrev="HTTP Push">
+      Generic Event Delivery Using HTTP Push
+    </title>
+
+    <author initials="M." surname="Thomson" fullname="Martin Thomson">
+      <organization>Mozilla</organization>
+      <address>
+        <postal>
+          <street>331 E Evelyn Street</street>
+          <city>Mountain View</city>
+          <region>CA</region>
+          <code>94041</code>
+          <country>US</country>
+        </postal>
+        <email>martin.thomson@gmail.com</email>
+      </address>
+    </author>
+
+    <date year="2014"/>
+    <area>RAI</area>
+    <workgroup>WEBPUSH</workgroup>
+    <keyword>Internet-Draft</keyword>
+    <keyword>HTTP</keyword>
+    <keyword>HTTP2</keyword>
+    <keyword>Push</keyword>
+    <keyword>WebPush</keyword>
+
+    <abstract>
+      <t>
+        A simple scheme for the delivery of realtime events to clients is described.  This scheme
+        uses HTTP/2 push.
+      </t>
+    </abstract>
+  </front>
+
+  <middle>
+    <section anchor="intro" title="Introduction">
+      <t>
+        Mobile computing devices are increasingly relied upon for a great many applications.  Mobile
+        devices typically have limited power reserves, so finding more efficient ways to serve
+        application requirements is an important part of any mobile platform.
+      </t>
+
+     <t>
+        One significant contributor to power usage mobile devices is the radio.  Cellular - and to a
+        lesser extent, IEEE 802 radios - consume a significant portion of the energy budget on a
+        wirelessly connected mobile device.
+      </t>
+      <t>
+        Many applications require continuous access to network communications so that real-time
+        events - such as incoming calls or messages - can be conveyed (or "pushed") to the user in a
+        timely fashion.  Uncoordinated use of persistent connections or sessions from multiple
+        applications can contribute to unnecessary use of the device radio, since each independent
+        session independently incurs overheads.  In particular, keep alive traffic used to ensure
+        that middleboxes do not prematurely time out sessions, can result in significant waste.
+        Maintenance traffic tends to dominate over the long term, since events are relatively rare.
+      </t>
+
+      <t>
+        Consolidating all real-time events into a single session ensures more efficient use of
+        network and radio resources.  A single service consolidates all events, distributing those
+        events to applications as they arrive.  This requires just one session, avoiding duplicated
+        overhead costs.
+      </t>
+      <t>
+        The <xref target="API">Web Push API</xref> describes an API that enables the use of a
+        consolidated push service from web applications.  This expands on that work by describing a
+        protocol that can be used to:
+        <list style="symbols">
+          <t>
+            request the delivery of an event to an attached device
+          </t>
+          <t>
+            register a new device, create new event delivery channels, and monitor those channels
+            for new events
+          </t>
+        </list>
+      </t>
+      <t>
+        This is intentionally split into these two categories because requesting the delivery of
+        events is required for immediate use by the Web Push API.  The registration, management and
+        monitoring functions are currently fulfilled by proprietary protocols; these are adequate,
+        but do not offer any advantages that standardization affords.
+      </t>
+      <t>
+        The monitoring function described in this document is intended to be replaceable, enabling
+        the use of monitoring schemes that are better optimized for the network environment and the
+        device.  For instance, using notification systems like the GSM Short Message Service (SMS)
+        can take advantage of the native paging capabilities of a cellular network, avoiding the
+        ongoing maintainence cost of a persistent TCP connection.
+      </t>
+
+      <t>
+        This document intentionally does not describe how a push server is discovered.  Discovery of
+        push servers is left for future efforts, if it turns out to be necessary at all.  Devices
+        are expected to be configured with a push server URL.
+      </t>
+      <t>
+        Similarly, discovery of support for and negotiation of use of alternative monitoring schemes
+        is left to documents that extend this basic protocol.
+      </t>
+
+      <section anchor="terminology" title="Conventions and Terminology">
+        <t>
+          In cases where normative language needs to be emphasized, this document falls back on
+          established shorthands for expressing interoperability requirements on implementations:
+          the capitalized words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these is
+          described in <xref target="RFC2119"/>.
+        </t>
+        <t>
+          This document will use the terminology from <xref target="API"/>, though "application"
+          will be used in preference to "webapp", since the described protocols are not restricted
+          to web use.  This document introduces the term "device", which refers to the consumer of
+          push messages.
+        </t>
+      </section>
+    </section>
+
+    <section title="Overview">
+      <t>
+        A general model for push services includes three basic actors: a device, a push server, and
+        an application.
+      </t>
+      <figure>
+          <artwork><![CDATA[
+  +-----------+        +-------------+        +-------------+
+  |  Device   |        | Push Server |        | Application |
+  +-----------+        +-------------+        +-------------+
+       |                      |                      |
+       |      Register        |                      |
+       |--------------------->|                      |
+       |       Monitor        |                      |
+       |<====================>|                      |
+       |     Get Channel      |                      |
+       |--------------------->|                      |
+       |           Provide Channel                   |
+       |-------------------------------------------->|
+       |                      |     Push Message     |
+       |    Push Message      |<---------------------|
+       |<---------------------|                      |
+       |                      |                      |
+]]></artwork>
+      </figure>
+      <t>
+        At the very beginning of the process, the device registers with the push server.  This
+        establishes a shared session between the device and push server that will be used to
+        aggregate push messages from all applications that the device interacts with.
+      </t>
+      <t>
+        The registration response includes details on how the device is expected to monitor for
+        incoming push messages.  This document describes one such mechanism, though more efficient
+        means of monitoring could be optionally defined (and this is expressly permitted).
+      </t>
+      <t>
+        A registration after creation has no channels associated with it.  New channels can be
+        requested by the device and then distributed to applications.  It is expected that devices
+        will distribute a different channel to each application, with the potential for multiple
+        channels being provided to the same application.
+      </t>
+      <t>
+        Applications use channels to deliver push messages to devices, via the push server.
+      </t>
+      <t>
+        Both registrations and channels have a limited lifetime.  These will need to be refreshed
+        over time.
+      </t>
+    </section>
+
+    <section anchor="push" title="Delivering Push Messages">
+      <t>
+        A push channel is identified with an <xref target="I-D.ietf-httpbis-p1-messaging">HTTP
+        URI</xref>.  An application can request the delivery of a push message by sending an HTTP
+        PUT request to this URI, including the push message in the body of the request.
+      </t>
+      <t>
+        A push server can acknowledge the end-to-end delivery of a push message by responding with a
+        200 (OK) status code.  A push server that stores the message for later delivery (see <xref
+        target="store"/>) could respond with a 202 (Accepted) status code to indicate that the
+        message was stored, but not delivered.
+      </t>
+    </section>
+
+    <!-- TODO determine if we want this...
+    <section title="Responding to Push Messages">
+      <t>
+
+        A server that wishes to enable end-to-end communication between a device and application
+        could use a link relation of "replies" to provide a location where the device can provide a
+        response.  The server can wait for some time for this to be populated and then use the
+        contents of this to generate the response to the push message.
+
+        That generates a lot of issues.  You no longer can have arbitrary content-types, you have to
+        carry that funny HTTP message content type so that the client can see all the header fields
+        and provide them.  It's pretty ugly.
+
+      </t>
+    </section>
+   -->
+
+    <section anchor="register" title="Registering">
+      <t>
+        A device that wishes to establish a new or replacement registration sends an HTTP POST
+        request to its configured push server URL.  The request contains no entity body.
+      </t>
+      <t>
+        The push server creates a new registration in response to this request, creating two new
+        resources and allocating an HTTP URI for each.  These URIs are included in link relations
+        that are included in Link header fields in the response.
+        <list style="hanging">
+          <t hangText="monitor:">
+            A link relation of type "...:push:monitor" includes the URL of a resource that the
+            device can monitor for events.  Monitoring is described in <xref target="monitor"/>.
+          </t>
+          <t hangText="channel:">
+            A link relation of type "...:push:channel" includes a URL of a resource where the device
+            can create new channels.  Creating channels is described in <xref target="channel"/>.
+          </t>
+        </list>
+        The push server includes the "monitor" link relation in a Location header field.
+      </t>
+      <t>
+        The push server MUST include expiration information in the response to this request in
+        either the Expires header field, or by setting a "max-age" parameter on a Cache-Control
+        header field.  The Cache-Control header field MUST include the "private" directive <xref
+        target="I-D.ietf-httpbis-p6-cache"/>.
+      </t>
+      <t>
+        The push server SHOULD also provide the "channel" link and expiration information in
+        response to requests to the "monitor" resource.
+      </t>
+    </section>
+
+    <section anchor="channel" title="Channels">
+      <t>
+        A client sends a POST request to the "channel" resource to create a new channel.
+      </t>
+      <t>
+        A response with a 201 status code includes the channel URI in the Location header field.
+      </t>
+      <t>
+        A channel can expire.  Servers indicate this using the Expires header field, or by setting a
+        "max-age" parameter on a Cache-Control header field.
+      </t>
+      <t>
+        A client can explicitly delete a channel by sending a DELETE request to channel URI.
+      </t>
+    </section>
+
+    <section anchor="monitor" title="Monitoring and Receiving Push Messages">
+      <t>
+        A device monitors for new events by making a GET request to the monitor resource.  The
+        server does not respond to these request, it instead uses <xref
+        target="I-D.ietf-httpbis-http2">server push</xref> to send the contents of push messages as
+        applications send them.
+      </t>
+      <t>
+        Each push message consists of a synthesized GET request to the channel URI that was the
+        target of the push.  The response body is the entity body from the PUT request.
+      </t>
+      <t>
+        A device can request the monitor resource immediately by including a <xref
+        target="I-D.snell-http-prefer">Prefer header field</xref> with a "wait" parmeter set to "0".
+      </t>
+      <t>
+        A server that wishes to redistribute load can do so using The alternative services
+        mechanisms that are part of HTTP/2 <xref target="I-D.ietf-httpbis-alt-svc"/>.  The ALTSVC
+        frame type allows for redistribution of load whilst retaining the same monitor resource.
+        Once a device has established a replacement connection, it can notify the server of imminent
+        shutdown using a GOAWAY frame, which allows the server to respond to the long-standing GET
+        request and gracefully shut down the connection.  This allows for seamless migration between
+        servers.
+      </t>
+    </section>
+
+    <section anchor="store" title="Store and Forward Operation">
+      <t>
+        Push servers are not obligated to store messages for any time.  If a client is not actively
+        monitoring for push messages, messages can be lost.
+      </t>
+      <t>
+        Push servers are permitted to store messages for some time to allow for limited recovery
+        from transient faults.  If a message is stored, but not delivered, the push server can
+        indicate the probable duration of storage by including expiration information in the
+        response to the push request.
+      </t>
+      <t>
+        Messages that were stored and not delivered to a client MAY be delivered when a client
+        commences monitoring.  These messages should include a Last-Modified header field.  If a
+        server stores push messages, a GET request to a channel URI returns the last message sent by
+        an application to that channel.
+      </t>
+      <t>
+        Push servers that store push messages might need to limit the size of push messages to avoid
+        being subject to overloading.  Push servers that don't store can stream the payload of push
+        messages to devices.  This can use HTTP/2 flow control to limit the state commitment this
+        requires.  However, push servers MAY place an upper limit on the size of push messages that
+        they permit.
+      </t>
+    </section>
+
+    <section title="IANA Considerations">
+      <t>
+        TODO: register link relation types, as necessary.
+      </t>
+    </section>
+
+    <section anchor="security" title="Security Considerations">
+      <t>
+        This protocol does not specific a single authorization framework for managing access to push
+        servers, either by devices or applications.  Thus, there is a very real possibility that
+        this could be exploited to mount denial of service attacks on the push service.
+      </t>
+      <t>
+        Push services MAY choose to authorize requests based on any HTTP-compatible means available,
+        of which there are numerous options.
+      </t>
+      <t>
+        A malicious application can use the greater resources of a push server to mount a denial of
+        service attack on devices.  Push servers MAY limit the rate at which push messages are sent
+        to devices.
+      </t>
+      <t>
+        One basic protection against misuse of push channels is to ensure that only authorized
+        applications are given channel URIs and to make it extremely difficult to successfully guess
+        a valid channel URI.  Encoding a large amount of random entropy in the URI path is one
+        technique for ensuring that channel URIs are able to act as bearer tokens.
+      </t>
+      <t>
+        A push server is able to see (and modify) the content of push messages.  Applications that
+        depend on end-to-end guarantees MUST use object security mechanisms to protect the
+        confidentiality and integrity of push messages.  Since the application frequently resides
+        both in the server that originates the push messages and in the device, and there is a
+        requirement for direct communications between these two instances to exchange channel
+        information, this provides a perfect medium for key agreement.
+      </t>
+      <t>
+        A push server is also able to deny service.  In addition to malicious reasons, delivery of
+        push messages can fail due to transient faults in networks, the device being temporarily
+        unavailable, or other similar faults.  Therefore, applications that rely on the content of
+        push messages being delivered MUST ensure that they provide other means of delivering
+        messages to devices.
+      </t>
+    </section>
+<!--
+    <section anchor="ack" title="Acknowledgements">
+      <t>
+      </t>
+    </section>
+-->
+  </middle>
+
+  <back>
+
+    <references title="Normative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.snell-http-prefer.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p1-messaging.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p6-cache.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-alt-svc.xml"?>
+    </references>
+    <references title="Informative References">
+      <reference anchor="API" target="https://w3c.github.io/push-api/index.html">
+        <front>
+          <title>Web Push API</title>
+          <author initials="B." surname="Sullivan" fullname="Bryan Sullivan"/>
+          <author initials="E." surname="Fullea" fullname="Eduardo Fullea"/>
+          <date month="May" year="2014" />
+        </front>
+        <seriesInfo name="Editor's Draft" value="push-api" />
+      </reference>
+    </references>
+
+    <!--
+        <section title="Change Log">
+        <t>[[The RFC Editor is requested to remove this section at publication.]]</t>
+        <t>Changes since -0-1:
+        <list style="symbols">
+        <t>Document created.</t>
+        </list>
+        </t>
+        </section>
+    -->
+  </back>
+</rfc>

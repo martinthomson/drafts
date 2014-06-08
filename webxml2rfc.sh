@@ -1,13 +1,25 @@
 #!/bin/sh
 # A replacement for xml2rfc that uses wget and the web service at xml.resource.org.
 
+if [[ "$1" = "--html" ]]; then
+    FORMAT=html
+    shift
+fi
+
 if [[ $# -lt 1 ]]; then
-    echo "Usage: ${0##*/} <input> [output]" 1>&2
+    echo "Usage: ${0##*/} [--html] <input> [[-o] output]" 1>&2
     exit 2
-elif [[ $# -ge 2 ]]; then
-    OUTPUT="$2"
 else
-    OUTPUT="${1%.xml}.txt"
+    INPUT="$1"
+    shift
+    if [[ "$1" = "-o" ]]; then
+        shift
+    fi
+    if [[ $# -ge 1 ]]; then
+        OUTPUT="$1"
+    else
+        OUTPUT="${INPUT%.xml}.txt"
+    fi
 fi
 
 URI="${XML2RFC_URI:-http://xml.resource.org/cgi-bin/xml2rfc.cgi}"
@@ -18,7 +30,7 @@ if [[ `uname -s 2>/dev/null` == "Darwin" ]]; then
 else
     MD5=(md5sum -)
 fi
-BOUNDARY="boundary-"`head "$1" | "${MD5[@]}" | cut -c 1-32 -`
+BOUNDARY="boundary-"`head "${INPUT}" | "${MD5[@]}" | cut -c 1-32 -`
 FILE=/tmp/${0##*/}$$
 M=""
 
@@ -49,7 +61,7 @@ $M
 --$BOUNDARY$M
 Content-Disposition: form-data; name="modeAsFormat"$M
 $M
-${OUTPUT##*.}/ascii$M
+${FORMAT:-${OUTPUT##*.}}/ascii$M
 --$BOUNDARY$M
 Content-Disposition: form-data; name="type"$M
 $M
@@ -63,7 +75,7 @@ Content-Disposition: form-data; name="input"; filename="${1##*/}"$M
 Content-Type: text/xml$M
 $M
 EOF
-cat "$1" >> "$FILE"
+cat "$INPUT" >> "$FILE"
 echo "$M" >> "$FILE"
 echo "--$BOUNDARY--$M" >> "$FILE"
 

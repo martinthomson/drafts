@@ -10,10 +10,10 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-thomson-tls-care-latest">
+<rfc category="std" ipr="trust200902" docName="draft-thomson-rtcweb-alpn-latest">
   <front>
-    <title abbrev="CARE">
-      Client Authentication Request Extension for (D)TLS
+    <title abbrev="ALPN for WebRTC">
+      Application Layer Protocol Negotiation for Web Real-Time Communications (WebRTC)
     </title>
 
     <author initials="M." surname="Thomson" fullname="Martin Thomson">
@@ -43,8 +43,8 @@
       <t>
         Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web
         Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).
-        Labels are provided for identifying a session that uses a combination of media and data, and
-        for identifying a session that uses media that requires confidentiality protection.
+        Labels are provided for identifying a session that uses a combination of WebRTC compatible
+        media and data, and for identifying a session requiring confidentiality protection.
       </t>
     </abstract>
   </front>
@@ -66,7 +66,7 @@
       <t>
         Different WebRTC uses can be advertised and behavior can be constrained to what is
         appropriate to a given use.  In particular, this allows for the identifications of sessions
-        that require confidentiality.
+        that require confidentiality protection.
       </t>
 
       <section title="Conventions and Terminology" anchor="terminology">
@@ -80,7 +80,7 @@
 
     <section title="ALPN Labels for WebRTC">
       <t>
-        The following four labels are defined for use in ALPN:
+        The following identifiers are defined for use in ALPN:
         <list style="hanging">
           <t hangText="webrtc:">
             The DTLS session is used to establish keys for a Secure Real-time Transport Protocol
@@ -104,6 +104,31 @@
         media+data.  That seems unlikely to be of any major benefit, but it might be worth
         considering.</cref>
       </t>
+      <t>
+        Both identifiers describe the same basic protocol: a DTLS session that is used to provide
+        keys for an SRTP session in combination with WebRTC data channels.  Either SRTP or data
+        channels MAY be absent.  The data channels send <xref target="RFC4960">Stream Control
+        Transmission Protocol (SCTP)</xref> over the DTLS record layer, which can be multiplexed
+        with SRTP on the same UDP flow.  WebRTC requires the use of <xref
+        target="RFC5245">Interactive Communication Establishment (ICE)</xref> to establish the UDP
+        flow, but this is not covered by the identifier.
+      </t>
+      <t>
+        A more thorough definition of what WebRTC communications entail is included in <xref
+        target="I-D.ietf-rtcweb-transports"/>.
+      </t>
+      <t>
+        There is no functional difference between the identifiers except with respect to the promise
+        that an endpoint makes with respect to the confidentiality of session content.  An endpoint
+        negotiating <spanx style="verb">c-webrtc</spanx> makes a promise to preserve the
+        confidentiality of the data it receives.
+      </t>
+      <t>
+        Only one of these labels can be used for any given session.  A peer acting in the client
+        role MUST NOT offer both identifiers.  A peer in the server role that receives a ClientHello
+        containing both labels MUST reject the session, though it MAY accept the confidential option
+        and protect content accordingly.
+      </t>
     </section>
 
     <section title="Media Confidentiality" anchor="confidentiality">
@@ -121,12 +146,26 @@
         style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
       </t>
       <t>
+        Without some form of indication that is securely bound to the session, a WebRTC endpoint is
+        unable to properly distinguish between session that requires confidentiality protection and
+        one that does not.
+      </t>
+      <t>
         A WebRTC implementation MUST only send media over a <spanx style="verb">c-webrtc</spanx>
         session that comes from user-controlled sources.  Media from sources that are controlled by
         third parties (such as the signaling application) could be used to create confusion about
         the content and origin of data.  This cannot prevent confusion when rendered as a web page,
         for example, but browsers are required to provide ways to identify media and its provenance
         (see Section 5.5 of <xref target="I-D.ietf-rtcweb-security-arch"/>).
+      </t>
+      <t>
+        A browser is required to enforce confidentiality using isolation controls similar to those
+        used in content cross-origin protections (see <eref
+        target="http://www.w3.org/TR/2012/CR-html5-20121217/browsers.html#origin">Section 5.3</eref>
+        of <xref target="HTML5"/>).  These protections ensure that media is protected from
+        applications.  Applications are not able to read or modify the contents of a protected flow
+        of media.  Media that is produced from a session using the <spanx
+        style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
       </t>
       <t>
         Confidentiality protections of this sort are not expected to be possible for data that is
@@ -147,9 +186,15 @@
       </t>
       <t>
         Generally speaking, ensuring confidentiality depends on authenticating the communications
-        peer.  However, this mechanism explicitly does not depend on authentication; a WebRTC
+        peer.  This mechanism explicitly does not define a specific authentication method; a WebRTC
         endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no
         matter what identity is attributed to a peer.
+      </t>
+      <t>
+        RTP middleboxes and entities that forward media or data cannot promise to maintain
+        confidentiality.  Any entity that forwards content, or records content for later access by
+        entities other than the authenticated peer, MUST NOT offer or accept a session with the
+        <spanx style="verb">c-webrtc</spanx> identifier.
       </t>
    </section>
 
@@ -241,9 +286,25 @@
     </references>
 
     <references title="Informative References">
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.4960.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5245.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security-arch.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-transports.xml"?>
+      <reference anchor="HTML5" target="http://www.w3.org/TR/2012/CR-html5-20121217/">
+        <front>
+          <title>
+            HTML 5
+          </title>
+          <author initials="R." surname="Berjon" fullname="Robin Berjon"/>
+          <author initials="T." surname="Leithead" fullname="Travis Leithead"/>
+          <author initials="E." surname="Doyle Navara" fullname="Erika Doyle Navara"/>
+          <author initials="E." surname="O'Connor" fullname="Edward O'Connor"/>
+          <author initials="S." surname="Pfeiffer" fullname="Silvia Pfeiffer"/>
+          <date year="2010" month="August"/>
+        </front>
+        <seriesInfo name="CR" value="CR-html5-20121217"/>
+      </reference>
     </references>
   </back>
 </rfc>
