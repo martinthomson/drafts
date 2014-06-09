@@ -1,9 +1,590 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>301 Moved Permanently</title>
-</head><body>
-<h1>Moved Permanently</h1>
-<p>The document has moved <a href="http://xml2rfc.ietf.org/cgi-bin/xml2rfc.cgi">here</a>.</p>
-<hr>
-<address>Apache/2.2.22 (Debian) Server at xml.resource.org Port 80</address>
-</body></html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" 
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head profile="http://www.w3.org/2006/03/hcard http://dublincore.org/documents/2008/08/04/dc-html/">
+  <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+
+  <title>Weighted, Ordered, Weighted (WOW) Priority for HTTP/2.0 </title>
+
+  <style type="text/css" title="Xml2Rfc (sans serif)">
+  /*<![CDATA[*/
+	  a {
+	  text-decoration: none;
+	  }
+      /* info code from SantaKlauss at http://www.madaboutstyle.com/tooltip2.html */
+      a.info {
+          /* This is the key. */
+          position: relative;
+          z-index: 24;
+          text-decoration: none;
+      }
+      a.info:hover {
+          z-index: 25;
+          color: #FFF; background-color: #900;
+      }
+      a.info span { display: none; }
+      a.info:hover span.info {
+          /* The span will display just on :hover state. */
+          display: block;
+          position: absolute;
+          font-size: smaller;
+          top: 2em; left: -5em; width: 15em;
+          padding: 2px; border: 1px solid #333;
+          color: #900; background-color: #EEE;
+          text-align: left;
+      }
+	  a.smpl {
+	  color: black;
+	  }
+	  a:hover {
+	  text-decoration: underline;
+	  }
+	  a:active {
+	  text-decoration: underline;
+	  }
+	  address {
+	  margin-top: 1em;
+	  margin-left: 2em;
+	  font-style: normal;
+	  }
+	  body {
+	  color: black;
+	  font-family: verdana, helvetica, arial, sans-serif;
+	  font-size: 10pt;
+	  max-width: 55em;
+	  
+	  }
+	  cite {
+	  font-style: normal;
+	  }
+	  dd {
+	  margin-right: 2em;
+	  }
+	  dl {
+	  margin-left: 2em;
+	  }
+	
+	  ul.empty {
+	  list-style-type: none;
+	  }
+	  ul.empty li {
+	  margin-top: .5em;
+	  }
+	  dl p {
+	  margin-left: 0em;
+	  }
+	  dt {
+	  margin-top: .5em;
+	  }
+	  h1 {
+	  font-size: 14pt;
+	  line-height: 21pt;
+	  page-break-after: avoid;
+	  }
+	  h1.np {
+	  page-break-before: always;
+	  }
+	  h1 a {
+	  color: #333333;
+	  }
+	  h2 {
+	  font-size: 12pt;
+	  line-height: 15pt;
+	  page-break-after: avoid;
+	  }
+	  h3, h4, h5, h6 {
+	  font-size: 10pt;
+	  page-break-after: avoid;
+	  }
+	  h2 a, h3 a, h4 a, h5 a, h6 a {
+	  color: black;
+	  }
+	  img {
+	  margin-left: 3em;
+	  }
+	  li {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  ol p {
+	  margin-left: 0em;
+	  }
+	  p {
+	  margin-left: 2em;
+	  margin-right: 2em;
+	  }
+	  pre {
+	  margin-left: 3em;
+	  background-color: lightyellow;
+	  padding: .25em;
+	  }
+	  pre.text2 {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f0f0f0;
+	  width: 69em;
+	  }
+	  pre.inline {
+	  background-color: white;
+	  padding: 0em;
+	  }
+	  pre.text {
+	  border-style: dotted;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  width: 69em;
+	  }
+	  pre.drawing {
+	  border-style: solid;
+	  border-width: 1px;
+	  background-color: #f8f8f8;
+	  padding: 2em;
+	  }
+	  table {
+	  margin-left: 2em;
+	  }
+	  table.tt {
+	  vertical-align: top;
+	  }
+	  table.full {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.headers {
+	  border-style: outset;
+	  border-width: 1px;
+	  }
+	  table.tt td {
+	  vertical-align: top;
+	  }
+	  table.full td {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.tt th {
+	  vertical-align: top;
+	  }
+	  table.full th {
+	  border-style: inset;
+	  border-width: 1px;
+	  }
+	  table.headers th {
+	  border-style: none none inset none;
+	  border-width: 1px;
+	  }
+	  table.left {
+	  margin-right: auto;
+	  }
+	  table.right {
+	  margin-left: auto;
+	  }
+	  table.center {
+	  margin-left: auto;
+	  margin-right: auto;
+	  }
+	  caption {
+	  caption-side: bottom;
+	  font-weight: bold;
+	  font-size: 9pt;
+	  margin-top: .5em;
+	  }
+	
+	  table.header {
+	  border-spacing: 1px;
+	  width: 95%;
+	  font-size: 10pt;
+	  color: white;
+	  }
+	  td.top {
+	  vertical-align: top;
+	  }
+	  td.topnowrap {
+	  vertical-align: top;
+	  white-space: nowrap; 
+	  }
+	  table.header td {
+	  background-color: gray;
+	  width: 50%;
+	  }
+	  table.header a {
+	  color: white;
+	  }
+	  td.reference {
+	  vertical-align: top;
+	  white-space: nowrap;
+	  padding-right: 1em;
+	  }
+	  thead {
+	  display:table-header-group;
+	  }
+	  ul.toc, ul.toc ul {
+	  list-style: none;
+	  margin-left: 1.5em;
+	  margin-right: 0em;
+	  padding-left: 0em;
+	  }
+	  ul.toc li {
+	  line-height: 150%;
+	  font-weight: bold;
+	  font-size: 10pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  ul.toc li li {
+	  line-height: normal;
+	  font-weight: normal;
+	  font-size: 9pt;
+	  margin-left: 0em;
+	  margin-right: 0em;
+	  }
+	  li.excluded {
+	  font-size: 0pt;
+	  }
+	  ul p {
+	  margin-left: 0em;
+	  }
+	
+	  .comment {
+	  background-color: yellow;
+	  }
+	  .center {
+	  text-align: center;
+	  }
+	  .error {
+	  color: red;
+	  font-style: italic;
+	  font-weight: bold;
+	  }
+	  .figure {
+	  font-weight: bold;
+	  text-align: center;
+	  font-size: 9pt;
+	  }
+	  .filename {
+	  color: #333333;
+	  font-weight: bold;
+	  font-size: 12pt;
+	  line-height: 21pt;
+	  text-align: center;
+	  }
+	  .fn {
+	  font-weight: bold;
+	  }
+	  .hidden {
+	  display: none;
+	  }
+	  .left {
+	  text-align: left;
+	  }
+	  .right {
+	  text-align: right;
+	  }
+	  .title {
+	  color: #990000;
+	  font-size: 18pt;
+	  line-height: 18pt;
+	  font-weight: bold;
+	  text-align: center;
+	  margin-top: 36pt;
+	  }
+	  .vcardline {
+	  display: block;
+	  }
+	  .warning {
+	  font-size: 14pt;
+	  background-color: yellow;
+	  }
+	
+	
+	  @media print {
+	  .noprint {
+		display: none;
+	  }
+	
+	  a {
+		color: black;
+		text-decoration: none;
+	  }
+	
+	  table.header {
+		width: 90%;
+	  }
+	
+	  td.header {
+		width: 50%;
+		color: black;
+		background-color: white;
+		vertical-align: top;
+		font-size: 12pt;
+	  }
+	
+	  ul.toc a::after {
+		content: leader('.') target-counter(attr(href), page);
+	  }
+	
+	  ul.ind li li a {
+		content: target-counter(attr(href), page);
+	  }
+	
+	  .print2col {
+		column-count: 2;
+		-moz-column-count: 2;
+		column-fill: auto;
+	  }
+	  }
+	
+	  @page {
+	  @top-left {
+		   content: "Internet-Draft"; 
+	  } 
+	  @top-right {
+		   content: "December 2010"; 
+	  } 
+	  @top-center {
+		   content: "Abbreviated Title";
+	  } 
+	  @bottom-left {
+		   content: "Doe"; 
+	  } 
+	  @bottom-center {
+		   content: "Expires June 2011"; 
+	  } 
+	  @bottom-right {
+		   content: "[Page " counter(page) "]"; 
+	  } 
+	  }
+	
+	  @page:first { 
+		@top-left {
+		  content: normal;
+		}
+		@top-right {
+		  content: normal;
+		}
+		@top-center {
+		  content: normal;
+		}
+	  }
+  /*]]>*/
+  </style><style tyle="text/css">body {   font: 11pt cambria, helvetica, arial, sans-serif;   font-size-adjust: 0.5;   line-height: 130%;   margin: 1em auto;   max-width: 700px; }  .title, .filename, h1, h2, h3, h4 {   font-family: candara, helvetica, arial, sans-serif;   font-size-adjust: 0.5; } .title { font-size: 150%; } h1 { font-size: 130%; } h2 { font-size: 120%; } h3, h4 { font-size: 110%; } ul.toc >li { font-size: 95%; } ul.toc >li >ul, .figure, caption { font-size: 90%; }  table {   margin-left: 0em; } table.header {   width: 100%; }  table.header td {   background-color: inherit;   color: black; }  samp, tt, code, pre {   font: 11pt consolas, monospace;   font-size-adjust: none; }  pre.text, pre.text2 {   width: 90%; }  dt {   float: left; clear: left;   margin: 0.5em 0.5em 0 0; } dt:first-child {   margin-top: 0; } dd {   margin: 0.5em 0 0 2em; } dd p, dd ul {   margin-top: 0; margin-bottom: 0; } dd *+p {   margin-top: 0.5em; }  ol, ul {   padding: 0;   margin: 0.5em 0 0.5em 2em; } ol ol, ol ul, ul ul, ul ol {   margin-left: 0; } ul.toc, ul.toc ul {    margin: 0 0 0 1.5em; } ul.toc a:first-child {    display: inline-block;    min-width: 1.2em; }</style>
+
+  <link href="#rfc.toc" rel="Contents"/>
+<link href="#rfc.section.1" rel="Chapter" title="1 Introduction"/>
+<link href="#rfc.section.1.1" rel="Chapter" title="1.1 Conventions and Terminology"/>
+<link href="#rfc.section.2" rel="Chapter" title="2 Weight, Order, Weight"/>
+<link href="#rfc.section.2.1" rel="Chapter" title="2.1 Stream Identification"/>
+<link href="#rfc.section.2.2" rel="Chapter" title="2.2 Stream Retention"/>
+<link href="#rfc.section.3" rel="Chapter" title="3 Priority Field"/>
+<link href="#rfc.section.4" rel="Chapter" title="4 Security Considerations"/>
+<link href="#rfc.section.5" rel="Chapter" title="5 IANA Considerations"/>
+<link href="#rfc.section.6" rel="Chapter" title="6 Acknowledgements"/>
+<link href="#rfc.references" rel="Chapter" title="7 References"/>
+<link href="#rfc.references.1" rel="Chapter" title="7.1 Normative References"/>
+<link href="#rfc.references.2" rel="Chapter" title="7.2 Informative References"/>
+<link href="#rfc.authors" rel="Chapter"/>
+
+
+  <meta name="generator" content="xml2rfc version 2.4.8 - http://tools.ietf.org/tools/xml2rfc" />
+  <link rel="schema.dct" href="http://purl.org/dc/terms/" />
+
+  <meta name="dct.creator" content="Thomson, M." />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-httpbis-wow-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-6-9" />
+  <meta name="dct.abstract" content="This document provides an alternative description of priority semantics for HTTP/2.0.  " />
+  <meta name="description" content="This document provides an alternative description of priority semantics for HTTP/2.0.  " />
+
+</head>
+
+<body>
+
+  <table class="header">
+    <tbody>
+    
+    	<tr>
+  <td class="left">HTTPBIS</td>
+  <td class="right">M. Thomson</td>
+</tr>
+<tr>
+  <td class="left">Internet-Draft</td>
+  <td class="right">Mozilla</td>
+</tr>
+<tr>
+  <td class="left">Intended status: Standards Track</td>
+  <td class="right">June 9, 2014</td>
+</tr>
+<tr>
+  <td class="left">Expires: December 11, 2014</td>
+  <td class="right"></td>
+</tr>
+
+    	
+    </tbody>
+  </table>
+
+  <p class="title">Weighted, Ordered, Weighted (WOW) Priority for HTTP/2.0 <br />
+  <span class="filename">draft-thomson-httpbis-wow-latest</span></p>
+  
+  <h1 id="rfc.abstract">
+  <a href="#rfc.abstract">Abstract</a>
+</h1>
+<p>This document provides an alternative description of priority semantics for HTTP/2.0.  </p>
+<h1 id="rfc.status">
+  <a href="#rfc.status">Status of This Memo</a>
+</h1>
+<p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
+<p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
+<p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
+<p>This Internet-Draft will expire on December 11, 2014.</p>
+<h1 id="rfc.copyrightnotice">
+  <a href="#rfc.copyrightnotice">Copyright Notice</a>
+</h1>
+<p>Copyright (c) 2014 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
+
+  
+  <hr class="noprint" />
+  <h1 class="np" id="rfc.toc"><a href="#rfc.toc">Table of Contents</a></h1>
+  <ul class="toc">
+
+  	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
+<li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
+<li>2.   <a href="#rfc.section.2">Weight, Order, Weight</a></li>
+<li>2.1.   <a href="#rfc.section.2.1">Stream Identification</a></li>
+<li>2.2.   <a href="#rfc.section.2.2">Stream Retention</a></li>
+<li>3.   <a href="#rfc.section.3">Priority Field</a></li>
+<li>4.   <a href="#rfc.section.4">Security Considerations</a></li>
+<li>5.   <a href="#rfc.section.5">IANA Considerations</a></li>
+<li>6.   <a href="#rfc.section.6">Acknowledgements</a></li>
+<li>7.   <a href="#rfc.references">References</a></li>
+<li>7.1.   <a href="#rfc.references.1">Normative References</a></li>
+<li>7.2.   <a href="#rfc.references.2">Informative References</a></li>
+<li><a href="#rfc.authors">Author's Address</a></li>
+
+
+  </ul>
+
+  <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
+<p id="rfc.section.1.p.1">A client that is able to express a richer set of prioritization semantics to a server can improve the overall efficiency of actions by ensuring that important data is available when it is most needed.  </p>
+<p id="rfc.section.1.p.2">This document describes a prioritization scheme that is relatively simple, yet capable of describing priority with a relatively high degree of specificity.  Importantly, since priority is advisory only, this scheme ensures that the cost to implementations that do not require prioritization features is minimal.  </p>
+<p id="rfc.section.1.p.3">The prioritization scheme operates in three layers: <a href="#I-D.chan-http2-stream-dependencies">[I-D.chan-http2-stream-dependencies]</a>.  The differences are largely in presentation and syntax.  </p>
+
+<ul>
+  <li>In the first layer, streams are given a relative weight.  This weighting indicates what proportion of available resources are best allocated to each stream.  </li>
+  <li>The second layer establishes a strict ordering between streams.  Stream later in the ordering sequence are of no use until earlier streams are complete.  </li>
+  <li>The third layer describes a weight for streams that are dependent on the same resource completion.  </li>
+</ul>
+
+<p> This scheme is identical in function to the scheme described in </p>
+<h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
+<p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These terms are defined in <a href="#RFC2119">[RFC2119]</a>.  </p>
+<h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#wow" id="wow">Weight, Order, Weight</a></h1>
+<p id="rfc.section.2.p.1">Each stream is given two priority values: weight and order.  These determine how resources are best allocated to streams.  </p>
+<p id="rfc.section.2.p.2">In many cases with HTTP/2.0, the "resource" that priority information controls (or guides) will be the bandwidth from the server to the client.  Servers with data available for multiple streams can select streams for which to send based on priority.  </p>
+<p id="rfc.section.2.p.3">Weight is expressed a number between 1 and 256.  Ideally, a stream with weight 2 is given one third of the resources that a stream with weight 6 is given.  Streams are given a weight of 32 if priority is not specified.  </p>
+<p id="rfc.section.2.p.4">Order is specified by identifying another stream.  The special stream identifier of zero is used to indicate that this stream is not dependent on the completion of any other stream.  </p>
+<p id="rfc.section.2.p.5">Streams that specify an ordering dependency on other streams do not form a dependency tree.  Though an ordering dependency identifies a specific stream, all streams that depend on the same stream are considered equivalent, except for those that depend on stream zero.  For example, if stream B and C both depend on stream A, stream D can specify a dependency on either B or C to the same effect.  This enables the use of simpler data structures for tracking stream dependencies.  </p>
+<p id="rfc.section.2.p.6">Rules for respecting these values are simple: </p>
+
+<ul>
+  <li>Streams that depend on another stream block until the stream (or streams) that they depend on closes.  </li>
+  <li>Streams that depend on the same stream form a group from which resources are allocated based on the relative weights assigned to those streams.  This includes streams dependent on stream zero.  Streams within the same group are selected based on their weight values, using systems like weighted fair queueing [REF], or lottery scheduling [REF].  </li>
+  <li>Once a stream is closed, any resources allocated to that stream are used for streams that directly depend on it using these same rules, recursively.  </li>
+</ul>
+
+<p> </p>
+<p id="rfc.section.2.p.7">Stream prioritization information is retained as long as possible, or until explicitly released, see <a href="#gc">Section 2.2</a>.  </p>
+<h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> Stream Identification</h1>
+<p id="rfc.section.2.1.p.1">Stream prioritization, where used, is likely to be included with every stream.  Therefore, there is a desire to minimize the number of bits used.  The stream identifier, at 31 bits, represents information that is largely redundant, since it is unlikely that either streams from a long time past, or future (and therefore non-existent) streams will be used.  </p>
+<p id="rfc.section.2.1.p.2">This document describes an identifiation scheme that references streams relative to the most recently opened stream in the corresponding direction.  The stream identifier used contains the least significant bits from the stream identifier most recently opened in the corresponding direction.  In the case of a HEADERS frame that opens a stream, the stream identifier in the frame header is used.  </p>
+<p id="rfc.section.2.1.p.3">This results in some uncertainty when identifying streams opened by the remote peer.  For pushed streams, any number of streams can be opened and closed in the time that the priority information is in transit, limited only by the ability of the peer to send data for those streams.  There is no true guarantee against this problem, other than the size of the ordering dependency field.  However, to limit the chances of this occurring, implementations MUST NOT skip values when allocating stream identifiers.  </p>
+<h1 id="rfc.section.2.2"><a href="#rfc.section.2.2">2.2.</a> <a href="#gc" id="gc">Stream Retention</a></h1>
+<p id="rfc.section.2.2.p.1">A prioritization scheme that relies on ordering requires that the prioritization information for a stream live beyong the normal lifetime of the stream itself.  A stream with dependencies necessarily passes relative weighting to its dependent streams; due to transit delays, a stream can be closed at one endpoint at the same time that additional dependencies are created upon it.  Therefore, it is RECOMMENDED that stream priority information be retained beyond the normal lifecycle of a stream.  </p>
+<p id="rfc.section.2.2.p.2">In order to support the ability of an endpoint to release resources, several bits are added to the priority field to identify the highest numbered stream (for a given direction) for which stream.  This value is expressed relative to the stream identified in the current ordering dependency.  </p>
+<p id="rfc.section.2.2.p.3">Streams that are part of the first weighted set (i.e., those that depend on stream 0) SHOULD be retained in preference to streams with explicit ordering dependencies.  The weighting values on those streams determines the proportional resource allocation to their dependent streams at the connection level, which is likely to be important, particularly in intermediation cases.  </p>
+<h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> Priority Field</h1>
+<p id="rfc.section.3.p.1">The PRIORITY flag in a HEADERS frame determines whether a specific priority included.  Absence of this flag indicates that default (or pre-existing) values are to be used for the stream.  </p>
+<p id="rfc.section.3.p.2">Weight and order are then packed into the 32-bit field as follows: </p>
+
+<dl>
+  <dt>Weight (8 bits):</dt>
+  <dd style="margin-left: 8">The weight value occupies the first 8 bits.  To obtain the weight value between 1 and 256 (inclusive), one is added to the value of the field.  </dd>
+  <dt>Order Present (1 bit):</dt>
+  <dd style="margin-left: 8">This bit, if set, indicates that the prioritized stream is dependent on another stream and that Order field contains part of a stream identifier.  Or, from an alternative perspective, a value of zero on this bit indicates that this stream depends only on the special stream 0.  </dd>
+  <dt>Order (19 bits):</dt>
+  <dd style="margin-left: 8">These bits contain the least significant bits of the stream identifier upon which this stream depends.    If the Order Present bit is not set, these bits are used to determine the basis for stream release.  <br/><br/> The 12 high bits of the stream identifier are taken from the identifier of the highest-numbered non-idle stream, which includes the current stream.  This value is reduced (by 2^19 after assembly) if the resulting value is greater than the current stream identifier.  </dd>
+  <dt>Maximum Unused Stream Identifier (4 bits):</dt>
+  <dd style="margin-left: 8">The value of this field is determined by the formula: 2*(4^x).  The resulting value is the difference between the stream identifier referenced in the Order field and the last stream identifier for which the receiver can safely discard priority information.  This constitutes a promise that the identified stream and all those with lower identifiers will not be referenced in later prioritization indications.  A value of all ones (15) is reserved to indicate an infinite value, or that no information can be discarded.  </dd>
+</dl>
+
+<p> </p>
+<h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security" id="security">Security Considerations</a></h1>
+<p id="rfc.section.4.p.1">This prioritization scheme can cause the retention of state for a stream beyond the lifetime of the stream.  A malicious endpoint could exploit this to cause a poorly protected implementation to expend excessive resources tracking streams.  </p>
+<p id="rfc.section.4.p.2">Priority is advisory only.  Implementations are able to safely discard priority information at any time and the only conseuqence is inferior performance.  An implementation SHOULD limit the resources it dedicates to tracking priority and discard prioritization information if these limits are exceeded.  Implementations can choose to discard excess state based on time, memory allocation limits, or the stream identifier ordinal value.  </p>
+<h1 id="rfc.section.5"><a href="#rfc.section.5">5.</a> <a href="#iana" id="iana">IANA Considerations</a></h1>
+<p id="rfc.section.5.p.1">This document makes no request of IANA.  </p>
+<h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
+<p id="rfc.section.6.p.1">Will Chan and his peers did most of this work.  This document merely transcribes that work and tweaks the formula a little.  </p>
+<h1 id="rfc.references"><a href="#rfc.references">7.</a> References</h1>
+<h1 id="rfc.references.1"><a href="#rfc.references.1">7.1.</a> Normative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="I-D.ietf-httpbis-http2">[I-D.ietf-httpbis-http2]</b>
+      </td>
+      <td class="top"><a>Belshe, M.</a>, <a>Peon, R.</a> and <a>M. Thomson</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-http2-12">Hypertext Transfer Protocol version 2</a>", Internet-Draft draft-ietf-httpbis-http2-12, April 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC2119">[RFC2119]</b>
+      </td>
+      <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.references.2"><a href="#rfc.references.2">7.2.</a> Informative References</h1>
+<table>
+  <tbody>
+    <tr>
+      <td class="reference">
+        <b id="I-D.chan-http2-stream-dependencies">[I-D.chan-http2-stream-dependencies]</b>
+      </td>
+      <td class="top"><a>Piatek, M.</a> and <a>W. Chan</a>, "<a href="http://tools.ietf.org/html/draft-chan-http2-stream-dependencies-00">HTTP/2 Stream Dependencies</a>", Internet-Draft draft-chan-http2-stream-dependencies-00, January 2014.</td>
+    </tr>
+  </tbody>
+</table>
+<h1 id="rfc.authors">
+  <a href="#rfc.authors">Author's Address</a>
+</h1>
+<div class="avoidbreak">
+  <address class="vcard">
+	<span class="vcardline">
+	  <span class="fn">Martin Thomson</span> 
+	  <span class="n hidden">
+		<span class="family-name">Thomson</span>
+	  </span>
+	</span>
+	<span class="org vcardline">Mozilla</span>
+	<span class="adr">
+	  <span class="vcardline">Suite 300</span>
+<span class="vcardline">650 Castro Street</span>
+
+	  <span class="vcardline">
+		<span class="locality">Mountain View</span>,  
+		<span class="region">CA</span> 
+		<span class="code">94041</span>
+	  </span>
+	  <span class="country-name vcardline">US</span>
+	</span>
+	<span class="vcardline">EMail: <a href="mailto:martin.thomson@gmail.com">martin.thomson@gmail.com</a></span>
+
+  </address>
+</div>
+
+</body>
+</html>

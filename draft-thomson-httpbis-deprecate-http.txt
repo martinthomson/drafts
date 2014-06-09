@@ -1,9 +1,224 @@
-<!DOCTYPE HTML PUBLIC "-//IETF//DTD HTML 2.0//EN">
-<html><head>
-<title>301 Moved Permanently</title>
-</head><body>
-<h1>Moved Permanently</h1>
-<p>The document has moved <a href="http://xml2rfc.ietf.org/cgi-bin/xml2rfc.cgi">here</a>.</p>
-<hr>
-<address>Apache/2.2.22 (Debian) Server at xml.resource.org Port 80</address>
-</body></html>
+
+
+
+
+HTTPBIS                                                       M. Thomson
+Internet-Draft
+Updates: 2616 (if approved)                                 June 9, 2014
+Intended status: Standards Track
+Expires: December 11, 2014
+
+
+                   Deprecating the 'http:' URI Scheme
+              draft-thomson-httpbis-deprecate-http-latest
+
+Abstract
+
+   The http: URI scheme has proven to be problematic.  This document
+   deprecates its use.
+
+Status of This Memo
+
+   This Internet-Draft is submitted in full conformance with the
+   provisions of BCP 78 and BCP 79.
+
+   Internet-Drafts are working documents of the Internet Engineering
+   Task Force (IETF).  Note that other groups may also distribute
+   working documents as Internet-Drafts.  The list of current Internet-
+   Drafts is at http://datatracker.ietf.org/drafts/current/.
+
+   Internet-Drafts are draft documents valid for a maximum of six months
+   and may be updated, replaced, or obsoleted by other documents at any
+   time.  It is inappropriate to use Internet-Drafts as reference
+   material or to cite them other than as "work in progress."
+
+   This Internet-Draft will expire on December 11, 2014.
+
+Copyright Notice
+
+   Copyright (c) 2014 IETF Trust and the persons identified as the
+   document authors.  All rights reserved.
+
+   This document is subject to BCP 78 and the IETF Trust's Legal
+   Provisions Relating to IETF Documents
+   (http://trustee.ietf.org/license-info) in effect on the date of
+   publication of this document.  Please review these documents
+   carefully, as they describe your rights and restrictions with respect
+   to this document.  Code Components extracted from this document must
+   include Simplified BSD License text as described in Section 4.e of
+   the Trust Legal Provisions and are provided without warranty as
+   described in the Simplified BSD License.
+
+
+
+
+
+Thomson                 Expires December 11, 2014               [Page 1]
+
+Internet-Draft              Deprecating http:                  June 2014
+
+
+Table of Contents
+
+   1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
+     1.1.  Conventions and Terminology . . . . . . . . . . . . . . .   2
+   2.  MUST NOT use http:  . . . . . . . . . . . . . . . . . . . . .   2
+   3.  Why Not Opportunistically Encrypt?  . . . . . . . . . . . . .   2
+   4.  Why Not Trust on First Use? . . . . . . . . . . . . . . . . .   2
+   5.  Why Not Externalize the Consequences? . . . . . . . . . . . .   3
+   6.  Security Considerations . . . . . . . . . . . . . . . . . . .   3
+   7.  Normative References  . . . . . . . . . . . . . . . . . . . .   3
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   3
+
+1.  Introduction
+
+   Anyone who uses HTTP [RFC2616] without TLS [RFC5246] (i.e., HTTPS
+   [RFC2818]) runs a very real risk of being pwned.
+
+   This document attempts to remedy this by prohibiting the use of the
+   "http:" scheme.
+
+1.1.  Conventions and Terminology
+
+   In cases where normative language needs to be emphasized, this
+   document falls back on established shorthands for expressing
+   interoperability requirements on implementations: the capitalized
+   words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these
+   is described in [RFC2119].
+
+2.  MUST NOT use http:
+
+   HTTP clients and servers MUST NOT access or provide resources over
+   unsecured HTTP.  Thus, resources identified with "http:" URIs cannot
+   be used.
+
+3.  Why Not Opportunistically Encrypt?
+
+   Opportunistic encryption is fine if your adversary isn't on-path.
+   It's pretty ineffectual if your adversary is able to interspose
+   themselves somehow.  There is now evidence to suggest that
+   interception capabilities are less difficult to achieve than
+   originally thought.
+
+4.  Why Not Trust on First Use?
+
+   TOFU is unsatisfactory.  It is effectively a pin for the lifetime of
+   a certificate, which raises several issues:
+
+
+
+
+
+Thomson                 Expires December 11, 2014               [Page 2]
+
+Internet-Draft              Deprecating http:                  June 2014
+
+
+   o  Key rollover cannot occur without exposure to an active attack, or
+      some form of succession plan.  The typical key pinning succession
+      plan involves providing alternative pins under the protection of a
+      trusted certificate.  This sort of plan cannot be enacted without
+      a lead time of at least equal to the pin duration.  The successor
+      key has to be available for this entire period.
+
+      From an operational perspective, this is difficult.  In order to
+      ensure that the risk of loss, exposure, or exfiltration of the
+      private key for the successor, the private key for the successor
+      needs to be backed up and stored offline.  Any service that is
+      unwilling to obtain third-party validation of their certificates
+      seems unlikely to be inclined to perform this step.
+
+   o  Pinning makes it difficult to scale out services without sharing
+      of private keys.  Clients will reject connections that offer
+      private keys other than the one they first see.
+
+5.  Why Not Externalize the Consequences?
+
+   That's what we've been doing for years.  That turned out to be a
+   political nightmare once people found out.
+
+6.  Security Considerations
+
+   The IETF has partnered with several large organizations to perform
+   enforcement.  Users of "http:" URIs will be pwned.  Operators of
+   sites that offer "http:" resources will be pwned.
+
+7.  Normative References
+
+   [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
+              Requirement Levels", BCP 14, RFC 2119, March 1997.
+
+   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
+              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
+              Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
+
+   [RFC2818]  Rescorla, E., "HTTP Over TLS", RFC 2818, May 2000.
+
+   [RFC5246]  Dierks, T. and E. Rescorla, "The Transport Layer Security
+              (TLS) Protocol Version 1.2", RFC 5246, August 2008.
+
+Author's Address
+
+
+
+
+
+
+
+Thomson                 Expires December 11, 2014               [Page 3]
+
+Internet-Draft              Deprecating http:                  June 2014
+
+
+   Martin Thomson
+   -
+   US
+
+   Email: martin.thomson@gmail.com
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson                 Expires December 11, 2014               [Page 4]
