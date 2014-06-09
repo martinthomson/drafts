@@ -33,7 +33,7 @@ clean::
 
 GHPAGES_TMP := /tmp/ghpages$(shell echo $$$$)
 .TRANSIENT: ${GHPAGES_TMP}
-GITORIG := $(shell git show-ref --head -s | head -1)
+GITORIG := $(shell git branch | grep '*' | cut -c 3-)
 
 IS_LOCAL := $(if ${TRAVIS},true,)
 ifeq (master,$(TRAVIS_BRANCH))
