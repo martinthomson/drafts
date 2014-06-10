@@ -275,7 +275,7 @@ WWW-Authenticate: ClientCertificate realm="home",
       <t>
         IANA is requested to create an entry in the HTTP Authentication Scheme Registry with the
         following information:
-        <list style="hanging:">
+        <list style="hanging">
           <t hangText="Authentication Scheme Name:">ClientCertificate</t>
           <t hangText="Pointer to specification text:">This document</t>
           <t hangText="Notes">This scheme does not rely on the Authorization header field.</t>
