@@ -125,9 +125,17 @@
       <t>
         For the new connection, a client can use the mechanism in <xref
         target="I-D.thomson-tls-care"/> to prompt the server to request a client certificate, to
-        avoid the problem where the server doesn't know to make a CertificateRequest.  [[TBD: In TLS
-        1.3 a client can unilaterally provide authentication information without a request from the
-        server.]]
+        avoid the problem where the server doesn't know to make a CertificateRequest.
+      </t>
+      <t>
+        [[TBD: In TLS 1.3 a client can unilaterally provide authentication information without a
+        request from the server.]]
+      </t>
+      <t>
+        [[TBD For versions of TLS prior to 1.3,]] a client can immediately request renegotiation
+        immediately after the initial handshake.  A server that supports conditional client
+        authentication MUST request a client certificate if it receives a renegotiation request
+        prior to receiving any application data.
       </t>
     </section>
 
