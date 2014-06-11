@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           June 10, 2014
-Expires: December 12, 2014
+Intended status: Standards Track                           June 11, 2014
+Expires: December 13, 2014
 
 
              Client Authentication over New TLS Connection
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 12, 2014.
+   This Internet-Draft will expire on December 13, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                 Expires December 12, 2014               [Page 1]
+Thomson                 Expires December 13, 2014               [Page 1]
 
 Internet-Draft                    CANT                         June 2014
 
@@ -67,13 +67,13 @@ Table of Contents
      3.1.  Distinguished Name Parameter ("dn") . . . . . . . . . . .   3
      3.2.  Fingerprint Parameters ("sha-256", ...) . . . . . . . . .   4
    4.  Security Considerations . . . . . . . . . . . . . . . . . . .   5
-   5.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   5
+   5.  Privacy Considerations  . . . . . . . . . . . . . . . . . . .   6
    6.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   6
    7.  Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .   6
    8.  References  . . . . . . . . . . . . . . . . . . . . . . . . .   6
-     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   6
+     8.1.  Normative References  . . . . . . . . . . . . . . . . . .   7
      8.2.  Informational References  . . . . . . . . . . . . . . . .   7
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   7
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .   8
 
 1.  Introduction
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                 Expires December 12, 2014               [Page 2]
+Thomson                 Expires December 13, 2014               [Page 2]
 
 Internet-Draft                    CANT                         June 2014
 
@@ -135,9 +135,16 @@ Internet-Draft                    CANT                         June 2014
    For the new connection, a client can use the mechanism in
    [I-D.thomson-tls-care] to prompt the server to request a client
    certificate, to avoid the problem where the server doesn't know to
-   make a CertificateRequest.  [[TBD: In TLS 1.3 a client can
-   unilaterally provide authentication information without a request
-   from the server.]]
+   make a CertificateRequest.
+
+   [[TBD: In TLS 1.3 a client can unilaterally provide authentication
+   information without a request from the server.]]
+
+   [[TBD For versions of TLS prior to 1.3,]] a client can immediately
+   request renegotiation immediately after the initial handshake.  A
+   server that supports conditional client authentication MUST request a
+   client certificate if it receives a renegotiation request prior to
+   receiving any application data.
 
 3.  Client Certificate Challenge Parameters
 
@@ -156,20 +163,18 @@ Internet-Draft                    CANT                         June 2014
    a TLS CertificateRequest handshake message.  The "dn" parameter is
    repeated for every distinguished name that is permitted.
 
+
+
+Thomson                 Expires December 13, 2014               [Page 3]
+
+Internet-Draft                    CANT                         June 2014
+
+
    A distinguished name is defined in Abstract Syntax Notation number 1
    (ASN.1) [X680] and encoded using Distinguished Encoding Rules (DER)
    [X690] when used in TLS.  The value of the "dn" parameter is a DER-
    encoded distinguished name that is further encoded using base 64
    [RFC4648] with the URL and filename safe alphabet.  Multiple
-
-
-
-
-Thomson                 Expires December 12, 2014               [Page 3]
-
-Internet-Draft                    CANT                         June 2014
-
-
    alternative distinguished names are carried by repeating the "dn"
    parameter.
 
@@ -206,6 +211,21 @@ Internet-Draft                    CANT                         June 2014
    Like the "dn" parameter, fingerprint parameters can be repeated to
    provide clients with alternative values.
 
+
+
+
+
+
+
+
+
+
+
+Thomson                 Expires December 13, 2014               [Page 4]
+
+Internet-Draft                    CANT                         June 2014
+
+
    For example, a server could indicate that a set of permissible
    certificates based on a SHA-256 fingerprint, as follows:
 
@@ -215,16 +235,6 @@ Internet-Draft                    CANT                         June 2014
    These fingerprint values could be matched against an end-entity
    certificate or any issuer in the certificate chain.  Note that line
    breaks are added to this example for formatting reasons only.
-
-
-
-
-
-
-Thomson                 Expires December 12, 2014               [Page 4]
-
-Internet-Draft                    CANT                         June 2014
-
 
    Where fingerprints are provided with multiple hash function names, a
    client can use any of the provided algorithms to determine which
@@ -260,6 +270,18 @@ Internet-Draft                    CANT                         June 2014
    unclear.  Clients MUST ensure that a client-authenticated connection
    is only used for the canonical root URI for which it was created.
 
+
+
+
+
+
+
+
+Thomson                 Expires December 13, 2014               [Page 5]
+
+Internet-Draft                    CANT                         June 2014
+
+
 5.  Privacy Considerations
 
    TLS version 1.2 and prior do not provide confidentiality protection
@@ -274,14 +296,6 @@ Internet-Draft                    CANT                         June 2014
    Revealing that a certificate is in use could alert a passive observer
    to the fact that a client has requested particular resources, thereby
    aiding traffic analysis.  While renegotiation hides the contents of a
-
-
-
-Thomson                 Expires December 12, 2014               [Page 5]
-
-Internet-Draft                    CANT                         June 2014
-
-
    client certificate, the presence of a new connection could reveal
    that some form of client authentication is being used.  This is an
    especially strong signal in HTTP/2, where new connections are
@@ -312,6 +326,18 @@ Internet-Draft                    CANT                         June 2014
 
 8.  References
 
+
+
+
+
+
+
+
+Thomson                 Expires December 13, 2014               [Page 6]
+
+Internet-Draft                    CANT                         June 2014
+
+
 8.1.  Normative References
 
    [I-D.ietf-httpbis-p7-auth]
@@ -330,13 +356,6 @@ Internet-Draft                    CANT                         June 2014
    [RFC4572]  Lennox, J., "Connection-Oriented Media Transport over the
               Transport Layer Security (TLS) Protocol in the Session
               Description Protocol (SDP)", RFC 4572, July 2006.
-
-
-
-Thomson                 Expires December 12, 2014               [Page 6]
-
-Internet-Draft                    CANT                         June 2014
-
 
    [RFC4648]  Josefsson, S., "The Base16, Base32, and Base64 Data
               Encodings", RFC 4648, October 2006.
@@ -368,6 +387,13 @@ Internet-Draft                    CANT                         June 2014
               (D)TLS", draft-thomson-tls-care-00 (work in progress),
               March 2014.
 
+
+
+Thomson                 Expires December 13, 2014               [Page 7]
+
+Internet-Draft                    CANT                         June 2014
+
+
 Author's Address
 
    Martin Thomson
@@ -389,4 +415,34 @@ Author's Address
 
 
 
-Thomson                 Expires December 12, 2014               [Page 7]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson                 Expires December 13, 2014               [Page 8]
