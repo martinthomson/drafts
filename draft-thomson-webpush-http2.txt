@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           June 11, 2014
-Expires: December 13, 2014
+Intended status: Standards Track                           June 21, 2014
+Expires: December 23, 2014
 
 
                  Generic Event Delivery Using HTTP Push
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 13, 2014.
+   This Internet-Draft will expire on December 23, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                 Expires December 13, 2014               [Page 1]
+Thomson                 Expires December 23, 2014               [Page 1]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                 Expires December 13, 2014               [Page 2]
+Thomson                 Expires December 23, 2014               [Page 2]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -165,7 +165,7 @@ Internet-Draft                  HTTP Push                      June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 3]
+Thomson                 Expires December 23, 2014               [Page 3]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -221,7 +221,7 @@ Internet-Draft                  HTTP Push                      June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 4]
+Thomson                 Expires December 23, 2014               [Page 4]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -277,7 +277,7 @@ Internet-Draft                  HTTP Push                      June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 5]
+Thomson                 Expires December 23, 2014               [Page 5]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -333,7 +333,7 @@ Internet-Draft                  HTTP Push                      June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 6]
+Thomson                 Expires December 23, 2014               [Page 6]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -389,7 +389,7 @@ Internet-Draft                  HTTP Push                      June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 7]
+Thomson                 Expires December 23, 2014               [Page 7]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -415,8 +415,8 @@ Internet-Draft                  HTTP Push                      June 2014
 
    [I-D.ietf-httpbis-http2]
               Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
-              Protocol version 2", draft-ietf-httpbis-http2-12 (work in
-              progress), April 2014.
+              Protocol version 2", draft-ietf-httpbis-http2-13 (work in
+              progress), June 2014.
 
    [I-D.ietf-httpbis-p1-messaging]
               Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
@@ -445,7 +445,7 @@ Internet-Draft                  HTTP Push                      June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 8]
+Thomson                 Expires December 23, 2014               [Page 8]
 
 Internet-Draft                  HTTP Push                      June 2014
 
@@ -501,4 +501,4 @@ Author's Address
 
 
 
-Thomson                 Expires December 13, 2014               [Page 9]
+Thomson                 Expires December 23, 2014               [Page 9]

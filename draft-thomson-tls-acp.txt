@@ -4,8 +4,8 @@
 
 TLS                                                           M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           June 11, 2014
-Expires: December 13, 2014
+Intended status: Standards Track                           June 21, 2014
+Expires: December 23, 2014
 
 
            Authenticated Content Promise Extension for (D)TLS
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on December 13, 2014.
+   This Internet-Draft will expire on December 23, 2014.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                 Expires December 13, 2014               [Page 1]
+Thomson                 Expires December 23, 2014               [Page 1]
 
 Internet-Draft                     ACP                         June 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                 Expires December 13, 2014               [Page 2]
+Thomson                 Expires December 23, 2014               [Page 2]
 
 Internet-Draft                     ACP                         June 2014
 
@@ -165,7 +165,7 @@ Internet-Draft                     ACP                         June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 3]
+Thomson                 Expires December 23, 2014               [Page 3]
 
 Internet-Draft                     ACP                         June 2014
 
@@ -221,15 +221,15 @@ Internet-Draft                     ACP                         June 2014
 
 
 
-Thomson                 Expires December 13, 2014               [Page 4]
+Thomson                 Expires December 23, 2014               [Page 4]
 
 Internet-Draft                     ACP                         June 2014
 
 
    [I-D.ietf-rtcweb-overview]
-              Alvestrand, H., "Overview: Real Time Protocols for Brower-
-              based Applications", draft-ietf-rtcweb-overview-09 (work
-              in progress), February 2014.
+              Alvestrand, H., "Overview: Real Time Protocols for
+              Browser-based Applications", draft-ietf-rtcweb-overview-10
+              (work in progress), June 2014.
 
    [I-D.ietf-rtcweb-security-arch]
               Rescorla, E., "WebRTC Security Architecture", draft-ietf-
@@ -277,4 +277,4 @@ Author's Address
 
 
 
-Thomson                 Expires December 13, 2014               [Page 5]
+Thomson                 Expires December 23, 2014               [Page 5]
