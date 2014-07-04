@@ -4,7 +4,7 @@ else
     CYGPATH := echo
 endif
 
-BASE := $(firstword $(basename $(wildcard draft-*.xml)))
+BASE := $(lastword $(basename $(wildcard draft-*.xml)))
 XML := ${BASE}.xml
 DTD := rfc2629.dtd
 XSLT := rfc2629.xslt
