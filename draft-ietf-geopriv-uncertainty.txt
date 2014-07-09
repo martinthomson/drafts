@@ -1749,10 +1749,6 @@ Internet-Draft          Uncertainty & Confidence               July 2014
    [RFC3693]  Cuellar, J., Morris, J., Mulligan, D., Peterson, J., and
               J. Polk, "Geopriv Requirements", RFC 3693, February 2004.
 
-   [RFC3694]  Danley, M., Mulligan, D., Morris, J., and J. Peterson,
-              "Threat Analysis of the Geopriv Protocol", RFC 3694,
-              February 2004.
-
    [RFC5139]  Thomson, M. and J. Winterbottom, "Revised Civic Location
               Format for Presence Information Data Format Location
               Object (PIDF-LO)", RFC 5139, February 2008.
@@ -1785,6 +1781,10 @@ Internet-Draft          Uncertainty & Confidence               July 2014
               3GPP, "Universal Geographic Area Description (GAD)", 3GPP
               TS 23.032 11.0.0, September 2012.
 
+   [Vatti92]  Vatti, B., "A generic solution to polygon clipping",
+              Communications of the ACM Vol35, Issue7, pp56-63, 1992,
+              <http://portal.acm.org/citation.cfm?id=129906 >.
+
 
 
 
@@ -1793,10 +1793,6 @@ Thomson & Winterbottom  Expires January 10, 2015               [Page 32]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
-
-   [Vatti92]  Vatti, B., "A generic solution to polygon clipping",
-              Communications of the ACM Vol35, Issue7, pp56-63, 1992,
-              <http://portal.acm.org/citation.cfm?id=129906 >.
 
    [WGS84]    US National Imagery and Mapping Agency, "Department of
               Defense (DoD) World Geodetic System 1984 (WGS 84), Third
@@ -1843,15 +1839,16 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
       u = atan((1-f) * Z * (1 + e'^2 * (1-f) * R / r) / p)
 
+      latitude = atan((Z + e'^2 * (1-f) * R * sin(u)^3)
+      / (p - e^2 * R * cos(u)^3))
+
+
 
 
 Thomson & Winterbottom  Expires January 10, 2015               [Page 33]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
-
-      latitude = atan((Z + e'^2 * (1-f) * R * sin(u)^3)
-      / (p - e^2 * R * cos(u)^3))
 
       longitude = atan2(Y, X)
 
@@ -1898,6 +1895,9 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
       Ny' = Ny / sqrt(Nx^2 + Ny^2 + Nz^2)
 
+      Nz' = Nz / sqrt(Nx^2 + Ny^2 + Nz^2)
+
+
 
 
 
@@ -1905,8 +1905,6 @@ Thomson & Winterbottom  Expires January 10, 2015               [Page 34]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
-
-      Nz' = Nz / sqrt(Nx^2 + Ny^2 + Nz^2)
 
 B.1.  Checking that a Polygon Upward Normal Points Up
 
@@ -1951,6 +1949,8 @@ Authors' Addresses
    AU
 
    Email: a.james.winterbottom@gmail.com
+
+
 
 
 
