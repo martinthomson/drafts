@@ -130,9 +130,9 @@
           abbreviations: square root <spanx style="verb">sqrt(x)</spanx>, sine <spanx
           style="verb">sin(x)</spanx>, cosine <spanx style="verb">cos(x)</spanx>, inverse cosine
           <spanx style="verb">acos(x)</spanx>, tangent <spanx style="verb">tan(x)</spanx>, inverse
-          tangent <spanx style="verb">atan(x)</spanx>, error function <spanx
-          style="verb">erf(x)</spanx>, and inverse error function <spanx
-          style="verb">erfinv(x)</spanx>.
+          tangent <spanx style="verb">atan(x)</spanx>, two-argument inverse tangent <spanx
+          style="verb">atan2(y,x)</spanx>, error function <spanx style="verb">erf(x)</spanx>, and
+          inverse error function <spanx style="verb">erfinv(x)</spanx>.
         </t>
       </section>
 
@@ -1848,11 +1848,17 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
             r = sqrt(X^2 + Y^2 + Z^2)
           </t>
           <t>
-            u = atan((1-f) * Z * (1 + e'^2 * (1-f) * R / r) / p)</t> <t> latitude = atan((Z + e'^2 *
-            (1-f) * R * sin(u)^3) /&nbsp;(p&nbsp;-&nbsp;e^2&nbsp;*&nbsp;R&nbsp;*&nbsp;cos(u)^3))
+            u = atan((1-f) * Z * (1 + e'^2 * (1-f) * R / r) / p)
           </t>
           <t>
-            longitude = atan(Y / X)</t> <t> altitude = sqrt((p - R * cos(u))^2
+            latitude = atan((Z + e'^2 * (1-f) * R * sin(u)^3)
+            /&nbsp;(p&nbsp;-&nbsp;e^2&nbsp;*&nbsp;R&nbsp;*&nbsp;cos(u)^3))
+          </t>
+          <t>
+            longitude = atan2(Y, X)
+          </t>
+          <t>
+            altitude = sqrt((p - R * cos(u))^2
             +&nbsp;(Z&nbsp;-&nbsp;(1-f)&nbsp;*&nbsp;R&nbsp;*&nbsp;sin(u))^2)
           </t>
         </list>
