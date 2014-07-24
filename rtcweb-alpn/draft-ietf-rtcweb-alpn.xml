@@ -95,10 +95,6 @@
         </list>
       </t>
       <t>
-        A more thorough definition of what WebRTC communications entail is included in <xref
-        target="I-D.ietf-rtcweb-transports"/>.
-      </t>
-      <t>
         Both identifiers describe the same basic protocol: a DTLS session that is used to provide
         keys for an SRTP session in combination with WebRTC data channels.  Either SRTP or data
         channels MAY be absent.  The data channels send <xref target="RFC4960">Stream Control
@@ -170,7 +166,7 @@
       <t>
         RTP middleboxes and entities that forward media or data cannot promise to maintain
         confidentiality.  Any entity that forwards content, or records content for later access by
-        entities other than the authenticated peer, MUST NOT offer or accept a session with the
+        entities other than the authenticated peer, SHOULD NOT offer or accept a session with the
         <spanx style="verb">c-webrtc</spanx> identifier.
       </t>
    </section>
