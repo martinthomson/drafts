@@ -149,12 +149,12 @@
         style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
       </t>
       <t>
-        Confidentiality protections of this sort are not expected to be possible for data that is
-        sent using data channels.  Thus, it is expected that data channels will not be employed for
-        sessions that negotiate confidentiality.  In the browser context, confidential data depends
-        on having both data sources and consumers that are exclusively browser- or user-based.  No
-        mechanisms currently exist to take advantage of data confidentiality, though some use cases
-        suggest that this could be useful, for example, confidential peer-to-peer file transfer.
+        These confidentiality protections do not apply to data that is sent using data channels.
+        Confidential data depends on having both data sources and consumers that are exclusively
+        browser- or user-based.  No mechanisms currently exist to take advantage of data
+        confidentiality, though some use cases suggest that this could be useful, for example,
+        confidential peer-to-peer file transfer.  Alternative labels might be provided in future to
+        support these use cases.
       </t>
       <t>
         Generally speaking, ensuring confidentiality depends on authenticating the communications
