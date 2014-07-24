@@ -390,8 +390,8 @@
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
-  <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-rtcweb-alpn-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-7-23" />
+  <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-rtcweb-alpn-latest" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-7-24" />
   <meta name="dct.abstract" content="Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).  Labels are provided for identifying a session that uses a combination of WebRTC compatible media and data, and for identifying a session requiring confidentiality protection.  " />
   <meta name="description" content="Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).  Labels are provided for identifying a session that uses a combination of WebRTC compatible media and data, and for identifying a session requiring confidentiality protection.  " />
 
@@ -412,10 +412,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">July 23, 2014</td>
+  <td class="right">July 24, 2014</td>
 </tr>
 <tr>
-  <td class="left">Expires: January 24, 2015</td>
+  <td class="left">Expires: January 25, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -424,7 +424,7 @@
   </table>
 
   <p class="title">Application Layer Protocol Negotiation for Web Real-Time Communications (WebRTC) <br />
-  <span class="filename">draft-thomson-rtcweb-alpn-latest</span></p>
+  <span class="filename">draft-ietf-rtcweb-alpn-latest</span></p>
   
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
@@ -436,7 +436,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on January 24, 2015.</p>
+<p>This Internet-Draft will expire on January 25, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -479,11 +479,10 @@
 </dl>
 
 <p> </p>
-<p id="rfc.section.2.p.2">A more thorough definition of what WebRTC communications entail is included in <a href="#I-D.ietf-rtcweb-transports">[I-D.ietf-rtcweb-transports]</a>.  </p>
-<p id="rfc.section.2.p.3">Both identifiers describe the same basic protocol: a DTLS session that is used to provide keys for an SRTP session in combination with WebRTC data channels.  Either SRTP or data channels MAY be absent.  The data channels send <a href="#RFC4960">Stream Control Transmission Protocol (SCTP)</a> <cite title="NONE">[RFC4960]</cite> over the DTLS record layer, which can be multiplexed with SRTP on the same UDP flow.  WebRTC requires the use of <a href="#RFC5245">Interactive Communication Establishment (ICE)</a> <cite title="NONE">[RFC5245]</cite> to establish the UDP flow, but this is not covered by the identifier.  </p>
-<p id="rfc.section.2.p.4">A more thorough definition of what WebRTC communications entail is included in <a href="#I-D.ietf-rtcweb-transports">[I-D.ietf-rtcweb-transports]</a>.  </p>
-<p id="rfc.section.2.p.5">There is no functional difference between the identifiers except with respect to the promise that an endpoint makes with respect to the confidentiality of session content.  An endpoint negotiating <samp>c-webrtc</samp> makes a promise to preserve the confidentiality of the data it receives.  </p>
-<p id="rfc.section.2.p.6">Only one of these labels can be used for any given session.  A peer acting in the client role MUST NOT offer both identifiers.  A peer in the server role that receives a ClientHello containing both labels MUST reject the session, though it MAY accept the confidential option and protect content accordingly.  </p>
+<p id="rfc.section.2.p.2">Both identifiers describe the same basic protocol: a DTLS session that is used to provide keys for an SRTP session in combination with WebRTC data channels.  Either SRTP or data channels MAY be absent.  The data channels send <a href="#RFC4960">Stream Control Transmission Protocol (SCTP)</a> <cite title="NONE">[RFC4960]</cite> over the DTLS record layer, which can be multiplexed with SRTP on the same UDP flow.  WebRTC requires the use of <a href="#RFC5245">Interactive Communication Establishment (ICE)</a> <cite title="NONE">[RFC5245]</cite> to establish the UDP flow, but this is not covered by the identifier.  </p>
+<p id="rfc.section.2.p.3">A more thorough definition of what WebRTC communications entail is included in <a href="#I-D.ietf-rtcweb-transports">[I-D.ietf-rtcweb-transports]</a>.  </p>
+<p id="rfc.section.2.p.4">There is no functional difference between the identifiers except that an endpoint negotiating <samp>c-webrtc</samp> makes a promise to preserve the confidentiality of the data it receives.  </p>
+<p id="rfc.section.2.p.5">A peer that is not aware of whether it needs to request confidentiality can use either form.  A peer in the client role MUST offer both identifiers if it is not aware of a need for confidentiality. A peer in the server role SHOULD select <samp>webrtc</samp> if it does not prefer either.  </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#confidentiality" id="confidentiality">Media Confidentiality</a></h1>
 <p id="rfc.section.3.p.1">Private communications in WebRTC depend on separating control (i.e., signaling) capabilities and access to media <a href="#I-D.ietf-rtcweb-security-arch">[I-D.ietf-rtcweb-security-arch]</a>.  In this way, an application can establish a session that is end-to-end confidential, where the ends in question are user agents (or browsers) and not the signaling application.  </p>
 <p id="rfc.section.3.p.2">A browser is required to enforce this control using isolation controls similar to those used in cross-origin protections.  These protections ensure that media is protected from applications.  Applications are not able to read or modify the contents of a protected flow of media.  Media that is produced from a session using the <samp>c-webrtc</samp> identifier MUST only be displayed to users.  </p>
@@ -491,7 +490,7 @@
 <p id="rfc.section.3.p.4">A browser is required to enforce confidentiality using isolation controls similar to those used in content cross-origin protections (see <a href="http://www.w3.org/TR/2012/CR-html5-20121217/browsers.html#origin">Section 5.3</a> of <a href="#HTML5">[HTML5]</a>).  These protections ensure that media is protected from applications.  Applications are not able to read or modify the contents of a protected flow of media.  Media that is produced from a session using the <samp>c-webrtc</samp> identifier MUST only be displayed to users.  </p>
 <p id="rfc.section.3.p.5">Confidentiality protections of this sort are not expected to be possible for data that is sent using data channels.  Thus, it is expected that data channels will not be employed for sessions that negotiate confidentiality.  In the browser context, confidential data depends on having both data sources and consumers that are exclusively browser- or user-based.  No mechanisms currently exist to take advantage of data confidentiality, though some use cases suggest that this could be useful, for example, confidential peer-to-peer file transfer.  </p>
 <p id="rfc.section.3.p.6">Generally speaking, ensuring confidentiality depends on authenticating the communications peer.  This mechanism explicitly does not define a specific authentication method; a WebRTC endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no matter what identity is attributed to a peer.  </p>
-<p id="rfc.section.3.p.7">RTP middleboxes and entities that forward media or data cannot promise to maintain confidentiality.  Any entity that forwards content, or records content for later access by entities other than the authenticated peer, MUST NOT offer or accept a session with the <samp>c-webrtc</samp> identifier.  </p>
+<p id="rfc.section.3.p.7">RTP middleboxes and entities that forward media or data cannot promise to maintain confidentiality.  Any entity that forwards content, or records content for later access by entities other than the authenticated peer, SHOULD NOT offer or accept a session with the <samp>c-webrtc</samp> identifier.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.4.p.1">Confidential communications depends on more than just an agreement from browsers.  </p>
 <p id="rfc.section.4.p.2">Information is not confidential if it is displayed to those other than to whom it is intended.  <a href="#I-D.ietf-rtcweb-security-arch">Peer authentication</a> <cite title="NONE">[I-D.ietf-rtcweb-security-arch]</cite> is necessary to ensure that data is only sent to the intended peer.  </p>

@@ -5,8 +5,8 @@
 GEOPRIV                                                       M. Thomson
 Internet-Draft                                                   Mozilla
 Intended status: Standards Track                         J. Winterbottom
-Expires: January 24, 2015                                   Unaffiliated
-                                                           July 23, 2014
+Expires: January 25, 2015                                   Unaffiliated
+                                                           July 24, 2014
 
 
         Representation of Uncertainty and Confidence in PIDF-LO
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 24, 2015.
+   This Internet-Draft will expire on January 25, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 1]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 1]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 2]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 2]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -165,7 +165,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 3]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 3]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -221,7 +221,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 4]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 4]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -277,7 +277,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 5]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 5]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -333,7 +333,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 6]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 6]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -389,7 +389,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 7]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 7]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -445,7 +445,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 8]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 8]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -501,7 +501,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015                [Page 9]
+Thomson & Winterbottom  Expires January 25, 2015                [Page 9]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -557,7 +557,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 10]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 10]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -613,7 +613,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 11]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 11]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -669,7 +669,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 12]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 12]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -725,7 +725,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 13]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 13]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -781,7 +781,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 14]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 14]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -837,7 +837,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 15]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 15]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -893,7 +893,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 16]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 16]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -949,7 +949,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 17]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 17]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1005,7 +1005,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 18]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 18]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1061,7 +1061,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 19]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 19]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1117,7 +1117,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 20]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 20]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1173,7 +1173,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 21]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 21]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1229,7 +1229,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 22]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 22]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1285,7 +1285,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 23]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 23]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1341,7 +1341,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 24]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 24]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1397,7 +1397,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 25]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 25]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1453,7 +1453,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 26]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 26]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1509,7 +1509,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 27]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 27]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1565,7 +1565,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 28]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 28]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1621,7 +1621,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 29]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 29]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1677,7 +1677,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 30]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 30]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1733,7 +1733,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 31]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 31]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1789,7 +1789,7 @@ Internet-Draft          Uncertainty & Confidence               July 2014
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 32]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 32]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1845,7 +1845,7 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 33]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 33]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1901,7 +1901,7 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 34]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 34]
 
 Internet-Draft          Uncertainty & Confidence               July 2014
 
@@ -1957,4 +1957,4 @@ Authors' Addresses
 
 
 
-Thomson & Winterbottom  Expires January 24, 2015               [Page 35]
+Thomson & Winterbottom  Expires January 25, 2015               [Page 35]
