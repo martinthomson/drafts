@@ -4,8 +4,8 @@
 
 TLS                                                           M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           July 24, 2014
-Expires: January 25, 2015
+Intended status: Standards Track                          August 7, 2014
+Expires: February 8, 2015
 
 
            Client Authentication Request Extension for (D)TLS
@@ -32,7 +32,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 25, 2015.
+   This Internet-Draft will expire on February 8, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires January 25, 2015                [Page 1]
+Thomson                 Expires February 8, 2015                [Page 1]
 
-Internet-Draft                    CARE                         July 2014
+Internet-Draft                    CARE                       August 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires January 25, 2015                [Page 2]
+Thomson                 Expires February 8, 2015                [Page 2]
 
-Internet-Draft                    CARE                         July 2014
+Internet-Draft                    CARE                       August 2014
 
 
    For that reason, a client can initiate a new connection when it
@@ -165,9 +165,9 @@ Internet-Draft                    CARE                         July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 3]
+Thomson                 Expires February 8, 2015                [Page 3]
 
-Internet-Draft                    CARE                         July 2014
+Internet-Draft                    CARE                       August 2014
 
 
 4.  Security Considerations
@@ -221,4 +221,4 @@ Author's Address
 
 
 
-Thomson                 Expires January 25, 2015                [Page 4]
+Thomson                 Expires February 8, 2015                [Page 4]

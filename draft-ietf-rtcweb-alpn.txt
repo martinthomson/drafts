@@ -4,8 +4,8 @@
 
 RTCWEB                                                        M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           July 24, 2014
-Expires: January 25, 2015
+Intended status: Standards Track                          August 7, 2014
+Expires: February 8, 2015
 
 
 Application Layer Protocol Negotiation for Web Real-Time Communications
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 25, 2015.
+   This Internet-Draft will expire on February 8, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires January 25, 2015                [Page 1]
+Thomson                 Expires February 8, 2015                [Page 1]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                 August 2014
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires January 25, 2015                [Page 2]
+Thomson                 Expires February 8, 2015                [Page 2]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                 August 2014
 
 
    c-webrtc:  The DTLS session is used for confidential WebRTC
@@ -165,9 +165,9 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 3]
+Thomson                 Expires February 8, 2015                [Page 3]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                 August 2014
 
 
    A browser is required to enforce confidentiality using isolation
@@ -221,9 +221,9 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 4]
+Thomson                 Expires February 8, 2015                [Page 4]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                 August 2014
 
 
    transmitted smells could linger for a period after communications
@@ -277,9 +277,9 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 5]
+Thomson                 Expires February 8, 2015                [Page 5]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                 August 2014
 
 
 6.  References
@@ -333,9 +333,9 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 6]
+Thomson                 Expires February 8, 2015                [Page 6]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                 August 2014
 
 
    [RFC5245]  Rosenberg, J., "Interactive Connectivity Establishment
@@ -389,4 +389,4 @@ Author's Address
 
 
 
-Thomson                 Expires January 25, 2015                [Page 7]
+Thomson                 Expires February 8, 2015                [Page 7]

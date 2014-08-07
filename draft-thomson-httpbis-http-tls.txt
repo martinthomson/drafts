@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           July 24, 2014
-Expires: January 25, 2015
+Intended status: Standards Track                          August 7, 2014
+Expires: February 8, 2015
 
 
               Using Transport Layer Security for http URIs
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 25, 2015.
+   This Internet-Draft will expire on February 8, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires January 25, 2015                [Page 1]
+Thomson                 Expires February 8, 2015                [Page 1]
 
-Internet-Draft                TLS for http:                    July 2014
+Internet-Draft                TLS for http:                  August 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires January 25, 2015                [Page 2]
+Thomson                 Expires February 8, 2015                [Page 2]
 
-Internet-Draft                TLS for http:                    July 2014
+Internet-Draft                TLS for http:                  August 2014
 
 
    A client that places the importance of passive protections over
@@ -165,9 +165,9 @@ Internet-Draft                TLS for http:                    July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 3]
+Thomson                 Expires February 8, 2015                [Page 3]
 
-Internet-Draft                TLS for http:                    July 2014
+Internet-Draft                TLS for http:                  August 2014
 
 
 4.  Persisting use of TLS
@@ -221,9 +221,9 @@ Internet-Draft                TLS for http:                    July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 4]
+Thomson                 Expires February 8, 2015                [Page 4]
 
-Internet-Draft                TLS for http:                    July 2014
+Internet-Draft                TLS for http:                  August 2014
 
 
    occurrences of "HTTP-TLS"; the certainty that a site has set a
@@ -268,8 +268,8 @@ Internet-Draft                TLS for http:                    July 2014
 
    [I-D.ietf-httpbis-http2]
               Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
-              Protocol version 2", draft-ietf-httpbis-http2-13 (work in
-              progress), June 2014.
+              Protocol version 2", draft-ietf-httpbis-http2-14 (work in
+              progress), July 2014.
 
 
 
@@ -277,9 +277,9 @@ Internet-Draft                TLS for http:                    July 2014
 
 
 
-Thomson                 Expires January 25, 2015                [Page 5]
+Thomson                 Expires February 8, 2015                [Page 5]
 
-Internet-Draft                TLS for http:                    July 2014
+Internet-Draft                TLS for http:                  August 2014
 
 
    [I-D.ietf-httpbis-p1-messaging]
@@ -333,4 +333,4 @@ Author's Address
 
 
 
-Thomson                 Expires January 25, 2015                [Page 6]
+Thomson                 Expires February 8, 2015                [Page 6]
