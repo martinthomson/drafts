@@ -1549,6 +1549,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
   </xs:annotation>
 
   <xs:element name="confidence" type="conf:confidenceType"/>
+
   <xs:complexType name="confidenceType">
     <xs:simpleContent>
       <xs:extension base="conf:confidenceBase">
@@ -1557,16 +1558,23 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
+
   <xs:simpleType name="confidenceBase">
-  <xs:union>
-    <xs:restriction base="xs:decimal">
-      <xs:minInclusive value="0.0"/>
-      <xs:maxInclusive value="100.0"/>
-    </xs:restriction>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="unknown"/>
-    </xs:restriction>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:minExclusive value="0.0"/>
+          <xs:maxExclusive value="100.0"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="unknown"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
   </xs:simpleType>
+
   <xs:simpleType name="pdfType">
     <xs:restriction base="xs:token">
       <xs:enumeration value="unknown"/>
@@ -1574,6 +1582,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
       <xs:enumeration value="rectangular"/>
     </xs:restriction>
   </xs:simpleType>
+
 </xs:schema>
 ]]></artwork></figure>
     </section>

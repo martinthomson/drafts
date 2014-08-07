@@ -24,19 +24,26 @@
   <xs:complexType name="confidenceType">
     <xs:simpleContent>
       <xs:extension base="conf:confidenceBase">
-        <xs:attribute name="pdf" type="conf:pdfType" default="unknown"/>
+        <xs:attribute name="pdf" type="conf:pdfType"
+                      default="unknown"/>
       </xs:extension>
     </xs:simpleContent>
   </xs:complexType>
 
   <xs:simpleType name="confidenceBase">
-    <xs:restriction base="xs:decimal">
-      <xs:minExclusive value="0.0"/>
-      <xs:maxExclusive value="100.0"/>
-    </xs:restriction>
-    <xs:restriction base="xs:token">
-      <xs:enumeration value="unknown"/>
-    </xs:restriction>
+    <xs:union>
+      <xs:simpleType>
+        <xs:restriction base="xs:decimal">
+          <xs:minExclusive value="0.0"/>
+          <xs:maxExclusive value="100.0"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType>
+        <xs:restriction base="xs:token">
+          <xs:enumeration value="unknown"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:union>
   </xs:simpleType>
 
   <xs:simpleType name="pdfType">
