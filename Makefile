@@ -4,7 +4,7 @@ else
     CYGPATH := echo
 endif
 
-BASE := $(firstword $(basename $(wildcard draft-*.xml)))
+BASE := $(lastword $(basename $(wildcard draft-*.xml)))
 XML := ${BASE}.xml
 DTD := rfc2629.dtd
 XSLT := rfc2629.xslt
@@ -178,6 +178,9 @@ submit:: ${BASE_NEXT}.txt
 
 ${BASE_NEXT}.xml: ${BASE}.xml
 	sed -e"s/${BASE}-latest/${BASE_NEXT}/" < $< > $@
+
+# %.xml: ${BASE}.xml
+#	sed -e"s/${BASE}-latest/$(basename $@)/" < $< > $@
 
 SUFFIXES := txt html xhtml unpg nr ps svg pdf
 clean::

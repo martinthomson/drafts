@@ -10,7 +10,7 @@
 <?rfc compact="yes" ?>
 <?rfc subcompact="no" ?>
 
-<rfc category="std" ipr="trust200902" docName="draft-thomson-rtcweb-alpn-latest">
+<rfc category="std" ipr="trust200902" docName="draft-ietf-rtcweb-alpn-latest">
   <front>
     <title abbrev="ALPN for WebRTC">
       Application Layer Protocol Negotiation for Web Real-Time Communications (WebRTC)
@@ -58,10 +58,9 @@
         peer-to-peer communications.
       </t>
       <t>
-        Identifying WebRTC protocol usage with <xref
-        target="I-D.ietf-tls-applayerprotoneg">Application Layer Protocol Negotiation (ALPN)</xref>
-        enables an endpoint to positively identify WebRTC uses and distinguish them from other DTLS
-        uses.
+        Identifying WebRTC protocol usage with <xref target="RFC7301">Application Layer Protocol
+        Negotiation (ALPN)</xref> enables an endpoint to positively identify WebRTC uses and
+        distinguish them from other DTLS uses.
       </t>
       <t>
         Different WebRTC uses can be advertised and behavior can be constrained to what is
@@ -96,15 +95,6 @@
         </list>
       </t>
       <t>
-        A more thorough definition of what WebRTC communications entail is included in <xref
-        target="I-D.ietf-rtcweb-transports"/>.
-      </t>
-      <t>
-        <cref>Open issue: The single "webrtc" label could be further split into media, data, or
-        media+data.  That seems unlikely to be of any major benefit, but it might be worth
-        considering.</cref>
-      </t>
-      <t>
         Both identifiers describe the same basic protocol: a DTLS session that is used to provide
         keys for an SRTP session in combination with WebRTC data channels.  Either SRTP or data
         channels MAY be absent.  The data channels send <xref target="RFC4960">Stream Control
@@ -118,16 +108,15 @@
         target="I-D.ietf-rtcweb-transports"/>.
       </t>
       <t>
-        There is no functional difference between the identifiers except with respect to the promise
-        that an endpoint makes with respect to the confidentiality of session content.  An endpoint
+        There is no functional difference between the identifiers except that an endpoint
         negotiating <spanx style="verb">c-webrtc</spanx> makes a promise to preserve the
         confidentiality of the data it receives.
       </t>
       <t>
-        Only one of these labels can be used for any given session.  A peer acting in the client
-        role MUST NOT offer both identifiers.  A peer in the server role that receives a ClientHello
-        containing both labels MUST reject the session, though it MAY accept the confidential option
-        and protect content accordingly.
+        A peer that is not aware of whether it needs to request confidentiality can use either form.
+        A peer in the client role MUST offer both identifiers if it is not aware of a need for
+        confidentiality. A peer in the server role SHOULD select <spanx style="verb">webrtc</spanx>
+        if it does not prefer either.
       </t>
     </section>
 
@@ -151,14 +140,6 @@
         one that does not.
       </t>
       <t>
-        A WebRTC implementation MUST only send media over a <spanx style="verb">c-webrtc</spanx>
-        session that comes from user-controlled sources.  Media from sources that are controlled by
-        third parties (such as the signaling application) could be used to create confusion about
-        the content and origin of data.  This cannot prevent confusion when rendered as a web page,
-        for example, but browsers are required to provide ways to identify media and its provenance
-        (see Section 5.5 of <xref target="I-D.ietf-rtcweb-security-arch"/>).
-      </t>
-      <t>
         A browser is required to enforce confidentiality using isolation controls similar to those
         used in content cross-origin protections (see <eref
         target="http://www.w3.org/TR/2012/CR-html5-20121217/browsers.html#origin">Section 5.3</eref>
@@ -168,21 +149,12 @@
         style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
       </t>
       <t>
-        Confidentiality protections of this sort are not expected to be possible for data that is
-        sent using data channels.  Thus, it is expected that data channels will not be employed for
-        sessions that negotiate confidentiality.  In the browser context, confidential data depends
-        on having both data sources and consumers that are exclusively browser- or user-based.  No
-        mechanisms currently exist to take advantage of data confidentiality, though some use cases
-        suggest that this could be useful, for example, confidential peer-to-peer file transfer.
-      </t>
-      <t>
-        <cref>It's possible that we could allow an exception to the blanket confidentiality for data
-        channels here, and simply state that the PPIDs used by data channels are expressly
-        non-confidential.  It's more complex that way, but it would allow for the creation of a
-        non-confidential channel for things like chat or signaling without the overhead of a new
-        DTLS session.  That does mean that we will need to define the default confidentiality
-        characteristic of an unknown PPID; or expressly prohibit PPIDs outside the current set used
-        for data channels.</cref>
+        These confidentiality protections do not apply to data that is sent using data channels.
+        Confidential data depends on having both data sources and consumers that are exclusively
+        browser- or user-based.  No mechanisms currently exist to take advantage of data
+        confidentiality, though some use cases suggest that this could be useful, for example,
+        confidential peer-to-peer file transfer.  Alternative labels might be provided in future to
+        support these use cases.
       </t>
       <t>
         Generally speaking, ensuring confidentiality depends on authenticating the communications
@@ -193,7 +165,7 @@
       <t>
         RTP middleboxes and entities that forward media or data cannot promise to maintain
         confidentiality.  Any entity that forwards content, or records content for later access by
-        entities other than the authenticated peer, MUST NOT offer or accept a session with the
+        entities other than the authenticated peer, SHOULD NOT offer or accept a session with the
         <spanx style="verb">c-webrtc</spanx> identifier.
       </t>
    </section>
@@ -232,16 +204,16 @@
       <t>
         For instance, another application that is able to access a microphone might be able to
         sample confidential audio that is playing through speakers.  This is true even if acoustic
-        echo cancellation, which attempts to prevent this from being possible, is used.  Similarly,
-        an application with access to a video camera might be able to use reflections to access
-        confidential video.
+        echo cancellation, which attempts to prevent this from happening, is used.  Similarly, an
+        application with access to a video camera might be able to use reflections to obtain all or
+        part of a confidential video stream.
       </t>
     </section>
 
     <section anchor="iana" title="IANA Considerations">
       <t>
         The following two entries are added to the "Application Layer Protocol Negotiation (ALPN)
-        Protocol IDs" registry established by <xref target="I-D.ietf-tls-applayerprotoneg"/>.
+        Protocol IDs" registry established by <xref target="RFC7301"/>.
       </t>
       <t>
         The <spanx style="verb">webrtc</spanx> identifies mixed media and data communications using
@@ -281,7 +253,7 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6347.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5764.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-tls-applayerprotoneg.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7301.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-data-channel.xml"?>
     </references>
 
