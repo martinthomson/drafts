@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                          August 7, 2014
-Expires: February 8, 2015
+Intended status: Standards Track                         August 14, 2014
+Expires: February 15, 2015
 
 
              Client Authentication over New TLS Connection
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on February 8, 2015.
+   This Internet-Draft will expire on February 15, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                 Expires February 8, 2015                [Page 1]
+Thomson                 Expires February 15, 2015               [Page 1]
 
 Internet-Draft                    CANT                       August 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                 Expires February 8, 2015                [Page 2]
+Thomson                 Expires February 15, 2015               [Page 2]
 
 Internet-Draft                    CANT                       August 2014
 
@@ -165,7 +165,7 @@ Internet-Draft                    CANT                       August 2014
 
 
 
-Thomson                 Expires February 8, 2015                [Page 3]
+Thomson                 Expires February 15, 2015               [Page 3]
 
 Internet-Draft                    CANT                       August 2014
 
@@ -221,7 +221,7 @@ Internet-Draft                    CANT                       August 2014
 
 
 
-Thomson                 Expires February 8, 2015                [Page 4]
+Thomson                 Expires February 15, 2015               [Page 4]
 
 Internet-Draft                    CANT                       August 2014
 
@@ -277,7 +277,7 @@ Internet-Draft                    CANT                       August 2014
 
 
 
-Thomson                 Expires February 8, 2015                [Page 5]
+Thomson                 Expires February 15, 2015               [Page 5]
 
 Internet-Draft                    CANT                       August 2014
 
@@ -333,7 +333,7 @@ Internet-Draft                    CANT                       August 2014
 
 
 
-Thomson                 Expires February 8, 2015                [Page 6]
+Thomson                 Expires February 15, 2015               [Page 6]
 
 Internet-Draft                    CANT                       August 2014
 
@@ -389,7 +389,7 @@ Internet-Draft                    CANT                       August 2014
 
 
 
-Thomson                 Expires February 8, 2015                [Page 7]
+Thomson                 Expires February 15, 2015               [Page 7]
 
 Internet-Draft                    CANT                       August 2014
 
@@ -445,4 +445,4 @@ Author's Address
 
 
 
-Thomson                 Expires February 8, 2015                [Page 8]
+Thomson                 Expires February 15, 2015               [Page 8]
