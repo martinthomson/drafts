@@ -1326,6 +1326,7 @@
           43
         </gs:orientation>
       </gs:Ellipsoid>
+      <con:confidence pdf="normal">95</con:confidence>
     </gp:location-info>
     <gp:usage-rules/>
   </gp:geopriv>
