@@ -438,8 +438,8 @@
         <t>
           Automatically determined <xref target="RFC5139">civic addresses</xref> inherently include
           uncertainty, based on the area of the most precise element that is specified.  In this
-          case, uncertainty is effectively described by the presence or absence of elements --
-          elements that are not present are deemed to be uncertain.
+          case, uncertainty is effectively described by the presence or absence of elements.  To the
+          recipient of location information, elements that are not present are uncertain.
         </t>
 
         <t>
