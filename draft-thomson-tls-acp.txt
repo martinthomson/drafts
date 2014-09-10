@@ -4,8 +4,8 @@
 
 TLS                                                           M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                         August 14, 2014
-Expires: February 15, 2015
+Intended status: Standards Track                      September 10, 2014
+Expires: March 14, 2015
 
 
            Authenticated Content Promise Extension for (D)TLS
@@ -33,7 +33,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on February 15, 2015.
+   This Internet-Draft will expire on March 14, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires February 15, 2015               [Page 1]
+Thomson                  Expires March 14, 2015                 [Page 1]
 
-Internet-Draft                     ACP                       August 2014
+Internet-Draft                     ACP                    September 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires February 15, 2015               [Page 2]
+Thomson                  Expires March 14, 2015                 [Page 2]
 
-Internet-Draft                     ACP                       August 2014
+Internet-Draft                     ACP                    September 2014
 
 
    that any indicators could not be erased or re-attributed to other
@@ -165,9 +165,9 @@ Internet-Draft                     ACP                       August 2014
 
 
 
-Thomson                 Expires February 15, 2015               [Page 3]
+Thomson                  Expires March 14, 2015                 [Page 3]
 
-Internet-Draft                     ACP                       August 2014
+Internet-Draft                     ACP                    September 2014
 
 
 3.  Security Considerations
@@ -221,15 +221,15 @@ Internet-Draft                     ACP                       August 2014
 
 
 
-Thomson                 Expires February 15, 2015               [Page 4]
+Thomson                  Expires March 14, 2015                 [Page 4]
 
-Internet-Draft                     ACP                       August 2014
+Internet-Draft                     ACP                    September 2014
 
 
    [I-D.ietf-rtcweb-overview]
               Alvestrand, H., "Overview: Real Time Protocols for
-              Browser-based Applications", draft-ietf-rtcweb-overview-10
-              (work in progress), June 2014.
+              Browser-based Applications", draft-ietf-rtcweb-overview-11
+              (work in progress), August 2014.
 
    [I-D.ietf-rtcweb-security-arch]
               Rescorla, E., "WebRTC Security Architecture", draft-ietf-
@@ -277,4 +277,4 @@ Author's Address
 
 
 
-Thomson                 Expires February 15, 2015               [Page 5]
+Thomson                  Expires March 14, 2015                 [Page 5]

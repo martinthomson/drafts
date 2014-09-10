@@ -427,7 +427,7 @@
 
   <meta name="dct.creator" content="Thomson, M. and J. Winterbottom" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-geopriv-uncertainty-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-8-14" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-9-10" />
   <meta name="dct.abstract" content="The key concepts of uncertainty and confidence as they pertain to location information are defined.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  " />
   <meta name="description" content="The key concepts of uncertainty and confidence as they pertain to location information are defined.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  " />
 
@@ -447,16 +447,16 @@
   <td class="right">Mozilla</td>
 </tr>
 <tr>
-  <td class="left">Intended status: Standards Track</td>
+  <td class="left">Updates: 3693,4119,5491 (if approved)</td>
   <td class="right">J. Winterbottom</td>
 </tr>
 <tr>
-  <td class="left">Expires: February 15, 2015</td>
+  <td class="left">Intended status: Standards Track</td>
   <td class="right">Unaffiliated</td>
 </tr>
 <tr>
-  <td class="left"></td>
-  <td class="right">August 14, 2014</td>
+  <td class="left">Expires: March 14, 2015</td>
+  <td class="right">September 10, 2014</td>
 </tr>
 
     	
@@ -470,13 +470,14 @@
   <a href="#rfc.abstract">Abstract</a>
 </h1>
 <p>The key concepts of uncertainty and confidence as they pertain to location information are defined.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  </p>
+<p>This draft normatively updates the definition of location information representations defined in RFC 4119 and RFC 5491.  It also deprecates related terminology defined in RFC 3693.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on February 15, 2015.</p>
+<p>This Internet-Draft will expire on March 14, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -542,7 +543,7 @@
 <p id="rfc.section.1.p.1">Location information represents an estimation of the position of a <a href="#RFC6280">Target</a> <cite title="NONE">[RFC6280]</cite>.  Under ideal circumstances, a location estimate precisely reflects the actual location of the Target.  For automated systems that determine location, there are many factors that introduce errors into the measurements that are used to determine location estimates.  </p>
 <p id="rfc.section.1.p.2">The process by which measurements are combined to generate a location estimate is outside of the scope of work within the IETF.  However, the results of such a process are carried in IETF data formats and protocols.  This document outlines how uncertainty, and its associated datum, confidence, are expressed and interpreted.  </p>
 <p id="rfc.section.1.p.3">This document provides a common nomenclature for discussing uncertainty and confidence as they relate to location information.  </p>
-<p id="rfc.section.1.p.4">This document also provides guidance on how to manage location information that includes uncertainty.  Methods for expanding or reducing uncertainty to obtain a required level of confidence are described.  Methods for determining the probability that a Target is within a specified region based on their location estimate are described.  These methods are simplified by making certain assumptions about the location estimate and are designed to be applicable to location estimates in a relatively small geographic area.  </p>
+<p id="rfc.section.1.p.4">This document also provides guidance on how to manage location information that includes uncertainty.  Methods for expanding or reducing uncertainty to obtain a required level of confidence are described.  Methods for determining the probability that a Target is within a specified region based on its location estimate are described.  These methods are simplified by making certain assumptions about the location estimate and are designed to be applicable to location estimates in a relatively small geographic area.  </p>
 <p id="rfc.section.1.p.5">A confidence extension for the <a href="#RFC4119">Presence Information Data Format - Location Object (PIDF-LO)</a> <cite title="NONE">[RFC4119]</cite> is described.  </p>
 <p id="rfc.section.1.p.6">This document describes methods that can be used in combination with automatically determined location information.  These are statistically-based methods.  </p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
@@ -574,7 +575,7 @@
 </ul>
 
 <p> </p>
-<p id="rfc.section.2.1.p.2">Each of these probability density functions can be characterized by its center point, or mean, and its width.  For a normal distribution, uncertainty and confidence together are related to the standard deviation (see <a href="#scaling">Section 5.4</a>).  For a rectangular distribution, half of the width of the distribution is used.  </p>
+<p id="rfc.section.2.1.p.2">Each of these probability density functions can be characterized by its center point, or mean, and its width.  For a normal distribution, uncertainty and confidence together are related to the standard deviation of the function (see <a href="#scaling">Section 5.4</a>).  For a rectangular distribution, the half-width of the distribution is used.  </p>
 <p><a href="#pdf">Figure 1</a> shows a normal and rectangular probability density function with the mean (m) and standard deviation (s) labelled.  The half-width (h) of the rectangular distribution is also indicated.  </p>
 <div id="rfc.figure.1"/>
 <div id="pdf"/>
@@ -650,7 +651,7 @@
 <p id="rfc.section.3.2.p.3">Absence of uncertainty information in a PIDF-LO document does not indicate that there is no uncertainty in the location estimate.  Uncertainty might not have been calculated for the estimate, or it may be withheld for privacy purposes.  </p>
 <p id="rfc.section.3.2.p.4">If the Point shape is used, confidence and uncertainty are unknown; a receiver can either assume a confidence of 0% or infinite uncertainty.  The same principle applies on the altitude axis for two-dimension shapes like the Circle.  </p>
 <h1 id="rfc.section.3.3"><a href="#rfc.section.3.3">3.3.</a> Uncertainty and Confidence for Civic Addresses</h1>
-<p id="rfc.section.3.3.p.1">Automatically determined <a href="#RFC5139">civic addresses</a> <cite title="NONE">[RFC5139]</cite> inherently include uncertainty, based on the area of the most precise element that is specified.  In this case, uncertainty is effectively described by the presence or absence of elements -- elements that are not present are deemed to be uncertain.  </p>
+<p id="rfc.section.3.3.p.1">Automatically determined <a href="#RFC5139">civic addresses</a> <cite title="NONE">[RFC5139]</cite> inherently include uncertainty, based on the area of the most precise element that is specified.  In this case, uncertainty is effectively described by the presence or absence of elements.  To the recipient of location information, elements that are not present are uncertain.  </p>
 <p id="rfc.section.3.3.p.2">To apply the concept of uncertainty to civic addresses, it is helpful to unify the conceptual models of civic address with geodetic location information.  This is particularly useful when considering civic addresses that are determined using reverse geocoding (that is, the process of translating geodetic information into civic addresses).  </p>
 <p id="rfc.section.3.3.p.3">In the unified view, a civic address defines a series of (sometimes non-orthogonal) spatial partitions.  The first is the implicit partition that identifies the surface of the earth and the space near the surface.  The second is the country.  Each label that is included in a civic address provides information about a different set of spatial partitions.  Some partitions require slight adjustments from a standard interpretation: for instance, a road includes all properties that adjoin the street.  Each label might need to be interpreted with other values to provide context.  </p>
 <p id="rfc.section.3.3.p.4">As a value at each level is interpreted, one or more spatial partitions at that level are selected, and all other partitions of that type are excluded.  For non-orthogonal partitions, only the portion of the partition that fits within the existing space is selected.  This is what distinguishes King Street in Sydney from King Street in Melbourne.  Each defined element selects a partition of space.  The resulting location is the intersection of all selected spaces.  </p>
@@ -665,9 +666,9 @@
 <p id="rfc.section.3.3.p.6">Uncertainty in civic addresses can be increased by removing elements.  This does not increase confidence unless additional information is used.  Similarly, arbitrarily increasing uncertainty in a geodetic location does not increase confidence.  </p>
 <h1 id="rfc.section.3.4"><a href="#rfc.section.3.4">3.4.</a> DHCP Location Configuration Information and Uncertainty</h1>
 <p id="rfc.section.3.4.p.1">Location information is often measured in two or three dimensions; expressions of uncertainty in one dimension only are rare.  The "resolution" parameters in <a href="#RFC6225">[RFC6225]</a> provide an indication of how many bits of a number are valid, which could be interpreted as an expression of uncertainty in one dimension.  </p>
-<p><a href="#RFC6225">[RFC6225]</a> defines a means for representing uncertainty, but a value for confidence is not specified.  A default value of 95% confidence is assumed for the combination of the uncertainty on each axis.  This is consistent with the transformation of those forms into the uncertainty representations from <a href="#RFC5491">[RFC5491]</a>.  That is, the confidence of the resultant rectangular polygon or prism is assumed to be 95%.  </p>
+<p><a href="#RFC6225">[RFC6225]</a> defines a means for representing uncertainty, but a value for confidence is not specified.  A default value of 95% confidence should be assumed for the combination of the uncertainty on each axis.  This is consistent with the transformation of those forms into the uncertainty representations from <a href="#RFC5491">[RFC5491]</a>.  That is, the confidence of the resultant rectangular polygon or prism is assumed to be 95%.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#confidence" id="confidence">Representation of Confidence in PIDF-LO</a></h1>
-<p id="rfc.section.4.p.1">On the whole, a fixed definition for confidence is preferable.  Primarily because it ensures consistency between implementations.  Location generators that are aware of this constraint can generate location information at the required confidence.  Location recipients are able to make sensible assumptions about the quality of the information that they receive.  </p>
+<p id="rfc.section.4.p.1">On the whole, a fixed definition for confidence is preferable, primarily because it ensures consistency between implementations.  Location generators that are aware of this constraint can generate location information at the required confidence.  Location recipients are able to make sensible assumptions about the quality of the information that they receive.  </p>
 <p id="rfc.section.4.p.2">In some circumstances - particularly with pre-existing systems - location generators might unable to provide location information with consistent confidence.  Existing systems sometimes specify confidence at 38%, 67% or 90%.  Existing forms of expressing location information, such as that defined in <a href="#TS-3GPP-23_032">[TS-3GPP-23_032]</a>, contain elements that express the confidence in the result.  </p>
 <p id="rfc.section.4.p.3">The addition of a confidence element provides information that was previously unavailable to recipients of location information.  Without this information, a location server or generator that has access to location information with a confidence lower than 95% has two options: </p>
 
@@ -869,7 +870,7 @@
 <p id="rfc.section.5.4.p.4">A region of uncertainty that has an unknown PDF shape cannot be reduced in size reliably.  The region of uncertainty can be expanded, but only if confidence is not increased.  </p>
 <p id="rfc.section.5.4.p.5">This section makes the simplifying assumption that location information is symmetrically and evenly distributed in each dimension.  This is not necessarily true in practice.  If better information is available, alternative methods might produce better results.  </p>
 <h1 id="rfc.section.5.4.1"><a href="#rfc.section.5.4.1">5.4.1.</a> <a href="#scale-rectangular" id="scale-rectangular">Rectangular Distributions</a></h1>
-<p id="rfc.section.5.4.1.p.1">Uncertainty that follows a rectangular distribution can only be decreased in size.  Increasing uncertainty has no value, since it has no effect on confidence.  Since the PDF is constant over the region of uncertainty, the resulting confidence is determined by the following formula: <samp>Uo</samp> and <samp>Ur</samp> are the sizes of the original and reduced regions of uncertainty (either the area or the volume of the region); <samp>Co</samp> and <samp>Cb</samp> are the confidence values associated with each region.  </p>
+<p id="rfc.section.5.4.1.p.1">Uncertainty that follows a rectangular distribution can only be decreased in size.  Increasing uncertainty has no value, since it has no effect on confidence.  Since the PDF is constant over the region of uncertainty, the resulting confidence is determined by the following formula: <samp>Uo</samp> and <samp>Ur</samp> are the sizes of the original and reduced regions of uncertainty (either the area or the volume of the region); <samp>Co</samp> and <samp>Cr</samp> are the confidence values associated with each region.  </p>
 
 <ul class="empty">
   <li>Cr = Co * Ur / Uo </li>
@@ -984,6 +985,7 @@
           43
         &lt;/gs:orientation&gt;
       &lt;/gs:Ellipsoid&gt;
+      &lt;con:confidence pdf="normal"&gt;95&lt;/con:confidence&gt;
     &lt;/gp:location-info&gt;
     &lt;gp:usage-rules/&gt;
   &lt;/gp:geopriv&gt;
@@ -992,7 +994,7 @@
 <p id="rfc.section.6.1.p.2">This information can be reduced to a point simply by extracting the center point, that is [-34.407242,&#160;150.882518,&#160;34].  </p>
 <p id="rfc.section.6.1.p.3">If some limited uncertainty were required, the estimate could be converted into a circle or sphere.  To convert to a sphere, the radius is the largest of the semi-major, semi-minor and vertical axes; in this case, 28.7 meters.  </p>
 <p id="rfc.section.6.1.p.4">However, if only a circle is required, the altitude can be dropped as can the altitude uncertainty (the vertical axis of the ellipsoid), resulting in a circle at [-34.407242,&#160;150.882518] of radius 7.7156 meters.  </p>
-<p id="rfc.section.6.1.p.5">Bob receives a location estimate with a Polygon shape.  This information is shown in <a href="#ex-polygon">Figure 9</a>.  </p>
+<p id="rfc.section.6.1.p.5">Bob receives a location estimate with a Polygon shape (which roughly corresponds to the location of the Sydney Opera House).  This information is shown in <a href="#ex-polygon">Figure 9</a>.  </p>
 <div id="rfc.figure.9"/>
 <div id="ex-polygon"/>
 <pre>
@@ -1010,7 +1012,7 @@
   &lt;/gml:Polygon&gt;
 </pre>
 <p class="figure">Figure 9</p>
-<p id="rfc.section.6.1.p.6">To convert this to a polygon, each point is firstly assigned an altitude of zero and converted to ECEF coordinates (see <a href="#ecef2geo">Appendix A</a>).  Then a normal vector for this polygon is found (see <a href="#polygonupnormal">Appendix B</a>).  The result of each of these stages is shown in <a href="#ex-poly-convert">Figure 10</a>.  Note that the numbers shown are all rounded; no rounding is possible during this process since rounding would contribute significant errors.  </p>
+<p id="rfc.section.6.1.p.6">To convert this to a polygon, each point is firstly assigned an altitude of zero and converted to ECEF coordinates (see <a href="#ecef2geo">Appendix A</a>).  Then a normal vector for this polygon is found (see <a href="#polygonupnormal">Appendix B</a>).  The result of each of these stages is shown in <a href="#ex-poly-convert">Figure 10</a>.  Note that the numbers shown in this document are rounded only for formatting reasons; the actual calculations do not include rounding, which would would generate significant errors in the final values.  </p>
 <div id="rfc.figure.10"/>
 <div id="ex-poly-convert"/>
 <pre>
@@ -1055,14 +1057,14 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
 <p id="rfc.section.6.1.p.7">The point conversion for the polygon uses the final result, <samp>Cg</samp>, ignoring the altitude since the original shape did not include altitude.  </p>
 <p id="rfc.section.6.1.p.8">To convert this to a circle, take the maximum distance in ECEF coordinates from the center point to each of the points.  This results in a radius of 99.1 meters.  Confidence is unchanged.  </p>
 <h1 id="rfc.section.6.2"><a href="#rfc.section.6.2">6.2.</a> Increasing and Decreasing Confidence</h1>
-<p id="rfc.section.6.2.p.1">Assuming that confidence is known to be 19% for Alice's location information.  This is a typical value for a three-dimensional ellipsoid uncertainty of normal distribution where the standard deviation is used directly for uncertainty in each dimension.  The confidence associated with Alice's location estimate is quite low for many applications.  Since the estimate is known to follow a normal distribution, the method in <a href="#scale-normal">Section 5.4.2</a> can be used.  Each axis can be scaled by: </p>
+<p id="rfc.section.6.2.p.1">Assume that confidence is known to be 19% for Alice's location information.  This is a typical value for a three-dimensional ellipsoid uncertainty of normal distribution where the standard deviation is used directly for uncertainty in each dimension.  The confidence associated with Alice's location estimate is quite low for many applications.  Since the estimate is known to follow a normal distribution, the method in <a href="#scale-normal">Section 5.4.2</a> can be used.  Each axis can be scaled by: </p>
 
 <ul class="empty">
   <li>scale = erfinv(0.95^(1/3)) / erfinv(0.19^(1/3)) = 2.9937 </li>
 </ul>
 
 <p> Ensuring that rounding always increases uncertainty, the location estimate at 95% includes a semi-major axis of 23.1, a semi-minor axis of 10 and a vertical axis of 86.  </p>
-<p id="rfc.section.6.2.p.2">Bob's location estimate (from the previous example) covers an area of approximately 12600 square meters.  If the estimate follows a rectangular distribution, the region of uncertainty can be reduced in size.  Here we find the confidence that Bob is within the smaller area of the concert hall.  For the concert hall, the polygon [-33.856473,&#160;151.215257; -33.856322,&#160;151.214973; -33.856424,&#160;151.21471; -33.857248,&#160;151.214753; -33.857413,&#160;151.214941; -33.857311,&#160;151.215128] is used.  To use this new region of uncertainty, find its area using the same translation method described in <a href="#centroid-polygon">Section 5.1.1.2</a>, which produces 4566.2 square meters.  Given that the concert hall is entirely within Bob's original location estimate, the confidence associated with the smaller area is therefore 95% * 4566.2 / 12600 = 34%.  </p>
+<p id="rfc.section.6.2.p.2">Bob's location estimate (from the previous example) covers an area of approximately 12600 square meters.  If the estimate follows a rectangular distribution, the region of uncertainty can be reduced in size.  Here we find the confidence that Bob is within the smaller area of the Concert Hall.  For the Concert Hall, the polygon [-33.856473,&#160;151.215257; -33.856322,&#160;151.214973; -33.856424,&#160;151.21471; -33.857248,&#160;151.214753; -33.857413,&#160;151.214941; -33.857311,&#160;151.215128] is used.  To use this new region of uncertainty, find its area using the same translation method described in <a href="#centroid-polygon">Section 5.1.1.2</a>, which produces 4566.2 square meters.  Given that the Concert Hall is entirely within Bob's original location estimate, the confidence associated with the smaller area is therefore 95% * 4566.2 / 12600 = 34%.  </p>
 <h1 id="rfc.section.6.3"><a href="#rfc.section.6.3">6.3.</a> Matching Location Estimates to Regions of Interest</h1>
 <p id="rfc.section.6.3.p.1">Suppose that a circular area is defined centered at [-33.872754,&#160;151.20683] with a radius of 1950 meters.  To determine whether Bob is found within this area - given that Bob is at [-34.407242,&#160;150.882518] with an uncertainty radius 7.7156 meters - we apply the method in <a href="#inarea">Section 5.5</a>.  Using the converted Circle shape for Bob's location, the distance between these points is found to be 1915.26 meters.  The area of overlap between Bob's location estimate and the region of interest is therefore 2209 square meters and the area of Bob's location estimate is 30853 square meters.  This gives the estimated probability that Bob is less than 1950 meters from the selected point as 67.8%.  </p>
 <p id="rfc.section.6.3.p.2">Note that if 1920 meters were chosen for the distance from the selected point, the area of overlap is only 16196 square meters and the confidence is 49.8%.  Therefore, it is marginally more likely that Bob is outside the region of interest, despite the center point of his location estimate being within the region.  </p>
@@ -1206,8 +1208,9 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
 
 <p> </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#security" id="security">Security Considerations</a></h1>
-<p id="rfc.section.9.p.1">This document describes methods for managing and manipulating uncertainty in location.  No specific security concerns arise from most of the information provided.  </p>
-<p id="rfc.section.9.p.2">Adding confidence to location information risks misinterpretation by consumers of location that do not understand the element.  This could be exploited, particularly when reducing confidence, since the resulting uncertainty region might include locations that are less likely to contain the target than the recipient expects.  Since this sort of error is always a possibility, the impact of this is low.  </p>
+<p id="rfc.section.9.p.1">This document describes methods for managing and manipulating uncertainty in location.  No specific security concerns arise from most of the information provided.  The considerations of <a href="#RFC4119">[RFC4119]</a> all apply.  </p>
+<p id="rfc.section.9.p.2">Providing uncertainty and confidence information can reveal information about the process by which location information is generated.  For instance, it might reveal information that could be used to infer that a user is using a mobile device with a GPS, or that a user is acquiring location information from a particular network-based service.  A Rule Maker might choose to remove uncertainty-related fields from a location object in order to protect this information; though it is noted that this information might not be perfectly protected for the reasons described in Section 13.5 of <a href="#RFC6772">[RFC6772]</a>.  </p>
+<p id="rfc.section.9.p.3">Adding confidence to location information risks misinterpretation by consumers of location that do not understand the element.  This could be exploited, particularly when reducing confidence, since the resulting uncertainty region might include locations that are less likely to contain the target than the recipient expects.  Since this sort of error is always a possibility, the impact of this is low.  </p>
 <h1 id="rfc.section.10"><a href="#rfc.section.10">10.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
 <p id="rfc.section.10.p.1">Peter Rhodes provided assistance with some of the mathematical groundwork on this document.  Dan Cornford provided a detailed review and many terminology corrections.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">11.</a> References</h1>
