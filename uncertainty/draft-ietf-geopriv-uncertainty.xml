@@ -495,7 +495,7 @@
 
         <t>
           <xref target="RFC6225"/> defines a means for representing uncertainty, but a value for
-          confidence is not specified.  A default value of 95% confidence is assumed for the
+          confidence is not specified.  A default value of 95% confidence should be assumed for the
           combination of the uncertainty on each axis.  This is consistent with the transformation
           of those forms into the uncertainty representations from <xref target="RFC5491"/>.  That
           is, the confidence of the resultant rectangular polygon or prism is assumed to be 95%.
