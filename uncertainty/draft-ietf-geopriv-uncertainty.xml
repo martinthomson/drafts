@@ -1657,7 +1657,17 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
     <section anchor="security" title="Security Considerations">
       <t>
         This document describes methods for managing and manipulating uncertainty in location.  No
-        specific security concerns arise from most of the information provided.
+        specific security concerns arise from most of the information provided.  The considerations
+        of <xref target="RFC4119"/> all apply.
+      </t>
+      <t>
+        Providing uncertainty and confidence information can reveal information about the process by
+        which location information is generated.  For instance, it might reveal information that
+        could be used to infer that a user is using a mobile device with a GPS, or that a user is
+        acquiring location information from a particular network-based service.  A Rule Maker might
+        choose to remove uncertainty-related fields from a location object in order to protect this
+        information; though it is noted that this information might not be perfectly protected for
+        the reasons described in Section 13.5 of <xref target="RFC6772"/>.
       </t>
       <t>
         Adding confidence to location information risks misinterpretation by consumers of location
