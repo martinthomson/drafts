@@ -97,9 +97,9 @@
         This document also provides guidance on how to manage location information that includes
         uncertainty.  Methods for expanding or reducing uncertainty to obtain a required level of
         confidence are described.  Methods for determining the probability that a Target is within a
-        specified region based on their location estimate are described.  These methods are
-        simplified by making certain assumptions about the location estimate and are designed to be
-        applicable to location estimates in a relatively small geographic area.
+        specified region based on its location estimate are described.  These methods are simplified
+        by making certain assumptions about the location estimate and are designed to be applicable
+        to location estimates in a relatively small geographic area.
       </t>
 
       <t>
@@ -230,8 +230,8 @@
         <t>
           Each of these probability density functions can be characterized by its center point, or
           mean, and its width.  For a normal distribution, uncertainty and confidence together are
-          related to the standard deviation (see <xref target="scaling"/>).  For a rectangular
-          distribution, the half-width of the distribution is used.
+          related to the standard deviation of the function (see <xref target="scaling"/>).  For a
+          rectangular distribution, the half-width of the distribution is used.
         </t>
 
         <t>
@@ -506,7 +506,7 @@
 
     <section anchor="confidence" title="Representation of Confidence in PIDF-LO">
       <t>
-        On the whole, a fixed definition for confidence is preferable.  Primarily because it ensures
+        On the whole, a fixed definition for confidence is preferable, primarily because it ensures
         consistency between implementations.  Location generators that are aware of this constraint
         can generate location information at the required confidence.  Location recipients are able
         to make sensible assumptions about the quality of the information that they receive.
@@ -1079,7 +1079,7 @@
             </list>
             Where <spanx style="verb">Uo</spanx> and <spanx style="verb">Ur</spanx> are the sizes of
             the original and reduced regions of uncertainty (either the area or the volume of the
-            region); <spanx style="verb">Co</spanx> and <spanx style="verb">Cb</spanx> are the
+            region); <spanx style="verb">Co</spanx> and <spanx style="verb">Cr</spanx> are the
             confidence values associated with each region.
           </t>
 
@@ -1351,7 +1351,8 @@
         </t>
 
         <t>
-          Bob receives a location estimate with a Polygon shape.  This information is shown in <xref
+          Bob receives a location estimate with a Polygon shape (which roughly corresponds to the
+          location of the Sydney Opera House).  This information is shown in <xref
           target="ex-polygon"/>.
         </t>
 
@@ -1437,7 +1438,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
 
       <section title="Increasing and Decreasing Confidence">
         <t>
-          Assuming that confidence is known to be 19% for Alice's location information.  This is a
+          Assume that confidence is known to be 19% for Alice's location information.  This is a
           typical value for a three-dimensional ellipsoid uncertainty of normal distribution where
           the standard deviation is used directly for uncertainty in each dimension.  The confidence
           associated with Alice's location estimate is quite low for many applications.  Since the
@@ -1456,12 +1457,12 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
           Bob's location estimate (from the previous example) covers an area of approximately 12600
           square meters.  If the estimate follows a rectangular distribution, the region of
           uncertainty can be reduced in size.  Here we find the confidence that Bob is within the
-          smaller area of the concert hall.  For the concert hall, the polygon
+          smaller area of the Concert Hall.  For the Concert Hall, the polygon
           [-33.856473,&nbsp;151.215257; -33.856322,&nbsp;151.214973; -33.856424,&nbsp;151.21471;
           -33.857248,&nbsp;151.214753; -33.857413,&nbsp;151.214941; -33.857311,&nbsp;151.215128] is
           used.  To use this new region of uncertainty, find its area using the same translation
           method described in <xref target="centroid-polygon"/>, which produces 4566.2 square
-          meters.  Given that the concert hall is entirely within Bob's original location estimate,
+          meters.  Given that the Concert Hall is entirely within Bob's original location estimate,
           the confidence associated with the smaller area is therefore 95% * 4566.2 / 12600 = 34%.
         </t>
       </section>
