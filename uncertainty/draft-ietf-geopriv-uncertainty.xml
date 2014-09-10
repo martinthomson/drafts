@@ -225,7 +225,7 @@
           Each of these probability density functions can be characterized by its center point, or
           mean, and its width.  For a normal distribution, uncertainty and confidence together are
           related to the standard deviation (see <xref target="scaling"/>).  For a rectangular
-          distribution, half of the width of the distribution is used.
+          distribution, the half-width of the distribution is used.
         </t>
 
         <t>
