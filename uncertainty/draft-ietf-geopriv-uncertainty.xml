@@ -1667,8 +1667,9 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
         could be used to infer that a user is using a mobile device with a GPS, or that a user is
         acquiring location information from a particular network-based service.  A Rule Maker might
         choose to remove uncertainty-related fields from a location object in order to protect this
-        information; though it is noted that this information might not be perfectly protected for
-        the reasons described in Section 13.5 of <xref target="RFC6772"/>.
+        information; though it is noted that this information might not be perfectly protected due
+        to difficulties associated with location obfuscation, as described in Section 13.5 of <xref
+        target="RFC6772"/>.
       </t>
       <t>
         Adding confidence to location information risks misinterpretation by consumers of location
