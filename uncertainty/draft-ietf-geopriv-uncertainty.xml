@@ -1379,7 +1379,7 @@
           this polygon is found (see <xref target="polygonupnormal"/>).  The result of each of these
           stages is shown in <xref target="ex-poly-convert"/>.  Note that the numbers shown in this
           document are rounded only for formatting reasons; the actual calculations do not include
-          rounding, which would would generate significant errors in the final values.
+          rounding, which would generate significant errors in the final values.
         </t>
 
         <figure anchor="ex-poly-convert">
