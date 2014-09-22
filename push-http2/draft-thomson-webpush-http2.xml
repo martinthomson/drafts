@@ -56,9 +56,9 @@
       </t>
 
      <t>
-        One significant contributor to power usage mobile devices is the radio.  Cellular - and to a
-        lesser extent, IEEE 802 radios - consume a significant portion of the energy budget on a
-        wirelessly connected mobile device.
+        One significant contributor to power usage mobile devices is the radio.  Radio
+        communications consumes a significant portion of the energy budget on a wirelessly connected
+        mobile device.
       </t>
       <t>
         Many applications require continuous access to network communications so that real-time
@@ -182,7 +182,7 @@
 
     <section anchor="push" title="Delivering Push Messages">
       <t>
-        A push channel is identified with an <xref target="I-D.ietf-httpbis-p1-messaging">HTTP
+        A push channel is identified with an <xref target="RFC7230">HTTP
         URI</xref>.  An application can request the delivery of a push message by sending an HTTP
         PUT request to this URI, including the push message in the body of the request.
       </t>
@@ -236,7 +236,7 @@
         The push server MUST include expiration information in the response to this request in
         either the Expires header field, or by setting a "max-age" parameter on a Cache-Control
         header field.  The Cache-Control header field MUST include the "private" directive <xref
-        target="I-D.ietf-httpbis-p6-cache"/>.
+        target="RFC7235"/>.
       </t>
       <t>
         The push server SHOULD also provide the "channel" link and expiration information in
@@ -368,8 +368,8 @@
     <references title="Normative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.snell-http-prefer.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p1-messaging.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-p6-cache.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7235.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-alt-svc.xml"?>
     </references>
