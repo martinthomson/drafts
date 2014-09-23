@@ -218,8 +218,9 @@
       </t>
       <t>
         The push server creates a new registration in response to this request, creating two new
-        resources and allocating an HTTP URI for each.  These URIs are included in link relations
-        that are included in Link header fields in the response.
+        resources and allocating an HTTP URI for each.  These URIs are included in <xref
+        target="RFC5988">link relations</xref> that are included in Link header fields in the
+        response.
         <list style="hanging">
           <t hangText="monitor:">
             A link relation of type "...:push:monitor" <cref>pick a URN base and register it (RFC
@@ -347,11 +348,12 @@
           convenient medium for key agreement.
         </t>
         <t>
-          [[Open Issue: Need to decide if this is feasible.]]  The W3C Web Push API requires that
-          each push channel created by the browser be bound to an asymmetric key pair, the private
-          key being only available to the browser.  Pushed messages are authenticated and decrypted
-          by the browser before delivery.  This ensures that the push server is unable to examine
-          the contents of push messages.
+          [[Open Issue: Need to decide if this approach is feasible; biggest concern is the
+          interaction with broadcast.]]  The W3C Web Push API requires that each push channel
+          created by the browser be bound to an asymmetric key pair, the private key being only
+          available to the browser.  Pushed messages are authenticated and decrypted by the browser
+          before delivery.  This ensures that the push server is unable to examine the contents of
+          push messages.
         </t>
         <t>
           The public key for a channel ensures that applications using a channel can identify
@@ -438,6 +440,8 @@
 
     <references title="Normative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5988.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.snell-http-prefer.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7231.xml"?>
