@@ -325,40 +325,103 @@
 
     <section anchor="security" title="Security Considerations">
       <t>
-        This protocol does not specific a single authorization framework for managing access to push
-        servers, either by devices or applications.  Thus, there is a very real possibility that
-        this could be exploited to mount denial of service attacks on the push service.
+        This protocol MUST use <xref target="RFC2818">HTTP over TLS</xref>; this includes any
+        communications between device and push server, plus communications between the application
+        and the push server.  This provides confidentiality and integrity protection for
+        registrations and push message.
       </t>
-      <t>
-        Push services MAY choose to authorize requests based on any HTTP-compatible means available,
-        of which there are numerous options.
-      </t>
-      <t>
-        A malicious application can use the greater resources of a push server to mount a denial of
-        service attack on devices.  Push servers MAY limit the rate at which push messages are sent
-        to devices.
-      </t>
-      <t>
-        One basic protection against misuse of push channels is to ensure that only authorized
-        applications are given channel URIs and to make it extremely difficult to successfully guess
-        a valid channel URI.  Encoding a large amount of random entropy in the URI path is one
-        technique for ensuring that channel URIs are able to act as bearer tokens.
-      </t>
-      <t>
-        A push server is able to see (and modify) the content of push messages.  Applications that
-        depend on end-to-end guarantees MUST use object security mechanisms to protect the
-        confidentiality and integrity of push messages.  Since the application frequently resides
-        both in the server that originates the push messages and in the device, and there is a
-        requirement for direct communications between these two instances to exchange channel
-        information, this provides a perfect medium for key agreement.
-      </t>
-      <t>
-        A push server is also able to deny service.  In addition to malicious reasons, delivery of
-        push messages can fail due to transient faults in networks, the device being temporarily
-        unavailable, or other similar faults.  Therefore, applications that rely on the content of
-        push messages being delivered MUST ensure that they provide other means of delivering
-        messages to devices.
-      </t>
+
+      <section title="Confidentiality from Push Server Access">
+        <t>
+          TLS does not protect content from the push server.  A push server is able to see and
+          modify the content of the messages.
+        </t>
+        <t>
+          Applications are able to provide additional confidentiality, integrity or authentication
+          mechanisms within the push message itself.  The originating application server and the
+          device are frequently just different instances of the same application, this does not
+          require standardization.  The process of registering a channel endpoints provides a
+          convenient medium for key agreement.
+        </t>
+        <t>
+          [[Open Issue: Need to decide if this is feasible.]]  The W3C Web Push API requires that
+          each push channel created by the browser be bound to an asymmetric key pair, the private
+          key being only available to the browser.  Pushed messages are authenticated and decrypted
+          by the browser before delivery.  This ensures that the push server is unable to examine
+          the contents of push messages.
+        </t>
+        <t>
+          The public key for a channel ensures that applications using a channel can identify
+          messages from unknown sources and discard them.  This depends on the public key only being
+          disclosed to entities that are authorized to send messages on the channel.  The
+          push server does not require access to this public key.
+        </t>
+     </section>
+
+     <section title="Privacy Considerations">
+       <t>
+         Push message confidentiality does not ensure that the identity of who is communicating and
+         when they are communicating is protected.  However, the amount of information that is
+         exposed can be limited.
+       </t>
+       <t>
+         The identifiers used by this protocol provide some ability to correlate communications
+         between different uses, either across applications or over time.  Most important is that
+         communications for a given device not be able to be correlated between different
+         application usages, or between different times.
+       </t>
+       <t>
+         Channel URIs established by the same device MUST NOT include any information that allows
+         them to be correlated with other channels or the device registration.  The push server is
+         the only entity that needs to be able to correlate channel URIs with device registrations.
+         Note that this can't prevent the use of traffic analysis in performing correlation.
+       </t>
+       <t>
+         A device MUST be able to create new registrations at any time.  Identifiers for new
+         registrations MUST NOT include any information that allows them to be correlated with other
+         registrations from the same device or users.
+       </t>
+     </section>
+
+     <section title="Denial of Service Vectors">
+       <t>
+         This protocol does not specify a single authorization framework for managing access to push
+         servers, either by devices or applications.  Thus, there is a very real possibility that
+         this could be exploited to mount denial of service attacks on the push server.  Push
+         servers MAY choose to authorize requests based on any HTTP-compatible means available, of
+         which there are numerous options.
+       </t>
+
+       <t>
+         Discarding unwanted messages at the device based on message authentication doesn't protect
+         against a denial of service attack on the device.  Even a relatively small number of
+         message can cause devices to exhaust batteries.  Limiting the number of entities with
+         access to push channels limits the number of entities that can generate value push requests
+         of the push server.  An application can do this by controlling the distribution of channel
+         URIs to authorized entities.
+       </t>
+       <t>
+         Only the push server can make this denial of service protection possible.  A push server
+         MUST generate channel URI that are extremely difficult to guess.  Encoding a large amount
+         of random entropy (at least 128 bits) in the URI path is one technique for ensuring that
+         channel URIs are able to act as bearer tokens.
+       </t>
+
+       <t>
+         A malicious application can use the greater resources of a push server to mount a denial of
+         service attack on devices.  Push servers MAY limit the rate at which push messages are sent
+         to devices.  <cref>...this suggests a mechanism whereby the server can inform devices when
+         it terminates channels or entire registrations.</cref>
+       </t>
+
+       <t>
+         Conversely, a push server is also able to deny service to devices.  Intentional failure to
+         deliver messages is difficult to distinguish from faults, which might occur due to
+         transient network errors, interruptions in device availability, or genuine service
+         outages.  Applications that rely on reliable message delivery need to provide means of
+         recovering from occasional failures that do not rely on push notifications.
+       </t>
+     </section>
     </section>
 <!--
     <section anchor="ack" title="Acknowledgements">
