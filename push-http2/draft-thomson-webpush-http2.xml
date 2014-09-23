@@ -222,8 +222,9 @@
         that are included in Link header fields in the response.
         <list style="hanging">
           <t hangText="monitor:">
-            A link relation of type "...:push:monitor" includes the URL of a resource that the
-            device can monitor for events.  Monitoring is described in <xref target="monitor"/>.
+            A link relation of type "...:push:monitor" <cref>pick a URN base and register it (RFC
+            3688)</cref> includes the URL of a resource that the device can monitor for events.
+            Monitoring is described in <xref target="monitor"/>.
           </t>
           <t hangText="channel:">
             A link relation of type "...:push:channel" includes a URL of a resource where the device
