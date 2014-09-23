@@ -280,6 +280,8 @@
       <t>
         A device can request the monitor resource immediately by including a <xref
         target="RFC7240">Prefer header field</xref> with a "wait" parmeter set to "0".
+        This allows clients to rapidly check for any missed messages.  Clients can check the status
+        of individual channels by sending GET requests to the channel URI.
       </t>
       <t>
         A server that wishes to redistribute load can do so using the alternative services
@@ -298,10 +300,10 @@
         monitoring for push messages, messages can be lost.
       </t>
       <t>
-        Push servers are permitted to store messages for some time to allow for limited recovery
-        from transient faults.  If a message is stored, but not delivered, the push server can
-        indicate the probable duration of storage by including expiration information in the
-        response to the push request.
+        Push servers can store messages for some time to allow for limited recovery from transient
+        faults.  If a message is stored, but not delivered, the push server can indicate the
+        probable duration of storage by including expiration information in the response to the push
+        request.
       </t>
       <t>
         Messages that were stored and not delivered to a client MAY be delivered when a client
