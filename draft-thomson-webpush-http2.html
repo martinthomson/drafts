@@ -384,9 +384,6 @@
 <link href="#rfc.section.7" rel="Chapter" title="7 Store and Forward Operation"/>
 <link href="#rfc.section.8" rel="Chapter" title="8 IANA Considerations"/>
 <link href="#rfc.section.9" rel="Chapter" title="9 Security Considerations"/>
-<link href="#rfc.section.9.1" rel="Chapter" title="9.1 Confidentiality from Push Server Access"/>
-<link href="#rfc.section.9.2" rel="Chapter" title="9.2 Privacy Considerations"/>
-<link href="#rfc.section.9.3" rel="Chapter" title="9.3 Denial of Service Vectors"/>
 <link href="#rfc.references" rel="Chapter" title="10 References"/>
 <link href="#rfc.references.1" rel="Chapter" title="10.1 Normative References"/>
 <link href="#rfc.references.2" rel="Chapter" title="10.2 Informative References"/>
@@ -398,7 +395,7 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-webpush-http2-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-9-23" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-9-24" />
   <meta name="dct.abstract" content="A simple scheme for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
   <meta name="description" content="A simple scheme for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
 
@@ -419,10 +416,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">September 23, 2014</td>
+  <td class="right">September 24, 2014</td>
 </tr>
 <tr>
-  <td class="left">Expires: March 27, 2015</td>
+  <td class="left">Expires: March 28, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -443,7 +440,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on March 27, 2015.</p>
+<p>This Internet-Draft will expire on March 28, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -465,9 +462,6 @@
 <li>7.   <a href="#rfc.section.7">Store and Forward Operation</a></li>
 <li>8.   <a href="#rfc.section.8">IANA Considerations</a></li>
 <li>9.   <a href="#rfc.section.9">Security Considerations</a></li>
-<li>9.1.   <a href="#rfc.section.9.1">Confidentiality from Push Server Access</a></li>
-<li>9.2.   <a href="#rfc.section.9.2">Privacy Considerations</a></li>
-<li>9.3.   <a href="#rfc.section.9.3">Denial of Service Vectors</a></li>
 <li>10.   <a href="#rfc.references">References</a></li>
 <li>10.1.   <a href="#rfc.references.1">Normative References</a></li>
 <li>10.2.   <a href="#rfc.references.2">Informative References</a></li>
@@ -526,11 +520,11 @@
 <p id="rfc.section.3.p.2">A push server can acknowledge the end-to-end delivery of a push message by responding with a 200 (OK) status code.  A push server that stores the message for later delivery (see <a href="#store">Section 7</a>) could respond with a 202 (Accepted) status code to indicate that the message was stored, but not delivered.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#register" id="register">Registering</a></h1>
 <p id="rfc.section.4.p.1">A device that wishes to establish a new or replacement registration sends an HTTP POST request to its configured push server URL.  The request contains no entity body.  </p>
-<p id="rfc.section.4.p.2">The push server creates a new registration in response to this request, creating two new resources and allocating an HTTP URI for each.  These URIs are included in <a href="#RFC5988">link relations</a> <cite title="NONE">[RFC5988]</cite> that are included in Link header fields in the response.  </p>
+<p id="rfc.section.4.p.2">The push server creates a new registration in response to this request, creating two new resources and allocating an HTTP URI for each.  These URIs are included in link relations that are included in Link header fields in the response.  </p>
 
 <dl>
   <dt>monitor:</dt>
-  <dd style="margin-left: 8">A link relation of type "...:push:monitor" <a id="CREF1" class="info">[CREF1]<span class="info">pick a URN base and register it (RFC 3688)</span></a> includes the URL of a resource that the device can monitor for events.  Monitoring is described in <a href="#monitor">Section 6</a>.  </dd>
+  <dd style="margin-left: 8">A link relation of type "...:push:monitor" includes the URL of a resource that the device can monitor for events.  Monitoring is described in <a href="#monitor">Section 6</a>.  </dd>
   <dt>channel:</dt>
   <dd style="margin-left: 8">A link relation of type "...:push:channel" includes a URL of a resource where the device can create new channels.  Creating channels is described in <a href="#channel">Section 5</a>.  </dd>
 </dl>
@@ -546,33 +540,22 @@
 <h1 id="rfc.section.6"><a href="#rfc.section.6">6.</a> <a href="#monitor" id="monitor">Monitoring and Receiving Push Messages</a></h1>
 <p id="rfc.section.6.p.1">A device monitors for new events by making a GET request to the monitor resource.  The server does not respond to these request, it instead uses <a href="#I-D.ietf-httpbis-http2">server push</a> <cite title="NONE">[I-D.ietf-httpbis-http2]</cite> to send the contents of push messages as applications send them.  </p>
 <p id="rfc.section.6.p.2">Each push message consists of a synthesized GET request to the channel URI that was the target of the push.  The response body is the entity body from the PUT request.  </p>
-<p id="rfc.section.6.p.3">A device can request the monitor resource immediately by including a <a href="#I-D.snell-http-prefer">Prefer header field</a> <cite title="NONE">[I-D.snell-http-prefer]</cite> with a "wait" parmeter set to "0".  This allows clients to rapidly check for any missed messages.  Clients can check the status of individual channels by sending GET requests to the channel URI.  </p>
+<p id="rfc.section.6.p.3">A device can request the monitor resource immediately by including a <a href="#I-D.snell-http-prefer">Prefer header field</a> <cite title="NONE">[I-D.snell-http-prefer]</cite> with a "wait" parmeter set to "0".  </p>
 <p id="rfc.section.6.p.4">A server that wishes to redistribute load can do so using The alternative services mechanisms that are part of HTTP/2 <a href="#I-D.ietf-httpbis-alt-svc">[I-D.ietf-httpbis-alt-svc]</a>.  The ALTSVC frame type allows for redistribution of load whilst retaining the same monitor resource.  Once a device has established a replacement connection, it can notify the server of imminent shutdown using a GOAWAY frame, which allows the server to respond to the long-standing GET request and gracefully shut down the connection.  This allows for seamless migration between servers.  </p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#store" id="store">Store and Forward Operation</a></h1>
 <p id="rfc.section.7.p.1">Push servers are not obligated to store messages for any time.  If a client is not actively monitoring for push messages, messages can be lost.  </p>
-<p id="rfc.section.7.p.2">Push servers can store messages for some time to allow for limited recovery from transient faults.  If a message is stored, but not delivered, the push server can indicate the probable duration of storage by including expiration information in the response to the push request.  </p>
+<p id="rfc.section.7.p.2">Push servers are permitted to store messages for some time to allow for limited recovery from transient faults.  If a message is stored, but not delivered, the push server can indicate the probable duration of storage by including expiration information in the response to the push request.  </p>
 <p id="rfc.section.7.p.3">Messages that were stored and not delivered to a client MAY be delivered when a client commences monitoring.  These messages should include a Last-Modified header field.  If a server stores push messages, a GET request to a channel URI returns the last message sent by an application to that channel.  </p>
 <p id="rfc.section.7.p.4">Push servers that store push messages might need to limit the size of push messages to avoid being subject to overloading.  Push servers that don't store can stream the payload of push messages to devices.  This can use HTTP/2 flow control to limit the state commitment this requires.  However, push servers MAY place an upper limit on the size of push messages that they permit.  </p>
 <h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> IANA Considerations</h1>
 <p id="rfc.section.8.p.1">TODO: register link relation types, as necessary.  </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#security" id="security">Security Considerations</a></h1>
-<p id="rfc.section.9.p.1">This protocol MUST use <a href="#RFC2818">HTTP over TLS</a> <cite title="NONE">[RFC2818]</cite>; this includes any communications between device and push server, plus communications between the application and the push server.  This provides confidentiality and integrity protection for registrations and push message.  </p>
-<h1 id="rfc.section.9.1"><a href="#rfc.section.9.1">9.1.</a> Confidentiality from Push Server Access</h1>
-<p id="rfc.section.9.1.p.1">TLS does not protect content from the push server.  A push server is able to see and modify the content of the messages.  </p>
-<p id="rfc.section.9.1.p.2">Applications are able to provide additional confidentiality, integrity or authentication mechanisms within the push message itself.  The originating application server and the device are frequently just different instances of the same application, this does not require standardization.  The process of registering a channel endpoints provides a convenient medium for key agreement.  </p>
-<p id="rfc.section.9.1.p.3">[[Open Issue: Need to decide if this approach is feasible; biggest concern is the interaction with broadcast.]]  The W3C Web Push API requires that each push channel created by the browser be bound to an asymmetric key pair, the private key being only available to the browser.  Pushed messages are authenticated and decrypted by the browser before delivery.  This ensures that the push server is unable to examine the contents of push messages.  </p>
-<p id="rfc.section.9.1.p.4">The public key for a channel ensures that applications using a channel can identify messages from unknown sources and discard them.  This depends on the public key only being disclosed to entities that are authorized to send messages on the channel.  The push server does not require access to this public key.  </p>
-<h1 id="rfc.section.9.2"><a href="#rfc.section.9.2">9.2.</a> Privacy Considerations</h1>
-<p id="rfc.section.9.2.p.1">Push message confidentiality does not ensure that the identity of who is communicating and when they are communicating is protected.  However, the amount of information that is exposed can be limited.  </p>
-<p id="rfc.section.9.2.p.2">The identifiers used by this protocol provide some ability to correlate communications between different uses, either across applications or over time.  Most important is that communications for a given device not be able to be correlated between different application usages, or between different times.  </p>
-<p id="rfc.section.9.2.p.3">Channel URIs established by the same device MUST NOT include any information that allows them to be correlated with other channels or the device registration.  The push server is the only entity that needs to be able to correlate channel URIs with device registrations.  Note that this can't prevent the use of traffic analysis in performing correlation.  </p>
-<p id="rfc.section.9.2.p.4">A device MUST be able to create new registrations at any time.  Identifiers for new registrations MUST NOT include any information that allows them to be correlated with other registrations from the same device or users.  </p>
-<h1 id="rfc.section.9.3"><a href="#rfc.section.9.3">9.3.</a> Denial of Service Vectors</h1>
-<p id="rfc.section.9.3.p.1">This protocol does not specify a single authorization framework for managing access to push servers, either by devices or applications.  Thus, there is a very real possibility that this could be exploited to mount denial of service attacks on the push server.  Push servers MAY choose to authorize requests based on any HTTP-compatible means available, of which there are numerous options.  </p>
-<p id="rfc.section.9.3.p.2">Discarding unwanted messages at the device based on message authentication doesn't protect against a denial of service attack on the device.  Even a relatively small number of message can cause devices to exhaust batteries.  Limiting the number of entities with access to push channels limits the number of entities that can generate value push requests of the push server.  An application can do this by controlling the distribution of channel URIs to authorized entities.  </p>
-<p id="rfc.section.9.3.p.3">Only the push server can make this denial of service protection possible.  A push server MUST generate channel URI that are extremely difficult to guess.  Encoding a large amount of random entropy (at least 128 bits) in the URI path is one technique for ensuring that channel URIs are able to act as bearer tokens.  </p>
-<p id="rfc.section.9.3.p.4">A malicious application can use the greater resources of a push server to mount a denial of service attack on devices.  Push servers MAY limit the rate at which push messages are sent to devices.  <a id="CREF2" class="info">[CREF2]<span class="info">...this suggests a mechanism whereby the server can inform devices when it terminates channels or entire registrations.</span></a> </p>
-<p id="rfc.section.9.3.p.5">Conversely, a push server is also able to deny service to devices.  Intentional failure to deliver messages is difficult to distinguish from faults, which might occur due to transient network errors, interruptions in device availability, or genuine service outages.  Applications that rely on reliable message delivery need to provide means of recovering from occasional failures that do not rely on push notifications.  </p>
+<p id="rfc.section.9.p.1">This protocol does not specific a single authorization framework for managing access to push servers, either by devices or applications.  Thus, there is a very real possibility that this could be exploited to mount denial of service attacks on the push service.  </p>
+<p id="rfc.section.9.p.2">Push services MAY choose to authorize requests based on any HTTP-compatible means available, of which there are numerous options.  </p>
+<p id="rfc.section.9.p.3">A malicious application can use the greater resources of a push server to mount a denial of service attack on devices.  Push servers MAY limit the rate at which push messages are sent to devices.  </p>
+<p id="rfc.section.9.p.4">One basic protection against misuse of push channels is to ensure that only authorized applications are given channel URIs and to make it extremely difficult to successfully guess a valid channel URI.  Encoding a large amount of random entropy in the URI path is one technique for ensuring that channel URIs are able to act as bearer tokens.  </p>
+<p id="rfc.section.9.p.5">A push server is able to see (and modify) the content of push messages.  Applications that depend on end-to-end guarantees MUST use object security mechanisms to protect the confidentiality and integrity of push messages.  Since the application frequently resides both in the server that originates the push messages and in the device, and there is a requirement for direct communications between these two instances to exchange channel information, this provides a perfect medium for key agreement.  </p>
+<p id="rfc.section.9.p.6">A push server is also able to deny service.  In addition to malicious reasons, delivery of push messages can fail due to transient faults in networks, the device being temporarily unavailable, or other similar faults.  Therefore, applications that rely on the content of push messages being delivered MUST ensure that they provide other means of delivering messages to devices.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">10.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">10.1.</a> Normative References</h1>
 <table>
@@ -600,18 +583,6 @@
         <b id="RFC2119">[RFC2119]</b>
       </td>
       <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC2818">[RFC2818]</b>
-      </td>
-      <td class="top"><a>Rescorla, E.</a>, "<a href="http://tools.ietf.org/html/rfc2818">HTTP Over TLS</a>", RFC 2818, May 2000.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC5988">[RFC5988]</b>
-      </td>
-      <td class="top"><a>Nottingham, M.</a>, "<a href="http://tools.ietf.org/html/rfc5988">Web Linking</a>", RFC 5988, October 2010.</td>
     </tr>
     <tr>
       <td class="reference">
