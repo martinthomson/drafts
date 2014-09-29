@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                      September 24, 2014
-Expires: March 28, 2015
+Intended status: Standards Track                      September 29, 2014
+Expires: April 2, 2015
 
 
                  Generic Event Delivery Using HTTP Push
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on March 28, 2015.
+   This Internet-Draft will expire on April 2, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                  Expires March 28, 2015                 [Page 1]
+Thomson                   Expires April 2, 2015                 [Page 1]
 
-Internet-Draft                  HTTP Push                 September 2014
+Internet-Draft                HTTP Web Push               September 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                  Expires March 28, 2015                 [Page 2]
+Thomson                   Expires April 2, 2015                 [Page 2]
 
-Internet-Draft                  HTTP Push                 September 2014
+Internet-Draft                HTTP Web Push               September 2014
 
 
    o  request the delivery of an event to an attached device
@@ -123,7 +123,7 @@ Internet-Draft                  HTTP Push                 September 2014
    requesting the delivery of events is required for immediate use by
    the Web Push API.  The registration, management and monitoring
    functions are currently fulfilled by proprietary protocols; these are
-   adequate, but do not offer any advantages that standardization
+   adequate, but do not offer any of the advantages that standardization
    affords.
 
    The monitoring function described in this document is intended to be
@@ -165,9 +165,9 @@ Internet-Draft                  HTTP Push                 September 2014
 
 
 
-Thomson                  Expires March 28, 2015                 [Page 3]
+Thomson                   Expires April 2, 2015                 [Page 3]
 
-Internet-Draft                  HTTP Push                 September 2014
+Internet-Draft                HTTP Web Push               September 2014
 
 
      +-----------+        +-------------+        +-------------+
@@ -208,7 +208,7 @@ Internet-Draft                  HTTP Push                 September 2014
    the push server.
 
    Both registrations and channels have a limited lifetime.  These will
-   need to be refreshed over time.
+   need to be refreshed or replaced over time.
 
 3.  Delivering Push Messages
 
@@ -221,9 +221,9 @@ Internet-Draft                  HTTP Push                 September 2014
 
 
 
-Thomson                  Expires March 28, 2015                 [Page 4]
+Thomson                   Expires April 2, 2015                 [Page 4]
 
-Internet-Draft                  HTTP Push                 September 2014
+Internet-Draft                HTTP Web Push               September 2014
 
 
    A push server can acknowledge the end-to-end delivery of a push
@@ -262,6 +262,10 @@ Internet-Draft                  HTTP Push                 September 2014
    The push server SHOULD also provide the "channel" link and expiration
    information in response to requests to the "monitor" resource.
 
+   A device MUST support the 307 (Temporary Redirect) status code
+   [RFC7231], which can be used by a push server to redistribute load at
+   the time a registration is created.
+
 5.  Channels
 
    A client sends a POST request to the "channel" resource to create a
@@ -270,17 +274,17 @@ Internet-Draft                  HTTP Push                 September 2014
    A response with a 201 status code includes the channel URI in the
    Location header field.
 
+
+
+
+Thomson                   Expires April 2, 2015                 [Page 5]
+
+Internet-Draft                HTTP Web Push               September 2014
+
+
    A channel can expire.  Servers indicate this using the Expires header
    field, or by setting a "max-age" parameter on a Cache-Control header
    field.
-
-
-
-
-Thomson                  Expires March 28, 2015                 [Page 5]
-
-Internet-Draft                  HTTP Push                 September 2014
-
 
    A client can explicitly delete a channel by sending a DELETE request
    to channel URI.
@@ -297,10 +301,9 @@ Internet-Draft                  HTTP Push                 September 2014
    the entity body from the PUT request.
 
    A device can request the monitor resource immediately by including a
-   Prefer header field [I-D.snell-http-prefer] with a "wait" parmeter
-   set to "0".
+   Prefer header field [RFC7240] with a "wait" parmeter set to "0".
 
-   A server that wishes to redistribute load can do so using The
+   A server that wishes to redistribute load can do so using the
    alternative services mechanisms that are part of HTTP/2
    [I-D.ietf-httpbis-alt-svc].  The ALTSVC frame type allows for
    redistribution of load whilst retaining the same monitor resource.
@@ -328,16 +331,15 @@ Internet-Draft                  HTTP Push                 September 2014
    messages, a GET request to a channel URI returns the last message
    sent by an application to that channel.
 
+
+
+Thomson                   Expires April 2, 2015                 [Page 6]
+
+Internet-Draft                HTTP Web Push               September 2014
+
+
    Push servers that store push messages might need to limit the size of
    push messages to avoid being subject to overloading.  Push servers
-
-
-
-Thomson                  Expires March 28, 2015                 [Page 6]
-
-Internet-Draft                  HTTP Push                 September 2014
-
-
    that don't store can stream the payload of push messages to devices.
    This can use HTTP/2 flow control to limit the state commitment this
    requires.  However, push servers MAY place an upper limit on the size
@@ -387,11 +389,9 @@ Internet-Draft                  HTTP Push                 September 2014
 
 
 
-
-
-Thomson                  Expires March 28, 2015                 [Page 7]
+Thomson                   Expires April 2, 2015                 [Page 7]
 
-Internet-Draft                  HTTP Push                 September 2014
+Internet-Draft                HTTP Web Push               September 2014
 
 
 10.  References
@@ -408,10 +408,6 @@ Internet-Draft                  HTTP Push                 September 2014
               Protocol version 2", draft-ietf-httpbis-http2-14 (work in
               progress), July 2014.
 
-   [I-D.snell-http-prefer]
-              Snell, J., "Prefer Header for HTTP", draft-snell-http-
-              prefer-18 (work in progress), January 2013.
-
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
 
@@ -419,8 +415,13 @@ Internet-Draft                  HTTP Push                 September 2014
               (HTTP/1.1): Message Syntax and Routing", RFC 7230, June
               2014.
 
+   [RFC7231]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
+              (HTTP/1.1): Semantics and Content", RFC 7231, June 2014.
+
    [RFC7235]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
               (HTTP/1.1): Authentication", RFC 7235, June 2014.
+
+   [RFC7240]  Snell, J., "Prefer Header for HTTP", RFC 7240, June 2014.
 
 10.2.  Informative References
 
@@ -444,5 +445,4 @@ Author's Address
 
 
 
-
-Thomson                  Expires March 28, 2015                 [Page 8]
+Thomson                   Expires April 2, 2015                 [Page 8]
