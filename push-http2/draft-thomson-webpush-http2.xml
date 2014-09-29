@@ -12,7 +12,7 @@
 
 <rfc category="std" ipr="trust200902" docName="draft-thomson-webpush-http2-latest">
   <front>
-    <title abbrev="HTTP Push">
+    <title abbrev="HTTP Web Push">
       Generic Event Delivery Using HTTP Push
     </title>
 
@@ -94,7 +94,7 @@
         This is intentionally split into these two categories because requesting the delivery of
         events is required for immediate use by the Web Push API.  The registration, management and
         monitoring functions are currently fulfilled by proprietary protocols; these are adequate,
-        but do not offer any advantages that standardization affords.
+        but do not offer any of the advantages that standardization affords.
       </t>
       <t>
         The monitoring function described in this document is intended to be replaceable, enabling
@@ -175,16 +175,16 @@
         Applications use channels to deliver push messages to devices, via the push server.
       </t>
       <t>
-        Both registrations and channels have a limited lifetime.  These will need to be refreshed
-        over time.
+        Both registrations and channels have a limited lifetime.  These will need to be refreshed or
+        replaced over time.
       </t>
     </section>
 
     <section anchor="push" title="Delivering Push Messages">
       <t>
-        A push channel is identified with an <xref target="RFC7230">HTTP
-        URI</xref>.  An application can request the delivery of a push message by sending an HTTP
-        PUT request to this URI, including the push message in the body of the request.
+        A push channel is identified with an <xref target="RFC7230">HTTP URI</xref>.  An application
+        can request the delivery of a push message by sending an HTTP PUT request to this URI,
+        including the push message in the body of the request.
       </t>
       <t>
         A push server can acknowledge the end-to-end delivery of a push message by responding with a
@@ -242,6 +242,11 @@
         The push server SHOULD also provide the "channel" link and expiration information in
         response to requests to the "monitor" resource.
       </t>
+      <t>
+        A device MUST support the 307 (Temporary Redirect) status code <xref target="RFC7231"/>,
+        which can be used by a push server to redistribute load at the time a registration is
+        created.
+      </t>
     </section>
 
     <section anchor="channel" title="Channels">
@@ -273,10 +278,10 @@
       </t>
       <t>
         A device can request the monitor resource immediately by including a <xref
-        target="I-D.snell-http-prefer">Prefer header field</xref> with a "wait" parmeter set to "0".
+        target="RFC7240">Prefer header field</xref> with a "wait" parmeter set to "0".
       </t>
       <t>
-        A server that wishes to redistribute load can do so using The alternative services
+        A server that wishes to redistribute load can do so using the alternative services
         mechanisms that are part of HTTP/2 <xref target="I-D.ietf-httpbis-alt-svc"/>.  The ALTSVC
         frame type allows for redistribution of load whilst retaining the same monitor resource.
         Once a device has established a replacement connection, it can notify the server of imminent
@@ -367,9 +372,10 @@
 
     <references title="Normative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.snell-http-prefer.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7231.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7235.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7240.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-alt-svc.xml"?>
     </references>
