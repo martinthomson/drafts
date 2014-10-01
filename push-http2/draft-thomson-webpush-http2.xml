@@ -280,9 +280,9 @@
       </t>
       <t>
         A device can request the monitor resource immediately by including a <xref
-        target="RFC7240">Prefer header field</xref> with a "wait" parmeter set to "0".
-        This allows clients to rapidly check for any missed messages.  Clients can check the status
-        of individual channels by sending GET requests to the channel URI.
+        target="RFC7240">Prefer header field</xref> with a "wait" parameter set to "0".  This allows
+        clients to rapidly check for any missed messages.  Clients can check the status of
+        individual channels by sending GET requests to the channel URI.
       </t>
       <t>
         A server that wishes to redistribute load can do so using the alternative services
@@ -414,9 +414,9 @@
 
        <t>
          A malicious application can use the greater resources of a push server to mount a denial of
-         service attack on devices.  Push servers MAY limit the rate at which push messages are sent
-         to devices.  <cref>...this suggests a mechanism whereby the server can inform devices when
-         it terminates channels or entire registrations.</cref>
+         service attack on devices.  Push servers SHOULD limit the rate at which push messages are
+         sent to devices.  <cref>...this suggests a mechanism whereby the server can inform devices
+         when it terminates channels or entire registrations.</cref>
        </t>
 
        <t>
@@ -427,6 +427,22 @@
          recovering from occasional failures that do not rely on push notifications.
        </t>
      </section>
+
+     <section title="Logging Exposure">
+       <t>
+         Server request logs can reveal registration and channel URIs.  Acquiring a registration URI
+         permits the creation of new channels and the receipt of messages.  Acquiring either URI
+         permits the generation of push messages.
+       </t>
+       <t>
+         End-to-end confidentiality mechanisms, such as those in <xref target="API"/>, prevent an
+         entity with a registration URI from learning the contents of push messages.  In both cases,
+         push messages that are not successfully authenticated will not be delivered by the API, but
+         this can present a denial of service risk.  Limitations on log retention and strong access
+         control mechanisms can ensure that these URIs are not learned.
+       </t>
+     </section>
+
     </section>
 <!--
     <section anchor="ack" title="Acknowledgements">
@@ -442,7 +458,6 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5988.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.snell-http-prefer.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7231.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7235.xml"?>
