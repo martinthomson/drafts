@@ -41,7 +41,7 @@
 
     <abstract>
       <t>
-        A simple scheme for the delivery of realtime events to clients is described.  This scheme
+        A simple protocol for the delivery of realtime events to clients is described.  This scheme
         uses HTTP/2 push.
       </t>
     </abstract>
@@ -82,11 +82,16 @@
         protocol that can be used to:
         <list style="symbols">
           <t>
-            request the delivery of an event to an attached device
+            request the delivery of an event to a device,
           </t>
           <t>
-            register a new device, create new event delivery channels, and monitor those channels
-            for new events
+            register a new device,
+          </t>
+	  <t>
+            create new event delivery channels, and
+          </t>
+	  <t>
+            monitor for new events.
           </t>
         </list>
       </t>
