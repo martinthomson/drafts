@@ -87,10 +87,10 @@
           <t>
             register a new device,
           </t>
-	  <t>
+          <t>
             create new event delivery channels, and
           </t>
-	  <t>
+          <t>
             monitor for new events.
           </t>
         </list>
@@ -342,8 +342,8 @@
 
       <section title="Confidentiality from Push Server Access">
         <t>
-          TLS does not protect content from the push server.  A push server is able to see and
-          modify the content of the messages.
+          The protection afforded by TLS does not protect content from the push server.  A push
+          server is able to see and modify the content of the messages.
         </t>
         <t>
           Applications are able to provide additional confidentiality, integrity or authentication
@@ -353,12 +353,10 @@
           convenient medium for key agreement.
         </t>
         <t>
-          [[Open Issue: Need to decide if this approach is feasible; biggest concern is the
-          interaction with broadcast.]]  The W3C Web Push API requires that each push channel
-          created by the browser be bound to an asymmetric key pair, the private key being only
-          available to the browser.  Pushed messages are authenticated and decrypted by the browser
-          before delivery.  This ensures that the push server is unable to examine the contents of
-          push messages.
+          In particular, the W3C Web Push API requires that each push channel created by the browser
+          be bound to a browser generated encryption key.  Pushed messages are authenticated and
+          decrypted by the browser before delivery.  This ensures that the push server is unable to
+          examine the contents of push messages.
         </t>
         <t>
           The public key for a channel ensures that applications using a channel can identify
@@ -375,8 +373,8 @@
          exposed can be limited.
        </t>
        <t>
-         The identifiers used by this protocol provide some ability to correlate communications
-         between different uses, either across applications or over time.  Most important is that
+         The identifiers used by this protocol provide some ability to correlate communications for
+         a given device, either across applications or over time.  Most important is that
          communications for a given device not be able to be correlated between different
          application usages, or between different times.
        </t>
@@ -389,7 +387,7 @@
        <t>
          A device MUST be able to create new registrations at any time.  Identifiers for new
          registrations MUST NOT include any information that allows them to be correlated with other
-         registrations from the same device or users.
+         registrations from the same device or user.
        </t>
      </section>
 
@@ -401,7 +399,6 @@
          servers MAY choose to authorize requests based on any HTTP-compatible means available, of
          which there are numerous options.
        </t>
-
        <t>
          Discarding unwanted messages at the device based on message authentication doesn't protect
          against a denial of service attack on the device.  Even a relatively small number of
@@ -416,14 +413,12 @@
          of random entropy (at least 128 bits) in the URI path is one technique for ensuring that
          channel URIs are able to act as bearer tokens.
        </t>
-
        <t>
          A malicious application can use the greater resources of a push server to mount a denial of
          service attack on devices.  Push servers SHOULD limit the rate at which push messages are
          sent to devices.  <cref>...this suggests a mechanism whereby the server can inform devices
          when it terminates channels or entire registrations.</cref>
        </t>
-
        <t>
          Conversely, a push server is also able to deny service to devices.  Intentional failure to
          deliver messages is difficult to distinguish from faults, which might occur due to
@@ -437,7 +432,9 @@
        <t>
          Server request logs can reveal registration and channel URIs.  Acquiring a registration URI
          permits the creation of new channels and the receipt of messages.  Acquiring either URI
-         permits the generation of push messages.
+         permits the generation of push messages.  Logging could also reveal relationships between
+         different channel URIs for the same registration, or between different registrations for
+         the same device.
        </t>
        <t>
          End-to-end confidentiality mechanisms, such as those in <xref target="API"/>, prevent an
