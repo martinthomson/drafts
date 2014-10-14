@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                         October 9, 2014
-Expires: April 12, 2015
+Intended status: Standards Track                        October 14, 2014
+Expires: April 17, 2015
 
 
                  Generic Event Delivery Using HTTP Push
@@ -13,7 +13,7 @@ Expires: April 12, 2015
 
 Abstract
 
-   A simple protocol for the delivery of realtime events to clients is
+   A simple scheme for the delivery of realtime events to clients is
    described.  This scheme uses HTTP/2 push.
 
 Status of This Memo
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 12, 2015.
+   This Internet-Draft will expire on April 17, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 1]
+Thomson                  Expires April 17, 2015                 [Page 1]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 2]
+Thomson                  Expires April 17, 2015                 [Page 2]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
@@ -118,13 +118,10 @@ Internet-Draft                HTTP Web Push                 October 2014
    consolidated push service from web applications.  This expands on
    that work by describing a protocol that can be used to:
 
-   o  request the delivery of an event to a device,
+   o  request the delivery of an event to an attached device
 
-   o  register a new device,
-
-   o  create new event delivery channels, and
-
-   o  monitor for new events.
+   o  register a new device, create new event delivery channels, and
+      monitor those channels for new events
 
    This is intentionally split into these two categories because
    requesting the delivery of events is required for immediate use by
@@ -161,17 +158,17 @@ Internet-Draft                HTTP Web Push                 October 2014
    This document will use the terminology from [API], though
    "application" will be used in preference to "webapp", since the
    described protocols are not restricted to web use.  This document
+   introduces the term "device", which refers to the consumer of push
+   messages.
 
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 3]
+
+Thomson                  Expires April 17, 2015                 [Page 3]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
-
-   introduces the term "device", which refers to the consumer of push
-   messages.
 
 2.  Overview
 
@@ -221,7 +218,10 @@ Internet-Draft                HTTP Web Push                 October 2014
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 4]
+
+
+
+Thomson                  Expires April 17, 2015                 [Page 4]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
@@ -277,7 +277,7 @@ Internet-Draft                HTTP Web Push                 October 2014
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 5]
+Thomson                  Expires April 17, 2015                 [Page 5]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
@@ -333,7 +333,7 @@ Internet-Draft                HTTP Web Push                 October 2014
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 6]
+Thomson                  Expires April 17, 2015                 [Page 6]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
@@ -371,9 +371,8 @@ Internet-Draft                HTTP Web Push                 October 2014
 
 9.1.  Confidentiality from Push Server Access
 
-   The protection afforded by TLS does not protect content from the push
-   server.  A push server is able to see and modify the content of the
-   messages.
+   TLS does not protect content from the push server.  A push server is
+   able to see and modify the content of the messages.
 
    Applications are able to provide additional confidentiality,
    integrity or authentication mechanisms within the push message
@@ -382,20 +381,21 @@ Internet-Draft                HTTP Web Push                 October 2014
    does not require standardization.  The process of registering a
    channel endpoints provides a convenient medium for key agreement.
 
-   In particular, the W3C Web Push API requires that each push channel
-   created by the browser be bound to a browser generated encryption
-   key.  Pushed messages are authenticated and decrypted by the browser
+   [[Open Issue: Need to decide if this approach is feasible; biggest
+   concern is the interaction with broadcast.]]  The W3C Web Push API
+   requires that each push channel created by the browser be bound to an
+   asymmetric key pair, the private key being only available to the
+   browser.  Pushed messages are authenticated and decrypted by the
 
 
 
-
-Thomson                  Expires April 12, 2015                 [Page 7]
+Thomson                  Expires April 17, 2015                 [Page 7]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
 
-   before delivery.  This ensures that the push server is unable to
-   examine the contents of push messages.
+   browser before delivery.  This ensures that the push server is unable
+   to examine the contents of push messages.
 
    The public key for a channel ensures that applications using a
    channel can identify messages from unknown sources and discard them.
@@ -410,7 +410,7 @@ Internet-Draft                HTTP Web Push                 October 2014
    However, the amount of information that is exposed can be limited.
 
    The identifiers used by this protocol provide some ability to
-   correlate communications for a given device, either across
+   correlate communications between different uses, either across
    applications or over time.  Most important is that communications for
    a given device not be able to be correlated between different
    application usages, or between different times.
@@ -425,7 +425,7 @@ Internet-Draft                HTTP Web Push                 October 2014
    A device MUST be able to create new registrations at any time.
    Identifiers for new registrations MUST NOT include any information
    that allows them to be correlated with other registrations from the
-   same device or user.
+   same device or users.
 
 9.3.  Denial of Service Vectors
 
@@ -445,7 +445,7 @@ Internet-Draft                HTTP Web Push                 October 2014
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 8]
+Thomson                  Expires April 17, 2015                 [Page 8]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
@@ -476,9 +476,7 @@ Internet-Draft                HTTP Web Push                 October 2014
    Server request logs can reveal registration and channel URIs.
    Acquiring a registration URI permits the creation of new channels and
    the receipt of messages.  Acquiring either URI permits the generation
-   of push messages.  Logging could also reveal relationships between
-   different channel URIs for the same registration, or between
-   different registrations for the same device.
+   of push messages.
 
    End-to-end confidentiality mechanisms, such as those in [API],
    prevent an entity with a registration URI from learning the contents
@@ -501,7 +499,9 @@ Internet-Draft                HTTP Web Push                 October 2014
 
 
 
-Thomson                  Expires April 12, 2015                 [Page 9]
+
+
+Thomson                  Expires April 17, 2015                 [Page 9]
 
 Internet-Draft                HTTP Web Push                 October 2014
 
@@ -557,4 +557,4 @@ Author's Address
 
 
 
-Thomson                  Expires April 12, 2015                [Page 10]
+Thomson                  Expires April 17, 2015                [Page 10]
