@@ -514,7 +514,7 @@
 
       <t>
         In some circumstances - particularly with pre-existing systems - location generators might
-        unable to provide location information with consistent confidence.  Existing systems
+        be unable to provide location information with consistent confidence.  Existing systems
         sometimes specify confidence at 38%, 67% or 90%.  Existing forms of expressing location
         information, such as that defined in <xref target="TS-3GPP-23_032"/>, contain elements that
         express the confidence in the result.
