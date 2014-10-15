@@ -399,10 +399,10 @@
           This assumption is less useful as uncertainty becomes small relative to the size of the
           Target of the PIDF-LO (or conversely, as uncertainty becomes small relative to the
           Target).  For instance, describing the location of a football stadium or small country
-          would include a region of uncertainty that is infinitesimally larger than the Target
-          itself.  In these cases, much of the guidance in this document is not applicable.  Indeed,
-          as the accuracy of location determination technology improves, it could be that the advice
-          this document contains becomes less relevant by the same measure.
+          would include a region of uncertainty that is only slightly larger than the Target itself.
+          In these cases, much of the guidance in this document is not applicable.  Indeed, as the
+          accuracy of location determination technology improves, it could be that the advice this
+          document contains becomes less relevant by the same measure.
         </t>
       </section>
 
