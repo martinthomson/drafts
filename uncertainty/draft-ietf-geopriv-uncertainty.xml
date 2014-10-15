@@ -812,8 +812,9 @@
             </figure>
 
             <t>
-              To apply a transform to each point in the polygon, form a matrix from the ECEF
-              coordinates and use matrix multiplication to determine the translated coordinates.
+              To apply a transform to each point in the polygon, form a matrix from the Cartesian
+              Earth-Centered, Earth-Fixed (ECEF) coordinates and use matrix multiplication to
+              determine the translated coordinates.
             </t>
 
             <figure anchor="transform" title="Transformation">
@@ -1217,11 +1218,10 @@
         <t>
           This probability is often input to a decision process that has a limited set of outcomes;
           therefore, a threshold value needs to be selected.  Depending on the application,
-          different threshold probabilities might be selected.  In the absence of specific
-          recommendations, this document suggests that the probability be greater than 50% before a
-          decision is made.  If the decision process selects between two or more regions, as is
-          required by <xref target="RFC5222"/>, then the region with the highest probability can be
-          selected.
+          different threshold probabilities might be selected.  A probability of 50% or greater is
+          recommended before deciding that an uncertain value is within a given region.  If the
+          decision process selects between two or more regions, as is required by <xref
+          target="RFC5222"/>, then the region with the highest probability can be selected.
         </t>
 
         <section title="Determining the Area of Overlap for Two Circles">
@@ -1663,7 +1663,9 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
       </t>
       <t>
         A thorough treatment of the privacy implications of describing location information are
-        discussed in <xref target="RFC6280"/>.
+        discussed in <xref target="RFC6280"/>.  Including uncertainty information increases the
+        amount of information available; and altering uncertainty is not an effective privacy
+        mechanism.
       </t>
       <t>
         Providing uncertainty and confidence information can reveal information about the process by
@@ -1671,9 +1673,10 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
         could be used to infer that a user is using a mobile device with a GPS, or that a user is
         acquiring location information from a particular network-based service.  A Rule Maker might
         choose to remove uncertainty-related fields from a location object in order to protect this
-        information; though it is noted that this information might not be perfectly protected due
-        to difficulties associated with location obfuscation, as described in Section 13.5 of <xref
-        target="RFC6772"/>.
+        information.  Note however that information might not be perfectly protected due to
+        difficulties associated with location obfuscation, as described in Section 13.5 of <xref
+        target="RFC6772"/>.  In particular, increasing uncertainty does not necessarily result in a
+        reduction of the information conveyed by the location object.
       </t>
       <t>
         Adding confidence to location information risks misinterpretation by consumers of location
