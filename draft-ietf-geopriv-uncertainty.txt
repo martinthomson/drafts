@@ -6,7 +6,7 @@ GEOPRIV                                                       M. Thomson
 Internet-Draft                                                   Mozilla
 Updates: 3693,4119,5491 (if approved)                    J. Winterbottom
 Intended status: Standards Track                            Unaffiliated
-Expires: April 17, 2015                                 October 14, 2014
+Expires: April 18, 2015                                 October 15, 2014
 
 
         Representation of Uncertainty and Confidence in PIDF-LO
@@ -37,7 +37,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 17, 2015.
+   This Internet-Draft will expire on April 18, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 1]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 1]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 2]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 2]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -119,7 +119,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
                 Coordinates in WGS84 . . . . . . . . . . . . . . . .  33
    Appendix B.  Calculating the Upward Normal of a Polygon . . . . .  34
      B.1.  Checking that a Polygon Upward Normal Points Up . . . . .  35
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  35
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  36
 
 1.  Introduction
 
@@ -165,7 +165,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 3]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 3]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -221,7 +221,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 4]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 4]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -277,7 +277,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 5]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 5]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -333,7 +333,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 6]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 6]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -389,7 +389,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 7]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 7]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -445,7 +445,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 8]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 8]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -501,7 +501,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                 [Page 9]
+Thomson & Winterbottom   Expires April 18, 2015                 [Page 9]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -557,7 +557,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 10]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 10]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -613,7 +613,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 11]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 11]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -669,7 +669,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 12]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 12]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -725,7 +725,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 13]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 13]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -781,7 +781,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 14]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 14]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -829,15 +829,15 @@ Internet-Draft          Uncertainty & Confidence            October 2014
                Figure 3: Recommended Transformation Matrices
 
    To apply a transform to each point in the polygon, form a matrix from
-   the ECEF coordinates and use matrix multiplication to determine the
-   translated coordinates.
+   the Cartesian Earth-Centered, Earth-Fixed (ECEF) coordinates and use
+   matrix multiplication to determine the translated coordinates.
 
 
 
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 15]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 15]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -893,7 +893,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 16]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 16]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -949,7 +949,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 17]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 17]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1005,7 +1005,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 18]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 18]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1061,7 +1061,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 19]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 19]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1117,7 +1117,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 20]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 20]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1173,7 +1173,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 21]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 21]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1189,11 +1189,11 @@ Internet-Draft          Uncertainty & Confidence            October 2014
    This probability is often input to a decision process that has a
    limited set of outcomes; therefore, a threshold value needs to be
    selected.  Depending on the application, different threshold
-   probabilities might be selected.  In the absence of specific
-   recommendations, this document suggests that the probability be
-   greater than 50% before a decision is made.  If the decision process
-   selects between two or more regions, as is required by [RFC5222],
-   then the region with the highest probability can be selected.
+   probabilities might be selected.  A probability of 50% or greater is
+   recommended before deciding that an uncertain value is within a given
+   region.  If the decision process selects between two or more regions,
+   as is required by [RFC5222], then the region with the highest
+   probability can be selected.
 
 5.5.1.  Determining the Area of Overlap for Two Circles
 
@@ -1229,7 +1229,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 22]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 22]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1285,7 +1285,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 23]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 23]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1341,7 +1341,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 24]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 24]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1397,7 +1397,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 25]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 25]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1453,7 +1453,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 26]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 26]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1509,7 +1509,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 27]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 27]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1565,7 +1565,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 28]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 28]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1621,7 +1621,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 29]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 29]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1677,7 +1677,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-Thomson & Winterbottom   Expires April 17, 2015                [Page 30]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 30]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
@@ -1690,7 +1690,10 @@ Internet-Draft          Uncertainty & Confidence            October 2014
    all apply.
 
    A thorough treatment of the privacy implications of describing
-   location information are discussed in [RFC6280].
+   location information are discussed in [RFC6280].  Including
+   uncertainty information increases the amount of information
+   available; and altering uncertainty is not an effective privacy
+   mechanism.
 
    Providing uncertainty and confidence information can reveal
    information about the process by which location information is
@@ -1699,9 +1702,11 @@ Internet-Draft          Uncertainty & Confidence            October 2014
    that a user is acquiring location information from a particular
    network-based service.  A Rule Maker might choose to remove
    uncertainty-related fields from a location object in order to protect
-   this information; though it is noted that this information might not
-   be perfectly protected due to difficulties associated with location
-   obfuscation, as described in Section 13.5 of [RFC6772].
+   this information.  Note however that information might not be
+   perfectly protected due to difficulties associated with location
+   obfuscation, as described in Section 13.5 of [RFC6772].  In
+   particular, increasing uncertainty does not necessarily result in a
+   reduction of the information conveyed by the location object.
 
    Adding confidence to location information risks misinterpretation by
    consumers of location that do not understand the element.  This could
@@ -1726,17 +1731,15 @@ Internet-Draft          Uncertainty & Confidence            October 2014
    [RFC3688]  Mealling, M., "The IETF XML Registry", BCP 81, RFC 3688,
               January 2004.
 
-   [RFC3693]  Cuellar, J., Morris, J., Mulligan, D., Peterson, J., and
-              J. Polk, "Geopriv Requirements", RFC 3693, February 2004.
 
 
-
-
-
-Thomson & Winterbottom   Expires April 17, 2015                [Page 31]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 31]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
+
+   [RFC3693]  Cuellar, J., Morris, J., Mulligan, D., Peterson, J., and
+              J. Polk, "Geopriv Requirements", RFC 3693, February 2004.
 
    [RFC4119]  Peterson, J., "A Presence-based GEOPRIV Location Object
               Format", RFC 4119, December 2005.
@@ -1782,17 +1785,19 @@ Internet-Draft          Uncertainty & Confidence            October 2014
               Tschofenig, "LoST: A Location-to-Service Translation
               Protocol", RFC 5222, August 2008.
 
+
+
+
+
+Thomson & Winterbottom   Expires April 18, 2015                [Page 32]
+
+Internet-Draft          Uncertainty & Confidence            October 2014
+
+
    [RFC6772]  Schulzrinne, H., Tschofenig, H., Cuellar, J., Polk, J.,
               Morris, J., and M. Thomson, "Geolocation Policy: A
               Document Format for Expressing Privacy Preferences for
               Location Information", RFC 6772, January 2013.
-
-
-
-Thomson & Winterbottom   Expires April 17, 2015                [Page 32]
-
-Internet-Draft          Uncertainty & Confidence            October 2014
-
 
    [Sunday02]
               Sunday, D., "Fast polygon area and Newell normal
@@ -1837,18 +1842,17 @@ Appendix A.  Conversion Between Cartesian and Geodetic Coordinates in
 
       X = (N + altitude) * cos(latitude) * cos(longitude)
 
-      Y = (N + altitude) * cos(latitude) * sin(longitude)
-
-      Z = (N*(1 - e^2) + altitude) * sin(latitude)
 
 
 
-
-
-Thomson & Winterbottom   Expires April 17, 2015                [Page 33]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 33]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
+
+      Y = (N + altitude) * cos(latitude) * sin(longitude)
+
+      Z = (N*(1 - e^2) + altitude) * sin(latitude)
 
    The reverse conversion requires more complex computation and most
    methods introduce some error in latitude and altitude.  A range of
@@ -1895,16 +1899,16 @@ Appendix B.  Calculating the Upward Normal of a Polygon
 
       Nx = sum from i=1..n of (y[i] * (z[i+1] - z[i-1]))
 
-      Ny = sum from i=1..n of (z[i] * (x[i+1] - x[i-1]))
-
-      Nz = sum from i=1..n of (x[i] * (y[i+1] - y[i-1]))
 
 
-
-Thomson & Winterbottom   Expires April 17, 2015                [Page 34]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 34]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
+
+      Ny = sum from i=1..n of (z[i] * (x[i+1] - x[i-1]))
+
+      Nz = sum from i=1..n of (x[i] * (y[i+1] - y[i-1]))
 
    For these formulae, the polygon is made of points
    "(x[1], y[1], z[1])" through "(x[n], y[n], x[n])".  Each array is
@@ -1946,7 +1950,6 @@ B.1.  Checking that a Polygon Upward Normal Points Up
    polygon - including the centroid - can be selected to generate an
    approximate up vector for comparison with the upward normal.
 
-Authors' Addresses
 
 
 
@@ -1954,13 +1957,12 @@ Authors' Addresses
 
 
 
-
-
-
-Thomson & Winterbottom   Expires April 17, 2015                [Page 35]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 35]
 
 Internet-Draft          Uncertainty & Confidence            October 2014
 
+
+Authors' Addresses
 
    Martin Thomson
    Mozilla
@@ -2011,6 +2013,4 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
 
 
-
-
-Thomson & Winterbottom   Expires April 17, 2015                [Page 36]
+Thomson & Winterbottom   Expires April 18, 2015                [Page 36]
