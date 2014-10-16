@@ -131,12 +131,14 @@
           Mathematical formulae are presented using the following notation: add <spanx
           style="verb">+</spanx>, subtract <spanx style="verb">-</spanx>, multiply <spanx
           style="verb">*</spanx>, divide <spanx style="verb">/</spanx>, power <spanx
-          style="verb">^</spanx> and absolute value <spanx style="verb">|x|</spanx>.  Precedence is
-          indicated using parentheses.  Mathematical functions are represented by common
-          abbreviations: square root <spanx style="verb">sqrt(x)</spanx>, sine <spanx
-          style="verb">sin(x)</spanx>, cosine <spanx style="verb">cos(x)</spanx>, inverse cosine
-          <spanx style="verb">acos(x)</spanx>, tangent <spanx style="verb">tan(x)</spanx>, inverse
-          tangent <spanx style="verb">atan(x)</spanx>, two-argument inverse tangent <spanx
+          style="verb">^</spanx> and absolute value <spanx style="verb">|x|</spanx>.  Precedence
+          follows established conventions: power operations precede multiply and divide, multiply
+          and divide precede add and subtract, and parentheses are used to indicate operations that
+          are applied together.  Mathematical functions are represented by common abbreviations:
+          square root <spanx style="verb">sqrt(x)</spanx>, sine <spanx style="verb">sin(x)</spanx>,
+          cosine <spanx style="verb">cos(x)</spanx>, inverse cosine <spanx
+          style="verb">acos(x)</spanx>, tangent <spanx style="verb">tan(x)</spanx>, inverse tangent
+          <spanx style="verb">atan(x)</spanx>, two-argument inverse tangent <spanx
           style="verb">atan2(y,x)</spanx>, error function <spanx style="verb">erf(x)</spanx>, and
           inverse error function <spanx style="verb">erfinv(x)</spanx>.
         </t>
