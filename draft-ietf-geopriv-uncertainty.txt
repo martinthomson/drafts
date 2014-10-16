@@ -639,7 +639,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
 
    A confidence element MUST be included with all location information
    that includes uncertainty (that is, all forms other than a point).  A
-   special "unknown" MAY be used if confidence is not known.
+   special "unknown" is used if confidence is not known.
 
 4.3.  Consuming and Presenting Confidence
 
