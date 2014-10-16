@@ -597,7 +597,7 @@
         <t>
           A confidence element MUST be included with all location information that includes
           uncertainty (that is, all forms other than a point).  A special <spanx
-          style="verb">unknown</spanx> MAY be used if confidence is not known.
+          style="verb">unknown</spanx> is used if confidence is not known.
         </t>
       </section>
 
