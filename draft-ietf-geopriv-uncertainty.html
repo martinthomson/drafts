@@ -428,8 +428,8 @@
   <meta name="dct.creator" content="Thomson, M. and J. Winterbottom" />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-geopriv-uncertainty-latest" />
   <meta name="dct.issued" scheme="ISO8601" content="2014-10-22" />
-  <meta name="dct.abstract" content="This document defines key concepts of uncertainty and confidence as they pertain to location information.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  " />
-  <meta name="description" content="This document defines key concepts of uncertainty and confidence as they pertain to location information.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  " />
+  <meta name="dct.abstract" content="The key concepts of uncertainty and confidence as they pertain to location information are defined.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  " />
+  <meta name="description" content="The key concepts of uncertainty and confidence as they pertain to location information are defined.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  " />
 
 </head>
 
@@ -469,8 +469,8 @@
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>This document defines key concepts of uncertainty and confidence as they pertain to location information.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  </p>
-<p>This document normatively updates the definition of location information representations defined in RFC 4119 and RFC 5491.  It also deprecates related terminology defined in RFC 3693.  </p>
+<p>The key concepts of uncertainty and confidence as they pertain to location information are defined.  Methods for the manipulation of location estimates that include uncertainty information are outlined.  </p>
+<p>This draft normatively updates the definition of location information representations defined in RFC 4119 and RFC 5491.  It also deprecates related terminology defined in RFC 3693.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
@@ -550,7 +550,7 @@
 <p id="rfc.section.1.1.p.1">The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in <a href="#RFC2119">[RFC2119]</a>.  </p>
 <p id="rfc.section.1.1.p.2">This document assumes a basic understanding of the principles of mathematics, particularly statistics and geometry.  </p>
 <p id="rfc.section.1.1.p.3">Some terminology is borrowed from <a href="#RFC3693">[RFC3693]</a> and <a href="#RFC6280">[RFC6280]</a>, in particular Target.  </p>
-<p id="rfc.section.1.1.p.4">Mathematical formulae are presented using the following notation: add <samp>+</samp>, subtract <samp>-</samp>, multiply <samp>*</samp>, divide <samp>/</samp>, power <samp>^</samp> and absolute value <samp>|x|</samp>.  Precedence follows established conventions: power operations precede multiply and divide, multiply and divide precede add and subtract, and parentheses are used to indicate operations that are applied together.  Mathematical functions are represented by common abbreviations: square root <samp>sqrt(x)</samp>, sine <samp>sin(x)</samp>, cosine <samp>cos(x)</samp>, inverse cosine <samp>acos(x)</samp>, tangent <samp>tan(x)</samp>, inverse tangent <samp>atan(x)</samp>, two-argument inverse tangent <samp>atan2(y,x)</samp>, error function <samp>erf(x)</samp>, and inverse error function <samp>erfinv(x)</samp>.  </p>
+<p id="rfc.section.1.1.p.4">Mathematical formulae are presented using the following notation: add <samp>+</samp>, subtract <samp>-</samp>, multiply <samp>*</samp>, divide <samp>/</samp>, power <samp>^</samp> and absolute value <samp>|x|</samp>.  Precedence is indicated using parentheses.  Mathematical functions are represented by common abbreviations: square root <samp>sqrt(x)</samp>, sine <samp>sin(x)</samp>, cosine <samp>cos(x)</samp>, inverse cosine <samp>acos(x)</samp>, tangent <samp>tan(x)</samp>, inverse tangent <samp>atan(x)</samp>, two-argument inverse tangent <samp>atan2(y,x)</samp>, error function <samp>erf(x)</samp>, and inverse error function <samp>erfinv(x)</samp>.  </p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#general" id="general">A General Definition of Uncertainty</a></h1>
 <p id="rfc.section.2.p.1">Uncertainty results from the limitations of measurement.  In measuring any observable quantity, errors from a range of sources affect the result.  Uncertainty is a quantification of what is known about the observed quantity, either through the limitations of measurement or through inherent variability of the quantity.  </p>
 <p id="rfc.section.2.p.2">Uncertainty is most completely described by a probability distribution.  A probability distribution assigns a probability to possible values for the quantity.  </p>
@@ -644,7 +644,7 @@
 <h1 id="rfc.section.3.1"><a href="#rfc.section.3.1">3.1.</a> Targets as Points in Space</h1>
 <p id="rfc.section.3.1.p.1">This document makes a simplifying assumption that the Target of the PIDF-LO occupies just a single point in space.  While this is clearly false in virtually all scenarios with any practical application, it is often a reasonable simplifying assumption to make.  </p>
 <p id="rfc.section.3.1.p.2">To a large extent, whether this simplification is valid depends on the size of the target relative to the size of the uncertainty region.  When locating a personal device using contemporary location determination techniques, the space the device occupies relative to the uncertainty is proportionally quite small.  Even where that device is used as a proxy for a person, the proportions change little.  </p>
-<p id="rfc.section.3.1.p.3">This assumption is less useful as uncertainty becomes small relative to the size of the Target of the PIDF-LO (or conversely, as uncertainty becomes small relative to the Target).  For instance, describing the location of a football stadium or small country would include a region of uncertainty that is only slightly larger than the Target itself.  In these cases, much of the guidance in this document is not applicable.  Indeed, as the accuracy of location determination technology improves, it could be that the advice this document contains becomes less relevant by the same measure.  </p>
+<p id="rfc.section.3.1.p.3">This assumption is less useful as uncertainty becomes small relative to the size of the Target of the PIDF-LO (or conversely, as uncertainty becomes small relative to the Target).  For instance, describing the location of a football stadium or small country would include a region of uncertainty that is infinitesimally larger than the Target itself.  In these cases, much of the guidance in this document is not applicable.  Indeed, as the accuracy of location determination technology improves, it could be that the advice this document contains becomes less relevant by the same measure.  </p>
 <h1 id="rfc.section.3.2"><a href="#rfc.section.3.2">3.2.</a> Representation of Uncertainty and Confidence in PIDF-LO</h1>
 <p id="rfc.section.3.2.p.1">A set of shapes suitable for the expression of uncertainty in location estimates in the Presence Information Data Format - Location Object (PIDF-LO) are described in <a href="#GeoShape">[GeoShape]</a>.  These shapes are the recommended form for the representation of uncertainty in <a href="#RFC4119">PIDF-LO</a> <cite title="NONE">[RFC4119]</cite> documents.  </p>
 <p id="rfc.section.3.2.p.2">The PIDF-LO can contain uncertainty, but does not include an indication of confidence.  <a href="#RFC5491">[RFC5491]</a> defines a fixed value of 95%.  Similarly, the PIDF-LO format does not provide an indication of the shape of the PDF.  <a href="#confidence">Section 4</a> defines elements to convey this information in PIDF-LO.  </p>
@@ -669,7 +669,7 @@
 <p><a href="#RFC6225">[RFC6225]</a> defines a means for representing uncertainty, but a value for confidence is not specified.  A default value of 95% confidence should be assumed for the combination of the uncertainty on each axis.  This is consistent with the transformation of those forms into the uncertainty representations from <a href="#RFC5491">[RFC5491]</a>.  That is, the confidence of the resultant rectangular polygon or prism is assumed to be 95%.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#confidence" id="confidence">Representation of Confidence in PIDF-LO</a></h1>
 <p id="rfc.section.4.p.1">On the whole, a fixed definition for confidence is preferable, primarily because it ensures consistency between implementations.  Location generators that are aware of this constraint can generate location information at the required confidence.  Location recipients are able to make sensible assumptions about the quality of the information that they receive.  </p>
-<p id="rfc.section.4.p.2">In some circumstances - particularly with pre-existing systems - location generators might be unable to provide location information with consistent confidence.  Existing systems sometimes specify confidence at 38%, 67% or 90%.  Existing forms of expressing location information, such as that defined in <a href="#TS-3GPP-23_032">[TS-3GPP-23_032]</a>, contain elements that express the confidence in the result.  </p>
+<p id="rfc.section.4.p.2">In some circumstances - particularly with pre-existing systems - location generators might unable to provide location information with consistent confidence.  Existing systems sometimes specify confidence at 38%, 67% or 90%.  Existing forms of expressing location information, such as that defined in <a href="#TS-3GPP-23_032">[TS-3GPP-23_032]</a>, contain elements that express the confidence in the result.  </p>
 <p id="rfc.section.4.p.3">The addition of a confidence element provides information that was previously unavailable to recipients of location information.  Without this information, a location server or generator that has access to location information with a confidence lower than 95% has two options: </p>
 
 <ul>
@@ -687,7 +687,7 @@
 <p id="rfc.section.4.1.p.5">A Point shape does not have uncertainty (or it has infinite uncertainty), so confidence is meaningless for a point; therefore, this element MUST be omitted if only a point is provided.  </p>
 <h1 id="rfc.section.4.2"><a href="#rfc.section.4.2">4.2.</a> Generating Locations with Confidence</h1>
 <p id="rfc.section.4.2.p.1">Location generators SHOULD attempt to ensure that confidence is equal in each dimension when generating location information.  This restriction, while not always practical, allows for more accurate scaling, if scaling is necessary.  </p>
-<p id="rfc.section.4.2.p.2">A confidence element MUST be included with all location information that includes uncertainty (that is, all forms other than a point).  A special <samp>unknown</samp> is used if confidence is not known.  </p>
+<p id="rfc.section.4.2.p.2">A confidence element MUST be included with all location information that includes uncertainty (that is, all forms other than a point).  A special <samp>unknown</samp> MAY be used if confidence is not known.  </p>
 <h1 id="rfc.section.4.3"><a href="#rfc.section.4.3">4.3.</a> Consuming and Presenting Confidence</h1>
 <p id="rfc.section.4.3.p.1">The inclusion of confidence that is anything other than 95% presents a potentially difficult usability problem for applications that use location information.  Effectively communicating the probability that a location is incorrect to a user can be difficult.  </p>
 <p id="rfc.section.4.3.p.2">It is inadvisable to simply display locations of any confidence, or to display confidence in a separate or non-obvious fashion.  If locations with different confidence levels are displayed such that the distinction is subtle or easy to overlook - such as using fine graduations of color or transparency for graphical uncertainty regions, or displaying uncertainty graphically, but providing confidence as supplementary text - a user could fail to notice a difference in the quality of the location information that might be significant.  </p>
@@ -756,7 +756,7 @@
               (Transform)                    (Reverse Transform)
 </pre>
 <p class="figure">Figure 3: Recommended Transformation Matrices</p>
-<p id="rfc.section.5.1.1.2.p.5">To apply a transform to each point in the polygon, form a matrix from the Cartesian Earth-Centered, Earth-Fixed (ECEF) coordinates and use matrix multiplication to determine the translated coordinates.  </p>
+<p id="rfc.section.5.1.1.2.p.5">To apply a transform to each point in the polygon, form a matrix from the ECEF coordinates and use matrix multiplication to determine the translated coordinates.  </p>
 <div id="rfc.figure.4"/>
 <div id="transform"/>
 <pre>
@@ -940,7 +940,7 @@
 </ul>
 
 <p> Given that the area of the region of uncertainty is </p>
-<p id="rfc.section.5.5.p.6">This probability is often input to a decision process that has a limited set of outcomes; therefore, a threshold value needs to be selected.  Depending on the application, different threshold probabilities might be selected.  A probability of 50% or greater is recommended before deciding that an uncertain value is within a given region.  If the decision process selects between two or more regions, as is required by <a href="#RFC5222">[RFC5222]</a>, then the region with the highest probability can be selected.  </p>
+<p id="rfc.section.5.5.p.6">This probability is often input to a decision process that has a limited set of outcomes; therefore, a threshold value needs to be selected.  Depending on the application, different threshold probabilities might be selected.  In the absence of specific recommendations, this document suggests that the probability be greater than 50% before a decision is made.  If the decision process selects between two or more regions, as is required by <a href="#RFC5222">[RFC5222]</a>, then the region with the highest probability can be selected.  </p>
 <h1 id="rfc.section.5.5.1"><a href="#rfc.section.5.5.1">5.5.1.</a> Determining the Area of Overlap for Two Circles</h1>
 <p id="rfc.section.5.5.1.p.1">Determining the area of overlap between two arbitrary shapes is a non-trivial process.  Reducing areas to circles (see <a href="#circle">Section 5.2</a>) enables the application of the following process.  </p>
 <p id="rfc.section.5.5.1.p.2">Given the radius of the first circle <samp>r</samp>, the radius of the second circle <samp>R</samp> and the distance between their center points <samp>d</samp>, the following set of formulas provide the area of overlap <samp>Ao</samp>.  <samp>d</samp> can be determined by converting the center points to Cartesian coordinates and calculating the distance between the two center points: </p>
@@ -1079,7 +1079,7 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
       xmlns:gp="urn:ietf:params:xml:ns:pidf:geopriv10"
       xmlns:gs="http://www.opengis.net/pidflo/1.0"
       xmlns:gml="http://www.opengis.net/gml"
-      xmlns:con="urn:ietf:params:xml:ns:geopriv:conf"
+      xmlns:con="urn:ietf:params:xml:ns:pidf:geopriv:conf"
       entity="pres:alice@example.com"&gt;
     &lt;dm:device id="sg89ab"&gt;
       &lt;pidf:status&gt;
@@ -1209,9 +1209,8 @@ Polygon centroid (Geo): Cg = [ -33.856926  151.215102  -4.9537e-04 ]
 <p> </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.9.p.1">This document describes methods for managing and manipulating uncertainty in location.  No specific security concerns arise from most of the information provided.  The considerations of <a href="#RFC4119">[RFC4119]</a> all apply.  </p>
-<p id="rfc.section.9.p.2">A thorough treatment of the privacy implications of describing location information are discussed in <a href="#RFC6280">[RFC6280]</a>.  Including uncertainty information increases the amount of information available; and altering uncertainty is not an effective privacy mechanism.  </p>
-<p id="rfc.section.9.p.3">Providing uncertainty and confidence information can reveal information about the process by which location information is generated.  For instance, it might reveal information that could be used to infer that a user is using a mobile device with a GPS, or that a user is acquiring location information from a particular network-based service.  A Rule Maker might choose to remove uncertainty-related fields from a location object in order to protect this information.  Note however that information might not be perfectly protected due to difficulties associated with location obfuscation, as described in Section 13.5 of <a href="#RFC6772">[RFC6772]</a>.  In particular, increasing uncertainty does not necessarily result in a reduction of the information conveyed by the location object.  </p>
-<p id="rfc.section.9.p.4">Adding confidence to location information risks misinterpretation by consumers of location that do not understand the element.  This could be exploited, particularly when reducing confidence, since the resulting uncertainty region might include locations that are less likely to contain the target than the recipient expects.  Since this sort of error is always a possibility, the impact of this is low.  </p>
+<p id="rfc.section.9.p.2">Providing uncertainty and confidence information can reveal information about the process by which location information is generated.  For instance, it might reveal information that could be used to infer that a user is using a mobile device with a GPS, or that a user is acquiring location information from a particular network-based service.  A Rule Maker might choose to remove uncertainty-related fields from a location object in order to protect this information; though it is noted that this information might not be perfectly protected due to difficulties associated with location obfuscation, as described in Section 13.5 of <a href="#RFC6772">[RFC6772]</a>.  </p>
+<p id="rfc.section.9.p.3">Adding confidence to location information risks misinterpretation by consumers of location that do not understand the element.  This could be exploited, particularly when reducing confidence, since the resulting uncertainty region might include locations that are less likely to contain the target than the recipient expects.  Since this sort of error is always a possibility, the impact of this is low.  </p>
 <h1 id="rfc.section.10"><a href="#rfc.section.10">10.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
 <p id="rfc.section.10.p.1">Peter Rhodes provided assistance with some of the mathematical groundwork on this document.  Dan Cornford provided a detailed review and many terminology corrections.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">11.</a> References</h1>
