@@ -399,9 +399,9 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-webpush-http2-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-10-16" />
-  <meta name="dct.abstract" content="A simple scheme for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
-  <meta name="description" content="A simple scheme for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-10-22" />
+  <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
+  <meta name="description" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
 
 </head>
 
@@ -420,10 +420,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">October 16, 2014</td>
+  <td class="right">October 22, 2014</td>
 </tr>
 <tr>
-  <td class="left">Expires: April 19, 2015</td>
+  <td class="left">Expires: April 25, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -437,14 +437,14 @@
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>A simple scheme for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  </p>
+<p>A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on April 19, 2015.</p>
+<p>This Internet-Draft will expire on April 25, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -486,8 +486,10 @@
 <p id="rfc.section.1.p.5">The <a href="#API">Web Push API</a> <cite title="NONE">[API]</cite> describes an API that enables the use of a consolidated push service from web applications.  This expands on that work by describing a protocol that can be used to: </p>
 
 <ul>
-  <li>request the delivery of an event to an attached device </li>
-  <li>register a new device, create new event delivery channels, and monitor those channels for new events </li>
+  <li>request the delivery of an event to a device, </li>
+  <li>register a new device, </li>
+  <li>create new event delivery channels, and </li>
+  <li>monitor for new events.  </li>
 </ul>
 
 <p> </p>
@@ -561,15 +563,15 @@
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.9.p.1">This protocol MUST use <a href="#RFC2818">HTTP over TLS</a> <cite title="NONE">[RFC2818]</cite>; this includes any communications between device and push server, plus communications between the application and the push server.  This provides confidentiality and integrity protection for registrations and push message.  </p>
 <h1 id="rfc.section.9.1"><a href="#rfc.section.9.1">9.1.</a> Confidentiality from Push Server Access</h1>
-<p id="rfc.section.9.1.p.1">TLS does not protect content from the push server.  A push server is able to see and modify the content of the messages.  </p>
+<p id="rfc.section.9.1.p.1">The protection afforded by TLS does not protect content from the push server.  A push server is able to see and modify the content of the messages.  </p>
 <p id="rfc.section.9.1.p.2">Applications are able to provide additional confidentiality, integrity or authentication mechanisms within the push message itself.  The originating application server and the device are frequently just different instances of the same application, this does not require standardization.  The process of registering a channel endpoints provides a convenient medium for key agreement.  </p>
-<p id="rfc.section.9.1.p.3">[[Open Issue: Need to decide if this approach is feasible; biggest concern is the interaction with broadcast.]]  The W3C Web Push API requires that each push channel created by the browser be bound to an asymmetric key pair, the private key being only available to the browser.  Pushed messages are authenticated and decrypted by the browser before delivery.  This ensures that the push server is unable to examine the contents of push messages.  </p>
+<p id="rfc.section.9.1.p.3">In particular, the W3C Web Push API requires that each push channel created by the browser be bound to a browser generated encryption key.  Pushed messages are authenticated and decrypted by the browser before delivery.  This ensures that the push server is unable to examine the contents of push messages.  </p>
 <p id="rfc.section.9.1.p.4">The public key for a channel ensures that applications using a channel can identify messages from unknown sources and discard them.  This depends on the public key only being disclosed to entities that are authorized to send messages on the channel.  The push server does not require access to this public key.  </p>
 <h1 id="rfc.section.9.2"><a href="#rfc.section.9.2">9.2.</a> Privacy Considerations</h1>
 <p id="rfc.section.9.2.p.1">Push message confidentiality does not ensure that the identity of who is communicating and when they are communicating is protected.  However, the amount of information that is exposed can be limited.  </p>
-<p id="rfc.section.9.2.p.2">The identifiers used by this protocol provide some ability to correlate communications between different uses, either across applications or over time.  Most important is that communications for a given device not be able to be correlated between different application usages, or between different times.  </p>
+<p id="rfc.section.9.2.p.2">The identifiers used by this protocol provide some ability to correlate communications for a given device, either across applications or over time.  Most important is that communications for a given device not be able to be correlated between different application usages, or between different times.  </p>
 <p id="rfc.section.9.2.p.3">Channel URIs established by the same device MUST NOT include any information that allows them to be correlated with other channels or the device registration.  The push server is the only entity that needs to be able to correlate channel URIs with device registrations.  Note that this can't prevent the use of traffic analysis in performing correlation.  </p>
-<p id="rfc.section.9.2.p.4">A device MUST be able to create new registrations at any time.  Identifiers for new registrations MUST NOT include any information that allows them to be correlated with other registrations from the same device or users.  </p>
+<p id="rfc.section.9.2.p.4">A device MUST be able to create new registrations at any time.  Identifiers for new registrations MUST NOT include any information that allows them to be correlated with other registrations from the same device or user.  </p>
 <h1 id="rfc.section.9.3"><a href="#rfc.section.9.3">9.3.</a> Denial of Service Vectors</h1>
 <p id="rfc.section.9.3.p.1">This protocol does not specify a single authorization framework for managing access to push servers, either by devices or applications.  Thus, there is a very real possibility that this could be exploited to mount denial of service attacks on the push server.  Push servers MAY choose to authorize requests based on any HTTP-compatible means available, of which there are numerous options.  </p>
 <p id="rfc.section.9.3.p.2">Discarding unwanted messages at the device based on message authentication doesn't protect against a denial of service attack on the device.  Even a relatively small number of message can cause devices to exhaust batteries.  Limiting the number of entities with access to push channels limits the number of entities that can generate value push requests of the push server.  An application can do this by controlling the distribution of channel URIs to authorized entities.  </p>
@@ -577,7 +579,7 @@
 <p id="rfc.section.9.3.p.4">A malicious application can use the greater resources of a push server to mount a denial of service attack on devices.  Push servers SHOULD limit the rate at which push messages are sent to devices.  <a id="CREF2" class="info">[CREF2]<span class="info">...this suggests a mechanism whereby the server can inform devices when it terminates channels or entire registrations.</span></a> </p>
 <p id="rfc.section.9.3.p.5">Conversely, a push server is also able to deny service to devices.  Intentional failure to deliver messages is difficult to distinguish from faults, which might occur due to transient network errors, interruptions in device availability, or genuine service outages.  Applications that rely on reliable message delivery need to provide means of recovering from occasional failures that do not rely on push notifications.  </p>
 <h1 id="rfc.section.9.4"><a href="#rfc.section.9.4">9.4.</a> Logging Exposure</h1>
-<p id="rfc.section.9.4.p.1">Server request logs can reveal registration and channel URIs.  Acquiring a registration URI permits the creation of new channels and the receipt of messages.  Acquiring either URI permits the generation of push messages.  </p>
+<p id="rfc.section.9.4.p.1">Server request logs can reveal registration and channel URIs.  Acquiring a registration URI permits the creation of new channels and the receipt of messages.  Acquiring either URI permits the generation of push messages.  Logging could also reveal relationships between different channel URIs for the same registration, or between different registrations for the same device.  </p>
 <p id="rfc.section.9.4.p.2">End-to-end confidentiality mechanisms, such as those in <a href="#API">[API]</a>, prevent an entity with a registration URI from learning the contents of push messages.  In both cases, push messages that are not successfully authenticated will not be delivered by the API, but this can present a denial of service risk.  Limitations on log retention and strong access control mechanisms can ensure that these URIs are not learned.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">10.</a> References</h1>
 <h1 id="rfc.references.1"><a href="#rfc.references.1">10.1.</a> Normative References</h1>
