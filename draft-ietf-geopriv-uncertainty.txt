@@ -14,13 +14,14 @@ Expires: April 25, 2015                                 October 22, 2014
 
 Abstract
 
-   The key concepts of uncertainty and confidence as they pertain to
-   location information are defined.  Methods for the manipulation of
-   location estimates that include uncertainty information are outlined.
+   This document defines key concepts of uncertainty and confidence as
+   they pertain to location information.  Methods for the manipulation
+   of location estimates that include uncertainty information are
+   outlined.
 
-   This draft normatively updates the definition of location information
-   representations defined in RFC 4119 and RFC 5491.  It also deprecates
-   related terminology defined in RFC 3693.
+   This document normatively updates the definition of location
+   information representations defined in RFC 4119 and RFC 5491.  It
+   also deprecates related terminology defined in RFC 3693.
 
 Status of This Memo
 
@@ -49,7 +50,6 @@ Copyright Notice
    (http://trustee.ietf.org/license-info) in effect on the date of
    publication of this document.  Please review these documents
    carefully, as they describe your rights and restrictions with respect
-   to this document.  Code Components extracted from this document must
 
 
 
@@ -58,6 +58,7 @@ Thomson & Winterbottom   Expires April 25, 2015                 [Page 1]
 Internet-Draft          Uncertainty & Confidence            October 2014
 
 
+   to this document.  Code Components extracted from this document must
    include Simplified BSD License text as described in Section 4.e of
    the Trust Legal Provisions and are provided without warranty as
    described in the Simplified BSD License.
@@ -105,7 +106,6 @@ Table of Contents
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .  31
    10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  31
    11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  31
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  31
 
 
 
@@ -114,6 +114,7 @@ Thomson & Winterbottom   Expires April 25, 2015                 [Page 2]
 Internet-Draft          Uncertainty & Confidence            October 2014
 
 
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  31
      11.2.  Informative References . . . . . . . . . . . . . . . . .  32
    Appendix A.  Conversion Between Cartesian and Geodetic
                 Coordinates in WGS84 . . . . . . . . . . . . . . . .  33
@@ -161,7 +162,6 @@ Internet-Draft          Uncertainty & Confidence            October 2014
    The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
    "SHOULD", "SHOULD NOT", "RECOMMENDED", "MAY", and "OPTIONAL" in this
    document are to be interpreted as described in [RFC2119].
-
 
 
 
