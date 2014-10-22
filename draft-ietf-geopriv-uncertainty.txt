@@ -1530,7 +1530,7 @@ Internet-Draft          Uncertainty & Confidence            October 2014
          xmlns:gp="urn:ietf:params:xml:ns:pidf:geopriv10"
          xmlns:gs="http://www.opengis.net/pidflo/1.0"
          xmlns:gml="http://www.opengis.net/gml"
-         xmlns:con="urn:ietf:params:xml:ns:pidf:geopriv:conf"
+         xmlns:con="urn:ietf:params:xml:ns:geopriv:conf"
          entity="pres:alice@example.com">
        <dm:device id="sg89ab">
          <pidf:status>
