@@ -195,8 +195,8 @@ Internet-Draft                    CARE                     November 2014
 
    [I-D.ietf-tls-tls13]
               Dierks, T. and E. Rescorla, "The Transport Layer Security
-              (TLS) Protocol Version 1.3", draft-ietf-tls-tls13-01 (work
-              in progress), April 2014.
+              (TLS) Protocol Version 1.3", draft-ietf-tls-tls13-03 (work
+              in progress), October 2014.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.

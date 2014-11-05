@@ -227,13 +227,13 @@ Internet-Draft                     ACP                     November 2014
 
 
    [I-D.ietf-rtcweb-overview]
-              Alvestrand, H., "Overview: Real Time Protocols for Brower-
-              based Applications", draft-ietf-rtcweb-overview-09 (work
-              in progress), February 2014.
+              Alvestrand, H., "Overview: Real Time Protocols for
+              Browser-based Applications", draft-ietf-rtcweb-overview-12
+              (work in progress), October 2014.
 
    [I-D.ietf-rtcweb-security-arch]
               Rescorla, E., "WebRTC Security Architecture", draft-ietf-
-              rtcweb-security-arch-09 (work in progress), February 2014.
+              rtcweb-security-arch-10 (work in progress), July 2014.
 
 Author's Address
 

@@ -595,21 +595,21 @@ Internet-Draft          Uncertainty & Confidence           November 2014
 
 4.1.  The "confidence" Element
 
-   The confidence element MAY be added to the "location-info" element of
-   the Presence Information Data Format - Location Object (PIDF-LO)
+   The "confidence" element MAY be added to the "location-info" element
+   of the Presence Information Data Format - Location Object (PIDF-LO)
    [RFC4119] document.  This element expresses the confidence in the
    associated location information as a percentage.  A special "unknown"
    value is reserved to indicate that confidence is supported, but not
    known to the Location Generator.
 
-   The confidence element optionally includes an attribute that
+   The "confidence" element optionally includes an attribute that
    indicates the shape of the probability density function (PDF) of the
    associated region of uncertainty.  Three values are possible:
    unknown, normal and rectangular.
 
-   Indicating a particular PDF only indicates that the distribution
-   approximately fits the given shape based on the methods used to
-   generate the location information.  The PDF is normal if there are a
+   The "confidence" element is defined in the
+   "urn:ietf:params:xml:ns:geopriv:conf" namespace (see Section 8.1).
+
 
 
 
@@ -618,13 +618,16 @@ Thomson & Winterbottom     Expires May 9, 2015                 [Page 11]
 Internet-Draft          Uncertainty & Confidence           November 2014
 
 
+   Indicating a particular PDF only indicates that the distribution
+   approximately fits the given shape based on the methods used to
+   generate the location information.  The PDF is normal if there are a
    large number of small, independent sources of error; rectangular if
    all points within the area have roughly equal probability of being
    the actual location of the Target; otherwise, the PDF MUST either be
    set to unknown or omitted.
 
-   If a PIDF-LO does not include the confidence element, the confidence
-   of the location estimate is 95%, as defined in [RFC5491].
+   If a PIDF-LO does not include the "confidence" element, the
+   confidence of the location estimate is 95%, as defined in [RFC5491].
 
    A Point shape does not have uncertainty (or it has infinite
    uncertainty), so confidence is meaningless for a point; therefore,
@@ -662,9 +665,6 @@ Internet-Draft          Uncertainty & Confidence           November 2014
    might be appropriate.  Section 5 describes techniques that could be
    appropriate for consumers that use automated processing.
 
-   Providing that the full implications of any choice for the
-   application are understood, some amount of automated processing could
-   be appropriate.  In a simple example, applications could choose to
 
 
 
@@ -674,6 +674,9 @@ Thomson & Winterbottom     Expires May 9, 2015                 [Page 12]
 Internet-Draft          Uncertainty & Confidence           November 2014
 
 
+   Providing that the full implications of any choice for the
+   application are understood, some amount of automated processing could
+   be appropriate.  In a simple example, applications could choose to
    discard or suppress the display of location information if confidence
    does not meet a pre-determined threshold.
 
@@ -720,9 +723,6 @@ Internet-Draft          Uncertainty & Confidence           November 2014
    applications that are able to use uncertainty information and those
    that cannot.
 
-   Note:  Reduction of a location estimate to a point constitutes a
-      reduction in information.  Removing uncertainty information can
-
 
 
 Thomson & Winterbottom     Expires May 9, 2015                 [Page 13]
@@ -730,6 +730,8 @@ Thomson & Winterbottom     Expires May 9, 2015                 [Page 13]
 Internet-Draft          Uncertainty & Confidence           November 2014
 
 
+   Note:  Reduction of a location estimate to a point constitutes a
+      reduction in information.  Removing uncertainty information can
       degrade results in some applications.  Also, there is a natural
       tendency to misinterpret a point location as representing a
       location without uncertainty.  This could lead to more serious
@@ -775,8 +777,6 @@ Internet-Draft          Uncertainty & Confidence           November 2014
    The centroid of the Arc-Band shape is found along a line that bisects
    the arc.  The centroid can be found at the following distance from
    the starting point of the arc-band (assuming an arc-band with an
-   inner radius of "r", outer radius "R", start angle "a", and opening
-   angle "o"):
 
 
 
@@ -785,6 +785,9 @@ Thomson & Winterbottom     Expires May 9, 2015                 [Page 14]
 
 Internet-Draft          Uncertainty & Confidence           November 2014
 
+
+   inner radius of "r", outer radius "R", start angle "a", and opening
+   angle "o"):
 
       d = 4 * sin(o/2) * (R*R + R*r + r*r) / (3*o*(R + r))
 
@@ -831,9 +834,6 @@ Internet-Draft          Uncertainty & Confidence           November 2014
    To apply a transform to each point in the polygon, form a matrix from
    the Cartesian Earth-Centered, Earth-Fixed (ECEF) coordinates and use
    matrix multiplication to determine the translated coordinates.
-
-
-
 
 
 

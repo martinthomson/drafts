@@ -263,13 +263,13 @@ Internet-Draft                TLS for http:                November 2014
 
    [I-D.ietf-httpbis-alt-svc]
               Nottingham, M., McManus, P., and J. Reschke, "HTTP
-              Alternative Services", draft-ietf-httpbis-alt-svc-01 (work
-              in progress), April 2014.
+              Alternative Services", draft-ietf-httpbis-alt-svc-04 (work
+              in progress), October 2014.
 
    [I-D.ietf-httpbis-http2]
               Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
-              Protocol version 2", draft-ietf-httpbis-http2-12 (work in
-              progress), April 2014.
+              Protocol version 2", draft-ietf-httpbis-http2-15 (work in
+              progress), October 2014.
 
 
 
@@ -310,8 +310,8 @@ Internet-Draft                TLS for http:                November 2014
 
    [I-D.ietf-websec-key-pinning]
               Evans, C., Palmer, C., and R. Sleevi, "Public Key Pinning
-              Extension for HTTP", draft-ietf-websec-key-pinning-13
-              (work in progress), May 2014.
+              Extension for HTTP", draft-ietf-websec-key-pinning-21
+              (work in progress), October 2014.
 
    [I-D.nottingham-http2-encryption]
               Nottingham, M. and M. Thomson, "Opportunistic Encryption

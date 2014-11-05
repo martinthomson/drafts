@@ -368,8 +368,8 @@ Internet-Draft                  HTTP Nice                  November 2014
    [I-D.ietf-core-http-mapping]
               Castellani, A., Loreto, S., Rahman, A., Fossati, T., and
               E. Dijk, "Guidelines for HTTP-CoAP Mapping
-              Implementations", draft-ietf-core-http-mapping-03 (work in
-              progress), February 2014.
+              Implementations", draft-ietf-core-http-mapping-05 (work in
+              progress), October 2014.
 
    [I-D.snell-http-prefer]
               Snell, J., "Prefer Header for HTTP", draft-snell-http-
@@ -377,7 +377,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
    [I-D.thomson-webpush-http2]
               Thomson, M., "Generic Event Delivery Using HTTP Push",
-              draft-thomson-webpush-http2-00 (work in progress), May
+              draft-thomson-webpush-http2-01 (work in progress), October
               2014.
 
 Author's Address

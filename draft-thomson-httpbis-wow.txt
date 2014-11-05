@@ -312,8 +312,8 @@ Internet-Draft                WOW Priority                 November 2014
 
    [I-D.ietf-httpbis-http2]
               Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
-              Protocol version 2", draft-ietf-httpbis-http2-12 (work in
-              progress), April 2014.
+              Protocol version 2", draft-ietf-httpbis-http2-15 (work in
+              progress), October 2014.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
