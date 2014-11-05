@@ -4,9 +4,9 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft
-Updates: 2616 (if approved)                             October 22, 2014
+Updates: 2616 (if approved)                             November 5, 2014
 Intended status: Standards Track
-Expires: April 25, 2015
+Expires: May 9, 2015
 
 
                    Deprecating the 'http:' URI Scheme
@@ -32,7 +32,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on April 25, 2015.
+   This Internet-Draft will expire on May 9, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                  Expires April 25, 2015                 [Page 1]
+Thomson                    Expires May 9, 2015                  [Page 1]
 
-Internet-Draft              Deprecating http:               October 2014
+Internet-Draft              Deprecating http:              November 2014
 
 
 Table of Contents
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                  Expires April 25, 2015                 [Page 2]
+Thomson                    Expires May 9, 2015                  [Page 2]
 
-Internet-Draft              Deprecating http:               October 2014
+Internet-Draft              Deprecating http:              November 2014
 
 
    o  Key rollover cannot occur without exposure to an active attack, or
@@ -165,9 +165,9 @@ Author's Address
 
 
 
-Thomson                  Expires April 25, 2015                 [Page 3]
+Thomson                    Expires May 9, 2015                  [Page 3]
 
-Internet-Draft              Deprecating http:               October 2014
+Internet-Draft              Deprecating http:              November 2014
 
 
    Martin Thomson
@@ -221,4 +221,4 @@ Internet-Draft              Deprecating http:               October 2014
 
 
 
-Thomson                  Expires April 25, 2015                 [Page 4]
+Thomson                    Expires May 9, 2015                  [Page 4]

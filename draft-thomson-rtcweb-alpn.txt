@@ -4,8 +4,8 @@
 
 RTCWEB                                                        M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                            July 9, 2014
-Expires: January 10, 2015
+Intended status: Standards Track                            June 9, 2014
+Expires: December 11, 2014
 
 
 Application Layer Protocol Negotiation for Web Real-Time Communications
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on January 10, 2015.
+   This Internet-Draft will expire on December 11, 2014.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires January 10, 2015                [Page 1]
+Thomson                 Expires December 11, 2014               [Page 1]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                   June 2014
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires January 10, 2015                [Page 2]
+Thomson                 Expires December 11, 2014               [Page 2]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                   June 2014
 
 
    c-webrtc:  The DTLS session is used for confidential WebRTC
@@ -165,9 +165,9 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 10, 2015                [Page 3]
+Thomson                 Expires December 11, 2014               [Page 3]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                   June 2014
 
 
    Without some form of indication that is securely bound to the
@@ -221,9 +221,9 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 10, 2015                [Page 4]
+Thomson                 Expires December 11, 2014               [Page 4]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                   June 2014
 
 
 4.  Security Considerations
@@ -277,9 +277,9 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 10, 2015                [Page 5]
+Thomson                 Expires December 11, 2014               [Page 5]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                   June 2014
 
 
    The "webrtc" identifies mixed media and data communications using
@@ -306,8 +306,8 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
    [I-D.ietf-rtcweb-data-channel]
               Jesup, R., Loreto, S., and M. Tuexen, "WebRTC Data
-              Channels", draft-ietf-rtcweb-data-channel-11 (work in
-              progress), July 2014.
+              Channels", draft-ietf-rtcweb-data-channel-09 (work in
+              progress), May 2014.
 
    [I-D.ietf-tls-applayerprotoneg]
               Friedl, S., Popov, A., Langley, A., and S. Emile,
@@ -333,23 +333,23 @@ Internet-Draft               ALPN for WebRTC                   July 2014
 
 
 
-Thomson                 Expires January 10, 2015                [Page 6]
+Thomson                 Expires December 11, 2014               [Page 6]
 
-Internet-Draft               ALPN for WebRTC                   July 2014
+Internet-Draft               ALPN for WebRTC                   June 2014
 
 
    [I-D.ietf-rtcweb-overview]
-              Alvestrand, H., "Overview: Real Time Protocols for
-              Browser-based Applications", draft-ietf-rtcweb-overview-10
-              (work in progress), June 2014.
+              Alvestrand, H., "Overview: Real Time Protocols for Brower-
+              based Applications", draft-ietf-rtcweb-overview-09 (work
+              in progress), February 2014.
 
    [I-D.ietf-rtcweb-security-arch]
               Rescorla, E., "WebRTC Security Architecture", draft-ietf-
-              rtcweb-security-arch-10 (work in progress), July 2014.
+              rtcweb-security-arch-09 (work in progress), February 2014.
 
    [I-D.ietf-rtcweb-transports]
               Alvestrand, H., "Transports for RTCWEB", draft-ietf-
-              rtcweb-transports-05 (work in progress), June 2014.
+              rtcweb-transports-04 (work in progress), April 2014.
 
    [RFC4960]  Stewart, R., "Stream Control Transmission Protocol", RFC
               4960, September 2007.
@@ -389,4 +389,4 @@ Author's Address
 
 
 
-Thomson                 Expires January 10, 2015                [Page 7]
+Thomson                 Expires December 11, 2014               [Page 7]
