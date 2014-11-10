@@ -86,10 +86,10 @@ Table of Contents
    Constrained devices are those with limited processing power, network
    connectivity or battery capacity.
 
-   The Constrained Application Protocol (CoAP) [I-D.ietf-core-coap] in
-   particular is designed to provide devices with extremely limited
-   capabilities a way to provide an HTTP-compatible interface to the
-   information and services they provide.  A CoAP-HTTP gateway
+   The Constrained Application Protocol (CoAP) [RFC7252] in particular
+   is designed to provide devices with extremely limited capabilities a
+   way to provide an HTTP-compatible interface to the information and
+   services they provide.  A CoAP-HTTP gateway
    [I-D.ietf-core-http-mapping] provides HTTP-capable clients a means of
    accessing these devices.
 
@@ -119,8 +119,9 @@ Internet-Draft                  HTTP Nice                  November 2014
 
    A push server [I-D.thomson-webpush-http2] provides similar
    functionality for devices with constrained resources.  Providing a
-   standard way to indicate that a request is not urgent would allow a
-   push server to discriminate between urgent and unimportant requests.
+   standard way to indicate that a request is not urgent allows a push
+   server to discriminate between requests that the sender considers
+   urgent and those that are unimportant.
 
    This document defines an HTTP header field, "Nice" that can be used
    by clients to indicate that a request is not urgent or important
@@ -145,8 +146,7 @@ Internet-Draft                  HTTP Nice                  November 2014
    words "MUST", "SHOULD" and "MAY".  The meaning of these is described
    in [RFC2119].
 
-   The terms "intermediary" and "gateway" are defined in
-   [I-D.ietf-httpbis-p1-messaging].
+   The terms "intermediary" and "gateway" are defined in [RFC7230].
 
 2.  The Nice Header Field
 
@@ -287,11 +287,10 @@ Internet-Draft                  HTTP Nice                  November 2014
    A gateway MAY hold requests for a limited amount of time, to be
    forwarded when the origin server becomes available (i.e., a "store
    and forward" mode of operation).  Including a "Prefer" header field
-   [I-D.snell-http-prefer] with the "wait" tag provides the gateway
-   information about how long the client is prepared to await a
-   response.  This could allow the gateway to reject the request
-   immediately if the device is known to be unreachable for the entire
-   duration.
+   [RFC7240] with the "wait" tag provides the gateway information about
+   how long the client is prepared to await a response.  This could
+   allow the gateway to reject the request immediately if the device is
+   known to be unreachable for the entire duration.
 
    Gateways MAY alternatively accept a request and return an immediate
    response, such as a 202 (Accepted) status code.  Use of the "respond-
@@ -333,6 +332,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
+
 Thomson                   Expires May 14, 2015                  [Page 6]
 
 Internet-Draft                  HTTP Nice                  November 2014
@@ -341,11 +341,6 @@ Internet-Draft                  HTTP Nice                  November 2014
 6.  References
 
 6.1.  Normative References
-
-   [I-D.ietf-httpbis-p1-messaging]
-              Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
-              (HTTP/1.1): Message Syntax and Routing", draft-ietf-
-              httpbis-p1-messaging-26 (work in progress), February 2014.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -358,12 +353,11 @@ Internet-Draft                  HTTP Nice                  November 2014
               Procedures for Message Header Fields", BCP 90, RFC 3864,
               September 2004.
 
-6.2.  Informative References
+   [RFC7230]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
+              (HTTP/1.1): Message Syntax and Routing", RFC 7230, June
+              2014.
 
-   [I-D.ietf-core-coap]
-              Shelby, Z., Hartke, K., and C. Bormann, "Constrained
-              Application Protocol (CoAP)", draft-ietf-core-coap-18
-              (work in progress), June 2013.
+6.2.  Informative References
 
    [I-D.ietf-core-http-mapping]
               Castellani, A., Loreto, S., Rahman, A., Fossati, T., and
@@ -371,28 +365,17 @@ Internet-Draft                  HTTP Nice                  November 2014
               Implementations", draft-ietf-core-http-mapping-05 (work in
               progress), October 2014.
 
-   [I-D.snell-http-prefer]
-              Snell, J., "Prefer Header for HTTP", draft-snell-http-
-              prefer-18 (work in progress), January 2013.
-
    [I-D.thomson-webpush-http2]
               Thomson, M., "Generic Event Delivery Using HTTP Push",
               draft-thomson-webpush-http2-01 (work in progress), October
               2014.
 
+   [RFC7240]  Snell, J., "Prefer Header for HTTP", RFC 7240, June 2014.
+
+   [RFC7252]  Shelby, Z., Hartke, K., and C. Bormann, "The Constrained
+              Application Protocol (CoAP)", RFC 7252, June 2014.
+
 Author's Address
-
-
-
-
-
-
-
-
-Thomson                   Expires May 14, 2015                  [Page 7]
-
-Internet-Draft                  HTTP Nice                  November 2014
-
 
    Martin Thomson
    Mozilla
@@ -406,43 +389,4 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-Thomson                   Expires May 14, 2015                  [Page 8]
+Thomson                   Expires May 14, 2015                  [Page 7]

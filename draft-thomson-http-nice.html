@@ -470,16 +470,16 @@
 
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
 <p><a href="#RFC2616">HTTP</a> <cite title="NONE">[RFC2616]</cite> servers are beginning to appear as the interface to a wide array of devices.  Management interfaces in many devices have classically been provided as HTTP servers, but this trend now extends to HTTP APIs on a range of devices, including constrained devices.  Constrained devices are those with limited processing power, network connectivity or battery capacity.  </p>
-<p id="rfc.section.1.p.2">The <a href="#I-D.ietf-core-coap">Constrained Application Protocol (CoAP)</a> <cite title="NONE">[I-D.ietf-core-coap]</cite> in particular is designed to provide devices with extremely limited capabilities a way to provide an HTTP-compatible interface to the information and services they provide.  A <a href="#I-D.ietf-core-http-mapping">CoAP-HTTP gateway</a> <cite title="NONE">[I-D.ietf-core-http-mapping]</cite> provides HTTP-capable clients a means of accessing these devices.  </p>
+<p id="rfc.section.1.p.2">The <a href="#RFC7252">Constrained Application Protocol (CoAP)</a> <cite title="NONE">[RFC7252]</cite> in particular is designed to provide devices with extremely limited capabilities a way to provide an HTTP-compatible interface to the information and services they provide.  A <a href="#I-D.ietf-core-http-mapping">CoAP-HTTP gateway</a> <cite title="NONE">[I-D.ietf-core-http-mapping]</cite> provides HTTP-capable clients a means of accessing these devices.  </p>
 <p id="rfc.section.1.p.3">For a device that operates based on a battery, it is often crucial that the device remain dormant for extended periods.  Radio communication in particular consumes a significant amount of power.  Frequent communication limits the length of time that the device can operate.  It is often the case that communication can be initiated, but this could require a significant expenditure of stored energy.  </p>
 <p id="rfc.section.1.p.4">Many constrained devices rely on intermediaries such as the CoAP-HTTP gateway to terminate requests and mediate access.  Clients that access the services provided by such limited devices can be unaware of the limited nature of the device serving the request, since they actually interact with the gateway.  Even when the client is aware of these limitatons, it is not always possible for clients to learn whether any given request would cause significant expenditure of resources at the constrained device.  </p>
-<p id="rfc.section.1.p.5">A <a href="#I-D.thomson-webpush-http2">push server</a> <cite title="NONE">[I-D.thomson-webpush-http2]</cite> provides similar functionality for devices with constrained resources.  Providing a standard way to indicate that a request is not urgent would allow a push server to discriminate between urgent and unimportant requests.  </p>
+<p id="rfc.section.1.p.5">A <a href="#I-D.thomson-webpush-http2">push server</a> <cite title="NONE">[I-D.thomson-webpush-http2]</cite> provides similar functionality for devices with constrained resources.  Providing a standard way to indicate that a request is not urgent allows a push server to discriminate between requests that the sender considers urgent and those that are unimportant.  </p>
 <p id="rfc.section.1.p.6">This document defines an HTTP header field, <samp>Nice</samp> that can be used by clients to indicate that a request is not urgent or important enough to cause a constrained server to expend special effort to serve.  An gateway that is aware that the origin server is unable to handle the request can instead terminate the request.  The request is forwarded as normal to an origin server that is available.  </p>
 <p id="rfc.section.1.p.7">An gateway can generate an error or 203 (Non-Authoritative Information) response in response to a nice request, avoiding the need to contact the constrained origin server.  Alternatively, the gateway could delay the request until the origin server becomes available or serve a response from cache if that is possible.  </p>
 <p id="rfc.section.1.p.8">No specific mechanism is defined for an origin server to inform gateways of absence or other indisposition.  </p>
 <h1 id="rfc.section.1.1"><a href="#rfc.section.1.1">1.1.</a> <a href="#terminology" id="terminology">Conventions and Terminology</a></h1>
 <p id="rfc.section.1.1.p.1">At times, this document falls back on shorthands for establishing interoperability requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  The meaning of these is described in <a href="#RFC2119">[RFC2119]</a>.  </p>
-<p id="rfc.section.1.1.p.2">The terms "intermediary" and "gateway" are defined in <a href="#I-D.ietf-httpbis-p1-messaging">[I-D.ietf-httpbis-p1-messaging]</a>.  </p>
+<p id="rfc.section.1.1.p.2">The terms "intermediary" and "gateway" are defined in <a href="#RFC7230">[RFC7230]</a>.  </p>
 <h1 id="rfc.section.2"><a href="#rfc.section.2">2.</a> <a href="#header" id="header">The Nice Header Field</a></h1>
 <p id="rfc.section.2.p.1">The <samp>Nice</samp> header field indicates that a request is less important than a request that doesn't bear this header.  </p>
 <p id="rfc.section.2.p.2">The value of the header field is a decimal number between 0 and 3 inclusive.  Values greater than zero indicate increasing levels of unimportance.  A lower value indicates greater urgency; for example, a value of 3 is less urgent or important than a value of 1.  A value of 0 (or an absent <samp>Nice</samp> header field) indicates that the request is to be forwarded as normal.  </p>
@@ -536,7 +536,7 @@ Date: Fri, 26 Jul 2013 03:34:19 GMT
 Retry-After: 4
 </pre>
 <h1 id="rfc.section.2.3"><a href="#rfc.section.2.3">2.3.</a> Store and Forward</h1>
-<p id="rfc.section.2.3.p.1">A gateway MAY hold requests for a limited amount of time, to be forwarded when the origin server becomes available (i.e., a "store and forward" mode of operation).  Including a <samp>Prefer</samp> header field <a href="#I-D.snell-http-prefer">[I-D.snell-http-prefer]</a> with the <samp>wait</samp> tag provides the gateway information about how long the client is prepared to await a response.  This could allow the gateway to reject the request immediately if the device is known to be unreachable for the entire duration.  </p>
+<p id="rfc.section.2.3.p.1">A gateway MAY hold requests for a limited amount of time, to be forwarded when the origin server becomes available (i.e., a "store and forward" mode of operation).  Including a <samp>Prefer</samp> header field <a href="#RFC7240">[RFC7240]</a> with the <samp>wait</samp> tag provides the gateway information about how long the client is prepared to await a response.  This could allow the gateway to reject the request immediately if the device is known to be unreachable for the entire duration.  </p>
 <p id="rfc.section.2.3.p.2">Gateways MAY alternatively accept a request and return an immediate response, such as a 202 (Accepted) status code.  Use of the <samp>respond-async</samp> token in the <samp>Prefer</samp> header field allows clients to expressly request this behavior.  </p>
 <h1 id="rfc.section.3"><a href="#rfc.section.3">3.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.3.p.1">Lowering the priority with which a request is handled is unlikely to cause any special concern with respect to security.  </p>
@@ -566,12 +566,6 @@ Retry-After: 4
   <tbody>
     <tr>
       <td class="reference">
-        <b id="I-D.ietf-httpbis-p1-messaging">[I-D.ietf-httpbis-p1-messaging]</b>
-      </td>
-      <td class="top"><a>Fielding, R.</a> and <a>J. Reschke</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-p1-messaging-26">Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing</a>", Internet-Draft draft-ietf-httpbis-p1-messaging-26, February 2014.</td>
-    </tr>
-    <tr>
-      <td class="reference">
         <b id="RFC2119">[RFC2119]</b>
       </td>
       <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
@@ -588,17 +582,17 @@ Retry-After: 4
       </td>
       <td class="top"><a>Klyne, G.</a>, <a>Nottingham, M.</a> and <a>J. Mogul</a>, "<a href="http://tools.ietf.org/html/rfc3864">Registration Procedures for Message Header Fields</a>", BCP 90, RFC 3864, September 2004.</td>
     </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7230">[RFC7230]</b>
+      </td>
+      <td class="top"><a>Fielding, R.</a> and <a>J. Reschke</a>, "<a href="http://tools.ietf.org/html/rfc7230">Hypertext Transfer Protocol (HTTP/1.1): Message Syntax and Routing</a>", RFC 7230, June 2014.</td>
+    </tr>
   </tbody>
 </table>
 <h1 id="rfc.references.2"><a href="#rfc.references.2">6.2.</a> Informative References</h1>
 <table>
   <tbody>
-    <tr>
-      <td class="reference">
-        <b id="I-D.ietf-core-coap">[I-D.ietf-core-coap]</b>
-      </td>
-      <td class="top"><a>Shelby, Z.</a>, <a>Hartke, K.</a> and <a>C. Bormann</a>, "<a href="http://tools.ietf.org/html/draft-ietf-core-coap-18">Constrained Application Protocol (CoAP)</a>", Internet-Draft draft-ietf-core-coap-18, June 2013.</td>
-    </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-core-http-mapping">[I-D.ietf-core-http-mapping]</b>
@@ -607,15 +601,21 @@ Retry-After: 4
     </tr>
     <tr>
       <td class="reference">
-        <b id="I-D.snell-http-prefer">[I-D.snell-http-prefer]</b>
-      </td>
-      <td class="top"><a>Snell, J.</a>, "<a href="http://tools.ietf.org/html/draft-snell-http-prefer-18">Prefer Header for HTTP</a>", Internet-Draft draft-snell-http-prefer-18, January 2013.</td>
-    </tr>
-    <tr>
-      <td class="reference">
         <b id="I-D.thomson-webpush-http2">[I-D.thomson-webpush-http2]</b>
       </td>
       <td class="top"><a>Thomson, M.</a>, "<a href="http://tools.ietf.org/html/draft-thomson-webpush-http2-01">Generic Event Delivery Using HTTP Push</a>", Internet-Draft draft-thomson-webpush-http2-01, October 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7240">[RFC7240]</b>
+      </td>
+      <td class="top"><a>Snell, J.</a>, "<a href="http://tools.ietf.org/html/rfc7240">Prefer Header for HTTP</a>", RFC 7240, June 2014.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC7252">[RFC7252]</b>
+      </td>
+      <td class="top"><a>Shelby, Z.</a>, <a>Hartke, K.</a> and <a>C. Bormann</a>, "<a href="http://tools.ietf.org/html/rfc7252">The Constrained Application Protocol (CoAP)</a>", RFC 7252, June 2014.</td>
     </tr>
   </tbody>
 </table>
