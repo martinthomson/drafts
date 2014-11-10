@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                        November 5, 2014
-Expires: May 9, 2015
+Intended status: Standards Track                       November 10, 2014
+Expires: May 14, 2015
 
 
                   Marking HTTP Requests as Unimportant
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 9, 2015.
+   This Internet-Draft will expire on May 14, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 1]
+Thomson                   Expires May 14, 2015                  [Page 1]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 2]
+Thomson                   Expires May 14, 2015                  [Page 2]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -165,7 +165,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 3]
+Thomson                   Expires May 14, 2015                  [Page 3]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -221,7 +221,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 4]
+Thomson                   Expires May 14, 2015                  [Page 4]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -277,7 +277,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 5]
+Thomson                   Expires May 14, 2015                  [Page 5]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -333,7 +333,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 6]
+Thomson                   Expires May 14, 2015                  [Page 6]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -389,7 +389,7 @@ Author's Address
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 7]
+Thomson                   Expires May 14, 2015                  [Page 7]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -445,4 +445,4 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                    Expires May 9, 2015                  [Page 8]
+Thomson                   Expires May 14, 2015                  [Page 8]
