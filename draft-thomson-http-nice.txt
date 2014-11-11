@@ -4,8 +4,8 @@
 
 HTTPBIS                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                       November 10, 2014
-Expires: May 14, 2015
+Intended status: Standards Track                       November 11, 2014
+Expires: May 15, 2015
 
 
                   Marking HTTP Requests as Unimportant
@@ -35,7 +35,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 14, 2015.
+   This Internet-Draft will expire on May 15, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                   Expires May 14, 2015                  [Page 1]
+Thomson                   Expires May 15, 2015                  [Page 1]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -79,7 +79,7 @@ Table of Contents
 
 1.  Introduction
 
-   HTTP [RFC2616] servers are beginning to appear as the interface to a
+   HTTP [RFC7230] servers are beginning to appear as the interface to a
    wide array of devices.  Management interfaces in many devices have
    classically been provided as HTTP servers, but this trend now extends
    to HTTP APIs on a range of devices, including constrained devices.
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                   Expires May 14, 2015                  [Page 2]
+Thomson                   Expires May 15, 2015                  [Page 2]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -165,7 +165,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                   Expires May 14, 2015                  [Page 3]
+Thomson                   Expires May 15, 2015                  [Page 3]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -221,7 +221,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                   Expires May 14, 2015                  [Page 4]
+Thomson                   Expires May 15, 2015                  [Page 4]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -277,7 +277,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                   Expires May 14, 2015                  [Page 5]
+Thomson                   Expires May 15, 2015                  [Page 5]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -333,7 +333,7 @@ Internet-Draft                  HTTP Nice                  November 2014
 
 
 
-Thomson                   Expires May 14, 2015                  [Page 6]
+Thomson                   Expires May 15, 2015                  [Page 6]
 
 Internet-Draft                  HTTP Nice                  November 2014
 
@@ -344,10 +344,6 @@ Internet-Draft                  HTTP Nice                  November 2014
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
-
-   [RFC2616]  Fielding, R., Gettys, J., Mogul, J., Frystyk, H.,
-              Masinter, L., Leach, P., and T. Berners-Lee, "Hypertext
-              Transfer Protocol -- HTTP/1.1", RFC 2616, June 1999.
 
    [RFC3864]  Klyne, G., Nottingham, M., and J. Mogul, "Registration
               Procedures for Message Header Fields", BCP 90, RFC 3864,
@@ -389,4 +385,8 @@ Author's Address
 
 
 
-Thomson                   Expires May 14, 2015                  [Page 7]
+
+
+
+
+Thomson                   Expires May 15, 2015                  [Page 7]

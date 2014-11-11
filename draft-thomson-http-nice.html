@@ -394,7 +394,7 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-http-nice-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-11-10" />
+  <meta name="dct.issued" scheme="ISO8601" content="2014-11-11" />
   <meta name="dct.abstract" content="An HTTP " />
   <meta name="description" content="An HTTP " />
 
@@ -415,10 +415,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">November 10, 2014</td>
+  <td class="right">November 11, 2014</td>
 </tr>
 <tr>
-  <td class="left">Expires: May 14, 2015</td>
+  <td class="left">Expires: May 15, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -439,7 +439,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on May 14, 2015.</p>
+<p>This Internet-Draft will expire on May 15, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -469,7 +469,7 @@
   </ul>
 
   <h1 id="rfc.section.1"><a href="#rfc.section.1">1.</a> <a href="#intro" id="intro">Introduction</a></h1>
-<p><a href="#RFC2616">HTTP</a> <cite title="NONE">[RFC2616]</cite> servers are beginning to appear as the interface to a wide array of devices.  Management interfaces in many devices have classically been provided as HTTP servers, but this trend now extends to HTTP APIs on a range of devices, including constrained devices.  Constrained devices are those with limited processing power, network connectivity or battery capacity.  </p>
+<p><a href="#RFC7230">HTTP</a> <cite title="NONE">[RFC7230]</cite> servers are beginning to appear as the interface to a wide array of devices.  Management interfaces in many devices have classically been provided as HTTP servers, but this trend now extends to HTTP APIs on a range of devices, including constrained devices.  Constrained devices are those with limited processing power, network connectivity or battery capacity.  </p>
 <p id="rfc.section.1.p.2">The <a href="#RFC7252">Constrained Application Protocol (CoAP)</a> <cite title="NONE">[RFC7252]</cite> in particular is designed to provide devices with extremely limited capabilities a way to provide an HTTP-compatible interface to the information and services they provide.  A <a href="#I-D.ietf-core-http-mapping">CoAP-HTTP gateway</a> <cite title="NONE">[I-D.ietf-core-http-mapping]</cite> provides HTTP-capable clients a means of accessing these devices.  </p>
 <p id="rfc.section.1.p.3">For a device that operates based on a battery, it is often crucial that the device remain dormant for extended periods.  Radio communication in particular consumes a significant amount of power.  Frequent communication limits the length of time that the device can operate.  It is often the case that communication can be initiated, but this could require a significant expenditure of stored energy.  </p>
 <p id="rfc.section.1.p.4">Many constrained devices rely on intermediaries such as the CoAP-HTTP gateway to terminate requests and mediate access.  Clients that access the services provided by such limited devices can be unaware of the limited nature of the device serving the request, since they actually interact with the gateway.  Even when the client is aware of these limitatons, it is not always possible for clients to learn whether any given request would cause significant expenditure of resources at the constrained device.  </p>
@@ -569,12 +569,6 @@ Retry-After: 4
         <b id="RFC2119">[RFC2119]</b>
       </td>
       <td class="top"><a href="mailto:sob@harvard.edu" title="Harvard University">Bradner, S.</a>, "<a href="http://tools.ietf.org/html/rfc2119">Key words for use in RFCs to Indicate Requirement Levels</a>", BCP 14, RFC 2119, March 1997.</td>
-    </tr>
-    <tr>
-      <td class="reference">
-        <b id="RFC2616">[RFC2616]</b>
-      </td>
-      <td class="top"><a href="mailto:fielding@ics.uci.edu" title="Department of Information and Computer Science">Fielding, R.</a>, <a href="mailto:jg@w3.org" title="World Wide Web Consortium">Gettys, J.</a>, <a href="mailto:mogul@wrl.dec.com" title="Compaq Computer Corporation">Mogul, J.</a>, <a href="mailto:frystyk@w3.org" title="World Wide Web Consortium">Frystyk, H.</a>, <a href="mailto:masinter@parc.xerox.com" title="Xerox Corporation">Masinter, L.</a>, <a href="mailto:paulle@microsoft.com" title="Microsoft Corporation">Leach, P.</a> and <a href="mailto:timbl@w3.org" title="World Wide Web Consortium">T. Berners-Lee</a>, "<a href="http://tools.ietf.org/html/rfc2616">Hypertext Transfer Protocol -- HTTP/1.1</a>", RFC 2616, June 1999.</td>
     </tr>
     <tr>
       <td class="reference">
