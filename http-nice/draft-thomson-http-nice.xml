@@ -56,7 +56,7 @@
 
     <section anchor="intro" title="Introduction">
       <t>
-        <xref target="RFC2616">HTTP</xref> servers are beginning to appear as the interface to a
+        <xref target="RFC7230">HTTP</xref> servers are beginning to appear as the interface to a
         wide array of devices.  Management interfaces in many devices have classically been provided
         as HTTP servers, but this trend now extends to HTTP APIs on a range of devices, including
         constrained devices.  Constrained devices are those with limited processing power, network
@@ -329,7 +329,6 @@ Retry-After: 4
   <back>
     <references title="Normative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2616.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.3864.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml"?>
     </references>
