@@ -287,7 +287,10 @@
         A device can request the monitor resource immediately by including a <xref
         target="RFC7240">Prefer header field</xref> with a "wait" parameter set to "0".  This allows
         clients to rapidly check for any missed messages.  Clients can check the status of
-        individual channels by sending GET requests to the channel URI.
+        individual channels by sending GET requests to the channel URI. The response of this request
+        is either a status code of 200 "OK" and a body containing the latest
+        undelivered message for the channel, or if there are no messages on the channel a response code
+        of 204 "No Content" is returned.
       </t>
       <t>
         A server that wishes to redistribute load can do so using the alternative services
