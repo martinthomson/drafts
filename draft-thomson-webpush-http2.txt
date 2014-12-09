@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                       November 11, 2014
-Expires: May 15, 2015
+Intended status: Standards Track                        December 9, 2014
+Expires: June 12, 2015
 
 
                  Generic Event Delivery Using HTTP Push
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on May 15, 2015.
+   This Internet-Draft will expire on June 12, 2015.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                   Expires May 15, 2015                  [Page 1]
+Thomson                   Expires June 12, 2015                 [Page 1]
 
-Internet-Draft                HTTP Web Push                November 2014
+Internet-Draft                HTTP Web Push                December 2014
 
 
 Table of Contents
@@ -67,15 +67,15 @@ Table of Contents
    4.  Registering . . . . . . . . . . . . . . . . . . . . . . . . .   5
    5.  Channels  . . . . . . . . . . . . . . . . . . . . . . . . . .   6
    6.  Monitoring and Receiving Push Messages  . . . . . . . . . . .   6
-   7.  Store and Forward Operation . . . . . . . . . . . . . . . . .   6
+   7.  Store and Forward Operation . . . . . . . . . . . . . . . . .   7
    8.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .   7
    9.  Security Considerations . . . . . . . . . . . . . . . . . . .   7
      9.1.  Confidentiality from Push Server Access . . . . . . . . .   7
      9.2.  Privacy Considerations  . . . . . . . . . . . . . . . . .   8
      9.3.  Denial of Service Vectors . . . . . . . . . . . . . . . .   8
      9.4.  Logging Exposure  . . . . . . . . . . . . . . . . . . . .   9
-   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .   9
-     10.1.  Normative References . . . . . . . . . . . . . . . . . .   9
+   10. References  . . . . . . . . . . . . . . . . . . . . . . . . .  10
+     10.1.  Normative References . . . . . . . . . . . . . . . . . .  10
      10.2.  Informative References . . . . . . . . . . . . . . . . .  10
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  10
 
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                   Expires May 15, 2015                  [Page 2]
+Thomson                   Expires June 12, 2015                 [Page 2]
 
-Internet-Draft                HTTP Web Push                November 2014
+Internet-Draft                HTTP Web Push                December 2014
 
 
    The Web Push API [API] describes an API that enables the use of a
@@ -165,9 +165,9 @@ Internet-Draft                HTTP Web Push                November 2014
 
 
 
-Thomson                   Expires May 15, 2015                  [Page 3]
+Thomson                   Expires June 12, 2015                 [Page 3]
 
-Internet-Draft                HTTP Web Push                November 2014
+Internet-Draft                HTTP Web Push                December 2014
 
 
    introduces the term "device", which refers to the consumer of push
@@ -221,9 +221,9 @@ Internet-Draft                HTTP Web Push                November 2014
 
 
 
-Thomson                   Expires May 15, 2015                  [Page 4]
+Thomson                   Expires June 12, 2015                 [Page 4]
 
-Internet-Draft                HTTP Web Push                November 2014
+Internet-Draft                HTTP Web Push                December 2014
 
 
 3.  Delivering Push Messages
@@ -277,9 +277,9 @@ Internet-Draft                HTTP Web Push                November 2014
 
 
 
-Thomson                   Expires May 15, 2015                  [Page 5]
+Thomson                   Expires June 12, 2015                 [Page 5]
 
-Internet-Draft                HTTP Web Push                November 2014
+Internet-Draft                HTTP Web Push                December 2014
 
 
 5.  Channels
@@ -312,7 +312,10 @@ Internet-Draft                HTTP Web Push                November 2014
    Prefer header field [RFC7240] with a "wait" parameter set to "0".
    This allows clients to rapidly check for any missed messages.
    Clients can check the status of individual channels by sending GET
-   requests to the channel URI.
+   requests to the channel URI.  The response of this request is either
+   a status code of 200 "OK" and a body containing the latest
+   undelivered message for the channel, or if there are no messages on
+   the channel a response code of 204 "No Content" is returned.
 
    A server that wishes to redistribute load can do so using the
    alternative services mechanisms that are part of HTTP/2
@@ -324,19 +327,22 @@ Internet-Draft                HTTP Web Push                November 2014
    shut down the connection.  This allows for seamless migration between
    servers.
 
+
+
+
+
+
+
+Thomson                   Expires June 12, 2015                 [Page 6]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
 7.  Store and Forward Operation
 
    Push servers are not obligated to store messages for any time.  If a
    client is not actively monitoring for push messages, messages can be
    lost.
-
-
-
-
-Thomson                   Expires May 15, 2015                  [Page 6]
-
-Internet-Draft                HTTP Web Push                November 2014
-
 
    Push servers can store messages for some time to allow for limited
    recovery from transient faults.  If a message is stored, but not
@@ -379,21 +385,21 @@ Internet-Draft                HTTP Web Push                November 2014
    integrity or authentication mechanisms within the push message
    itself.  The originating application server and the device are
    frequently just different instances of the same application, this
+
+
+
+
+Thomson                   Expires June 12, 2015                 [Page 7]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
    does not require standardization.  The process of registering a
    channel endpoints provides a convenient medium for key agreement.
 
    In particular, the W3C Web Push API requires that each push channel
    created by the browser be bound to a browser generated encryption
    key.  Pushed messages are authenticated and decrypted by the browser
-
-
-
-
-Thomson                   Expires May 15, 2015                  [Page 7]
-
-Internet-Draft                HTTP Web Push                November 2014
-
-
    before delivery.  This ensures that the push server is unable to
    examine the contents of push messages.
 
@@ -436,20 +442,20 @@ Internet-Draft                HTTP Web Push                November 2014
    MAY choose to authorize requests based on any HTTP-compatible means
    available, of which there are numerous options.
 
+
+
+
+Thomson                   Expires June 12, 2015                 [Page 8]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
    Discarding unwanted messages at the device based on message
    authentication doesn't protect against a denial of service attack on
    the device.  Even a relatively small number of message can cause
    devices to exhaust batteries.  Limiting the number of entities with
    access to push channels limits the number of entities that can
    generate value push requests of the push server.  An application can
-
-
-
-Thomson                   Expires May 15, 2015                  [Page 8]
-
-Internet-Draft                HTTP Web Push                November 2014
-
-
    do this by controlling the distribution of channel URIs to authorized
    entities.
 
@@ -488,28 +494,31 @@ Internet-Draft                HTTP Web Push                November 2014
    and strong access control mechanisms can ensure that these URIs are
    not learned.
 
+
+
+
+
+
+
+
+Thomson                   Expires June 12, 2015                 [Page 9]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
 10.  References
 
 10.1.  Normative References
 
    [I-D.ietf-httpbis-alt-svc]
               Nottingham, M., McManus, P., and J. Reschke, "HTTP
-              Alternative Services", draft-ietf-httpbis-alt-svc-04 (work
-              in progress), October 2014.
-
-
-
-
-
-Thomson                   Expires May 15, 2015                  [Page 9]
-
-Internet-Draft                HTTP Web Push                November 2014
-
+              Alternative Services", draft-ietf-httpbis-alt-svc-05 (work
+              in progress), December 2014.
 
    [I-D.ietf-httpbis-http2]
               Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
-              Protocol version 2", draft-ietf-httpbis-http2-15 (work in
-              progress), October 2014.
+              Protocol version 2", draft-ietf-httpbis-http2-16 (work in
+              progress), November 2014.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
@@ -548,13 +557,4 @@ Author's Address
 
 
 
-
-
-
-
-
-
-
-
-
-Thomson                   Expires May 15, 2015                 [Page 10]
+Thomson                   Expires June 12, 2015                [Page 10]
