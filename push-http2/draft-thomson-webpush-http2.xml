@@ -41,8 +41,8 @@
 
     <abstract>
       <t>
-        A simple protocol for the delivery of realtime events to clients is described.  This scheme
-        uses HTTP/2 push.
+        A simple protocol for the delivery of realtime events to clients is
+        described.  This scheme uses HTTP/2 push.
       </t>
     </abstract>
   </front>
@@ -50,138 +50,185 @@
   <middle>
     <section anchor="intro" title="Introduction">
       <t>
-        Mobile computing devices are increasingly relied upon for a great many applications.  Mobile
-        devices typically have limited power reserves, so finding more efficient ways to serve
-        application requirements is an important part of any mobile platform.
+        Mobile computing devices are increasingly relied upon for a great many
+        applications.  Mobile devices typically have limited power reserves, so
+        finding more efficient ways to serve application requirements is an
+        important part of any mobile platform.
       </t>
 
      <t>
-        One significant contributor to power usage mobile devices is the radio.  Radio
-        communications consumes a significant portion of the energy budget on a wirelessly connected
-        mobile device.
+        One significant contributor to power usage mobile devices is the radio.
+        Radio communications consumes a significant portion of the energy budget
+        on a wirelessly connected mobile device.
       </t>
       <t>
-        Many applications require continuous access to network communications so that real-time
-        events - such as incoming calls or messages - can be conveyed (or "pushed") to the user in a
-        timely fashion.  Uncoordinated use of persistent connections or sessions from multiple
-        applications can contribute to unnecessary use of the device radio, since each independent
-        session independently incurs overheads.  In particular, keep alive traffic used to ensure
-        that middleboxes do not prematurely time out sessions, can result in significant waste.
-        Maintenance traffic tends to dominate over the long term, since events are relatively rare.
+        Many applications require continuous access to network communications so
+        that real-time events - such as incoming calls or messages - can be
+        conveyed (or "pushed") to the user in a timely fashion.  Uncoordinated
+        use of persistent connections or sessions from multiple applications can
+        contribute to unnecessary use of the device radio, since each
+        independent session independently incurs overheads.  In particular, keep
+        alive traffic used to ensure that middleboxes do not prematurely time
+        out sessions, can result in significant waste.  Maintenance traffic
+        tends to dominate over the long term, since events are relatively rare.
       </t>
 
       <t>
-        Consolidating all real-time events into a single session ensures more efficient use of
-        network and radio resources.  A single service consolidates all events, distributing those
-        events to applications as they arrive.  This requires just one session, avoiding duplicated
+        Consolidating all real-time events into a single session ensures more
+        efficient use of network and radio resources.  A single service
+        consolidates all events, distributing those events to applications as
+        they arrive.  This requires just one session, avoiding duplicated
         overhead costs.
       </t>
       <t>
-        The <xref target="API">Web Push API</xref> describes an API that enables the use of a
-        consolidated push service from web applications.  This expands on that work by describing a
-        protocol that can be used to:
+        The <xref target="API">Web Push API</xref> describes an API that enables
+        the use of a consolidated push service from web applications.  This
+        expands on that work by describing a protocol that can be used to:
         <list style="symbols">
           <t>
-            request the delivery of an event to a device,
+            request the delivery of a push message to a user agent,
           </t>
           <t>
-            register a new device,
+            register a new user agent,
           </t>
           <t>
-            create new event delivery channels, and
+            create new push message delivery subscriptions, and
           </t>
           <t>
-            monitor for new events.
+            monitor for new push messages.
           </t>
         </list>
       </t>
       <t>
-        This is intentionally split into these two categories because requesting the delivery of
-        events is required for immediate use by the Web Push API.  The registration, management and
-        monitoring functions are currently fulfilled by proprietary protocols; these are adequate,
-        but do not offer any of the advantages that standardization affords.
+        This is intentionally split into these two categories because requesting
+        the delivery of events is required for immediate use by the Web Push
+        API.  The registration, management and monitoring functions are
+        currently fulfilled by proprietary protocols; these are adequate, but do
+        not offer any of the advantages that standardization affords.
       </t>
       <t>
-        The monitoring function described in this document is intended to be replaceable, enabling
-        the use of monitoring schemes that are better optimized for the network environment and the
-        device.  For instance, using notification systems like the GSM Short Message Service (SMS)
-        can take advantage of the native paging capabilities of a cellular network, avoiding the
-        ongoing maintainence cost of a persistent TCP connection.
+        The monitoring function described in this document is intended to be
+        replaceable, enabling the use of monitoring schemes that are better
+        optimized for the network environment and the user agent.  For instance,
+        using notification systems like the <xref target="TS.3GPP.23.040">3GPP
+        Short Message Service (SMS)</xref> can take advantage of the native
+        paging capabilities of a cellular network, avoiding the ongoing
+        maintainence cost of a persistent TCP connection.
       </t>
 
       <t>
-        This document intentionally does not describe how a push server is discovered.  Discovery of
-        push servers is left for future efforts, if it turns out to be necessary at all.  Devices
-        are expected to be configured with a push server URL.
+        This document intentionally does not describe how a push server is
+        discovered.  Discovery of push servers is left for future efforts, if it
+        turns out to be necessary at all.  User agents are expected to be
+        configured with a push server URL.
       </t>
       <t>
-        Similarly, discovery of support for and negotiation of use of alternative monitoring schemes
-        is left to documents that extend this basic protocol.
+        Similarly, discovery of support for and negotiation of use of
+        alternative monitoring schemes is left to documents that extend this
+        basic protocol.
       </t>
 
       <section anchor="terminology" title="Conventions and Terminology">
         <t>
-          In cases where normative language needs to be emphasized, this document falls back on
-          established shorthands for expressing interoperability requirements on implementations:
-          the capitalized words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these is
+          In cases where normative language needs to be emphasized, this
+          document falls back on established shorthands for expressing
+          interoperability requirements on implementations: the capitalized
+          words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these is
           described in <xref target="RFC2119"/>.
         </t>
         <t>
-          This document will use the terminology from <xref target="API"/>, though "application"
-          will be used in preference to "webapp", since the described protocols are not restricted
-          to web use.  This document introduces the term "device", which refers to the consumer of
-          push messages.
+          This document defines the following terms:
+          <list style="hanging">
+            <t hangText="application:">
+              Both the sender and ultimate consumer of push messages.  Many
+              applications have components that are run on a user agent and
+              other components that run on servers.
+            </t>
+            <t hangText="application server:">
+              The component of an application that runs on a server and requests
+              the delivery of a push message.
+            </t>
+            <t hangText="push message:">
+              A message, sent from an application server to a user agent via a
+              push service.
+            </t>
+            <t hangText="push service:">
+              A service that delivers push messages to user agents.
+            </t>
+            <t hangText="registration:">
+              A session that is established between the user agent and the push
+              service.  A registation has any number of associated
+              subscriptions.
+            </t>
+            <t hangText="subscription:">
+              A message delivery context that is established between the user
+              agent and the push service and shared with applications.  All push
+              messages are associated with a subscription.
+            </t>
+            <t hangText="user agent:">
+              A device and software that is the recipient of push messages.
+            </t>
+          </list>
         </t>
       </section>
     </section>
 
     <section title="Overview">
       <t>
-        A general model for push services includes three basic actors: a device, a push server, and
-        an application.
+        A general model for push services includes three basic actors: a user
+        agent, a push service, and an application (server).
       </t>
       <figure>
           <artwork><![CDATA[
-  +-----------+        +-------------+        +-------------+
-  |  Device   |        | Push Server |        | Application |
-  +-----------+        +-------------+        +-------------+
-       |                      |                      |
-       |      Register        |                      |
-       |--------------------->|                      |
-       |       Monitor        |                      |
-       |<====================>|                      |
-       |     Get Channel      |                      |
-       |--------------------->|                      |
-       |           Provide Channel                   |
-       |-------------------------------------------->|
-       |                      |     Push Message     |
-       |    Push Message      |<---------------------|
-       |<---------------------|                      |
-       |                      |                      |
+ +-------+           +--------------+       +-------------+
+ |  UA   |           | Push Service |       | Application |
+ +-------+           +--------------+       +-------------+
+     |                      |                      |
+     |      Register        |                      |
+     |--------------------->|                      |
+     |       Monitor        |                      |
+     |<====================>|                      |
+     |      Subscribe       |                      |
+     |--------------------->|                      |
+     |           Provide Subscription              |
+     |-------------------------------------------->|
+     |                      |                      |
+     :                      :                      :
+     |                      |     Push Message     |
+     |    Push Message      |<---------------------|
+     |<---------------------|                      |
+     |                      |                      |
 ]]></artwork>
       </figure>
       <t>
-        At the very beginning of the process, the device registers with the push server.  This
-        establishes a shared session between the device and push server that will be used to
-        aggregate push messages from all applications that the device interacts with.
+        At the very beginning of the process, the device creates a registration
+        resource at the push service.  The registration is the basis of all
+        future interactions between the user agent and push service.  The
+        registration aggregates push messages that the user agent receives from
+        all subscriptions.
       </t>
       <t>
-        The registration response includes details on how the device is expected to monitor for
-        incoming push messages.  This document describes one such mechanism, though more efficient
-        means of monitoring could be optionally defined (and this is expressly permitted).
+        The registration resource describes how the user agent is expected to
+        monitor for incoming push messages.  This document describes one such
+        mechanism, though more efficient means of monitoring could be defined.
       </t>
       <t>
-        A registration after creation has no channels associated with it.  New channels can be
-        requested by the device and then distributed to applications.  It is expected that devices
-        will distribute a different channel to each application, with the potential for multiple
-        channels being provided to the same application.
+        The registration resource also describes how the user agent might create
+        a subscription.  A new subscription is created by the user agent and
+        then distributed to an application.  It is expected that user agents
+        will distribute a different subscription to each application, though
+        multiple subscriptions might be created for the same application.
       </t>
       <t>
-        Applications use channels to deliver push messages to devices, via the push server.
+        Applications use subscriptions to deliver push messages to devices, via
+        the push service.
       </t>
       <t>
-        Both registrations and channels have a limited lifetime.  These will need to be refreshed or
-        replaced over time.
+        Both registrations and subscriptions have a limited lifetime.  They can
+        also be terminated by either push service or user agent at any time.
+        User agents and applications need to be prepared to handle changes in
+        registrations and subscriptions; the protocol described here supports
+        any number of either resource concurrently with minimal overhead.
       </t>
     </section>
 
@@ -274,7 +321,7 @@
 
     <section anchor="monitor" title="Monitoring and Receiving Push Messages">
       <t>
-        A device monitors for new events by making a GET request to the monitor resource. The 
+        A device monitors for new events by making a GET request to the monitor resource. The
         push server SHOULD return the "channel" link and expiration information in
         response to monitor requests. The server does not respond to these request, it instead uses <xref
         target="I-D.ietf-httpbis-http2">server push</xref> to send the contents of push messages as
@@ -480,6 +527,17 @@
           <date month="May" year="2014" />
         </front>
         <seriesInfo name="Editor's Draft" value="push-api" />
+      </reference>
+
+      <reference anchor="TS.3GPP.23.040">
+        <front>
+          <title>Technical realization of the Short Message Service (SMS)</title>
+          <author><organization>3GPP</organization></author>
+          <date month="October" year="2014"/>
+        </front>
+
+        <seriesInfo name="3GPP TS" value="23.040 12.2.0"/>
+        <format type="HTML" target="http://www.3gpp.org/ftp/Specs/html-info/23040.htm"/>
       </reference>
     </references>
 
