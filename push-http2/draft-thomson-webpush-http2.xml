@@ -274,8 +274,9 @@
 
     <section anchor="monitor" title="Monitoring and Receiving Push Messages">
       <t>
-        A device monitors for new events by making a GET request to the monitor resource.  The
-        server does not respond to these request, it instead uses <xref
+        A device monitors for new events by making a GET request to the monitor resource. The 
+        push server SHOULD return the "channel" link and expiration information in
+        response to monitor requests. The server does not respond to these request, it instead uses <xref
         target="I-D.ietf-httpbis-http2">server push</xref> to send the contents of push messages as
         applications send them.
       </t>
