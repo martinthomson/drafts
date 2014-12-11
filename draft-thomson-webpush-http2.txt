@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                        December 9, 2014
-Expires: June 12, 2015
+Intended status: Standards Track                       December 11, 2014
+Expires: June 14, 2015
 
 
                  Generic Event Delivery Using HTTP Push
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 12, 2015.
+   This Internet-Draft will expire on June 14, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 1]
+Thomson                   Expires June 14, 2015                 [Page 1]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 2]
+Thomson                   Expires June 14, 2015                 [Page 2]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -165,7 +165,7 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 3]
+Thomson                   Expires June 14, 2015                 [Page 3]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -221,7 +221,7 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 4]
+Thomson                   Expires June 14, 2015                 [Page 4]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -277,7 +277,7 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 5]
+Thomson                   Expires June 14, 2015                 [Page 5]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -300,9 +300,11 @@ Internet-Draft                HTTP Web Push                December 2014
 6.  Monitoring and Receiving Push Messages
 
    A device monitors for new events by making a GET request to the
-   monitor resource.  The server does not respond to these request, it
-   instead uses server push [I-D.ietf-httpbis-http2] to send the
-   contents of push messages as applications send them.
+   monitor resource.  The push server SHOULD return the "channel" link
+   and expiration information in response to monitor requests.  The
+   server does not respond to these request, it instead uses server push
+   [I-D.ietf-httpbis-http2] to send the contents of push messages as
+   applications send them.
 
    Each push message consists of a synthesized GET request to the
    channel URI that was the target of the push.  The response body is
@@ -331,9 +333,7 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-
-
-Thomson                   Expires June 12, 2015                 [Page 6]
+Thomson                   Expires June 14, 2015                 [Page 6]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -389,7 +389,7 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 7]
+Thomson                   Expires June 14, 2015                 [Page 7]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -445,7 +445,7 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 8]
+Thomson                   Expires June 14, 2015                 [Page 8]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -501,7 +501,7 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 12, 2015                 [Page 9]
+Thomson                   Expires June 14, 2015                 [Page 9]
 
 Internet-Draft                HTTP Web Push                December 2014
 
@@ -557,4 +557,4 @@ Author's Address
 
 
 
-Thomson                   Expires June 12, 2015                [Page 10]
+Thomson                   Expires June 14, 2015                [Page 10]
