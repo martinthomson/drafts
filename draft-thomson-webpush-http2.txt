@@ -14,7 +14,7 @@ Expires: June 15, 2015
 Abstract
 
    A simple protocol for the delivery of realtime events to clients is
-   described.  This scheme uses HTTP/2 push.
+   described.  This scheme uses HTTP/2 server push.
 
 Status of This Memo
 
@@ -61,7 +61,7 @@ Internet-Draft                HTTP Web Push                December 2014
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Conventions and Terminology . . . . . . . . . . . . . . .   3
+     1.1.  Conventions and Terminology . . . . . . . . . . . . . . .   4
    2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
      2.1.  HTTP Resources  . . . . . . . . . . . . . . . . . . . . .   6
    3.  Registration  . . . . . . . . . . . . . . . . . . . . . . . .   6
@@ -72,15 +72,16 @@ Table of Contents
      7.1.  Load Management . . . . . . . . . . . . . . . . . . . . .   9
      7.2.  Push Message Expiration . . . . . . . . . . . . . . . . .  10
      7.3.  Registration and Subscription Expiration  . . . . . . . .  10
+     7.4.  Implications for Application Reliability  . . . . . . . .  11
    8.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
      8.1.  Confidentiality from Push Service Access  . . . . . . . .  11
      8.2.  Privacy Considerations  . . . . . . . . . . . . . . . . .  12
-     8.3.  Authorization . . . . . . . . . . . . . . . . . . . . . .  12
+     8.3.  Authorization . . . . . . . . . . . . . . . . . . . . . .  13
      8.4.  Denial of Service Considerations  . . . . . . . . . . . .  13
      8.5.  Logging Risks . . . . . . . . . . . . . . . . . . . . . .  14
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  14
-   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  15
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
+   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  16
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
      11.1.  Normative References . . . . . . . . . . . . . . . . . .  16
      11.2.  Informative References . . . . . . . . . . . . . . . . .  17
    Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  17
@@ -104,8 +105,7 @@ Table of Contents
    since each independent session independently incurs overheads.  In
    particular, keep alive traffic used to ensure that middleboxes do not
    prematurely time out sessions, can result in significant waste.
-   Maintenance traffic tends to dominate over the long term, since
-   events are relatively rare.
+
 
 
 
@@ -113,6 +113,9 @@ Thomson                   Expires June 15, 2015                 [Page 2]
 
 Internet-Draft                HTTP Web Push                December 2014
 
+
+   Maintenance traffic tends to dominate over the long term, since
+   events are relatively rare.
 
    Consolidating all real-time events into a single session ensures more
    efficient use of network and radio resources.  A single service
@@ -156,11 +159,8 @@ Internet-Draft                HTTP Web Push                December 2014
    alternative monitoring schemes is left to documents that extend this
    basic protocol.
 
-1.1.  Conventions and Terminology
 
-   In cases where normative language needs to be emphasized, this
-   document falls back on established shorthands for expressing
-   interoperability requirements on implementations: the capitalized
+
 
 
 
@@ -170,6 +170,11 @@ Thomson                   Expires June 15, 2015                 [Page 3]
 Internet-Draft                HTTP Web Push                December 2014
 
 
+1.1.  Conventions and Terminology
+
+   In cases where normative language needs to be emphasized, this
+   document falls back on established shorthands for expressing
+   interoperability requirements on implementations: the capitalized
    words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these
    is described in [RFC2119].
 
@@ -207,11 +212,6 @@ Internet-Draft                HTTP Web Push                December 2014
 
    A general model for push services includes three basic actors: a user
    agent, a push service, and an application (server).
-
-
-
-
-
 
 
 
@@ -576,6 +576,25 @@ Internet-Draft                HTTP Web Push                December 2014
    A user agent can request that a registration or subscription be
    removed by sending a DELETE request to the corresponding URI.
 
+7.4.  Implications for Application Reliability
+
+   An application developer might find it tempting to create alternative
+   mechanisms for message delivery in case the push service fails to
+   deliver a critical message.  Setting up a polling mechanism or a
+   backup messaging channel in order to compensate for these
+   shortcomings negates almost all of the advantages a push service
+   provides.
+
+   Applications are encouraged to instead provide a means to detect
+   situations where push messages were not delivered and recover
+   gracefully.  For instance, an application server might include a
+   sequence number in push messages; a gap in the sequence can then be
+   used to trigger some form of state resynchronization.  For instance,
+   the missing messages might be requested from the application server
+   directly.  Push service failures are expected to be rare, therefore
+   performance optimization of any recovery mechanism might be
+   unnecessary.
+
 8.  Security Considerations
 
    This protocol MUST use HTTP over TLS [RFC2818]; this includes any
@@ -590,6 +609,14 @@ Internet-Draft                HTTP Web Push                December 2014
    The protection afforded by TLS does not protect content from the push
    service.  Without additional safeguards, a push service is able to
    see and modify the content of the messages.
+
+
+
+
+Thomson                   Expires June 15, 2015                [Page 11]
+
+Internet-Draft                HTTP Web Push                December 2014
+
 
    Applications are able to provide additional confidentiality,
    integrity or authentication mechanisms within the push message
@@ -610,14 +637,6 @@ Internet-Draft                HTTP Web Push                December 2014
    The public key for a subscription ensures that applications using
    that subscription can identify messages from unknown sources and
    discard them.  This depends on the public key only being disclosed to
-
-
-
-Thomson                   Expires June 15, 2015                [Page 11]
-
-Internet-Draft                HTTP Web Push                December 2014
-
-
    entities that are authorized to send messages on the channel.  The
    push server does not require access to this public key.
 
@@ -648,6 +667,13 @@ Internet-Draft                HTTP Web Push                December 2014
       server instance.  It is also possible that traffic analysis could
       be used to correlate subscriptions.
 
+
+
+Thomson                   Expires June 15, 2015                [Page 12]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
    A user agent MUST be able to create new registrations and
    subscriptions with new identifiers at any time.
 
@@ -665,22 +691,16 @@ Internet-Draft                HTTP Web Push                December 2014
    Authorization for sending push messages is managed using capability
    URLs (see [CAP-URI]).  A capability URL grants access to a resource
    based solely on knowledge of the URL.  Capability URLs are used for
+   their "easy onward sharing" and "easy client API" properties.  These
+   make it possible to avoid relying on relationships between push
+   services and application servers, with the protocols necessary to
+   build and support those relationships.
 
-
-
-
-Thomson                   Expires June 15, 2015                [Page 12]
-
-Internet-Draft                HTTP Web Push                December 2014
-
-
-   their "easy onward sharing" property, which helps avoid the need to
-   have a relationships between push services and application servers.
-
-   Subscription URIs MUST be extremely difficult to guess.  Encoding a
-   large amount of random entropy (at least 128 bits) in the path
-   component ensures that it is difficult to successfully guess a valid
-   subscription URI.
+   A subscription URI therefore acts as a bearer token: knowledge of the
+   URI implies authorization to send push messages.  Subscription URIs
+   MUST be extremely difficult to guess.  Encoding a large amount of
+   random entropy (at least 120 bits) in the path component ensures that
+   it is difficult to successfully guess a valid subscription URI.
 
 8.4.  Denial of Service Considerations
 
@@ -701,6 +721,15 @@ Internet-Draft                HTTP Web Push                December 2014
    resources of a push service to mount a denial of service attack on a
    user agent.  Push service SHOULD limit the rate at which push
    messages are sent to individual user agents.  A push service or user
+
+
+
+
+Thomson                   Expires June 15, 2015                [Page 13]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
    agent MAY terminate subscriptions (Section 7.3) that receives too
    many push messages.
 
@@ -714,21 +743,7 @@ Internet-Draft                HTTP Web Push                December 2014
    agents.  Intentional failure to deliver messages is difficult to
    distinguish from faults, which might occur due to transient network
    errors, interruptions in device availability, or genuine service
-   outages.  Applications that rely on reliable message delivery need to
-   provide means of recovering from occasional failures that do not rely
-   on push notifications.
-
-
-
-
-
-
-
-
-Thomson                   Expires June 15, 2015                [Page 13]
-
-Internet-Draft                HTTP Web Push                December 2014
-
+   outages.
 
 8.5.  Logging Risks
 
@@ -763,6 +778,14 @@ Internet-Draft                HTTP Web Push                December 2014
    Respository:  [Editor/IANA note: please include a link to the final
       registry location.]
 
+
+
+
+Thomson                   Expires June 15, 2015                [Page 14]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
    Index value:  Values in this registry are URNs or URN prefixes that
       start with the prefix "urn:ietf:params:push".  Each is registered
       independently.
@@ -778,13 +801,6 @@ Internet-Draft                HTTP Web Push                December 2014
       semantics of the URN or URN prefix.
 
    Contact:  Email for the person or group making the registration.
-
-
-
-Thomson                   Expires June 15, 2015                [Page 14]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
    Index value:  As described in [RFC3553], URN prefixes that are
       registered include a description of how the URN is constructed.
@@ -818,6 +834,14 @@ Internet-Draft                HTTP Web Push                December 2014
    Description:  This link relation type is used to identify a resource
       that can be used to create new web push subscriptions.
 
+
+
+
+Thomson                   Expires June 15, 2015                [Page 15]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
    Specification:  (this document)
 
    Contact:  Martin Thomson (martin.thomson@gmail) or the Web Push WG
@@ -830,17 +854,6 @@ Internet-Draft                HTTP Web Push                December 2014
    many others.
 
 11.  References
-
-
-
-
-
-
-
-Thomson                   Expires June 15, 2015                [Page 15]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
 11.1.  Normative References
 
@@ -877,6 +890,14 @@ Internet-Draft                HTTP Web Push                December 2014
               (HTTP/1.1): Message Syntax and Routing", RFC 7230, June
               2014.
 
+
+
+
+Thomson                   Expires June 15, 2015                [Page 16]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
    [RFC7231]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
               (HTTP/1.1): Semantics and Content", RFC 7231, June 2014.
 
@@ -888,15 +909,6 @@ Internet-Draft                HTTP Web Push                December 2014
               2014.
 
    [RFC7240]  Snell, J., "Prefer Header for HTTP", RFC 7240, June 2014.
-
-
-
-
-
-Thomson                   Expires June 15, 2015                [Page 16]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
 11.2.  Informative References
 
@@ -921,18 +933,6 @@ Author's Address
    US
 
    Email: martin.thomson@gmail.com
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

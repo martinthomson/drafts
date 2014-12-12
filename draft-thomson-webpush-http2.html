@@ -386,6 +386,7 @@
 <link href="#rfc.section.7.1" rel="Chapter" title="7.1 Load Management"/>
 <link href="#rfc.section.7.2" rel="Chapter" title="7.2 Push Message Expiration"/>
 <link href="#rfc.section.7.3" rel="Chapter" title="7.3 Registration and Subscription Expiration"/>
+<link href="#rfc.section.7.4" rel="Chapter" title="7.4 Implications for Application Reliability"/>
 <link href="#rfc.section.8" rel="Chapter" title="8 Security Considerations"/>
 <link href="#rfc.section.8.1" rel="Chapter" title="8.1 Confidentiality from Push Service Access"/>
 <link href="#rfc.section.8.2" rel="Chapter" title="8.2 Privacy Considerations"/>
@@ -406,8 +407,8 @@
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-webpush-http2-latest" />
   <meta name="dct.issued" scheme="ISO8601" content="2014-12-12" />
-  <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
-  <meta name="description" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  " />
+  <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 server push.  " />
+  <meta name="description" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 server push.  " />
 
 </head>
 
@@ -443,7 +444,7 @@
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 push.  </p>
+<p>A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 server push.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
@@ -474,6 +475,7 @@
 <li>7.1.   <a href="#rfc.section.7.1">Load Management</a></li>
 <li>7.2.   <a href="#rfc.section.7.2">Push Message Expiration</a></li>
 <li>7.3.   <a href="#rfc.section.7.3">Registration and Subscription Expiration</a></li>
+<li>7.4.   <a href="#rfc.section.7.4">Implications for Application Reliability</a></li>
 <li>8.   <a href="#rfc.section.8">Security Considerations</a></li>
 <li>8.1.   <a href="#rfc.section.8.1">Confidentiality from Push Service Access</a></li>
 <li>8.2.   <a href="#rfc.section.8.2">Privacy Considerations</a></li>
@@ -682,6 +684,9 @@ DATA         [stream 4] +END_STREAM
 <p id="rfc.section.7.3.p.3">Expiration is indicated using either the Expires header field, or by setting a "max-age" parameter on a Cache-Control header field (see <a href="#RFC7234">[RFC7234]</a>).  The Cache-Control header field MUST also include the "private" directive.  </p>
 <p id="rfc.section.7.3.p.4">A push service can invalidate a registration or subscription at any time.  If a user agent has an outstanding request to the "registration" resource (see <a href="#monitor">Section 6</a>), this can be signaled by returning a 400-series response code, such as 410 (Gone).  A push service uses server push to indicate that a subscription has expired; a pushed 400-series status code for the subscription resource signals the termination of a subscription.  </p>
 <p id="rfc.section.7.3.p.5">A user agent can request that a registration or subscription be removed by sending a DELETE request to the corresponding URI.  </p>
+<h1 id="rfc.section.7.4"><a href="#rfc.section.7.4">7.4.</a> Implications for Application Reliability</h1>
+<p id="rfc.section.7.4.p.1">An application developer might find it tempting to create alternative mechanisms for message delivery in case the push service fails to deliver a critical message.  Setting up a polling mechanism or a backup messaging channel in order to compensate for these shortcomings negates almost all of the advantages a push service provides.  </p>
+<p id="rfc.section.7.4.p.2">Applications are encouraged to instead provide a means to detect situations where push messages were not delivered and recover gracefully.  For instance, an application server might include a sequence number in push messages; a gap in the sequence can then be used to trigger some form of state resynchronization.  For instance, the missing messages might be requested from the application server directly.  Push service failures are expected to be rare, therefore performance optimization of any recovery mechanism might be unnecessary.  </p>
 <h1 id="rfc.section.8"><a href="#rfc.section.8">8.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.8.p.1">This protocol MUST use <a href="#RFC2818">HTTP over TLS</a> <cite title="NONE">[RFC2818]</cite>; this includes any communications between user agent and push service, plus communications between the application and the push service.  Thus, all URIs use the "https" scheme.  This provides confidentiality and integrity protection for registrations and push messages from external parties.  </p>
 <h1 id="rfc.section.8.1"><a href="#rfc.section.8.1">8.1.</a> Confidentiality from Push Service Access</h1>
@@ -704,14 +709,14 @@ DATA         [stream 4] +END_STREAM
 <p id="rfc.section.8.2.p.5">A user agent MUST be able to create new registrations and subscriptions with new identifiers at any time.  </p>
 <h1 id="rfc.section.8.3"><a href="#rfc.section.8.3">8.3.</a> Authorization</h1>
 <p id="rfc.section.8.3.p.1">This protocol does not define how a push service establishes whether a user agent is permitted to create a registration or subscription, or whether push messages can be delivered to the user agent.  A push service MAY choose to authorize request based on any HTTP-compatible authorization method available, of which there are numerous options.  The authorization process and any associated credentials are expected to be configured in the user agent along with the URI for the "push service".  </p>
-<p id="rfc.section.8.3.p.2">Authorization for sending push messages is managed using capability URLs (see <a href="#CAP-URI">[CAP-URI]</a>).  A capability URL grants access to a resource based solely on knowledge of the URL.  Capability URLs are used for their "easy onward sharing" property, which helps avoid the need to have a relationships between push services and application servers.  </p>
-<p id="rfc.section.8.3.p.3">Subscription URIs MUST be extremely difficult to guess.  Encoding a large amount of random entropy (at least 128 bits) in the path component ensures that it is difficult to successfully guess a valid subscription URI.  </p>
+<p id="rfc.section.8.3.p.2">Authorization for sending push messages is managed using capability URLs (see <a href="#CAP-URI">[CAP-URI]</a>).  A capability URL grants access to a resource based solely on knowledge of the URL.  Capability URLs are used for their "easy onward sharing" and "easy client API" properties.  These make it possible to avoid relying on relationships between push services and application servers, with the protocols necessary to build and support those relationships.  </p>
+<p id="rfc.section.8.3.p.3">A subscription URI therefore acts as a bearer token: knowledge of the URI implies authorization to send push messages.  Subscription URIs MUST be extremely difficult to guess.  Encoding a large amount of random entropy (at least 120 bits) in the path component ensures that it is difficult to successfully guess a valid subscription URI.  </p>
 <h1 id="rfc.section.8.4"><a href="#rfc.section.8.4">8.4.</a> Denial of Service Considerations</h1>
 <p id="rfc.section.8.4.p.1">Discarding unwanted messages at the user agent based on message authentication doesn't protect against a denial of service attack on the user agent.  Even a relatively small volume of push messages can cause battery-powered devices to exhaust power reserves.  Limiting the number of entities with access to push channels limits the number of entities that can generate value push requests of the push server.  </p>
 <p id="rfc.section.8.4.p.2">An application can limit where push messages can originate by limiting the distribution of subscription URIs to authorized entities.  Ensuring that subscription URIs are hard to guess ensures that only applications servers that have been given a subscription URI can use it.  </p>
 <p id="rfc.section.8.4.p.3">A malicious application with a valid subscription use the greater resources of a push service to mount a denial of service attack on a user agent.  Push service SHOULD limit the rate at which push messages are sent to individual user agents.  A push service or user agent MAY <a href="#delete">terminate subscriptions</a> <cite title="NONE">[delete]</cite> that receives too many push messages.  </p>
 <p id="rfc.section.8.4.p.4">End-to-end confidentiality mechanisms, such as those in <a href="#API">[API]</a>, prevent an entity with a registration URI from learning the contents of push messages.  In both cases, push messages that are not successfully authenticated will not be delivered by the API, but this can present a denial of service risk.  </p>
-<p id="rfc.section.8.4.p.5">Conversely, a push service is also able to deny service to user agents.  Intentional failure to deliver messages is difficult to distinguish from faults, which might occur due to transient network errors, interruptions in device availability, or genuine service outages.  Applications that rely on reliable message delivery need to provide means of recovering from occasional failures that do not rely on push notifications.  </p>
+<p id="rfc.section.8.4.p.5">Conversely, a push service is also able to deny service to user agents.  Intentional failure to deliver messages is difficult to distinguish from faults, which might occur due to transient network errors, interruptions in device availability, or genuine service outages.  </p>
 <h1 id="rfc.section.8.5"><a href="#rfc.section.8.5">8.5.</a> Logging Risks</h1>
 <p id="rfc.section.8.5.p.1">Server request logs can reveal registration and subscription URIs.  Acquiring a registration URI permits the creation of new subscriptions, as well as potentially enabling the receipt of messages.  Acquiring a subscription URI permits the sending of push messages.  Logging could also reveal relationships between different subscription URIs for the same registration, or between different registrations for the same device.  </p>
 <p id="rfc.section.8.5.p.2">Limitations on log retention and strong access control mechanisms can ensure that URIs are not learned by unauthorized entities.  </p>
