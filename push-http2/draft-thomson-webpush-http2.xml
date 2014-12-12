@@ -117,10 +117,10 @@
       </t>
 
       <t>
-        This document intentionally does not describe how a push server is
-        discovered.  Discovery of push servers is left for future efforts, if it
-        turns out to be necessary at all.  User agents are expected to be
-        configured with a push server URL.
+        This document intentionally does not describe how a push service is
+        discovered.  Discovery of push services is left for future efforts, if
+        it turns out to be necessary at all.  User agents are expected to be
+        configured with a URL for a push service.
       </t>
       <t>
         Similarly, discovery of support for and negotiation of use of
@@ -136,6 +136,7 @@
           words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these is
           described in <xref target="RFC2119"/>.
         </t>
+
         <t>
           This document defines the following terms:
           <list style="hanging">
@@ -169,6 +170,13 @@
               A device and software that is the recipient of push messages.
             </t>
           </list>
+        </t>
+
+        <t>
+          Examples in this document use the <xref target="RFC7230">HTTP/1.1
+          message format</xref>.  Many of the exchanges can be completed using
+          HTTP/1.1, but where HTTP/2 is required, the (invalid) version "HTTP/2"
+          is used.
         </t>
       </section>
     </section>
@@ -215,167 +223,315 @@
       <t>
         The registration resource also describes how the user agent might create
         a subscription.  A new subscription is created by the user agent and
-        then distributed to an application.  It is expected that user agents
-        will distribute a different subscription to each application, though
-        multiple subscriptions might be created for the same application.
+        then distributed by to an application server.
       </t>
       <t>
-        Applications use subscriptions to deliver push messages to devices, via
-        the push service.
+        It is expected that a different subscription will be provided to each
+        application; however, there are no inherent cardinality constraints in
+        the protocol.  Multiple subscriptions might be created for the same
+        application, or multiple applications could use the same subscription.
+        Note however that sharing subscriptions can have security and privacy
+        implications.
+      </t>
+      <t>
+        Application servers use subscriptions to deliver push messages to
+        devices, via the push service.
       </t>
       <t>
         Both registrations and subscriptions have a limited lifetime.  They can
         also be terminated by either push service or user agent at any time.
-        User agents and applications need to be prepared to handle changes in
-        registrations and subscriptions; the protocol described here supports
-        any number of either resource concurrently with minimal overhead.
+        User agents and application servers need to be prepared to handle
+        changes in registrations and subscriptions; the protocol described here
+        supports any number of either resource concurrently with minimal
+        overhead.
+      </t>
+
+      <section anchor="resources" title="HTTP Resources">
+        <t>
+          This protocol uses <xref target="RFC7230">HTTP resources</xref> and
+          <xref target="RFC5988">link relations</xref>.  The following resources
+          are defined:
+          <list style="hanging">
+            <t hangText="push service:">
+              This resource is used in <xref
+              target="register">Registration</xref>.  It is configured into user
+              agents.
+            </t>
+            <t hangText="registration:">
+              A link relation of type "urn:ietf:params:push:reg" refers to a
+              registration resource.  This resource is used by a user agent in
+              requesting the delivery of push messages.  A process for
+              monitoring for messages using this resource is described in <xref
+              target="monitor"/>.
+            </t>
+            <t hangText="subscribe:">
+              A link relation of type "urn:ietf:params:push:sub" refers to a
+              resource where a user agent can create new subscriptions.
+              Creating a subscription is described in <xref
+              target="subscribe"/>.
+            </t>
+            <t hangText="subscription:">
+              A link relation of type "urn:ietf:params:push" refers to a
+              subscription resource.  Subscription resources are used to deliver
+              push messages.  An application server <xref target="send">sends
+              push messages</xref> and a user agent <xref
+              target="monitor">receives push messages</xref> using this
+              resource.
+            </t>
+          </list>
+        </t>
+      </section>
+    </section>
+
+    <section anchor="register" title="Registration">
+      <t>
+        A user agent that wishes to establish a new or replacement registration
+        sends an HTTP POST request to its configured push service resource.
+      </t>
+      <t>
+        A request to create a registration contains no entity body.  A future
+        specification MAY define a format and semantics for the entity body on
+        this request.
+      </t>
+      <t>
+        The push service creates a new registration and subscribe resource in
+        response to this request.  URIs for these resources are included in Link
+        header fields in the response.  The push server includes the
+        "registration" link relation in a Location header field.
+      </t>
+
+      <figure>
+        <preamble>
+          For example, the following request requests the creation of a new
+          registration:
+        </preamble>
+        <artwork type="inline"><![CDATA[
+POST /register HTTP/1.1
+Host: push.example.net
+
+]]></artwork>
+      </figure>
+      <figure>
+        <preamble>
+          The following response might be generated in response to this request:
+        </preamble>
+        <artwork type="inline"><![CDATA[
+HTTP/1.1 201 Created
+Date: Thu, 11 Dec 2014 23:56:47 GMT
+Link: </reg/1G_GIPMorg_n-IrQvqZr6g>;
+        rel="urn:ietf:params:push:reg"
+Link: </subscribe/1G_GIPMorg_n-IrQvqZr6g>;
+        rel="urn:ietf:params:push:sub"
+Location: https://push.example.net/reg/1G_GIPMorg_n-IrQvqZr6g
+Cache-Control: max-age=8640000, private
+
+]]></artwork>
+      </figure>
+
+      <t>
+        The push server SHOULD provide a URI for the associated "subscribe"
+        resource and any known expiration information in response to requests to
+        the "registration" resource.
       </t>
     </section>
 
-    <section anchor="push" title="Delivering Push Messages">
+    <section anchor="subscribe" title="Subscribing">
       <t>
-        A push channel is identified with an <xref target="RFC7230">HTTP URI</xref>.  An application
-        can request the delivery of a push message by sending an HTTP PUT request to this URI,
-        including the push message in the body of the request.
+        A client sends a POST request to the "subscribe" resource to create a
+        new subscription.
+      </t>
+      <figure>
+        <artwork type="inline"><![CDATA[
+POST /subscribe/1G_GIPMorg_n-IrQvqZr6g HTTP/1.1
+Host: push.example.net
+
+]]></artwork>
+      </figure>
+      <t>
+        A response with a 201 (Created) status code includes a URI for the subscription in
+        the Location header field.
+      </t>
+      <figure>
+        <artwork type="inline"><![CDATA[
+HTTP/1.1 201 Created
+Date: Thu, 11 Dec 2014 23:56:52 GMT
+Location: https://s.push.example.net/LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx
+Cache-Control: max-age:864000, private
+
+]]></artwork>
+      </figure>
+    </section>
+
+    <section anchor="push" title="Requesting Push Message Delivery">
+      <t>
+        A push subscription is an <xref target="RFC7230">HTTP resource</xref>.
       </t>
       <t>
-        A push server can acknowledge the end-to-end delivery of a push message by responding with a
-        200 (OK) status code.  A push server that stores the message for later delivery (see <xref
-        target="store"/>) could respond with a 202 (Accepted) status code to indicate that the
-        message was stored, but not delivered.
+        An application server requests the delivery of a push message by sending
+        an HTTP PUT request to this resource, including the push message in the
+        body of the request.
+      </t>
+      <figure>
+        <artwork type="inline"><![CDATA[
+PUT /LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx HTTP/1.1
+Host: s.push.example.net
+Content-Type: text/plain;charset=utf8
+Content-Length: 15
+
+Hello, World!
+]]></artwork>
+      </figure>
+      <figure>
+        <preamble>
+          A simple 200 response is sufficient to indicate that the push message
+          was accepted.  This does not indicate that the message was delivered
+          to the user agent.
+        </preamble>
+        <artwork type="inline"><![CDATA[
+HTTP/1.1 200 OK
+Date: Thu, 11 Dec 2014 23:56:55 GMT
+Cache-Control: max-age=600
+
+]]></artwork>
+      </figure>
+      <t>
+        A push service MAY generate a 413 (Payload Too Large) status code in
+        response to PUT requests that include an entity body that is too large.
+        Push services MUST NOT generate a 413 status code in responses to an
+        entity body that is 4k (4096 bytes) or less in size.
+      </t>
+      <t>
+        A push service that does not store messages can stream the payload of
+        push messages to the user agent.  Flow control SHOULD be used to limit
+        the state commitment for delivery of large messages.
       </t>
     </section>
 
-    <!-- TODO determine if we want this...
-    <section title="Responding to Push Messages">
+    <section anchor="monitor" title="Receiving Push Messages">
       <t>
+        A user agent requests the delivery of new push messages by making a GET
+        request to the "registration" resource.  The push service does not
+        respond to this request, it instead uses <xref
+        target="I-D.ietf-httpbis-http2">HTTP/2 server push</xref> to send the
+        contents of push messages as they are sent by application servers.
+      </t>
+      <t>
+        Each push message is pushed in response to a synthesized GET request.
+        The GET request is made to the same "subscription" URI that is used by
+        the application server to send the message.  The response body is the
+        entity body from the most recent PUT request sent to the subscription
+        resource.
+      </t>
+      <figure>
+        <artwork><![CDATA[
 
-        A server that wishes to enable end-to-end communication between a device and application
-        could use a link relation of "replies" to provide a location where the device can provide a
-        response.  The server can wait for some time for this to be populated and then use the
-        contents of this to generate the response to the push message.
 
-        That generates a lot of issues.  You no longer can have arbitrary content-types, you have to
-        carry that funny HTTP message content type so that the client can see all the header fields
-        and provide them.  It's pretty ugly.
 
-      </t>
-    </section>
-   -->
+        FBBI2+xwssjrh6hOCDr5UdKiUJR265wG
+]]></artwork>
+      </figure>
 
-    <section anchor="register" title="Registering">
       <t>
-        A device that wishes to establish a new or replacement registration sends an HTTP POST
-        request to its configured push server URL.  The request contains no entity body.
+        A user agent can request the contents of the "registration" resource
+        immediately by including a <xref target="RFC7240">Prefer header
+        field</xref> with a "wait" parameter set to "0".  The push server SHOULD
+        return a link reference to the "registration" resource and expiration
+        information in response to this request.  This request also triggers the
+        delivery of all push messages that the push service has stored but not
+        yet delivered.
       </t>
       <t>
-        The push server creates a new registration in response to this request, creating two new
-        resources and allocating an HTTP URI for each.  These URIs are included in <xref
-        target="RFC5988">link relations</xref> that are included in Link header fields in the
-        response.
-        <list style="hanging">
-          <t hangText="monitor:">
-            A link relation of type "...:push:monitor" <cref>pick a URN base and register it (RFC
-            3688)</cref> includes the URL of a resource that the device can monitor for events.
-            Monitoring is described in <xref target="monitor"/>.
-          </t>
-          <t hangText="channel:">
-            A link relation of type "...:push:channel" includes a URL of a resource where the device
-            can create new channels.  Creating channels is described in <xref target="channel"/>.
-          </t>
-        </list>
-        The push server includes the "monitor" link relation in a Location header field.
-      </t>
-      <t>
-        The push server MUST include expiration information in the response to this request in
-        either the Expires header field, or by setting a "max-age" parameter on a Cache-Control
-        header field.  The Cache-Control header field MUST include the "private" directive <xref
-        target="RFC7235"/>.
-      </t>
-      <t>
-        The push server SHOULD also provide the "channel" link and expiration information in
-        response to requests to the "monitor" resource.
-      </t>
-      <t>
-        A device MUST support the 307 (Temporary Redirect) status code <xref target="RFC7231"/>,
-        which can be used by a push server to redistribute load at the time a registration is
-        created.
+        A user agent can request the last push message for a "subscription"
+        resource by sending GET requests to its URI.  A 200 (OK) status response
+        contains the last push message sent to the subscription.  A 204 (No
+        Content) status code indicates that no messages are presently available.
       </t>
     </section>
 
-    <section anchor="channel" title="Channels">
+    <section anchor="operational" title="Operational Considerations">
       <t>
-        A client sends a POST request to the "channel" resource to create a new channel.
+        A push service is likely to have to maintain a very large number of open
+        TCP connections.  Effective management of those connections can depend
+        on being able to move connections between server instances.  In some
+        cases, it may be necessary to terminate registrations or subscriptions
+        so that they can be refreshed.
       </t>
-      <t>
-        A response with a 201 status code includes the channel URI in the Location header field.
-      </t>
-      <t>
-        A channel can expire.  Servers indicate this using the Expires header field, or by setting a
-        "max-age" parameter on a Cache-Control header field.
-      </t>
-      <t>
-        A client can explicitly delete a channel by sending a DELETE request to channel URI.
-      </t>
+
+      <section anchor="load" title="Load Management">
+        <t>
+          A user agent MUST support the 307 (Temporary Redirect) status code
+          <xref target="RFC7231"/>, which can be used by a push service to
+          redistribute load at the time that a new registration is requested.
+        </t>
+        <t>
+          A server that wishes to redistribute load can do so using the
+          alternative services mechanisms that are part of HTTP/2 <xref
+          target="I-D.ietf-httpbis-alt-svc"/>.  Alternative services allows for
+          redistribution of load whilst maintaining the same URIs for various
+          resources.  User agents can ensure a graceful transition by using the
+          GOAWAY frame once it has established a replacement connection.
+        </t>
+      </section>
+
+      <section anchor="storage" title="Push Message Expiration">
+        <t>
+          Push services typically store messages for some time to allow for
+          limited recovery from transient faults.  If a push message is stored,
+          but not delivered, the push service can indicate the probable duration
+          of storage by including expiration information in the response to the
+          push request.
+        </t>
+        <t>
+          A push service is not obligated to store messages indefinitely.  If a
+          user agent is not actively monitoring for push messages, those
+          messages can be lost or overridden by newer messages on the same
+          subscription.
+        </t>
+        <t>
+          Push messages that were stored and not delivered to a client are
+          delivered when a client recommences monitoring.  Stored push messages
+          SHOULD include a Last-Modified header field indicating when delivery
+          was requested by an application server.
+        </t>
+        <t>
+          A GET request to a "subscription" resource that has expired messages
+          results in a 204 (No Content) status response, equivalent to if no
+          push message were ever sent.
+        </t>
+        <t>
+          Push services might need to limit the size and number of stored push
+          messages to avoid overloading.  In addition to using the 413 (Payload
+          Too Large) status code for too large push messages, a push service MAY
+          expire push messages prior to any advertised expiration time.
+        </t>
+      </section>
+
+      <section anchor="delete" title="Registration and Subscription Expiration">
+        <t>
+          Registrations and subscriptions can expire.  If either resource has a
+          known expiration time, the push server includes expiration information
+          in responses to requests that create the resource, or in requests to the
+          resource.  Expiration is indicated using either the Expires header
+          field, or by setting a "max-age" parameter on a Cache-Control header
+          field.  The Cache-Control header field MUST also include the "private"
+          directive <xref target="RFC7234"/>.
+        </t>
+        <t>
+          A push service can invalidate a registration or subscription at any
+          time.  If a user agent has an outstanding request to the "registration"
+          resource (see <xref target="monitor"/>), this can be signaled by
+          returning a 400-series response code, such as 410 (Gone).  A push
+          service uses server push to indicate that a subscription has expired; a
+          pushed 400-series status code for the subscription resource signals the
+          termination of a subscription.
+        </t>
+        <t>
+          A user agent can request that a registration or subscription be removed
+          by sending a DELETE request to the corresponding URI.
+        </t>
+      </section>
     </section>
 
-    <section anchor="monitor" title="Monitoring and Receiving Push Messages">
-      <t>
-        A device monitors for new events by making a GET request to the monitor resource. The
-        push server SHOULD return the "channel" link and expiration information in
-        response to monitor requests. The server does not respond to these request, it instead uses <xref
-        target="I-D.ietf-httpbis-http2">server push</xref> to send the contents of push messages as
-        applications send them.
-      </t>
-      <t>
-        Each push message consists of a synthesized GET request to the channel URI that was the
-        target of the push.  The response body is the entity body from the PUT request.
-      </t>
-      <t>
-        A device can request the monitor resource immediately by including a <xref
-        target="RFC7240">Prefer header field</xref> with a "wait" parameter set to "0".  This allows
-        clients to rapidly check for any missed messages.  Clients can check the status of
-        individual channels by sending GET requests to the channel URI. The response of this request
-        is either a status code of 200 "OK" and a body containing the latest
-        undelivered message for the channel, or if there are no messages on the channel a response code
-        of 204 "No Content" is returned.
-      </t>
-      <t>
-        A server that wishes to redistribute load can do so using the alternative services
-        mechanisms that are part of HTTP/2 <xref target="I-D.ietf-httpbis-alt-svc"/>.  The ALTSVC
-        frame type allows for redistribution of load whilst retaining the same monitor resource.
-        Once a device has established a replacement connection, it can notify the server of imminent
-        shutdown using a GOAWAY frame, which allows the server to respond to the long-standing GET
-        request and gracefully shut down the connection.  This allows for seamless migration between
-        servers.
-      </t>
-    </section>
-
-    <section anchor="store" title="Store and Forward Operation">
-      <t>
-        Push servers are not obligated to store messages for any time.  If a client is not actively
-        monitoring for push messages, messages can be lost.
-      </t>
-      <t>
-        Push servers can store messages for some time to allow for limited recovery from transient
-        faults.  If a message is stored, but not delivered, the push server can indicate the
-        probable duration of storage by including expiration information in the response to the push
-        request.
-      </t>
-      <t>
-        Messages that were stored and not delivered to a client MAY be delivered when a client
-        commences monitoring.  These messages should include a Last-Modified header field.  If a
-        server stores push messages, a GET request to a channel URI returns the last message sent by
-        an application to that channel.
-      </t>
-      <t>
-        Push servers that store push messages might need to limit the size of push messages to avoid
-        being subject to overloading.  Push servers that don't store can stream the payload of push
-        messages to devices.  This can use HTTP/2 flow control to limit the state commitment this
-        requires.  However, push servers MAY place an upper limit on the size of push messages that
-        they permit.
-      </t>
-    </section>
 
     <section title="IANA Considerations">
       <t>
@@ -510,10 +666,11 @@
     <references title="Normative References">
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2119.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.2818.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.3553.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5988.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7231.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7235.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7234.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7240.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-alt-svc.xml"?>
