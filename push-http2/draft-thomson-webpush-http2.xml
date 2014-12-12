@@ -688,15 +688,17 @@ DATA         [stream 4] +END_STREAM
          Authorization for sending push messages is managed using capability
          URLs (see <xref target="CAP-URI"/>).  A capability URL grants access to
          a resource based solely on knowledge of the URL.  Capability URLs are
-         used for their "easy onward sharing" property, which helps avoid the
-         need to have a relationships between push services and application
-         servers.
+         used for their "easy onward sharing" and "easy client API" properties.
+         These make it possible to avoid relying on relationships between push
+         services and application servers, with the protocols necessary to build
+         and support those relationships.
        </t>
        <t>
-         Subscription URIs MUST be extremely difficult to guess.  Encoding a
-         large amount of random entropy (at least 128 bits) in the path
-         component ensures that it is difficult to successfully guess a valid
-         subscription URI.
+         A subscription URI therefore acts as a bearer token: knowledge of the
+         URI implies authorization to send push messages.  Subscription URIs
+         MUST be extremely difficult to guess.  Encoding a large amount of
+         random entropy (at least 120 bits) in the path component ensures that
+         it is difficult to successfully guess a valid subscription URI.
        </t>
      </section>
 
