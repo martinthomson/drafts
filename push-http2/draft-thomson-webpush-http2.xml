@@ -81,7 +81,7 @@
         overhead costs.
       </t>
       <t>
-        The <xref target="API">Web Push API</xref> describes an API that enables
+        The <xref target="API">W3C Web Push API</xref> describes an API that enables
         the use of a consolidated push service from web applications.  This
         expands on that work by describing a protocol that can be used to:
         <list style="symbols">
@@ -175,8 +175,8 @@
         <t>
           Examples in this document use the <xref target="RFC7230">HTTP/1.1
           message format</xref>.  Many of the exchanges can be completed using
-          HTTP/1.1, but where HTTP/2 is required, the (invalid) version "HTTP/2"
-          is used.
+          HTTP/1.1, where HTTP/2 is necessary, the more verbose frame format
+          from <xref target="I-D.ietf-httpbis-http2"/> is used.
         </t>
       </section>
     </section>
@@ -318,7 +318,7 @@ Host: push.example.net
         <artwork type="inline"><![CDATA[
 HTTP/1.1 201 Created
 Date: Thu, 11 Dec 2014 23:56:47 GMT
-Link: </reg/1G_GIPMorg_n-IrQvqZr6g>;
+Link: </monitor/1G_GIPMorg_n-IrQvqZr6g>;
         rel="urn:ietf:params:push:reg"
 Link: </subscribe/1G_GIPMorg_n-IrQvqZr6g>;
         rel="urn:ietf:params:push:sub"
@@ -355,14 +355,16 @@ Host: push.example.net
         <artwork type="inline"><![CDATA[
 HTTP/1.1 201 Created
 Date: Thu, 11 Dec 2014 23:56:52 GMT
-Location: https://s.push.example.net/LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx
+Link: </p/LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx>;
+        rel="urn:ietf:params:push"
+Location: https://push.example.net/p/LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx
 Cache-Control: max-age:864000, private
 
 ]]></artwork>
       </figure>
     </section>
 
-    <section anchor="push" title="Requesting Push Message Delivery">
+    <section anchor="send" title="Requesting Push Message Delivery">
       <t>
         A push subscription is an <xref target="RFC7230">HTTP resource</xref>.
       </t>
@@ -373,8 +375,8 @@ Cache-Control: max-age:864000, private
       </t>
       <figure>
         <artwork type="inline"><![CDATA[
-PUT /LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx HTTP/1.1
-Host: s.push.example.net
+PUT /p/LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx HTTP/1.1
+Host: push.example.net
 Content-Type: text/plain;charset=utf8
 Content-Length: 15
 
@@ -422,12 +424,42 @@ Cache-Control: max-age=600
         entity body from the most recent PUT request sent to the subscription
         resource.
       </t>
+
       <figure>
+        <preamble>
+          The following example request is made over HTTP/2.
+        </preamble>
         <artwork><![CDATA[
+HEADERS      [stream 7] +END_STREAM +END_HEADERS
+  :method        = GET
+  :path          = /monitor/1G_GIPMorg_n-IrQvqZr6g
+  :authority     = push.example.net
+]]></artwork>
+      </figure>
 
+      <figure>
+        <preamble>
+          The push service permits the request to remain outstanding.  When a
+          push message is sent by an application server, a server push is
+          associated with the initial request.  The response includes the push
+          message.
+        </preamble>
+        <artwork><![CDATA[
+PUSH_PROMISE [stream 7; promised stream 4] +END_HEADERS
+  :method        = GET
+  :path          = /p/LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx
+  :authority     = push.example.net
 
+HEADERS      [stream 4] +END_HEADERS
+  :status        = 200
+  date           = Thu, 11 Dec 2014 23:56:55 GMT
+  last-modified  = Thu, 11 Dec 2014 23:56:55 GMT
+  cache-control  = private
+  content-type   = text/plain;charset=utf8
+  content-length = 15
 
-        FBBI2+xwssjrh6hOCDr5UdKiUJR265wG
+DATA         [stream 4] +END_STREAM
+  Hello World!\r\n
 ]]></artwork>
       </figure>
 
@@ -452,9 +484,7 @@ Cache-Control: max-age=600
       <t>
         A push service is likely to have to maintain a very large number of open
         TCP connections.  Effective management of those connections can depend
-        on being able to move connections between server instances.  In some
-        cases, it may be necessary to terminate registrations or subscriptions
-        so that they can be refreshed.
+        on being able to move connections between server instances.
       </t>
 
       <section anchor="load" title="Load Management">
@@ -490,8 +520,9 @@ Cache-Control: max-age=600
         <t>
           Push messages that were stored and not delivered to a client are
           delivered when a client recommences monitoring.  Stored push messages
-          SHOULD include a Last-Modified header field indicating when delivery
-          was requested by an application server.
+          SHOULD include a Last-Modified header field (see Section 2.2 of <xref
+          target="RFC7232"/>) indicating when delivery was requested by an
+          application server.
         </t>
         <t>
           A GET request to a "subscription" resource that has expired messages
@@ -508,22 +539,29 @@ Cache-Control: max-age=600
 
       <section anchor="delete" title="Registration and Subscription Expiration">
         <t>
-          Registrations and subscriptions can expire.  If either resource has a
-          known expiration time, the push server includes expiration information
-          in responses to requests that create the resource, or in requests to the
-          resource.  Expiration is indicated using either the Expires header
-          field, or by setting a "max-age" parameter on a Cache-Control header
-          field.  The Cache-Control header field MUST also include the "private"
-          directive <xref target="RFC7234"/>.
+          In some cases, it may be necessary to terminate registrations or
+          subscriptions so that they can be refreshed.
+        </t>
+        <t>
+          A push service might choose to set a fixed expiration time.  If a
+          resource has a known expiration time, expiration information is
+          included in responses to requests that create the resource, or in
+          requests that retrieve a representation of the resource.
+        </t>
+        <t>
+          Expiration is indicated using either the Expires header field, or by
+          setting a "max-age" parameter on a Cache-Control header field (see
+          <xref target="RFC7234"/>).  The Cache-Control header field MUST also
+          include the "private" directive.
         </t>
         <t>
           A push service can invalidate a registration or subscription at any
-          time.  If a user agent has an outstanding request to the "registration"
-          resource (see <xref target="monitor"/>), this can be signaled by
-          returning a 400-series response code, such as 410 (Gone).  A push
-          service uses server push to indicate that a subscription has expired; a
-          pushed 400-series status code for the subscription resource signals the
-          termination of a subscription.
+          time.  If a user agent has an outstanding request to the
+          "registration" resource (see <xref target="monitor"/>), this can be
+          signaled by returning a 400-series response code, such as 410 (Gone).
+          A push service uses server push to indicate that a subscription has
+          expired; a pushed 400-series status code for the subscription resource
+          signals the termination of a subscription.
         </t>
         <t>
           A user agent can request that a registration or subscription be removed
@@ -532,133 +570,188 @@ Cache-Control: max-age=600
       </section>
     </section>
 
-
-    <section title="IANA Considerations">
-      <t>
-        TODO: register link relation types, as necessary.
-      </t>
-    </section>
-
     <section anchor="security" title="Security Considerations">
       <t>
-        This protocol MUST use <xref target="RFC2818">HTTP over TLS</xref>; this includes any
-        communications between device and push server, plus communications between the application
-        and the push server.  This provides confidentiality and integrity protection for
-        registrations and push message.
+        This protocol MUST use <xref target="RFC2818">HTTP over TLS</xref>; this
+        includes any communications between user agent and push service, plus
+        communications between the application and the push service.  Thus, all
+        URIs use the "https" scheme.  This provides confidentiality and
+        integrity protection for registrations and push messages from external
+        parties.
       </t>
 
-      <section title="Confidentiality from Push Server Access">
+      <section title="Confidentiality from Push Service Access">
         <t>
-          The protection afforded by TLS does not protect content from the push server.  A push
-          server is able to see and modify the content of the messages.
+          The protection afforded by TLS does not protect content from the push
+          service.  Without additional safeguards, a push service is able to see
+          and modify the content of the messages.
         </t>
         <t>
-          Applications are able to provide additional confidentiality, integrity or authentication
-          mechanisms within the push message itself.  The originating application server and the
-          device are frequently just different instances of the same application, this does not
-          require standardization.  The process of registering a channel endpoints provides a
-          convenient medium for key agreement.
+          Applications are able to provide additional confidentiality, integrity
+          or authentication mechanisms within the push message itself.  The
+          application server sending the push message and the application on the
+          user agent that receives it are frequently just different instances of
+          the same application, so no standardized protocol is needed to
+          establish a proper security context.  The process of providing the
+          application server with subscription information provides a convenient
+          medium for key agreement.
         </t>
         <t>
-          In particular, the W3C Web Push API requires that each push channel created by the browser
-          be bound to a browser generated encryption key.  Pushed messages are authenticated and
-          decrypted by the browser before delivery.  This ensures that the push server is unable to
-          examine the contents of push messages.
+          The Web Push API codifies this practice by requiring that each push
+          subscription created by the browser be bound to a browser generated
+          encryption key.  Pushed messages are authenticated and decrypted by
+          the browser before delivery to applications.  This scheme ensures that
+          the push service is unable to examine the contents of push messages.
         </t>
         <t>
-          The public key for a channel ensures that applications using a channel can identify
-          messages from unknown sources and discard them.  This depends on the public key only being
-          disclosed to entities that are authorized to send messages on the channel.  The
-          push server does not require access to this public key.
+          The public key for a subscription ensures that applications using that
+          subscription can identify messages from unknown sources and discard
+          them.  This depends on the public key only being disclosed to entities
+          that are authorized to send messages on the channel.  The push server
+          does not require access to this public key.
         </t>
      </section>
 
      <section title="Privacy Considerations">
        <t>
-         Push message confidentiality does not ensure that the identity of who is communicating and
-         when they are communicating is protected.  However, the amount of information that is
-         exposed can be limited.
+         Push message confidentiality does not ensure that the identity of who
+         is communicating and when they are communicating is protected.
+         However, the amount of information that is exposed can be limited.
        </t>
        <t>
-         The identifiers used by this protocol provide some ability to correlate communications for
-         a given device, either across applications or over time.  Most important is that
-         communications for a given device not be able to be correlated between different
-         application usages, or between different times.
+         Subscription URIs MUST NOT provide any basis to correlate
+         communications for a given user agent.  It MUST NOT be possible to
+         correlate any two subscription URIs based solely on the content of the
+         subscription URIs.  This allows a user agent to control correlation
+         across different applications, or over time.
        </t>
        <t>
-         Channel URIs established by the same device MUST NOT include any information that allows
-         them to be correlated with other channels or the device registration.  The push server is
-         the only entity that needs to be able to correlate channel URIs with device registrations.
-         Note that this can't prevent the use of traffic analysis in performing correlation.
+         In particular, user and device information MUST NOT be exposed through
+         the subscription URI.
        </t>
        <t>
-         A device MUST be able to create new registrations at any time.  Identifiers for new
-         registrations MUST NOT include any information that allows them to be correlated with other
-         registrations from the same device or user.
-       </t>
-     </section>
-
-     <section title="Denial of Service Vectors">
-       <t>
-         This protocol does not specify a single authorization framework for managing access to push
-         servers, either by devices or applications.  Thus, there is a very real possibility that
-         this could be exploited to mount denial of service attacks on the push server.  Push
-         servers MAY choose to authorize requests based on any HTTP-compatible means available, of
-         which there are numerous options.
-       </t>
-       <t>
-         Discarding unwanted messages at the device based on message authentication doesn't protect
-         against a denial of service attack on the device.  Even a relatively small number of
-         message can cause devices to exhaust batteries.  Limiting the number of entities with
-         access to push channels limits the number of entities that can generate value push requests
-         of the push server.  An application can do this by controlling the distribution of channel
-         URIs to authorized entities.
+         In addition, subscription URIs established by the same user agent MUST
+         NOT include any information that allows them to be correlated with the
+         associated registration or the user agent.  The push service is the
+         only entity that needs to be able to correlate subscriptions with a
+         registration.
+         <list style="hanging">
+           <t hangText="Note:">
+             This need not be perfect as long as the resulting anonymity set
+             (see <xref target="RFC6973"/>, Section 6.1.1) is sufficiently
+             large.  A subscription URI necessarily identifies a push service or
+             a single server instance.  It is also possible that traffic
+             analysis could be used to correlate subscriptions.
+           </t>
+         </list>
        </t>
        <t>
-         Only the push server can make this denial of service protection possible.  A push server
-         MUST generate channel URI that are extremely difficult to guess.  Encoding a large amount
-         of random entropy (at least 128 bits) in the URI path is one technique for ensuring that
-         channel URIs are able to act as bearer tokens.
-       </t>
-       <t>
-         A malicious application can use the greater resources of a push server to mount a denial of
-         service attack on devices.  Push servers SHOULD limit the rate at which push messages are
-         sent to devices.  <cref>...this suggests a mechanism whereby the server can inform devices
-         when it terminates channels or entire registrations.</cref>
-       </t>
-       <t>
-         Conversely, a push server is also able to deny service to devices.  Intentional failure to
-         deliver messages is difficult to distinguish from faults, which might occur due to
-         transient network errors, interruptions in device availability, or genuine service
-         outages.  Applications that rely on reliable message delivery need to provide means of
-         recovering from occasional failures that do not rely on push notifications.
+         A user agent MUST be able to create new registrations and subscriptions
+         with new identifiers at any time.
        </t>
      </section>
 
-     <section title="Logging Exposure">
+     <section title="Authorization">
        <t>
-         Server request logs can reveal registration and channel URIs.  Acquiring a registration URI
-         permits the creation of new channels and the receipt of messages.  Acquiring either URI
-         permits the generation of push messages.  Logging could also reveal relationships between
-         different channel URIs for the same registration, or between different registrations for
-         the same device.
+         This protocol does not define how a push service establishes whether a
+         user agent is permitted to create a registration or subscription, or
+         whether push messages can be delivered to the user agent.  A push
+         service MAY choose to authorize request based on any HTTP-compatible
+         authorization method available, of which there are numerous options.
+         The authorization process and any associated credentials are expected
+         to be configured in the user agent along with the URI for the "push
+         service".
+       </t>
+
+       <t>
+         Authorization for sending push messages is managed using capability
+         URLs (see <xref target="CAP-URI"/>).  A capability URL grants access to
+         a resource based solely on knowledge of the URL.  Capability URLs are
+         used for their "easy onward sharing" property, which helps avoid the
+         need to have a relationships between push services and application
+         servers.
        </t>
        <t>
-         End-to-end confidentiality mechanisms, such as those in <xref target="API"/>, prevent an
-         entity with a registration URI from learning the contents of push messages.  In both cases,
-         push messages that are not successfully authenticated will not be delivered by the API, but
-         this can present a denial of service risk.  Limitations on log retention and strong access
-         control mechanisms can ensure that these URIs are not learned.
+         Subscription URIs MUST be extremely difficult to guess.  Encoding a
+         large amount of random entropy (at least 128 bits) in the path
+         component ensures that it is difficult to successfully guess a valid
+         subscription URI.
+       </t>
+     </section>
+
+     <section title="Denial of Service Considerations">
+       <t>
+         Discarding unwanted messages at the user agent based on message
+         authentication doesn't protect against a denial of service attack on
+         the user agent.  Even a relatively small volume of push messages can
+         cause battery-powered devices to exhaust power reserves.  Limiting the
+         number of entities with access to push channels limits the number of
+         entities that can generate value push requests of the push server.
+       </t>
+       <t>
+         An application can limit where push messages can originate by limiting
+         the distribution of subscription URIs to authorized entities.  Ensuring
+         that subscription URIs are hard to guess ensures that only applications
+         servers that have been given a subscription URI can use it.
+       </t>
+       <t>
+         A malicious application with a valid subscription use the greater
+         resources of a push service to mount a denial of service attack on a
+         user agent.  Push service SHOULD limit the rate at which push messages
+         are sent to individual user agents.  A push service or user agent MAY
+         <xref target="delete">terminate subscriptions</xref> that receives too
+         many push messages.
+       </t>
+       <t>
+         End-to-end confidentiality mechanisms, such as those in <xref
+         target="API"/>, prevent an entity with a registration URI from learning
+         the contents of push messages.  In both cases, push messages that are
+         not successfully authenticated will not be delivered by the API, but
+         this can present a denial of service risk.
+       </t>
+       <t>
+         Conversely, a push service is also able to deny service to user agents.
+         Intentional failure to deliver messages is difficult to distinguish
+         from faults, which might occur due to transient network errors,
+         interruptions in device availability, or genuine service outages.
+         Applications that rely on reliable message delivery need to provide
+         means of recovering from occasional failures that do not rely on push
+         notifications.
+       </t>
+     </section>
+
+     <section title="Logging Risks">
+       <t>
+         Server request logs can reveal registration and subscription URIs.
+         Acquiring a registration URI permits the creation of new subscriptions,
+         as well as potentially enabling the receipt of messages.  Acquiring a
+         subscription URI permits the sending of push messages.  Logging could
+         also reveal relationships between different subscription URIs for the
+         same registration, or between different registrations for the same
+         device.
+       </t>
+       <t>
+         Limitations on log retention and strong access control mechanisms can
+         ensure that URIs are not learned by unauthorized entities.
        </t>
      </section>
 
     </section>
-<!--
-    <section anchor="ack" title="Acknowledgements">
+
+    <section title="IANA Considerations">
       <t>
+        This section
       </t>
     </section>
--->
+
+    <section anchor="ack" title="Acknowledgements">
+      <t>
+        Significant technical input to this document has been provided by Costin
+        Manolache, Robert Sparks, Mark Nottingham, Matthew Kaufman and many
+        others.
+      </t>
+    </section>
+
   </middle>
 
   <back>
@@ -670,21 +763,34 @@ Cache-Control: max-age=600
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5988.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7230.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7231.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7232.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7234.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7240.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-http2.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-httpbis-alt-svc.xml"?>
+
+      <reference anchor="CAP-URI" target="http://www.w3.org/TR/capability-urls/">
+        <front>
+          <title>Good Practices for Capability URLs</title>
+          <author initials="J." surname="Tennison" fullname="Jeni Tennison"/>
+          <date month="February" year="2014"/>
+        </front>
+        <seriesInfo name="FPWD" value="capability-urls"/>
+      </reference>
     </references>
+
     <references title="Informative References">
-      <reference anchor="API" target="https://w3c.github.io/push-api/index.html">
+      <reference anchor="API" target="https://w3c.github.io/push-api/">
         <front>
           <title>Web Push API</title>
           <author initials="B." surname="Sullivan" fullname="Bryan Sullivan"/>
           <author initials="E." surname="Fullea" fullname="Eduardo Fullea"/>
-          <date month="May" year="2014" />
+          <date month="December" year="2014" />
         </front>
-        <seriesInfo name="Editor's Draft" value="push-api" />
+        <seriesInfo name="ED" value="push-api" />
       </reference>
+
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6973.xml"?>
 
       <reference anchor="TS.3GPP.23.040">
         <front>
