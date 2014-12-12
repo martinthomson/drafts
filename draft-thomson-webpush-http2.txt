@@ -79,11 +79,11 @@ Table of Contents
      8.4.  Denial of Service Considerations  . . . . . . . . . . . .  13
      8.5.  Logging Risks . . . . . . . . . . . . . . . . . . . . . .  14
    9.  IANA Considerations . . . . . . . . . . . . . . . . . . . . .  14
-   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  14
-   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  14
-     11.1.  Normative References . . . . . . . . . . . . . . . . . .  14
-     11.2.  Informative References . . . . . . . . . . . . . . . . .  15
-   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  15
+   10. Acknowledgements  . . . . . . . . . . . . . . . . . . . . . .  15
+   11. References  . . . . . . . . . . . . . . . . . . . . . . . . .  15
+     11.1.  Normative References . . . . . . . . . . . . . . . . . .  16
+     11.2.  Informative References . . . . . . . . . . . . . . . . .  17
+   Author's Address  . . . . . . . . . . . . . . . . . . . . . . . .  17
 
 1.  Introduction
 
@@ -745,7 +745,83 @@ Internet-Draft                HTTP Web Push                December 2014
 
 9.  IANA Considerations
 
-   This section
+   This document registers three URNs for use in identifying link
+   relation types.  These are added to a new "Web Push Identifiers"
+   registry according to the procedures in Section 4 of [RFC3553]; the
+   corresponding "push" sub-namespace is entered in the "IETF URN Sub-
+   namespace for Registered Protocol Parameter Identifiers" registry.
+
+   The "Web Push Identifiers" registry operates under the IETF Review
+   policy [RFC5226].
+
+   Registry name:  Web Push Identifiers
+
+   URN Prefix:  urn:ietf:params:push
+
+   Specification:  (this document)
+
+   Respository:  [Editor/IANA note: please include a link to the final
+      registry location.]
+
+   Index value:  Values in this registry are URNs or URN prefixes that
+      start with the prefix "urn:ietf:params:push".  Each is registered
+      independently.
+
+   New registrations in the "Web Push Identifiers" are encouraged to
+   include the following information:
+
+   URN:  A complete URN or URN prefix.
+
+   Description:  A summary description.
+
+   Specification:  A reference to a specification describing the
+      semantics of the URN or URN prefix.
+
+   Contact:  Email for the person or group making the registration.
+
+
+
+Thomson                   Expires June 15, 2015                [Page 14]
+
+Internet-Draft                HTTP Web Push                December 2014
+
+
+   Index value:  As described in [RFC3553], URN prefixes that are
+      registered include a description of how the URN is constructed.
+      This is not applicable for specific URNs.
+
+   Three values are entered as the initial content of the "Web Push
+   Identifiers" registry.
+
+   URN:  urn:ietf:params:push
+
+   Description:  This link relation type is used to identify a web push
+      subscription.
+
+   Specification:  (this document)
+
+   Contact:  Martin Thomson (martin.thomson@gmail) or the Web Push WG
+      (webpush@ietf.org)
+
+   URN:  urn:ietf:params:push:reg
+
+   Description:  This link relation type is used to identify a web push
+      registration.
+
+   Specification:  (this document)
+
+   Contact:  Martin Thomson (martin.thomson@gmail) or the Web Push WG
+      (webpush@ietf.org)
+
+   URN:  urn:ietf:params:push:sub
+
+   Description:  This link relation type is used to identify a resource
+      that can be used to create new web push subscriptions.
+
+   Specification:  (this document)
+
+   Contact:  Martin Thomson (martin.thomson@gmail) or the Web Push WG
+      (webpush@ietf.org)
 
 10.  Acknowledgements
 
@@ -754,6 +830,17 @@ Internet-Draft                HTTP Web Push                December 2014
    many others.
 
 11.  References
+
+
+
+
+
+
+
+Thomson                   Expires June 15, 2015                [Page 15]
+
+Internet-Draft                HTTP Web Push                December 2014
+
 
 11.1.  Normative References
 
@@ -776,19 +863,13 @@ Internet-Draft                HTTP Web Push                December 2014
 
    [RFC2818]  Rescorla, E., "HTTP Over TLS", RFC 2818, May 2000.
 
-
-
-
-
-
-Thomson                   Expires June 15, 2015                [Page 14]
-
-Internet-Draft                HTTP Web Push                December 2014
-
-
    [RFC3553]  Mealling, M., Masinter, L., Hardie, T., and G. Klyne, "An
               IETF URN Sub-namespace for Registered Protocol
               Parameters", BCP 73, RFC 3553, June 2003.
+
+   [RFC5226]  Narten, T. and H. Alvestrand, "Guidelines for Writing an
+              IANA Considerations Section in RFCs", BCP 26, RFC 5226,
+              May 2008.
 
    [RFC5988]  Nottingham, M., "Web Linking", RFC 5988, October 2010.
 
@@ -807,6 +888,15 @@ Internet-Draft                HTTP Web Push                December 2014
               2014.
 
    [RFC7240]  Snell, J., "Prefer Header for HTTP", RFC 7240, June 2014.
+
+
+
+
+
+Thomson                   Expires June 15, 2015                [Page 16]
+
+Internet-Draft                HTTP Web Push                December 2014
+
 
 11.2.  Informative References
 
@@ -837,4 +927,26 @@ Author's Address
 
 
 
-Thomson                   Expires June 15, 2015                [Page 15]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson                   Expires June 15, 2015                [Page 17]

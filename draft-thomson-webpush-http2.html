@@ -716,7 +716,82 @@ DATA         [stream 4] +END_STREAM
 <p id="rfc.section.8.5.p.1">Server request logs can reveal registration and subscription URIs.  Acquiring a registration URI permits the creation of new subscriptions, as well as potentially enabling the receipt of messages.  Acquiring a subscription URI permits the sending of push messages.  Logging could also reveal relationships between different subscription URIs for the same registration, or between different registrations for the same device.  </p>
 <p id="rfc.section.8.5.p.2">Limitations on log retention and strong access control mechanisms can ensure that URIs are not learned by unauthorized entities.  </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> IANA Considerations</h1>
-<p id="rfc.section.9.p.1">This section </p>
+<p id="rfc.section.9.p.1">This document registers three URNs for use in identifying link relation types.  These are added to a new "Web Push Identifiers" registry according to the procedures in Section 4 of <a href="#RFC3553">[RFC3553]</a>; the corresponding "push" sub-namespace is entered in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers" registry.  </p>
+<p id="rfc.section.9.p.2">The "Web Push Identifiers" registry operates under the <a href="#RFC5226">IETF Review policy</a> <cite title="NONE">[RFC5226]</cite>.  </p>
+
+<dl>
+  <dt>Registry name:</dt>
+  <dd style="margin-left: 8">Web Push Identifiers</dd>
+  <dt>URN Prefix:</dt>
+  <dd style="margin-left: 8">urn:ietf:params:push</dd>
+  <dt>Specification:</dt>
+  <dd style="margin-left: 8">(this document)</dd>
+  <dt>Respository:</dt>
+  <dd style="margin-left: 8">[Editor/IANA note: please include a link to the final registry location.]</dd>
+  <dt>Index value:</dt>
+  <dd style="margin-left: 8">Values in this registry are URNs or URN prefixes that start with the prefix <samp>urn:ietf:params:push</samp>.  Each is registered independently.</dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.9.p.3">New registrations in the "Web Push Identifiers" are encouraged to include the following information: </p>
+
+<dl>
+  <dt>URN:</dt>
+  <dd style="margin-left: 8">A complete URN or URN prefix.</dd>
+  <dt>Description:</dt>
+  <dd style="margin-left: 8">A summary description.</dd>
+  <dt>Specification:</dt>
+  <dd style="margin-left: 8">A reference to a specification describing the semantics of the URN or URN prefix.</dd>
+  <dt>Contact:</dt>
+  <dd style="margin-left: 8">Email for the person or group making the registration.</dd>
+  <dt>Index value:</dt>
+  <dd style="margin-left: 8">As described in <a href="#RFC3553">[RFC3553]</a>, URN prefixes that are registered include a description of how the URN is constructed.  This is not applicable for specific URNs.</dd>
+</dl>
+
+<p> </p>
+<p id="rfc.section.9.p.4">Three values are entered as the initial content of the "Web Push Identifiers" registry.  </p>
+<p/>
+
+<dl>
+  <dt>URN:</dt>
+  <dd style="margin-left: 8">urn:ietf:params:push</dd>
+  <dt>Description:</dt>
+  <dd style="margin-left: 8">This link relation type is used to identify a web push subscription.</dd>
+  <dt>Specification:</dt>
+  <dd style="margin-left: 8">(this document)</dd>
+  <dt>Contact:</dt>
+  <dd style="margin-left: 8">Martin Thomson (martin.thomson@gmail) or the Web Push WG (webpush@ietf.org)</dd>
+</dl>
+
+<p> </p>
+<p/>
+
+<dl>
+  <dt>URN:</dt>
+  <dd style="margin-left: 8">urn:ietf:params:push:reg</dd>
+  <dt>Description:</dt>
+  <dd style="margin-left: 8">This link relation type is used to identify a web push registration.</dd>
+  <dt>Specification:</dt>
+  <dd style="margin-left: 8">(this document)</dd>
+  <dt>Contact:</dt>
+  <dd style="margin-left: 8">Martin Thomson (martin.thomson@gmail) or the Web Push WG (webpush@ietf.org)</dd>
+</dl>
+
+<p> </p>
+<p/>
+
+<dl>
+  <dt>URN:</dt>
+  <dd style="margin-left: 8">urn:ietf:params:push:sub</dd>
+  <dt>Description:</dt>
+  <dd style="margin-left: 8">This link relation type is used to identify a resource that can be used to create new web push subscriptions.</dd>
+  <dt>Specification:</dt>
+  <dd style="margin-left: 8">(this document)</dd>
+  <dt>Contact:</dt>
+  <dd style="margin-left: 8">Martin Thomson (martin.thomson@gmail) or the Web Push WG (webpush@ietf.org)</dd>
+</dl>
+
+<p> </p>
 <h1 id="rfc.section.10"><a href="#rfc.section.10">10.</a> <a href="#ack" id="ack">Acknowledgements</a></h1>
 <p id="rfc.section.10.p.1">Significant technical input to this document has been provided by Costin Manolache, Robert Sparks, Mark Nottingham, Matthew Kaufman and many others.  </p>
 <h1 id="rfc.references"><a href="#rfc.references">11.</a> References</h1>
@@ -758,6 +833,12 @@ DATA         [stream 4] +END_STREAM
         <b id="RFC3553">[RFC3553]</b>
       </td>
       <td class="top"><a>Mealling, M.</a>, <a>Masinter, L.</a>, <a>Hardie, T.</a> and <a>G. Klyne</a>, "<a href="http://tools.ietf.org/html/rfc3553">An IETF URN Sub-namespace for Registered Protocol Parameters</a>", BCP 73, RFC 3553, June 2003.</td>
+    </tr>
+    <tr>
+      <td class="reference">
+        <b id="RFC5226">[RFC5226]</b>
+      </td>
+      <td class="top"><a>Narten, T.</a> and <a>H. Alvestrand</a>, "<a href="http://tools.ietf.org/html/rfc5226">Guidelines for Writing an IANA Considerations Section in RFCs</a>", BCP 26, RFC 5226, May 2008.</td>
     </tr>
     <tr>
       <td class="reference">
