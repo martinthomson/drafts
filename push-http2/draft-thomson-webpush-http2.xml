@@ -42,7 +42,7 @@
     <abstract>
       <t>
         A simple protocol for the delivery of realtime events to clients is
-        described.  This scheme uses HTTP/2 push.
+        described.  This scheme uses HTTP/2 server push.
       </t>
     </abstract>
   </front>
@@ -568,6 +568,27 @@ DATA         [stream 4] +END_STREAM
           by sending a DELETE request to the corresponding URI.
         </t>
       </section>
+
+      <section title="Implications for Application Reliability">
+        <t>
+          An application developer might find it tempting to create alternative
+          mechanisms for message delivery in case the push service fails to
+          deliver a critical message.  Setting up a polling mechanism or a
+          backup messaging channel in order to compensate for these shortcomings
+          negates almost all of the advantages a push service provides.
+        </t>
+        <t>
+          Applications are encouraged to instead provide a means to detect
+          situations where push messages were not delivered and recover
+          gracefully.  For instance, an application server might include a
+          sequence number in push messages; a gap in the sequence can then be
+          used to trigger some form of state resynchronization.  For instance,
+          the missing messages might be requested from the application server
+          directly.  Push service failures are expected to be rare, therefore
+          performance optimization of any recovery mechanism might be
+          unnecessary.
+        </t>
+      </section>
     </section>
 
     <section anchor="security" title="Security Considerations">
@@ -714,9 +735,6 @@ DATA         [stream 4] +END_STREAM
          Intentional failure to deliver messages is difficult to distinguish
          from faults, which might occur due to transient network errors,
          interruptions in device availability, or genuine service outages.
-         Applications that rely on reliable message delivery need to provide
-         means of recovering from occasional failures that do not rely on push
-         notifications.
        </t>
      </section>
 
