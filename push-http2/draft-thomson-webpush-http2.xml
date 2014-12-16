@@ -318,11 +318,11 @@ Host: push.example.net
         <artwork type="inline"><![CDATA[
 HTTP/1.1 201 Created
 Date: Thu, 11 Dec 2014 23:56:47 GMT
-Link: </reg/1G_GIPMorg_n-IrQvqZr6g>;
+Link: </monitor/1G_GIPMorg_n-IrQvqZr6g>;
         rel="urn:ietf:params:push:reg"
 Link: </subscribe/1G_GIPMorg_n-IrQvqZr6g>;
         rel="urn:ietf:params:push:sub"
-Location: https://push.example.net/reg/1G_GIPMorg_n-IrQvqZr6g
+Location: https://push.example.net/monitor/1G_GIPMorg_n-IrQvqZr6g
 Cache-Control: max-age=8640000, private
 
 ]]></artwork>
