@@ -566,14 +566,21 @@ DATA         [stream 4] +END_STREAM
           A push service can invalidate a registration or subscription at any
           time.  If a user agent has an outstanding request to the
           "registration" resource (see <xref target="monitor"/>), this can be
-          signaled by returning a 400-series response code, such as 410 (Gone).
-          A push service uses server push to indicate that a subscription has
+          signaled by returning a 400-series status code, such as 410 (Gone).  A
+          push service uses server push to indicate that a subscription has
           expired; a pushed 400-series status code for the subscription resource
           signals the termination of a subscription.
         </t>
         <t>
-          A user agent can request that a registration or subscription be removed
-          by sending a DELETE request to the corresponding URI.
+          A user agent can request that a registration or subscription be
+          removed by sending a DELETE request to the corresponding URI.
+          Removing a registration causes all associated subscriptions to be
+          removed.
+        </t>
+        <t>
+          A push service MUST send a 400-series status code, such as 404 (Not
+          Found) or 410 (Gone) if an application server atttempts to send a push
+          message to a removed or expired subscription.
         </t>
       </section>
 
