@@ -41,7 +41,7 @@
 
     <abstract>
       <t>
-        A simple protocol for the delivery of realtime events to clients is
+        A simple protocol for the delivery of realtime events to user agents is
         described.  This scheme uses HTTP/2 server push.
       </t>
     </abstract>
@@ -209,11 +209,11 @@
 ]]></artwork>
       </figure>
       <t>
-        At the very beginning of the process, the device creates a registration
-        resource at the push service.  The registration is the basis of all
-        future interactions between the user agent and push service.  The
-        registration aggregates push messages that the user agent receives from
-        all subscriptions.
+        At the very beginning of the process, the user agent creates a
+        registration resource at the push service.  The registration is the
+        basis of all future interactions between the user agent and push
+        service.  The registration aggregates push messages that the user agent
+        receives from all subscriptions.
       </t>
       <t>
         The registration resource describes how the user agent is expected to
@@ -235,7 +235,7 @@
       </t>
       <t>
         Application servers use subscriptions to deliver push messages to
-        devices, via the push service.
+        user agents, via the push service.
       </t>
       <t>
         Both registrations and subscriptions have a limited lifetime.  They can
@@ -337,8 +337,8 @@ Cache-Control: max-age=8640000, private
 
     <section anchor="subscribe" title="Subscribing">
       <t>
-        A client sends a POST request to the "subscribe" resource to create a
-        new subscription.
+        A user agent sends a POST request to the "subscribe" resource to create
+        a new subscription.
       </t>
       <figure>
         <artwork type="inline"><![CDATA[
@@ -518,11 +518,11 @@ DATA         [stream 4] +END_STREAM
           subscription.
         </t>
         <t>
-          Push messages that were stored and not delivered to a client are
-          delivered when a client recommences monitoring.  Stored push messages
-          SHOULD include a Last-Modified header field (see Section 2.2 of <xref
-          target="RFC7232"/>) indicating when delivery was requested by an
-          application server.
+          Push messages that were stored and not delivered to a user agent are
+          delivered when the user agent recommences monitoring.  Stored push
+          messages SHOULD include a Last-Modified header field (see Section 2.2
+          of <xref target="RFC7232"/>) indicating when delivery was requested by
+          an application server.
         </t>
         <t>
           A GET request to a "subscription" resource that has expired messages
@@ -736,7 +736,7 @@ DATA         [stream 4] +END_STREAM
          Conversely, a push service is also able to deny service to user agents.
          Intentional failure to deliver messages is difficult to distinguish
          from faults, which might occur due to transient network errors,
-         interruptions in device availability, or genuine service outages.
+         interruptions in user agent availability, or genuine service outages.
        </t>
      </section>
 
@@ -748,7 +748,7 @@ DATA         [stream 4] +END_STREAM
          subscription URI permits the sending of push messages.  Logging could
          also reveal relationships between different subscription URIs for the
          same registration, or between different registrations for the same
-         device.
+         user agent.
        </t>
        <t>
          Limitations on log retention and strong access control mechanisms can
