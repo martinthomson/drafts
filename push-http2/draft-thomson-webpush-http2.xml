@@ -477,7 +477,8 @@ DATA         [stream 4] +END_STREAM
         return a link reference to the "registration" resource and expiration
         information in response to this request.  This request also triggers the
         delivery of all push messages that the push service has stored but not
-        yet delivered.
+        yet delivered.  The server MUST generate a server push for all stored
+        messages that have not yet been delivered.
       </t>
       <t>
         A user agent can request the last push message for a "subscription"
