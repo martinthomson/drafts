@@ -575,7 +575,9 @@ DATA         [stream 4] +END_STREAM
           A user agent can request that a registration or subscription be
           removed by sending a DELETE request to the corresponding URI.
           Removing a registration causes all associated subscriptions to be
-          removed.
+          removed.  Requests to delete a subscription MUST be authenticated; the
+          URI for subscriptions will be known by multiple entities, most of whom
+          will not be authorized to remove the subscription.
         </t>
         <t>
           A push service MUST send a 400-series status code, such as 404 (Not
