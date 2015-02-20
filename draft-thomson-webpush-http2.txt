@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                       December 16, 2014
-Expires: June 19, 2015
+Intended status: Standards Track                       February 20, 2015
+Expires: August 24, 2015
 
 
                  Generic Event Delivery Using HTTP Push
@@ -13,8 +13,8 @@ Expires: June 19, 2015
 
 Abstract
 
-   A simple protocol for the delivery of realtime events to clients is
-   described.  This scheme uses HTTP/2 server push.
+   A simple protocol for the delivery of realtime events to user agents
+   is described.  This scheme uses HTTP/2 server push.
 
 Status of This Memo
 
@@ -31,11 +31,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on June 19, 2015.
+   This Internet-Draft will expire on August 24, 2015.
 
 Copyright Notice
 
-   Copyright (c) 2014 IETF Trust and the persons identified as the
+   Copyright (c) 2015 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 1]
+Thomson                  Expires August 24, 2015                [Page 1]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
 Table of Contents
@@ -69,12 +69,12 @@ Table of Contents
    5.  Requesting Push Message Delivery  . . . . . . . . . . . . . .   7
    6.  Receiving Push Messages . . . . . . . . . . . . . . . . . . .   8
    7.  Operational Considerations  . . . . . . . . . . . . . . . . .   9
-     7.1.  Load Management . . . . . . . . . . . . . . . . . . . . .   9
+     7.1.  Load Management . . . . . . . . . . . . . . . . . . . . .  10
      7.2.  Push Message Expiration . . . . . . . . . . . . . . . . .  10
      7.3.  Registration and Subscription Expiration  . . . . . . . .  10
      7.4.  Implications for Application Reliability  . . . . . . . .  11
-   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  11
-     8.1.  Confidentiality from Push Service Access  . . . . . . . .  11
+   8.  Security Considerations . . . . . . . . . . . . . . . . . . .  12
+     8.1.  Confidentiality from Push Service Access  . . . . . . . .  12
      8.2.  Privacy Considerations  . . . . . . . . . . . . . . . . .  12
      8.3.  Authorization . . . . . . . . . . . . . . . . . . . . . .  13
      8.4.  Denial of Service Considerations  . . . . . . . . . . . .  13
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 2]
+Thomson                  Expires August 24, 2015                [Page 2]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
    Maintenance traffic tends to dominate over the long term, since
@@ -165,9 +165,9 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 3]
+Thomson                  Expires August 24, 2015                [Page 3]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
 1.1.  Conventions and Terminology
@@ -221,9 +221,9 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 4]
+Thomson                  Expires August 24, 2015                [Page 4]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
     +-------+           +--------------+       +-------------+
@@ -245,7 +245,7 @@ Internet-Draft                HTTP Web Push                December 2014
         |<---------------------|                      |
         |                      |                      |
 
-   At the very beginning of the process, the device creates a
+   At the very beginning of the process, the user agent creates a
    registration resource at the push service.  The registration is the
    basis of all future interactions between the user agent and push
    service.  The registration aggregates push messages that the user
@@ -268,7 +268,7 @@ Internet-Draft                HTTP Web Push                December 2014
    security and privacy implications.
 
    Application servers use subscriptions to deliver push messages to
-   devices, via the push service.
+   user agents, via the push service.
 
    Both registrations and subscriptions have a limited lifetime.  They
    can also be terminated by either push service or user agent at any
@@ -277,9 +277,9 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 5]
+Thomson                  Expires August 24, 2015                [Page 5]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
    described here supports any number of either resource concurrently
@@ -333,9 +333,9 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 6]
+Thomson                  Expires August 24, 2015                [Page 6]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
    The following response might be generated in response to this
@@ -357,8 +357,8 @@ Internet-Draft                HTTP Web Push                December 2014
 
 4.  Subscribing
 
-   A client sends a POST request to the "subscribe" resource to create a
-   new subscription.
+   A user agent sends a POST request to the "subscribe" resource to
+   create a new subscription.
 
    POST /subscribe/1G_GIPMorg_n-IrQvqZr6g HTTP/1.1
    Host: push.example.net
@@ -389,9 +389,9 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 7]
+Thomson                  Expires August 24, 2015                [Page 7]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
    PUT /p/LBhhw0OohO-Wl4Oi971UGsB7sdQGUibx HTTP/1.1
@@ -445,9 +445,9 @@ Internet-Draft                HTTP Web Push                December 2014
 
 
 
-Thomson                   Expires June 19, 2015                 [Page 8]
+Thomson                  Expires August 24, 2015                [Page 8]
 
-Internet-Draft                HTTP Web Push                December 2014
+Internet-Draft                HTTP Web Push                February 2015
 
 
    The push service permits the request to remain outstanding.  When a
@@ -471,13 +471,19 @@ Internet-Draft                HTTP Web Push                December 2014
    DATA         [stream 4] +END_STREAM
      Hello World!\r\n
 
+   A user agent might receive a PUSH_PROMISE for a resource for which
+   they have no active subscription.  The resulting unwanted push
+   message can be ignored, or the corresponding stream can be reset
+   (using RST_STREAM) to avoid expending bandwidth.
+
    A user agent can request the contents of the "registration" resource
    immediately by including a Prefer header field [RFC7240] with a
    "wait" parameter set to "0".  The push server SHOULD return a link
    reference to the "registration" resource and expiration information
    in response to this request.  This request also triggers the delivery
    of all push messages that the push service has stored but not yet
-   delivered.
+   delivered.  The server MUST generate a server push for all stored
+   messages that have not yet been delivered.
 
    A user agent can request the last push message for a "subscription"
    resource by sending GET requests to its URI.  A 200 (OK) status
@@ -491,20 +497,20 @@ Internet-Draft                HTTP Web Push                December 2014
    open TCP connections.  Effective management of those connections can
    depend on being able to move connections between server instances.
 
+
+
+
+
+Thomson                  Expires August 24, 2015                [Page 9]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
 7.1.  Load Management
 
    A user agent MUST support the 307 (Temporary Redirect) status code
    [RFC7231], which can be used by a push service to redistribute load
    at the time that a new registration is requested.
-
-
-
-
-
-Thomson                   Expires June 19, 2015                 [Page 9]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
    A server that wishes to redistribute load can do so using the
    alternative services mechanisms that are part of HTTP/2
@@ -526,11 +532,11 @@ Internet-Draft                HTTP Web Push                December 2014
    messages can be lost or overridden by newer messages on the same
    subscription.
 
-   Push messages that were stored and not delivered to a client are
-   delivered when a client recommences monitoring.  Stored push messages
-   SHOULD include a Last-Modified header field (see Section 2.2 of
-   [RFC7232]) indicating when delivery was requested by an application
-   server.
+   Push messages that were stored and not delivered to a user agent are
+   delivered when the user agent recommences monitoring.  Stored push
+   messages SHOULD include a Last-Modified header field (see Section 2.2
+   of [RFC7232]) indicating when delivery was requested by an
+   application server.
 
    A GET request to a "subscription" resource that has expired messages
    results in a 204 (No Content) status response, equivalent to if no
@@ -548,33 +554,40 @@ Internet-Draft                HTTP Web Push                December 2014
 
    A push service might choose to set a fixed expiration time.  If a
    resource has a known expiration time, expiration information is
+
+
+
+Thomson                  Expires August 24, 2015               [Page 10]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
    included in responses to requests that create the resource, or in
    requests that retrieve a representation of the resource.
 
    Expiration is indicated using either the Expires header field, or by
    setting a "max-age" parameter on a Cache-Control header field (see
-
-
-
-
-Thomson                   Expires June 19, 2015                [Page 10]
-
-Internet-Draft                HTTP Web Push                December 2014
-
-
    [RFC7234]).  The Cache-Control header field MUST also include the
    "private" directive.
 
    A push service can invalidate a registration or subscription at any
    time.  If a user agent has an outstanding request to the
    "registration" resource (see Section 6), this can be signaled by
-   returning a 400-series response code, such as 410 (Gone).  A push
+   returning a 400-series status code, such as 410 (Gone).  A push
    service uses server push to indicate that a subscription has expired;
    a pushed 400-series status code for the subscription resource signals
    the termination of a subscription.
 
    A user agent can request that a registration or subscription be
    removed by sending a DELETE request to the corresponding URI.
+   Removing a registration causes all associated subscriptions to be
+   removed.  Requests to delete a subscription MUST be authenticated;
+   the URI for subscriptions will be known by multiple entities, most of
+   whom will not be authorized to remove the subscription.
+
+   A push service MUST send a 400-series status code, such as 404 (Not
+   Found) or 410 (Gone) if an application server atttempts to send a
+   push message to a removed or expired subscription.
 
 7.4.  Implications for Application Reliability
 
@@ -595,6 +608,16 @@ Internet-Draft                HTTP Web Push                December 2014
    performance optimization of any recovery mechanism might be
    unnecessary.
 
+
+
+
+
+
+Thomson                  Expires August 24, 2015               [Page 11]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
 8.  Security Considerations
 
    This protocol MUST use HTTP over TLS [RFC2818]; this includes any
@@ -609,14 +632,6 @@ Internet-Draft                HTTP Web Push                December 2014
    The protection afforded by TLS does not protect content from the push
    service.  Without additional safeguards, a push service is able to
    see and modify the content of the messages.
-
-
-
-
-Thomson                   Expires June 19, 2015                [Page 11]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
    Applications are able to provide additional confidentiality,
    integrity or authentication mechanisms within the push message
@@ -652,6 +667,13 @@ Internet-Draft                HTTP Web Push                December 2014
    the subscription URIs.  This allows a user agent to control
    correlation across different applications, or over time.
 
+
+
+Thomson                  Expires August 24, 2015               [Page 12]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
    In particular, user and device information MUST NOT be exposed
    through the subscription URI.
 
@@ -666,13 +688,6 @@ Internet-Draft                HTTP Web Push                December 2014
       subscription URI necessarily identifies a push service or a single
       server instance.  It is also possible that traffic analysis could
       be used to correlate subscriptions.
-
-
-
-Thomson                   Expires June 19, 2015                [Page 12]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
    A user agent MUST be able to create new registrations and
    subscriptions with new identifiers at any time.
@@ -707,6 +722,14 @@ Internet-Draft                HTTP Web Push                December 2014
    Discarding unwanted messages at the user agent based on message
    authentication doesn't protect against a denial of service attack on
    the user agent.  Even a relatively small volume of push messages can
+
+
+
+Thomson                  Expires August 24, 2015               [Page 13]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
    cause battery-powered devices to exhaust power reserves.  Limiting
    the number of entities with access to push channels limits the number
    of entities that can generate value push requests of the push server.
@@ -721,15 +744,6 @@ Internet-Draft                HTTP Web Push                December 2014
    resources of a push service to mount a denial of service attack on a
    user agent.  Push service SHOULD limit the rate at which push
    messages are sent to individual user agents.  A push service or user
-
-
-
-
-Thomson                   Expires June 19, 2015                [Page 13]
-
-Internet-Draft                HTTP Web Push                December 2014
-
-
    agent MAY terminate subscriptions (Section 7.3) that receives too
    many push messages.
 
@@ -742,7 +756,7 @@ Internet-Draft                HTTP Web Push                December 2014
    Conversely, a push service is also able to deny service to user
    agents.  Intentional failure to deliver messages is difficult to
    distinguish from faults, which might occur due to transient network
-   errors, interruptions in device availability, or genuine service
+   errors, interruptions in user agent availability, or genuine service
    outages.
 
 8.5.  Logging Risks
@@ -753,7 +767,7 @@ Internet-Draft                HTTP Web Push                December 2014
    messages.  Acquiring a subscription URI permits the sending of push
    messages.  Logging could also reveal relationships between different
    subscription URIs for the same registration, or between different
-   registrations for the same device.
+   registrations for the same user agent.
 
    Limitations on log retention and strong access control mechanisms can
    ensure that URIs are not learned by unauthorized entities.
@@ -763,6 +777,15 @@ Internet-Draft                HTTP Web Push                December 2014
    This document registers three URNs for use in identifying link
    relation types.  These are added to a new "Web Push Identifiers"
    registry according to the procedures in Section 4 of [RFC3553]; the
+
+
+
+
+Thomson                  Expires August 24, 2015               [Page 14]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
    corresponding "push" sub-namespace is entered in the "IETF URN Sub-
    namespace for Registered Protocol Parameter Identifiers" registry.
 
@@ -777,14 +800,6 @@ Internet-Draft                HTTP Web Push                December 2014
 
    Respository:  [Editor/IANA note: please include a link to the final
       registry location.]
-
-
-
-
-Thomson                   Expires June 19, 2015                [Page 14]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
    Index value:  Values in this registry are URNs or URN prefixes that
       start with the prefix "urn:ietf:params:push".  Each is registered
@@ -819,6 +834,14 @@ Internet-Draft                HTTP Web Push                December 2014
    Contact:  Martin Thomson (martin.thomson@gmail) or the Web Push WG
       (webpush@ietf.org)
 
+
+
+
+Thomson                  Expires August 24, 2015               [Page 15]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
    URN:  urn:ietf:params:push:reg
 
    Description:  This link relation type is used to identify a web push
@@ -833,14 +856,6 @@ Internet-Draft                HTTP Web Push                December 2014
 
    Description:  This link relation type is used to identify a resource
       that can be used to create new web push subscriptions.
-
-
-
-
-Thomson                   Expires June 19, 2015                [Page 15]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
    Specification:  (this document)
 
@@ -863,18 +878,25 @@ Internet-Draft                HTTP Web Push                December 2014
 
    [I-D.ietf-httpbis-alt-svc]
               Nottingham, M., McManus, P., and J. Reschke, "HTTP
-              Alternative Services", draft-ietf-httpbis-alt-svc-05 (work
-              in progress), December 2014.
+              Alternative Services", draft-ietf-httpbis-alt-svc-06 (work
+              in progress), February 2015.
 
    [I-D.ietf-httpbis-http2]
               Belshe, M., Peon, R., and M. Thomson, "Hypertext Transfer
-              Protocol version 2", draft-ietf-httpbis-http2-16 (work in
-              progress), November 2014.
+              Protocol version 2", draft-ietf-httpbis-http2-17 (work in
+              progress), February 2015.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119, March 1997.
 
    [RFC2818]  Rescorla, E., "HTTP Over TLS", RFC 2818, May 2000.
+
+
+
+Thomson                  Expires August 24, 2015               [Page 16]
+
+Internet-Draft                HTTP Web Push                February 2015
+
 
    [RFC3553]  Mealling, M., Masinter, L., Hardie, T., and G. Klyne, "An
               IETF URN Sub-namespace for Registered Protocol
@@ -889,14 +911,6 @@ Internet-Draft                HTTP Web Push                December 2014
    [RFC7230]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
               (HTTP/1.1): Message Syntax and Routing", RFC 7230, June
               2014.
-
-
-
-
-Thomson                   Expires June 19, 2015                [Page 16]
-
-Internet-Draft                HTTP Web Push                December 2014
-
 
    [RFC7231]  Fielding, R. and J. Reschke, "Hypertext Transfer Protocol
               (HTTP/1.1): Semantics and Content", RFC 7231, June 2014.
@@ -926,6 +940,20 @@ Internet-Draft                HTTP Web Push                December 2014
 
 Author's Address
 
+
+
+
+
+
+
+
+
+
+Thomson                  Expires August 24, 2015               [Page 17]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
    Martin Thomson
    Mozilla
    331 E Evelyn Street
@@ -949,4 +977,32 @@ Author's Address
 
 
 
-Thomson                   Expires June 19, 2015                [Page 17]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Thomson                  Expires August 24, 2015               [Page 18]

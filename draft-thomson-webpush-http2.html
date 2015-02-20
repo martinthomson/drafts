@@ -406,9 +406,9 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-webpush-http2-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2014-12-16" />
-  <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 server push.  " />
-  <meta name="description" content="A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 server push.  " />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-2-20" />
+  <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
+  <meta name="description" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
 
 </head>
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">December 16, 2014</td>
+  <td class="right">February 20, 2015</td>
 </tr>
 <tr>
-  <td class="left">Expires: June 19, 2015</td>
+  <td class="left">Expires: August 24, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -444,18 +444,18 @@
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>A simple protocol for the delivery of realtime events to clients is described.  This scheme uses HTTP/2 server push.  </p>
+<p>A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on June 19, 2015.</p>
+<p>This Internet-Draft will expire on August 24, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
-<p>Copyright (c) 2014 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
+<p>Copyright (c) 2015 IETF Trust and the persons identified as the document authors.  All rights reserved.</p>
 <p>This document is subject to BCP 78 and the IETF Trust's Legal Provisions Relating to IETF Documents (http://trustee.ietf.org/license-info) in effect on the date of publication of this document.  Please review these documents carefully, as they describe your rights and restrictions with respect to this document.  Code Components extracted from this document must include Simplified BSD License text as described in Section 4.e of the Trust Legal Provisions and are provided without warranty as described in the Simplified BSD License.</p>
 
   
@@ -556,11 +556,11 @@
      |&lt;---------------------|                      |
      |                      |                      |
 </pre>
-<p id="rfc.section.2.p.2">At the very beginning of the process, the device creates a registration resource at the push service.  The registration is the basis of all future interactions between the user agent and push service.  The registration aggregates push messages that the user agent receives from all subscriptions.  </p>
+<p id="rfc.section.2.p.2">At the very beginning of the process, the user agent creates a registration resource at the push service.  The registration is the basis of all future interactions between the user agent and push service.  The registration aggregates push messages that the user agent receives from all subscriptions.  </p>
 <p id="rfc.section.2.p.3">The registration resource describes how the user agent is expected to monitor for incoming push messages.  This document describes one such mechanism, though more efficient means of monitoring could be defined.  </p>
 <p id="rfc.section.2.p.4">The registration resource also describes how the user agent might create a subscription.  A new subscription is created by the user agent and then distributed by to an application server.  </p>
 <p id="rfc.section.2.p.5">It is expected that a different subscription will be provided to each application; however, there are no inherent cardinality constraints in the protocol.  Multiple subscriptions might be created for the same application, or multiple applications could use the same subscription.  Note however that sharing subscriptions can have security and privacy implications.  </p>
-<p id="rfc.section.2.p.6">Application servers use subscriptions to deliver push messages to devices, via the push service.  </p>
+<p id="rfc.section.2.p.6">Application servers use subscriptions to deliver push messages to user agents, via the push service.  </p>
 <p id="rfc.section.2.p.7">Both registrations and subscriptions have a limited lifetime.  They can also be terminated by either push service or user agent at any time.  User agents and application servers need to be prepared to handle changes in registrations and subscriptions; the protocol described here supports any number of either resource concurrently with minimal overhead.  </p>
 <h1 id="rfc.section.2.1"><a href="#rfc.section.2.1">2.1.</a> <a href="#resources" id="resources">HTTP Resources</a></h1>
 <p id="rfc.section.2.1.p.1">This protocol uses <a href="#RFC7230">HTTP resources</a> <cite title="NONE">[RFC7230]</cite> and <a href="#RFC5988">link relations</a> <cite title="NONE">[RFC5988]</cite>.  The following resources are defined: </p>
@@ -601,7 +601,7 @@ Cache-Control: max-age=8640000, private
 </pre>
 <p id="rfc.section.3.p.4">The push server SHOULD provide a URI for the associated "subscribe" resource and any known expiration information in response to requests to the "registration" resource.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#subscribe" id="subscribe">Subscribing</a></h1>
-<p id="rfc.section.4.p.1">A client sends a POST request to the "subscribe" resource to create a new subscription.  </p>
+<p id="rfc.section.4.p.1">A user agent sends a POST request to the "subscribe" resource to create a new subscription.  </p>
 <pre>
 POST /subscribe/1G_GIPMorg_n-IrQvqZr6g HTTP/1.1
 Host: push.example.net
@@ -665,8 +665,9 @@ HEADERS      [stream 4] +END_HEADERS
 DATA         [stream 4] +END_STREAM
   Hello World!\r\n
 </pre>
-<p id="rfc.section.6.p.3">A user agent can request the contents of the "registration" resource immediately by including a <a href="#RFC7240">Prefer header field</a> <cite title="NONE">[RFC7240]</cite> with a "wait" parameter set to "0".  The push server SHOULD return a link reference to the "registration" resource and expiration information in response to this request.  This request also triggers the delivery of all push messages that the push service has stored but not yet delivered.  </p>
-<p id="rfc.section.6.p.4">A user agent can request the last push message for a "subscription" resource by sending GET requests to its URI.  A 200 (OK) status response contains the last push message sent to the subscription.  A 204 (No Content) status code indicates that no messages are presently available.  </p>
+<p id="rfc.section.6.p.3">A user agent might receive a PUSH_PROMISE for a resource for which they have no active subscription.  The resulting unwanted push message can be ignored, or the corresponding stream can be reset (using RST_STREAM) to avoid expending bandwidth.  </p>
+<p id="rfc.section.6.p.4">A user agent can request the contents of the "registration" resource immediately by including a <a href="#RFC7240">Prefer header field</a> <cite title="NONE">[RFC7240]</cite> with a "wait" parameter set to "0".  The push server SHOULD return a link reference to the "registration" resource and expiration information in response to this request.  This request also triggers the delivery of all push messages that the push service has stored but not yet delivered.  The server MUST generate a server push for all stored messages that have not yet been delivered.  </p>
+<p id="rfc.section.6.p.5">A user agent can request the last push message for a "subscription" resource by sending GET requests to its URI.  A 200 (OK) status response contains the last push message sent to the subscription.  A 204 (No Content) status code indicates that no messages are presently available.  </p>
 <h1 id="rfc.section.7"><a href="#rfc.section.7">7.</a> <a href="#operational" id="operational">Operational Considerations</a></h1>
 <p id="rfc.section.7.p.1">A push service is likely to have to maintain a very large number of open TCP connections.  Effective management of those connections can depend on being able to move connections between server instances.  </p>
 <h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#load" id="load">Load Management</a></h1>
@@ -675,15 +676,16 @@ DATA         [stream 4] +END_STREAM
 <h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> <a href="#storage" id="storage">Push Message Expiration</a></h1>
 <p id="rfc.section.7.2.p.1">Push services typically store messages for some time to allow for limited recovery from transient faults.  If a push message is stored, but not delivered, the push service can indicate the probable duration of storage by including expiration information in the response to the push request.  </p>
 <p id="rfc.section.7.2.p.2">A push service is not obligated to store messages indefinitely.  If a user agent is not actively monitoring for push messages, those messages can be lost or overridden by newer messages on the same subscription.  </p>
-<p id="rfc.section.7.2.p.3">Push messages that were stored and not delivered to a client are delivered when a client recommences monitoring.  Stored push messages SHOULD include a Last-Modified header field (see Section 2.2 of <a href="#RFC7232">[RFC7232]</a>) indicating when delivery was requested by an application server.  </p>
+<p id="rfc.section.7.2.p.3">Push messages that were stored and not delivered to a user agent are delivered when the user agent recommences monitoring.  Stored push messages SHOULD include a Last-Modified header field (see Section 2.2 of <a href="#RFC7232">[RFC7232]</a>) indicating when delivery was requested by an application server.  </p>
 <p id="rfc.section.7.2.p.4">A GET request to a "subscription" resource that has expired messages results in a 204 (No Content) status response, equivalent to if no push message were ever sent.  </p>
 <p id="rfc.section.7.2.p.5">Push services might need to limit the size and number of stored push messages to avoid overloading.  In addition to using the 413 (Payload Too Large) status code for too large push messages, a push service MAY expire push messages prior to any advertised expiration time.  </p>
 <h1 id="rfc.section.7.3"><a href="#rfc.section.7.3">7.3.</a> <a href="#delete" id="delete">Registration and Subscription Expiration</a></h1>
 <p id="rfc.section.7.3.p.1">In some cases, it may be necessary to terminate registrations or subscriptions so that they can be refreshed.  </p>
 <p id="rfc.section.7.3.p.2">A push service might choose to set a fixed expiration time.  If a resource has a known expiration time, expiration information is included in responses to requests that create the resource, or in requests that retrieve a representation of the resource.  </p>
 <p id="rfc.section.7.3.p.3">Expiration is indicated using either the Expires header field, or by setting a "max-age" parameter on a Cache-Control header field (see <a href="#RFC7234">[RFC7234]</a>).  The Cache-Control header field MUST also include the "private" directive.  </p>
-<p id="rfc.section.7.3.p.4">A push service can invalidate a registration or subscription at any time.  If a user agent has an outstanding request to the "registration" resource (see <a href="#monitor">Section 6</a>), this can be signaled by returning a 400-series response code, such as 410 (Gone).  A push service uses server push to indicate that a subscription has expired; a pushed 400-series status code for the subscription resource signals the termination of a subscription.  </p>
-<p id="rfc.section.7.3.p.5">A user agent can request that a registration or subscription be removed by sending a DELETE request to the corresponding URI.  </p>
+<p id="rfc.section.7.3.p.4">A push service can invalidate a registration or subscription at any time.  If a user agent has an outstanding request to the "registration" resource (see <a href="#monitor">Section 6</a>), this can be signaled by returning a 400-series status code, such as 410 (Gone).  A push service uses server push to indicate that a subscription has expired; a pushed 400-series status code for the subscription resource signals the termination of a subscription.  </p>
+<p id="rfc.section.7.3.p.5">A user agent can request that a registration or subscription be removed by sending a DELETE request to the corresponding URI.  Removing a registration causes all associated subscriptions to be removed.  Requests to delete a subscription MUST be authenticated; the URI for subscriptions will be known by multiple entities, most of whom will not be authorized to remove the subscription.  </p>
+<p id="rfc.section.7.3.p.6">A push service MUST send a 400-series status code, such as 404 (Not Found) or 410 (Gone) if an application server atttempts to send a push message to a removed or expired subscription.  </p>
 <h1 id="rfc.section.7.4"><a href="#rfc.section.7.4">7.4.</a> Implications for Application Reliability</h1>
 <p id="rfc.section.7.4.p.1">An application developer might find it tempting to create alternative mechanisms for message delivery in case the push service fails to deliver a critical message.  Setting up a polling mechanism or a backup messaging channel in order to compensate for these shortcomings negates almost all of the advantages a push service provides.  </p>
 <p id="rfc.section.7.4.p.2">Applications are encouraged to instead provide a means to detect situations where push messages were not delivered and recover gracefully.  For instance, an application server might include a sequence number in push messages; a gap in the sequence can then be used to trigger some form of state resynchronization.  For instance, the missing messages might be requested from the application server directly.  Push service failures are expected to be rare, therefore performance optimization of any recovery mechanism might be unnecessary.  </p>
@@ -716,9 +718,9 @@ DATA         [stream 4] +END_STREAM
 <p id="rfc.section.8.4.p.2">An application can limit where push messages can originate by limiting the distribution of subscription URIs to authorized entities.  Ensuring that subscription URIs are hard to guess ensures that only applications servers that have been given a subscription URI can use it.  </p>
 <p id="rfc.section.8.4.p.3">A malicious application with a valid subscription use the greater resources of a push service to mount a denial of service attack on a user agent.  Push service SHOULD limit the rate at which push messages are sent to individual user agents.  A push service or user agent MAY <a href="#delete">terminate subscriptions</a> <cite title="NONE">[delete]</cite> that receives too many push messages.  </p>
 <p id="rfc.section.8.4.p.4">End-to-end confidentiality mechanisms, such as those in <a href="#API">[API]</a>, prevent an entity with a registration URI from learning the contents of push messages.  In both cases, push messages that are not successfully authenticated will not be delivered by the API, but this can present a denial of service risk.  </p>
-<p id="rfc.section.8.4.p.5">Conversely, a push service is also able to deny service to user agents.  Intentional failure to deliver messages is difficult to distinguish from faults, which might occur due to transient network errors, interruptions in device availability, or genuine service outages.  </p>
+<p id="rfc.section.8.4.p.5">Conversely, a push service is also able to deny service to user agents.  Intentional failure to deliver messages is difficult to distinguish from faults, which might occur due to transient network errors, interruptions in user agent availability, or genuine service outages.  </p>
 <h1 id="rfc.section.8.5"><a href="#rfc.section.8.5">8.5.</a> Logging Risks</h1>
-<p id="rfc.section.8.5.p.1">Server request logs can reveal registration and subscription URIs.  Acquiring a registration URI permits the creation of new subscriptions, as well as potentially enabling the receipt of messages.  Acquiring a subscription URI permits the sending of push messages.  Logging could also reveal relationships between different subscription URIs for the same registration, or between different registrations for the same device.  </p>
+<p id="rfc.section.8.5.p.1">Server request logs can reveal registration and subscription URIs.  Acquiring a registration URI permits the creation of new subscriptions, as well as potentially enabling the receipt of messages.  Acquiring a subscription URI permits the sending of push messages.  Logging could also reveal relationships between different subscription URIs for the same registration, or between different registrations for the same user agent.  </p>
 <p id="rfc.section.8.5.p.2">Limitations on log retention and strong access control mechanisms can ensure that URIs are not learned by unauthorized entities.  </p>
 <h1 id="rfc.section.9"><a href="#rfc.section.9">9.</a> IANA Considerations</h1>
 <p id="rfc.section.9.p.1">This document registers three URNs for use in identifying link relation types.  These are added to a new "Web Push Identifiers" registry according to the procedures in Section 4 of <a href="#RFC3553">[RFC3553]</a>; the corresponding "push" sub-namespace is entered in the "IETF URN Sub-namespace for Registered Protocol Parameter Identifiers" registry.  </p>
@@ -813,13 +815,13 @@ DATA         [stream 4] +END_STREAM
       <td class="reference">
         <b id="I-D.ietf-httpbis-alt-svc">[I-D.ietf-httpbis-alt-svc]</b>
       </td>
-      <td class="top"><a>Nottingham, M.</a>, <a>McManus, P.</a> and <a>J. Reschke</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-alt-svc-05">HTTP Alternative Services</a>", Internet-Draft draft-ietf-httpbis-alt-svc-05, December 2014.</td>
+      <td class="top"><a>Nottingham, M.</a>, <a>McManus, P.</a> and <a>J. Reschke</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-alt-svc-06">HTTP Alternative Services</a>", Internet-Draft draft-ietf-httpbis-alt-svc-06, February 2015.</td>
     </tr>
     <tr>
       <td class="reference">
         <b id="I-D.ietf-httpbis-http2">[I-D.ietf-httpbis-http2]</b>
       </td>
-      <td class="top"><a>Belshe, M.</a>, <a>Peon, R.</a> and <a>M. Thomson</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-http2-16">Hypertext Transfer Protocol version 2</a>", Internet-Draft draft-ietf-httpbis-http2-16, November 2014.</td>
+      <td class="top"><a>Belshe, M.</a>, <a>Peon, R.</a> and <a>M. Thomson</a>, "<a href="http://tools.ietf.org/html/draft-ietf-httpbis-http2-17">Hypertext Transfer Protocol version 2</a>", Internet-Draft draft-ietf-httpbis-http2-17, February 2015.</td>
     </tr>
     <tr>
       <td class="reference">
