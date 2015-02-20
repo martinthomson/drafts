@@ -8,6 +8,6 @@ sed_i := sed -i
 endif
 
 txt::
-	$(sed_i) -e 's/^   \.//' ${BASE}.txt
+	[ -f ${BASE}.txt ] && $(sed_i) -e 's/^   \.//' ${BASE}.txt
 submit::
 	$(sed_i) -e 's/^   \.//' ${BASE_NEXT}.txt
