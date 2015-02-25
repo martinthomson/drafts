@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                       February 20, 2015
-Expires: August 24, 2015
+Intended status: Standards Track                       February 25, 2015
+Expires: August 29, 2015
 
 
                  Generic Event Delivery Using HTTP Push
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on August 24, 2015.
+   This Internet-Draft will expire on August 29, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                  Expires August 24, 2015                [Page 1]
+Thomson                  Expires August 29, 2015                [Page 1]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -61,7 +61,7 @@ Internet-Draft                HTTP Web Push                February 2015
 Table of Contents
 
    1.  Introduction  . . . . . . . . . . . . . . . . . . . . . . . .   2
-     1.1.  Conventions and Terminology . . . . . . . . . . . . . . .   4
+     1.1.  Conventions and Terminology . . . . . . . . . . . . . . .   3
    2.  Overview  . . . . . . . . . . . . . . . . . . . . . . . . . .   4
      2.1.  HTTP Resources  . . . . . . . . . . . . . . . . . . . . .   6
    3.  Registration  . . . . . . . . . . . . . . . . . . . . . . . .   6
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                  Expires August 24, 2015                [Page 2]
+Thomson                  Expires August 29, 2015                [Page 2]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -135,12 +135,10 @@ Internet-Draft                HTTP Web Push                February 2015
 
    o  monitor for new push messages.
 
-   This is intentionally split into these two categories because
-   requesting the delivery of events is required for immediate use by
-   the Web Push API.  The registration, management and monitoring
-   functions are currently fulfilled by proprietary protocols; these are
-   adequate, but do not offer any of the advantages that standardization
-   affords.
+   Requesting the delivery of events is particularly important for the
+   Web Push API.  The registration, management and monitoring functions
+   are currently fulfilled by proprietary protocols; these are adequate,
+   but do not offer any of the advantages that standardization affords.
 
    The monitoring function described in this document is intended to be
    replaceable, enabling the use of monitoring schemes that are better
@@ -159,22 +157,19 @@ Internet-Draft                HTTP Web Push                February 2015
    alternative monitoring schemes is left to documents that extend this
    basic protocol.
 
-
-
-
-
-
-
-Thomson                  Expires August 24, 2015                [Page 3]
-
-Internet-Draft                HTTP Web Push                February 2015
-
-
 1.1.  Conventions and Terminology
 
    In cases where normative language needs to be emphasized, this
    document falls back on established shorthands for expressing
    interoperability requirements on implementations: the capitalized
+
+
+
+Thomson                  Expires August 29, 2015                [Page 3]
+
+Internet-Draft                HTTP Web Push                February 2015
+
+
    words "MUST", "MUST NOT", "SHOULD" and "MAY".  The meaning of these
    is described in [RFC2119].
 
@@ -221,7 +216,12 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015                [Page 4]
+
+
+
+
+
+Thomson                  Expires August 29, 2015                [Page 4]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -277,7 +277,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015                [Page 5]
+Thomson                  Expires August 29, 2015                [Page 5]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -333,7 +333,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015                [Page 6]
+Thomson                  Expires August 29, 2015                [Page 6]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -389,7 +389,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015                [Page 7]
+Thomson                  Expires August 29, 2015                [Page 7]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -445,7 +445,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015                [Page 8]
+Thomson                  Expires August 29, 2015                [Page 8]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -501,7 +501,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015                [Page 9]
+Thomson                  Expires August 29, 2015                [Page 9]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -557,7 +557,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 10]
+Thomson                  Expires August 29, 2015               [Page 10]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -613,7 +613,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 11]
+Thomson                  Expires August 29, 2015               [Page 11]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -669,7 +669,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 12]
+Thomson                  Expires August 29, 2015               [Page 12]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -725,7 +725,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 13]
+Thomson                  Expires August 29, 2015               [Page 13]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -781,7 +781,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 14]
+Thomson                  Expires August 29, 2015               [Page 14]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -837,7 +837,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 15]
+Thomson                  Expires August 29, 2015               [Page 15]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -893,7 +893,7 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 16]
+Thomson                  Expires August 29, 2015               [Page 16]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -949,7 +949,7 @@ Author's Address
 
 
 
-Thomson                  Expires August 24, 2015               [Page 17]
+Thomson                  Expires August 29, 2015               [Page 17]
 
 Internet-Draft                HTTP Web Push                February 2015
 
@@ -1005,4 +1005,4 @@ Internet-Draft                HTTP Web Push                February 2015
 
 
 
-Thomson                  Expires August 24, 2015               [Page 18]
+Thomson                  Expires August 29, 2015               [Page 18]

@@ -406,7 +406,7 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-webpush-http2-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2015-2-20" />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-2-25" />
   <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
   <meta name="description" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">February 20, 2015</td>
+  <td class="right">February 25, 2015</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 24, 2015</td>
+  <td class="left">Expires: August 29, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -451,7 +451,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 24, 2015.</p>
+<p>This Internet-Draft will expire on August 29, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -507,7 +507,7 @@
 </ul>
 
 <p> </p>
-<p id="rfc.section.1.p.6">This is intentionally split into these two categories because requesting the delivery of events is required for immediate use by the Web Push API.  The registration, management and monitoring functions are currently fulfilled by proprietary protocols; these are adequate, but do not offer any of the advantages that standardization affords.  </p>
+<p id="rfc.section.1.p.6">Requesting the delivery of events is particularly important for the Web Push API.  The registration, management and monitoring functions are currently fulfilled by proprietary protocols; these are adequate, but do not offer any of the advantages that standardization affords.  </p>
 <p id="rfc.section.1.p.7">The monitoring function described in this document is intended to be replaceable, enabling the use of monitoring schemes that are better optimized for the network environment and the user agent.  For instance, using notification systems like the <a href="#TS.3GPP.23.040">3GPP Short Message Service (SMS)</a> <cite title="NONE">[TS.3GPP.23.040]</cite> can take advantage of the native paging capabilities of a cellular network, avoiding the ongoing maintainence cost of a persistent TCP connection.  </p>
 <p id="rfc.section.1.p.8">This document intentionally does not describe how a push service is discovered.  Discovery of push services is left for future efforts, if it turns out to be necessary at all.  User agents are expected to be configured with a URL for a push service.  </p>
 <p id="rfc.section.1.p.9">Similarly, discovery of support for and negotiation of use of alternative monitoring schemes is left to documents that extend this basic protocol.  </p>
