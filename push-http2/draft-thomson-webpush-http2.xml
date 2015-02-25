@@ -100,9 +100,8 @@
         </list>
       </t>
       <t>
-        This is intentionally split into these two categories because requesting
-        the delivery of events is required for immediate use by the Web Push
-        API.  The registration, management and monitoring functions are
+        Requesting the delivery of events is particularly important for the Web
+        Push API.  The registration, management and monitoring functions are
         currently fulfilled by proprietary protocols; these are adequate, but do
         not offer any of the advantages that standardization affords.
       </t>
