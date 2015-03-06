@@ -890,7 +890,8 @@ DATA         [stream 4] +END_STREAM
           <title>Web Push API</title>
           <author initials="B." surname="Sullivan" fullname="Bryan Sullivan"/>
           <author initials="E." surname="Fullea" fullname="Eduardo Fullea"/>
-          <date month="December" year="2014" />
+          <author initials="M." surname="van Ouwerkerk" fullname="Michael van Ouwerkerk"/>
+          <date month="February" year="2015" />
         </front>
         <seriesInfo name="ED" value="push-api" />
       </reference>
