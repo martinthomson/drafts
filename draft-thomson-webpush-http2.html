@@ -401,12 +401,12 @@
 <link href="#rfc.authors" rel="Chapter"/>
 
 
-  <meta name="generator" content="xml2rfc version 2.4.8 - http://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.4.9 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-webpush-http2-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2015-2-25" />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-3-6" />
   <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
   <meta name="description" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">February 25, 2015</td>
+  <td class="right">March 6, 2015</td>
 </tr>
 <tr>
-  <td class="left">Expires: August 29, 2015</td>
+  <td class="left">Expires: September 7, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -451,7 +451,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on August 29, 2015.</p>
+<p>This Internet-Draft will expire on September 7, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -464,30 +464,30 @@
   <ul class="toc">
 
   	<li>1.   <a href="#rfc.section.1">Introduction</a></li>
-<li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
-<li>2.   <a href="#rfc.section.2">Overview</a></li>
-<li>2.1.   <a href="#rfc.section.2.1">HTTP Resources</a></li>
-<li>3.   <a href="#rfc.section.3">Registration</a></li>
+<ul><li>1.1.   <a href="#rfc.section.1.1">Conventions and Terminology</a></li>
+</ul><li>2.   <a href="#rfc.section.2">Overview</a></li>
+<ul><li>2.1.   <a href="#rfc.section.2.1">HTTP Resources</a></li>
+</ul><li>3.   <a href="#rfc.section.3">Registration</a></li>
 <li>4.   <a href="#rfc.section.4">Subscribing</a></li>
 <li>5.   <a href="#rfc.section.5">Requesting Push Message Delivery</a></li>
 <li>6.   <a href="#rfc.section.6">Receiving Push Messages</a></li>
 <li>7.   <a href="#rfc.section.7">Operational Considerations</a></li>
-<li>7.1.   <a href="#rfc.section.7.1">Load Management</a></li>
+<ul><li>7.1.   <a href="#rfc.section.7.1">Load Management</a></li>
 <li>7.2.   <a href="#rfc.section.7.2">Push Message Expiration</a></li>
 <li>7.3.   <a href="#rfc.section.7.3">Registration and Subscription Expiration</a></li>
 <li>7.4.   <a href="#rfc.section.7.4">Implications for Application Reliability</a></li>
-<li>8.   <a href="#rfc.section.8">Security Considerations</a></li>
-<li>8.1.   <a href="#rfc.section.8.1">Confidentiality from Push Service Access</a></li>
+</ul><li>8.   <a href="#rfc.section.8">Security Considerations</a></li>
+<ul><li>8.1.   <a href="#rfc.section.8.1">Confidentiality from Push Service Access</a></li>
 <li>8.2.   <a href="#rfc.section.8.2">Privacy Considerations</a></li>
 <li>8.3.   <a href="#rfc.section.8.3">Authorization</a></li>
 <li>8.4.   <a href="#rfc.section.8.4">Denial of Service Considerations</a></li>
 <li>8.5.   <a href="#rfc.section.8.5">Logging Risks</a></li>
-<li>9.   <a href="#rfc.section.9">IANA Considerations</a></li>
+</ul><li>9.   <a href="#rfc.section.9">IANA Considerations</a></li>
 <li>10.   <a href="#rfc.section.10">Acknowledgements</a></li>
 <li>11.   <a href="#rfc.references">References</a></li>
-<li>11.1.   <a href="#rfc.references.1">Normative References</a></li>
+<ul><li>11.1.   <a href="#rfc.references.1">Normative References</a></li>
 <li>11.2.   <a href="#rfc.references.2">Informative References</a></li>
-<li><a href="#rfc.authors">Author's Address</a></li>
+</ul><li><a href="#rfc.authors">Author's Address</a></li>
 
 
   </ul>
@@ -892,7 +892,7 @@ DATA         [stream 4] +END_STREAM
       <td class="reference">
         <b id="API">[API]</b>
       </td>
-      <td class="top"><a>Sullivan, B.</a> and <a>E. Fullea</a>, "<a href="https://w3c.github.io/push-api/">Web Push API</a>", ED push-api, December 2014.</td>
+      <td class="top"><a>Sullivan, B.</a>, <a>Fullea, E.</a> and <a>M. van Ouwerkerk</a>, "<a href="https://w3c.github.io/push-api/">Web Push API</a>", ED push-api, February 2015.</td>
     </tr>
     <tr>
       <td class="reference">
