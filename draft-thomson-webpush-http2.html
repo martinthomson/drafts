@@ -401,12 +401,12 @@
 <link href="#rfc.authors" rel="Chapter"/>
 
 
-  <meta name="generator" content="xml2rfc version 2.4.9 - http://tools.ietf.org/tools/xml2rfc" />
+  <meta name="generator" content="xml2rfc version 2.4.10 - http://tools.ietf.org/tools/xml2rfc" />
   <link rel="schema.dct" href="http://purl.org/dc/terms/" />
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-thomson-webpush-http2-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2015-3-6" />
+  <meta name="dct.issued" scheme="ISO8601" content="2015-3-10" />
   <meta name="dct.abstract" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
   <meta name="description" content="A simple protocol for the delivery of realtime events to user agents is described.  This scheme uses HTTP/2 server push.  " />
 
@@ -427,10 +427,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">March 6, 2015</td>
+  <td class="right">March 10, 2015</td>
 </tr>
 <tr>
-  <td class="left">Expires: September 7, 2015</td>
+  <td class="left">Expires: September 11, 2015</td>
   <td class="right"></td>
 </tr>
 
@@ -451,7 +451,7 @@
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on September 7, 2015.</p>
+<p>This Internet-Draft will expire on September 11, 2015.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -672,7 +672,7 @@ DATA         [stream 4] +END_STREAM
 <p id="rfc.section.7.p.1">A push service is likely to have to maintain a very large number of open TCP connections.  Effective management of those connections can depend on being able to move connections between server instances.  </p>
 <h1 id="rfc.section.7.1"><a href="#rfc.section.7.1">7.1.</a> <a href="#load" id="load">Load Management</a></h1>
 <p id="rfc.section.7.1.p.1">A user agent MUST support the 307 (Temporary Redirect) status code <a href="#RFC7231">[RFC7231]</a>, which can be used by a push service to redistribute load at the time that a new registration is requested.  </p>
-<p id="rfc.section.7.1.p.2">A server that wishes to redistribute load can do so using the alternative services mechanisms that are part of HTTP/2 <a href="#I-D.ietf-httpbis-alt-svc">[I-D.ietf-httpbis-alt-svc]</a>.  Alternative services allows for redistribution of load whilst maintaining the same URIs for various resources.  User agents can ensure a graceful transition by using the GOAWAY frame once it has established a replacement connection.  </p>
+<p id="rfc.section.7.1.p.2">A server that wishes to redistribute load can do so using alternative services <a href="#I-D.ietf-httpbis-alt-svc">[I-D.ietf-httpbis-alt-svc]</a>.  Alternative services allows for redistribution of load whilst maintaining the same URIs for various resources.  User agents can ensure a graceful transition by using the GOAWAY frame once it has established a replacement connection.  </p>
 <h1 id="rfc.section.7.2"><a href="#rfc.section.7.2">7.2.</a> <a href="#storage" id="storage">Push Message Expiration</a></h1>
 <p id="rfc.section.7.2.p.1">Push services typically store messages for some time to allow for limited recovery from transient faults.  If a push message is stored, but not delivered, the push service can indicate the probable duration of storage by including expiration information in the response to the push request.  </p>
 <p id="rfc.section.7.2.p.2">A push service is not obligated to store messages indefinitely.  If a user agent is not actively monitoring for push messages, those messages can be lost or overridden by newer messages on the same subscription.  </p>

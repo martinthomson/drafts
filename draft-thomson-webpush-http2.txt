@@ -4,8 +4,8 @@
 
 WEBPUSH                                                       M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                           March 6, 2015
-Expires: September 7, 2015
+Intended status: Standards Track                          March 10, 2015
+Expires: September 11, 2015
 
 
                  Generic Event Delivery Using HTTP Push
@@ -31,7 +31,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on September 7, 2015.
+   This Internet-Draft will expire on September 11, 2015.
 
 Copyright Notice
 
@@ -53,7 +53,7 @@ Copyright Notice
 
 
 
-Thomson                 Expires September 7, 2015               [Page 1]
+Thomson                Expires September 11, 2015               [Page 1]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -109,7 +109,7 @@ Table of Contents
 
 
 
-Thomson                 Expires September 7, 2015               [Page 2]
+Thomson                Expires September 11, 2015               [Page 2]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -165,7 +165,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015               [Page 3]
+Thomson                Expires September 11, 2015               [Page 3]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -221,7 +221,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015               [Page 4]
+Thomson                Expires September 11, 2015               [Page 4]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -277,7 +277,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015               [Page 5]
+Thomson                Expires September 11, 2015               [Page 5]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -333,7 +333,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015               [Page 6]
+Thomson                Expires September 11, 2015               [Page 6]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -389,7 +389,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015               [Page 7]
+Thomson                Expires September 11, 2015               [Page 7]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -445,7 +445,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015               [Page 8]
+Thomson                Expires September 11, 2015               [Page 8]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -501,7 +501,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015               [Page 9]
+Thomson                Expires September 11, 2015               [Page 9]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -512,9 +512,8 @@ Internet-Draft                HTTP Web Push                   March 2015
    [RFC7231], which can be used by a push service to redistribute load
    at the time that a new registration is requested.
 
-   A server that wishes to redistribute load can do so using the
-   alternative services mechanisms that are part of HTTP/2
-   [I-D.ietf-httpbis-alt-svc].  Alternative services allows for
+   A server that wishes to redistribute load can do so using alternative
+   services [I-D.ietf-httpbis-alt-svc].  Alternative services allows for
    redistribution of load whilst maintaining the same URIs for various
    resources.  User agents can ensure a graceful transition by using the
    GOAWAY frame once it has established a replacement connection.
@@ -557,7 +556,8 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 10]
+
+Thomson                Expires September 11, 2015              [Page 10]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -613,7 +613,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 11]
+Thomson                Expires September 11, 2015              [Page 11]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -669,7 +669,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 12]
+Thomson                Expires September 11, 2015              [Page 12]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -725,7 +725,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 13]
+Thomson                Expires September 11, 2015              [Page 13]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -781,7 +781,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 14]
+Thomson                Expires September 11, 2015              [Page 14]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -837,7 +837,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 15]
+Thomson                Expires September 11, 2015              [Page 15]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -893,7 +893,7 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 16]
+Thomson                Expires September 11, 2015              [Page 16]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -949,7 +949,7 @@ Author's Address
 
 
 
-Thomson                 Expires September 7, 2015              [Page 17]
+Thomson                Expires September 11, 2015              [Page 17]
 
 Internet-Draft                HTTP Web Push                   March 2015
 
@@ -1005,4 +1005,4 @@ Internet-Draft                HTTP Web Push                   March 2015
 
 
 
-Thomson                 Expires September 7, 2015              [Page 18]
+Thomson                Expires September 11, 2015              [Page 18]
