@@ -501,12 +501,12 @@ DATA         [stream 4] +END_STREAM
           redistribute load at the time that a new registration is requested.
         </t>
         <t>
-          A server that wishes to redistribute load can do so using the
-          alternative services mechanisms that are part of HTTP/2 <xref
-          target="I-D.ietf-httpbis-alt-svc"/>.  Alternative services allows for
-          redistribution of load whilst maintaining the same URIs for various
-          resources.  User agents can ensure a graceful transition by using the
-          GOAWAY frame once it has established a replacement connection.
+          A server that wishes to redistribute load can do so using alternative
+          services <xref target="I-D.ietf-httpbis-alt-svc"/>.  Alternative
+          services allows for redistribution of load whilst maintaining the same
+          URIs for various resources.  User agents can ensure a graceful
+          transition by using the GOAWAY frame once it has established a
+          replacement connection.
         </t>
       </section>
 
