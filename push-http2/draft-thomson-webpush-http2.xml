@@ -222,7 +222,7 @@
       <t>
         The registration resource also describes how the user agent might create
         a subscription.  A new subscription is created by the user agent and
-        then distributed by to an application server.
+        then distributed to an application server.
       </t>
       <t>
         It is expected that a different subscription will be provided to each
