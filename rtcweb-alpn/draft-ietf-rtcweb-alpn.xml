@@ -89,15 +89,16 @@
           </t>
           <t hangText="c-webrtc:">
             The DTLS session is used for confidential WebRTC communications, where peers agree to
-            maintain the confidentiality of the communications, as described in <xref
-            target="confidentiality"/>.
+            maintain the confidentiality of the media, as described in <xref
+            target="confidentiality"/>.  However, data provided over data channels does not receive
+            confidentiality protection.
           </t>
         </list>
       </t>
       <t>
         Both identifiers describe the same basic protocol: a DTLS session that is used to provide
         keys for an SRTP session in combination with WebRTC data channels.  Either SRTP or data
-        channels MAY be absent.  The data channels send <xref target="RFC4960">Stream Control
+        channels could be absent.  The data channels send <xref target="RFC4960">Stream Control
         Transmission Protocol (SCTP)</xref> over the DTLS record layer, which can be multiplexed
         with SRTP on the same UDP flow.  WebRTC requires the use of <xref
         target="RFC5245">Interactive Communication Establishment (ICE)</xref> to establish the UDP
@@ -110,7 +111,7 @@
       <t>
         There is no functional difference between the identifiers except that an endpoint
         negotiating <spanx style="verb">c-webrtc</spanx> makes a promise to preserve the
-        confidentiality of the data it receives.
+        confidentiality of the media it receives.
       </t>
       <t>
         A peer that is not aware of whether it needs to request confidentiality can use either form.
@@ -128,16 +129,9 @@
         question are user agents (or browsers) and not the signaling application.
       </t>
       <t>
-        A browser is required to enforce this control using isolation controls similar to those used
-        in cross-origin protections.  These protections ensure that media is protected from
-        applications.  Applications are not able to read or modify the contents of a protected flow
-        of media.  Media that is produced from a session using the <spanx
-        style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
-      </t>
-      <t>
         Without some form of indication that is securely bound to the session, a WebRTC endpoint is
         unable to properly distinguish between session that requires confidentiality protection and
-        one that does not.
+        one that does not.  The ALPN identifier provides that signal.
       </t>
       <t>
         A browser is required to enforce confidentiality using isolation controls similar to those
