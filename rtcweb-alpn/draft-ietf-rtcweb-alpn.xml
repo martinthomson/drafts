@@ -207,24 +207,29 @@
     <section anchor="iana" title="IANA Considerations">
       <t>
         The following two entries are added to the "Application Layer Protocol Negotiation (ALPN)
-        Protocol IDs" registry established by <xref target="RFC7301"/>.
-      </t>
-      <t>
-        The <spanx style="verb">webrtc</spanx> identifies mixed media and data communications using
-        SRTP and data channels:
+        Protocol IDs" registry established by <xref target="RFC7301"/>:
         <list style="hanging">
-          <t hangText="Protocol:">WebRTC Media and Data</t>
-          <t hangText="Identification Sequence:">0x77 0x65 0x62 0x72 0x74 0x63 ("webrtc")</t>
-          <t hangText="Specification:">This document (RFCXXXX)</t>
-        </list>
-      </t>
-      <t>
-        The <spanx style="verb">c-webrtc</spanx> identifies confidential WebRTC communications:
-        <list style="hanging">
-          <t hangText="Protocol:">Confidential WebRTC Media and Data</t>
-          <t hangText="Identification Sequence:">0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
-          ("c-webrtc")</t>
-          <t hangText="Specification:">This document (RFCXXXX)</t>
+          <t hangText="webrtc:">
+            <vspace blankLines="1"/>
+            The <spanx style="verb">webrtc</spanx> label identifies mixed media and data
+            communications using SRTP and data channels:
+            <list style="hanging">
+              <t hangText="Protocol:">WebRTC Media and Data</t>
+              <t hangText="Identification Sequence:">0x77 0x65 0x62 0x72 0x74 0x63 ("webrtc")</t>
+              <t hangText="Specification:">This document (RFCXXXX)</t>
+            </list>
+          </t>
+          <t hangText="c-webrtc:">
+            <vspace blankLines="1"/>
+            The <spanx style="verb">c-webrtc</spanx> label identifies confidential WebRTC
+            communications:
+            <list style="hanging">
+              <t hangText="Protocol:">Confidential WebRTC Media and Data</t>
+              <t hangText="Identification Sequence:">0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
+              ("c-webrtc")</t>
+              <t hangText="Specification:">This document (RFCXXXX)</t>
+            </list>
+          </t>
         </list>
       </t>
     </section>
