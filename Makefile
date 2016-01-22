@@ -63,7 +63,7 @@ endif
 	git add ${TOP}/*.txt ${TOP}/*.html
 	if test `git status -s | wc -l` -gt 0; then git commit -m "Script updating page."; fi
 ifeq (false,$(TRAVIS_PULL_REQUEST))
-	echo git push -q https://github.com/martinthomson/drafts.git gh-pages
+	@echo git push -q https://github.com/martinthomson/drafts.git gh-pages
 	@git push -q https://$(GH_TOKEN)@github.com/martinthomson/drafts.git gh-pages >/dev/null 2>&1
 endif
 ifneq (true,${TRAVIS})
