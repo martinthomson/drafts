@@ -44,7 +44,8 @@
         Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web
         Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).
         Labels are provided for identifying a session that uses a combination of WebRTC compatible
-        media and data, and for identifying a session requiring confidentiality protection.
+        media and data, and for identifying a session requiring confidentiality protection from web
+        applications.
       </t>
     </abstract>
   </front>
@@ -65,15 +66,16 @@
       <t>
         Different WebRTC uses can be advertised and behavior can be constrained to what is
         appropriate to a given use.  In particular, this allows for the identifications of sessions
-        that require confidentiality protection.
+        that require confidentiality protection from the application that manages the signaling for
+        the session.
       </t>
 
       <section title="Conventions and Terminology" anchor="terminology">
-       <t>
-         At times, this document falls back on shorthands for establishing interoperability
-         requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These
-         terms are defined in <xref target="RFC2119"/>.
-       </t>
+        <t>
+          The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD
+          NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+          interpreted as described in <xref target="RFC2119"/>.
+        </t>
       </section>
     </section>
 
@@ -82,7 +84,7 @@
         The following identifiers are defined for use in ALPN:
         <list style="hanging">
           <t hangText="webrtc:">
-            The DTLS session is used to establish keys for a Secure Real-time Transport Protocol
+            The DTLS session is used to establish keys for Secure Real-time Transport Protocol
             (SRTP) - known as DTLS-SRTP - as described in <xref target="RFC5764"/>.  The DTLS record
             layer is used for <xref target="I-D.ietf-rtcweb-data-channel">WebRTC data
             channels</xref>.
@@ -90,8 +92,8 @@
           <t hangText="c-webrtc:">
             The DTLS session is used for confidential WebRTC communications, where peers agree to
             maintain the confidentiality of the media, as described in <xref
-            target="confidentiality"/>.  However, data provided over data channels does not receive
-            confidentiality protection.
+            target="confidentiality"/>.  However, data provided over data channels do not receive
+            the same level of confidentiality protection.
           </t>
         </list>
       </t>
@@ -117,7 +119,7 @@
         A peer that is not aware of whether it needs to request confidentiality can use either form.
         A peer in the client role MUST offer both identifiers if it is not aware of a need for
         confidentiality. A peer in the server role SHOULD select <spanx style="verb">webrtc</spanx>
-        if it does not prefer either.
+        if it does not need confidentiality protection.
       </t>
     </section>
 
@@ -126,16 +128,18 @@
         Private communications in WebRTC depend on separating control (i.e., signaling) capabilities
         and access to media <xref target="I-D.ietf-rtcweb-security-arch"/>.  In this way, an
         application can establish a session that is end-to-end confidential, where the ends in
-        question are user agents (or browsers) and not the signaling application.
+        question are user agents (or browsers) and not the signaling application.  This allows an
+        application to manage signaling for a session, without having access to the media that is
+        exchanged in the session.
       </t>
       <t>
         Without some form of indication that is securely bound to the session, a WebRTC endpoint is
-        unable to properly distinguish between session that requires confidentiality protection and
-        one that does not.  The ALPN identifier provides that signal.
+        unable to properly distinguish between a session that requires this confidentiality
+        protection and one that does not.  The ALPN identifier provides that signal.
       </t>
       <t>
-        A browser is required to enforce confidentiality using isolation controls similar to those
-        used in content cross-origin protections (see <eref
+        A browser is required to enforce this confidentiality protection using isolation controls
+        similar to those used in content cross-origin protections (see <eref
         target="http://www.w3.org/TR/2012/CR-html5-20121217/browsers.html#origin">Section 5.3</eref>
         of <xref target="HTML5"/>).  These protections ensure that media is protected from
         applications.  Applications are not able to read or modify the contents of a protected flow
@@ -159,7 +163,7 @@
       <t>
         RTP middleboxes and entities that forward media or data cannot promise to maintain
         confidentiality.  Any entity that forwards content, or records content for later access by
-        entities other than the authenticated peer, SHOULD NOT offer or accept a session with the
+        entities other than the authenticated peer, MUST NOT offer or accept a session with the
         <spanx style="verb">c-webrtc</spanx> identifier.
       </t>
    </section>
@@ -180,8 +184,7 @@
         arrangement of mirrors could variously be used to record or redistribute media once
         delivered.  Similarly, if media is visible or audible (or otherwise accessible) to others in
         the vicinity, there are no technical measures that protect the confidentiality of that
-        media.  In other cases, effects might not be temporally localized: transmitted smells could
-        linger for a period after communications cease.
+        media.
       </t>
       <t>
         The only guarantee provided by this mechanism and the browser that implements it is that the
@@ -193,7 +196,7 @@
         On a shared computing platform like a browser, other entities with access to that platform
         (i.e., web applications), might be able to access information that would compromise the
         confidentiality of communications.  Implementations MAY choose to limit concurrent access to
-        input devices during confidential communications session.
+        input devices during confidential communications sessions.
       </t>
       <t>
         For instance, another application that is able to access a microphone might be able to
