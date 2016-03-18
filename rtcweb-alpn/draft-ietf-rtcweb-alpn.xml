@@ -71,11 +71,11 @@
       </t>
 
       <section title="Conventions and Terminology" anchor="terminology">
-       <t>
-         At times, this document falls back on shorthands for establishing interoperability
-         requirements on implementations: the capitalized words "MUST", "SHOULD" and "MAY".  These
-         terms are defined in <xref target="RFC2119"/>.
-       </t>
+        <t>
+          The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "SHOULD
+          NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be
+          interpreted as described in <xref target="RFC2119"/>.
+        </t>
       </section>
     </section>
 
