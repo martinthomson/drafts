@@ -180,8 +180,7 @@
         arrangement of mirrors could variously be used to record or redistribute media once
         delivered.  Similarly, if media is visible or audible (or otherwise accessible) to others in
         the vicinity, there are no technical measures that protect the confidentiality of that
-        media.  In other cases, effects might not be temporally localized: transmitted smells could
-        linger for a period after communications cease.
+        media.
       </t>
       <t>
         The only guarantee provided by this mechanism and the browser that implements it is that the
