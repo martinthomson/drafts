@@ -119,6 +119,15 @@
         confidentiality. A peer in the server role SHOULD select <spanx style="verb">webrtc</spanx>
         if it does not prefer either.
       </t>
+      <t>
+        An endpoint that requires media confidentiality might negotiate a session with a peer that
+        does not support this specification.  Endpoint MUST abort a session if it requires
+        confidentiality but does not successfully negotiate <spanx style="verb">c-webrtc</spanx>.  A
+        peer that is willing to accept <spanx style="verb">webrtc</spanx> SHOULD assume that a peer
+        that does not support this specification has negotiated <spanx style="verb">webrtc</spanx>
+        unless signaling provides other information; however, a peer MUST NOT assume that <spanx
+        style="verb">c-webrtc</spanx> has been negotiated unless explicitly negotiated.
+      </t>
     </section>
 
     <section title="Media Confidentiality" anchor="confidentiality">
