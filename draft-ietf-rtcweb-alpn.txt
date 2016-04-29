@@ -145,8 +145,10 @@ Internet-Draft               ALPN for WebRTC                  April 2016
    session with a peer that does not support this specification.
    Endpoint MUST abort a session if it requires confidentiality but does
    not successfully negotiate "c-webrtc".  A peer that is willing to
-   accept "webrtc" MAY assume that a peer that does not support this
-   specification has negotiated "webrtc".
+   accept "webrtc" SHOULD assume that a peer that does not support this
+   specification has negotiated "webrtc" unless signaling provides other
+   information; however, a peer MUST NOT assume that "c-webrtc" has been
+   negotiated unless explicitly negotiated.
 
 3.  Media Confidentiality
 
@@ -159,8 +161,6 @@ Internet-Draft               ALPN for WebRTC                  April 2016
 
    Without some form of indication that is securely bound to the
    session, a WebRTC endpoint is unable to properly distinguish between
-   session that requires confidentiality protection and one that does
-   not.  The ALPN identifier provides that signal.
 
 
 
@@ -169,6 +169,9 @@ Thomson                 Expires October 31, 2016                [Page 3]
 
 Internet-Draft               ALPN for WebRTC                  April 2016
 
+
+   session that requires confidentiality protection and one that does
+   not.  The ALPN identifier provides that signal.
 
    A browser is required to enforce confidentiality using isolation
    controls similar to those used in content cross-origin protections
@@ -215,9 +218,6 @@ Internet-Draft               ALPN for WebRTC                  April 2016
    screen recording devices, tape recorders, portable cameras, or a
    cunning arrangement of mirrors could variously be used to record or
    redistribute media once delivered.  Similarly, if media is visible or
-   audible (or otherwise accessible) to others in the vicinity, there
-   are no technical measures that protect the confidentiality of that
-   media.  In other cases, effects might not be temporally localized:
 
 
 
@@ -226,6 +226,9 @@ Thomson                 Expires October 31, 2016                [Page 4]
 Internet-Draft               ALPN for WebRTC                  April 2016
 
 
+   audible (or otherwise accessible) to others in the vicinity, there
+   are no technical measures that protect the confidentiality of that
+   media.  In other cases, effects might not be temporally localized:
    transmitted smells could linger for a period after communications
    cease.
 
@@ -272,15 +275,15 @@ Internet-Draft               ALPN for WebRTC                  April 2016
 
       Protocol:  Confidential WebRTC Media and Data
 
-      Identification Sequence:  0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
-         ("c-webrtc")
-
 
 
 Thomson                 Expires October 31, 2016                [Page 5]
 
 Internet-Draft               ALPN for WebRTC                  April 2016
 
+
+      Identification Sequence:  0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
+         ("c-webrtc")
 
       Specification:  This document (RFCXXXX)
 
@@ -327,9 +330,6 @@ Internet-Draft               ALPN for WebRTC                  April 2016
    [I-D.ietf-rtcweb-security-arch]
               Rescorla, E., "WebRTC Security Architecture", draft-ietf-
               rtcweb-security-arch-11 (work in progress), March 2015.
-
-
-
 
 
 
