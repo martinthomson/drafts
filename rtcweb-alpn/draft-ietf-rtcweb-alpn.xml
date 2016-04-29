@@ -114,10 +114,10 @@
         confidentiality of the media it receives.
       </t>
       <t>
-        A peer that is not aware of whether it needs to request confidentiality can use either form.
-        A peer in the client role MUST offer both identifiers if it is not aware of a need for
-        confidentiality. A peer in the server role SHOULD select <spanx style="verb">webrtc</spanx>
-        if it does not prefer either.
+        A peer that is not aware of whether it needs to request confidentiality can use either
+        identifier.  A peer in the client role MUST offer both identifiers if it is not aware of a
+        need for confidentiality. A peer in the server role SHOULD select <spanx
+        style="verb">webrtc</spanx> if it does not prefer either.
       </t>
       <t>
         An endpoint that requires media confidentiality might negotiate a session with a peer that
