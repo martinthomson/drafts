@@ -4,8 +4,8 @@
 
 RTCWEB                                                        M. Thomson
 Internet-Draft                                                   Mozilla
-Intended status: Standards Track                          April 29, 2016
-Expires: October 31, 2016
+Intended status: Standards Track                             May 4, 2016
+Expires: November 5, 2016
 
 
 Application Layer Protocol Negotiation for Web Real-Time Communications
@@ -36,7 +36,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on October 31, 2016.
+   This Internet-Draft will expire on November 5, 2016.
 
 Copyright Notice
 
@@ -53,9 +53,9 @@ Copyright Notice
 
 
 
-Thomson                 Expires October 31, 2016                [Page 1]
+Thomson                 Expires November 5, 2016                [Page 1]
 
-Internet-Draft               ALPN for WebRTC                  April 2016
+Internet-Draft               ALPN for WebRTC                    May 2016
 
 
    the Trust Legal Provisions and are provided without warranty as
@@ -109,9 +109,9 @@ Table of Contents
 
 
 
-Thomson                 Expires October 31, 2016                [Page 2]
+Thomson                 Expires November 5, 2016                [Page 2]
 
-Internet-Draft               ALPN for WebRTC                  April 2016
+Internet-Draft               ALPN for WebRTC                    May 2016
 
 
    c-webrtc:  The DTLS session is used for confidential WebRTC
@@ -165,9 +165,9 @@ Internet-Draft               ALPN for WebRTC                  April 2016
 
 
 
-Thomson                 Expires October 31, 2016                [Page 3]
+Thomson                 Expires November 5, 2016                [Page 3]
 
-Internet-Draft               ALPN for WebRTC                  April 2016
+Internet-Draft               ALPN for WebRTC                    May 2016
 
 
    session that requires confidentiality protection and one that does
@@ -221,9 +221,9 @@ Internet-Draft               ALPN for WebRTC                  April 2016
 
 
 
-Thomson                 Expires October 31, 2016                [Page 4]
+Thomson                 Expires November 5, 2016                [Page 4]
 
-Internet-Draft               ALPN for WebRTC                  April 2016
+Internet-Draft               ALPN for WebRTC                    May 2016
 
 
    audible (or otherwise accessible) to others in the vicinity, there
@@ -277,9 +277,9 @@ Internet-Draft               ALPN for WebRTC                  April 2016
 
 
 
-Thomson                 Expires October 31, 2016                [Page 5]
+Thomson                 Expires November 5, 2016                [Page 5]
 
-Internet-Draft               ALPN for WebRTC                  April 2016
+Internet-Draft               ALPN for WebRTC                    May 2016
 
 
       Identification Sequence:  0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
@@ -295,6 +295,10 @@ Internet-Draft               ALPN for WebRTC                  April 2016
               Jesup, R., Loreto, S., and M. Tuexen, "WebRTC Data
               Channels", draft-ietf-rtcweb-data-channel-13 (work in
               progress), January 2015.
+
+   [I-D.ietf-rtcweb-security-arch]
+              Rescorla, E., "WebRTC Security Architecture", draft-ietf-
+              rtcweb-security-arch-11 (work in progress), March 2015.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -327,15 +331,11 @@ Internet-Draft               ALPN for WebRTC                  April 2016
               Browser-based Applications", draft-ietf-rtcweb-overview-15
               (work in progress), January 2016.
 
-   [I-D.ietf-rtcweb-security-arch]
-              Rescorla, E., "WebRTC Security Architecture", draft-ietf-
-              rtcweb-security-arch-11 (work in progress), March 2015.
 
 
-
-Thomson                 Expires October 31, 2016                [Page 6]
+Thomson                 Expires November 5, 2016                [Page 6]
 
-Internet-Draft               ALPN for WebRTC                  April 2016
+Internet-Draft               ALPN for WebRTC                    May 2016
 
 
    [I-D.ietf-rtcweb-transports]
@@ -389,4 +389,4 @@ Author's Address
 
 
 
-Thomson                 Expires October 31, 2016                [Page 7]
+Thomson                 Expires November 5, 2016                [Page 7]
