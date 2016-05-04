@@ -262,6 +262,7 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.6347.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5764.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.7301.xml"?>
+      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security-arch.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-data-channel.xml"?>
     </references>
 
@@ -269,7 +270,6 @@
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.4960.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml/reference.RFC.5245.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-overview.xml"?>
-      <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-security-arch.xml"?>
       <?rfc include="http://xml.resource.org/public/rfc/bibxml3/reference.I-D.ietf-rtcweb-transports.xml"?>
       <reference anchor="HTML5" target="http://www.w3.org/TR/2012/CR-html5-20121217/">
         <front>
