@@ -186,12 +186,12 @@ Internet-Draft               ALPN for WebRTC                    May 2016
    is produced from a session using the "c-webrtc" identifier MUST only
    be displayed to users.
 
-   These confidentiality protections do not apply to data that is sent
-   using data channels.  Confidential data depends on having both data
-   sources and consumers that are exclusively browser- or user-based.
-   No mechanisms currently exist to take advantage of data
-   confidentiality, though some use cases suggest that this could be
-   useful, for example, confidential peer-to-peer file transfer.
+   The promise to apply confidentiality protections do not apply to data
+   that is sent using data channels.  Confidential data depends on
+   having both data sources and consumers that are exclusively browser-
+   or user-based.  No mechanisms currently exist to take advantage of
+   data confidentiality, though some use cases suggest that this could
+   be useful, for example, confidential peer-to-peer file transfer.
    Alternative labels might be provided in future to support these use
    cases.
 
@@ -271,8 +271,8 @@ Internet-Draft               ALPN for WebRTC                    May 2016
 
    c-webrtc:
 
-      The "c-webrtc" label identifies confidential WebRTC
-      communications:
+      The "c-webrtc" label identifies WebRTC communications with a
+      promise to protect media confidentiality:
 
 
 
