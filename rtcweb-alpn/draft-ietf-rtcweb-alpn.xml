@@ -41,11 +41,12 @@
 
     <abstract>
       <t>
-        Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web
-        Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).
-        Labels are provided for identifying a session that uses a combination of WebRTC compatible
-        media and data, and for identifying a session requiring confidentiality protection from web
-        applications.
+        This document specifies two Application Layer Protocol Negotiation (ALPN) labels for use
+        with Web Real-Time Communications (WebRTC).  The "webrtc" label identifies regular WebRTC
+        communications: a DTLS session that is used establish keys for Secure Real-time Transport
+        Protocol (SRTP) or to establish data channels using SCTP over DTLS.  The "c-webrtc" label
+        describes the same protocol, but the peers also agree to maintain the confidentiality of the
+        media by not sharing it with other applications.
       </t>
     </abstract>
   </front>
@@ -65,7 +66,7 @@
       </t>
       <t>
         Different WebRTC uses can be advertised and behavior can be constrained to what is
-        appropriate to a given use.  In particular, this allows for the identifications of sessions
+        appropriate to a given use.  In particular, this allows for the identification of sessions
         that require confidentiality protection from the application that manages the signaling for
         the session.
       </t>
