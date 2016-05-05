@@ -93,8 +93,9 @@
           <t hangText="c-webrtc:">
             The DTLS session is used for confidential WebRTC communications, where peers agree to
             maintain the confidentiality of the media, as described in <xref
-            target="confidentiality"/>.  However, data provided over data channels do not receive
-            the same level of confidentiality protection.
+            target="confidentiality"/>. The confidentiality protections ensure that media is
+            protected from other applications, but the confidentiality protections do not extend to
+            messages on data channels.
           </t>
         </list>
       </t>
