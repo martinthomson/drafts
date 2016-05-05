@@ -166,8 +166,7 @@
         support these use cases.
       </t>
       <t>
-        Generally speaking, ensuring confidentiality depends on authenticating the communications
-        peer.  This mechanism explicitly does not define a specific authentication method; a WebRTC
+        This mechanism explicitly does not define a specific authentication method; a WebRTC
         endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no
         matter what identity is attributed to a peer.
       </t>
@@ -189,13 +188,12 @@
         necessary to ensure that data is only sent to the intended peer.
       </t>
       <t>
-        This is not a digital rights management mechanism.  Even with an authenticated peer, a user
-        is not prevented from using other mechanisms to record or forward media.  This means that
-        (for example) screen recording devices, tape recorders, portable cameras, or a cunning
-        arrangement of mirrors could variously be used to record or redistribute media once
-        delivered.  Similarly, if media is visible or audible (or otherwise accessible) to others in
-        the vicinity, there are no technical measures that protect the confidentiality of that
-        media.
+        This is not a digital rights management mechanism.  A user is not prevented from using other
+        mechanisms to record or forward media.  This means that (for example) screen recording
+        devices, tape recorders, portable cameras, or a cunning arrangement of mirrors could
+        variously be used to record or redistribute media once delivered.  Similarly, if media is
+        visible or audible (or otherwise accessible) to others in the vicinity, there are no
+        technical measures that protect the confidentiality of that media.
       </t>
       <t>
         The only guarantee provided by this mechanism and the browser that implements it is that the
