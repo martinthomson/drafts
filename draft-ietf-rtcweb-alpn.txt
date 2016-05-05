@@ -89,23 +89,23 @@ Table of Contents
 
    Different WebRTC uses can be advertised and behavior can be
    constrained to what is appropriate to a given use.  In particular,
-   this allows for the identifications of sessions that require
-   confidentiality protection.
+   this allows for the identification of sessions that require
+   confidentiality protection from the application that manages the
+   signaling for the session.
 
 1.1.  Conventions and Terminology
 
-   At times, this document falls back on shorthands for establishing
-   interoperability requirements on implementations: the capitalized
-   words "MUST", "SHOULD" and "MAY".  These terms are defined in
+   The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT",
+   "SHOULD", "SHOULD NOT", "RECOMMENDED", "NOT RECOMMENDED", "MAY", and
+   "OPTIONAL" in this document are to be interpreted as described in
    [RFC2119].
 
 2.  ALPN Labels for WebRTC
 
    The following identifiers are defined for use in ALPN:
 
-   webrtc:  The DTLS session is used to establish keys for a Secure
-      Real-time Transport Protocol (SRTP) - known as DTLS-SRTP - as
-
+   webrtc:  The DTLS session is used to establish keys for Secure Real-
+      time Transport Protocol (SRTP) - known as DTLS-SRTP - as described
 
 
 
@@ -114,8 +114,8 @@ Thomson                 Expires November 6, 2016                [Page 2]
 Internet-Draft               ALPN for WebRTC                    May 2016
 
 
-      described in [RFC5764].  The DTLS record layer is used for WebRTC
-      data channels [I-D.ietf-rtcweb-data-channel].
+      in [RFC5764].  The DTLS record layer is used for WebRTC data
+      channels [I-D.ietf-rtcweb-data-channel].
 
    c-webrtc:  The DTLS session is used for confidential WebRTC
       communications, where peers agree to maintain the confidentiality
@@ -161,7 +161,7 @@ Internet-Draft               ALPN for WebRTC                    May 2016
    signaling) capabilities and access to media
    [I-D.ietf-rtcweb-security-arch].  In this way, an application can
    establish a session that is end-to-end confidential, where the ends
-
+   in question are user agents (or browsers) and not the signaling
 
 
 
@@ -170,21 +170,22 @@ Thomson                 Expires November 6, 2016                [Page 3]
 Internet-Draft               ALPN for WebRTC                    May 2016
 
 
-   in question are user agents (or browsers) and not the signaling
-   application.
+   application.  This allows an application to manage signaling for a
+   session, without having access to the media that is exchanged in the
+   session.
 
    Without some form of indication that is securely bound to the
    session, a WebRTC endpoint is unable to properly distinguish between
-   session that requires confidentiality protection and one that does
-   not.  The ALPN identifier provides that signal.
+   a session that requires this confidentiality protection and one that
+   does not.  The ALPN identifier provides that signal.
 
-   A browser is required to enforce confidentiality using isolation
-   controls similar to those used in content cross-origin protections
-   (see Section 5.3 [1] of [HTML5]).  These protections ensure that
-   media is protected from applications.  Applications are not able to
-   read or modify the contents of a protected flow of media.  Media that
-   is produced from a session using the "c-webrtc" identifier MUST only
-   be displayed to users.
+   A browser is required to enforce this confidentiality protection
+   using isolation controls similar to those used in content cross-
+   origin protections (see Section 5.3 [1] of [HTML5]).  These
+   protections ensure that media is protected from applications.
+   Applications are not able to read or modify the contents of a
+   protected flow of media.  Media that is produced from a session using
+   the "c-webrtc" identifier MUST only be displayed to users.
 
    The promise to apply confidentiality protections do not apply to data
    that is sent using data channels.  Confidential data depends on
@@ -203,7 +204,7 @@ Internet-Draft               ALPN for WebRTC                    May 2016
    RTP middleboxes and entities that forward media or data cannot
    promise to maintain confidentiality.  Any entity that forwards
    content, or records content for later access by entities other than
-   the authenticated peer, SHOULD NOT offer or accept a session with the
+   the authenticated peer, MUST NOT offer or accept a session with the
    "c-webrtc" identifier.
 
 4.  Security Considerations
@@ -216,8 +217,7 @@ Internet-Draft               ALPN for WebRTC                    May 2016
    [I-D.ietf-rtcweb-security-arch] is necessary to ensure that data is
    only sent to the intended peer.
 
-   This is not a digital rights management mechanism.  A user is not
-   prevented from using other mechanisms to record or forward media.
+
 
 
 
@@ -226,6 +226,8 @@ Thomson                 Expires November 6, 2016                [Page 4]
 Internet-Draft               ALPN for WebRTC                    May 2016
 
 
+   This is not a digital rights management mechanism.  A user is not
+   prevented from using other mechanisms to record or forward media.
    This means that (for example) screen recording devices, tape
    recorders, portable cameras, or a cunning arrangement of mirrors
    could variously be used to record or redistribute media once
@@ -243,7 +245,7 @@ Internet-Draft               ALPN for WebRTC                    May 2016
    access to that platform (i.e., web applications), might be able to
    access information that would compromise the confidentiality of
    communications.  Implementations MAY choose to limit concurrent
-   access to input devices during confidential communications session.
+   access to input devices during confidential communications sessions.
 
    For instance, another application that is able to access a microphone
    might be able to sample confidential audio that is playing through
@@ -271,8 +273,6 @@ Internet-Draft               ALPN for WebRTC                    May 2016
 
    c-webrtc:
 
-      The "c-webrtc" label identifies WebRTC communications with a
-      promise to protect media confidentiality:
 
 
 
@@ -281,6 +281,9 @@ Thomson                 Expires November 6, 2016                [Page 5]
 
 Internet-Draft               ALPN for WebRTC                    May 2016
 
+
+      The "c-webrtc" label identifies WebRTC communications with a
+      promise to protect media confidentiality:
 
       Protocol:  Confidential WebRTC Media and Data
 
@@ -327,9 +330,6 @@ Internet-Draft               ALPN for WebRTC                    May 2016
    [HTML5]    Berjon, R., Leithead, T., Doyle Navara, E., O'Connor, E.,
               and S. Pfeiffer, "HTML 5", CR CR-html5-20121217, August
               2010, <http://www.w3.org/TR/2012/CR-html5-20121217/>.
-
-
-
 
 
 
