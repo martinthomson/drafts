@@ -41,11 +41,12 @@
 
     <abstract>
       <t>
-        Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web
-        Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).
-        Labels are provided for identifying a session that uses a combination of WebRTC compatible
-        media and data, and for identifying a session requiring confidentiality protection from web
-        applications.
+        This document specifies two Application Layer Protocol Negotiation (ALPN) labels for use
+        with Web Real-Time Communications (WebRTC).  The "webrtc" label identifies regular WebRTC
+        communications: a DTLS session that is used establish keys for Secure Real-time Transport
+        Protocol (SRTP) or to establish data channels using SCTP over DTLS.  The "c-webrtc" label
+        describes the same protocol, but the peers also agree to maintain the confidentiality of the
+        media by not sharing it with other applications.
       </t>
     </abstract>
   </front>
@@ -65,7 +66,7 @@
       </t>
       <t>
         Different WebRTC uses can be advertised and behavior can be constrained to what is
-        appropriate to a given use.  In particular, this allows for the identifications of sessions
+        appropriate to a given use.  In particular, this allows for the identification of sessions
         that require confidentiality protection from the application that manages the signaling for
         the session.
       </t>
@@ -92,8 +93,9 @@
           <t hangText="c-webrtc:">
             The DTLS session is used for confidential WebRTC communications, where peers agree to
             maintain the confidentiality of the media, as described in <xref
-            target="confidentiality"/>.  However, data provided over data channels do not receive
-            the same level of confidentiality protection.
+            target="confidentiality"/>. The confidentiality protections ensure that media is
+            protected from other applications, but the confidentiality protections do not extend to
+            messages on data channels.
           </t>
         </list>
       </t>
@@ -156,16 +158,15 @@
         style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
       </t>
       <t>
-        These confidentiality protections do not apply to data that is sent using data channels.
-        Confidential data depends on having both data sources and consumers that are exclusively
-        browser- or user-based.  No mechanisms currently exist to take advantage of data
+        The promise to apply confidentiality protections do not apply to data that is sent using
+        data channels.  Confidential data depends on having both data sources and consumers that are
+        exclusively browser- or user-based.  No mechanisms currently exist to take advantage of data
         confidentiality, though some use cases suggest that this could be useful, for example,
         confidential peer-to-peer file transfer.  Alternative labels might be provided in future to
         support these use cases.
       </t>
       <t>
-        Generally speaking, ensuring confidentiality depends on authenticating the communications
-        peer.  This mechanism explicitly does not define a specific authentication method; a WebRTC
+        This mechanism explicitly does not define a specific authentication method; a WebRTC
         endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no
         matter what identity is attributed to a peer.
       </t>
@@ -187,13 +188,12 @@
         necessary to ensure that data is only sent to the intended peer.
       </t>
       <t>
-        This is not a digital rights management mechanism.  Even with an authenticated peer, a user
-        is not prevented from using other mechanisms to record or forward media.  This means that
-        (for example) screen recording devices, tape recorders, portable cameras, or a cunning
-        arrangement of mirrors could variously be used to record or redistribute media once
-        delivered.  Similarly, if media is visible or audible (or otherwise accessible) to others in
-        the vicinity, there are no technical measures that protect the confidentiality of that
-        media.
+        This is not a digital rights management mechanism.  A user is not prevented from using other
+        mechanisms to record or forward media.  This means that (for example) screen recording
+        devices, tape recorders, portable cameras, or a cunning arrangement of mirrors could
+        variously be used to record or redistribute media once delivered.  Similarly, if media is
+        visible or audible (or otherwise accessible) to others in the vicinity, there are no
+        technical measures that protect the confidentiality of that media.
       </t>
       <t>
         The only guarantee provided by this mechanism and the browser that implements it is that the
@@ -233,8 +233,8 @@
           </t>
           <t hangText="c-webrtc:">
             <vspace blankLines="1"/>
-            The <spanx style="verb">c-webrtc</spanx> label identifies confidential WebRTC
-            communications:
+            The <spanx style="verb">c-webrtc</spanx> label identifies WebRTC
+            communications with a promise to protect media confidentiality:
             <list style="hanging">
               <t hangText="Protocol:">Confidential WebRTC Media and Data</t>
               <t hangText="Identification Sequence:">0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
