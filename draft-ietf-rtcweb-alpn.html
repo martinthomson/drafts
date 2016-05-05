@@ -391,9 +391,9 @@
 
   <meta name="dct.creator" content="Thomson, M." />
   <meta name="dct.identifier" content="urn:ietf:id:draft-ietf-rtcweb-alpn-latest" />
-  <meta name="dct.issued" scheme="ISO8601" content="2016-5-4" />
-  <meta name="dct.abstract" content="Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).  Labels are provided for identifying a session that uses a combination of WebRTC compatible media and data, and for identifying a session requiring confidentiality protection.  " />
-  <meta name="description" content="Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).  Labels are provided for identifying a session that uses a combination of WebRTC compatible media and data, and for identifying a session requiring confidentiality protection.  " />
+  <meta name="dct.issued" scheme="ISO8601" content="2016-5-5" />
+  <meta name="dct.abstract" content="This document specifies two Application Layer Protocol Negotiation (ALPN) labels for use with Web Real-Time Communications (WebRTC).  The &quot;webrtc&quot; label identifies regular WebRTC communications: a DTLS session that is used establish keys for Secure Real-time Transport Protocol (SRTP) or to establish data channels using SCTP over DTLS.  The &quot;c-webrtc&quot; label describes the same protocol, but the peers also agree to maintain the confidentiality of the media by not sharing it with other applications.  " />
+  <meta name="description" content="This document specifies two Application Layer Protocol Negotiation (ALPN) labels for use with Web Real-Time Communications (WebRTC).  The &quot;webrtc&quot; label identifies regular WebRTC communications: a DTLS session that is used establish keys for Secure Real-time Transport Protocol (SRTP) or to establish data channels using SCTP over DTLS.  The &quot;c-webrtc&quot; label describes the same protocol, but the peers also agree to maintain the confidentiality of the media by not sharing it with other applications.  " />
 
 </head>
 
@@ -412,10 +412,10 @@
 </tr>
 <tr>
   <td class="left">Intended status: Standards Track</td>
-  <td class="right">May 4, 2016</td>
+  <td class="right">May 5, 2016</td>
 </tr>
 <tr>
-  <td class="left">Expires: November 5, 2016</td>
+  <td class="left">Expires: November 6, 2016</td>
   <td class="right"></td>
 </tr>
 
@@ -429,14 +429,14 @@
   <h1 id="rfc.abstract">
   <a href="#rfc.abstract">Abstract</a>
 </h1>
-<p>Application Layer Protocol Negotiation (ALPN) labels are defined for use in identifying Web Real-Time Communications (WebRTC) usages of Datagram Transport Layer Security (DTLS).  Labels are provided for identifying a session that uses a combination of WebRTC compatible media and data, and for identifying a session requiring confidentiality protection.  </p>
+<p>This document specifies two Application Layer Protocol Negotiation (ALPN) labels for use with Web Real-Time Communications (WebRTC).  The "webrtc" label identifies regular WebRTC communications: a DTLS session that is used establish keys for Secure Real-time Transport Protocol (SRTP) or to establish data channels using SCTP over DTLS.  The "c-webrtc" label describes the same protocol, but the peers also agree to maintain the confidentiality of the media by not sharing it with other applications.  </p>
 <h1 id="rfc.status">
   <a href="#rfc.status">Status of This Memo</a>
 </h1>
 <p>This Internet-Draft is submitted in full conformance with the provisions of BCP 78 and BCP 79.</p>
 <p>Internet-Drafts are working documents of the Internet Engineering Task Force (IETF).  Note that other groups may also distribute working documents as Internet-Drafts.  The list of current Internet-Drafts is at http://datatracker.ietf.org/drafts/current/.</p>
 <p>Internet-Drafts are draft documents valid for a maximum of six months and may be updated, replaced, or obsoleted by other documents at any time.  It is inappropriate to use Internet-Drafts as reference material or to cite them other than as "work in progress."</p>
-<p>This Internet-Draft will expire on November 5, 2016.</p>
+<p>This Internet-Draft will expire on November 6, 2016.</p>
 <h1 id="rfc.copyrightnotice">
   <a href="#rfc.copyrightnotice">Copyright Notice</a>
 </h1>
@@ -475,7 +475,7 @@
   <dt>webrtc:</dt>
   <dd style="margin-left: 8">The DTLS session is used to establish keys for a Secure Real-time Transport Protocol (SRTP) - known as DTLS-SRTP - as described in <a href="#RFC5764">[RFC5764]</a>.  The DTLS record layer is used for <a href="#I-D.ietf-rtcweb-data-channel">WebRTC data channels</a> <cite title="NONE">[I-D.ietf-rtcweb-data-channel]</cite>.  </dd>
   <dt>c-webrtc:</dt>
-  <dd style="margin-left: 8">The DTLS session is used for confidential WebRTC communications, where peers agree to maintain the confidentiality of the media, as described in <a href="#confidentiality">Section 3</a>.  However, data provided over data channels does not receive confidentiality protection.  </dd>
+  <dd style="margin-left: 8">The DTLS session is used for confidential WebRTC communications, where peers agree to maintain the confidentiality of the media, as described in <a href="#confidentiality">Section 3</a>. The confidentiality protections ensure that media is protected from other applications, but the confidentiality protections do not extend to messages on data channels.  </dd>
 </dl>
 
 <p> </p>
@@ -489,12 +489,12 @@
 <p id="rfc.section.3.p.2">Without some form of indication that is securely bound to the session, a WebRTC endpoint is unable to properly distinguish between session that requires confidentiality protection and one that does not.  The ALPN identifier provides that signal.  </p>
 <p id="rfc.section.3.p.3">A browser is required to enforce confidentiality using isolation controls similar to those used in content cross-origin protections (see <a href="http://www.w3.org/TR/2012/CR-html5-20121217/browsers.html#origin">Section 5.3</a> of <a href="#HTML5">[HTML5]</a>).  These protections ensure that media is protected from applications.  Applications are not able to read or modify the contents of a protected flow of media.  Media that is produced from a session using the <samp>c-webrtc</samp> identifier MUST only be displayed to users.  </p>
 <p id="rfc.section.3.p.4">These confidentiality protections do not apply to data that is sent using data channels.  Confidential data depends on having both data sources and consumers that are exclusively browser- or user-based.  No mechanisms currently exist to take advantage of data confidentiality, though some use cases suggest that this could be useful, for example, confidential peer-to-peer file transfer.  Alternative labels might be provided in future to support these use cases.  </p>
-<p id="rfc.section.3.p.5">Generally speaking, ensuring confidentiality depends on authenticating the communications peer.  This mechanism explicitly does not define a specific authentication method; a WebRTC endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no matter what identity is attributed to a peer.  </p>
+<p id="rfc.section.3.p.5">This mechanism explicitly does not define a specific authentication method; a WebRTC endpoint that accepts a session with this ALPN identifier MUST respect confidentiality no matter what identity is attributed to a peer.  </p>
 <p id="rfc.section.3.p.6">RTP middleboxes and entities that forward media or data cannot promise to maintain confidentiality.  Any entity that forwards content, or records content for later access by entities other than the authenticated peer, SHOULD NOT offer or accept a session with the <samp>c-webrtc</samp> identifier.  </p>
 <h1 id="rfc.section.4"><a href="#rfc.section.4">4.</a> <a href="#security" id="security">Security Considerations</a></h1>
 <p id="rfc.section.4.p.1">Confidential communications depends on more than just an agreement from browsers.  </p>
 <p id="rfc.section.4.p.2">Information is not confidential if it is displayed to those other than to whom it is intended.  <a href="#I-D.ietf-rtcweb-security-arch">Peer authentication</a> <cite title="NONE">[I-D.ietf-rtcweb-security-arch]</cite> is necessary to ensure that data is only sent to the intended peer.  </p>
-<p id="rfc.section.4.p.3">This is not a digital rights management mechanism.  Even with an authenticated peer, a user is not prevented from using other mechanisms to record or forward media.  This means that (for example) screen recording devices, tape recorders, portable cameras, or a cunning arrangement of mirrors could variously be used to record or redistribute media once delivered.  Similarly, if media is visible or audible (or otherwise accessible) to others in the vicinity, there are no technical measures that protect the confidentiality of that media.  In other cases, effects might not be temporally localized: transmitted smells could linger for a period after communications cease.  </p>
+<p id="rfc.section.4.p.3">This is not a digital rights management mechanism.  A user is not prevented from using other mechanisms to record or forward media.  This means that (for example) screen recording devices, tape recorders, portable cameras, or a cunning arrangement of mirrors could variously be used to record or redistribute media once delivered.  Similarly, if media is visible or audible (or otherwise accessible) to others in the vicinity, there are no technical measures that protect the confidentiality of that media.  </p>
 <p id="rfc.section.4.p.4">The only guarantee provided by this mechanism and the browser that implements it is that the media was delivered to the user that was authenticated.  Individual users will still need to make a judgment about how their peer intends to respect the confidentiality of any information provided.  </p>
 <p id="rfc.section.4.p.5">On a shared computing platform like a browser, other entities with access to that platform (i.e., web applications), might be able to access information that would compromise the confidentiality of communications.  Implementations MAY choose to limit concurrent access to input devices during confidential communications session.  </p>
 <p id="rfc.section.4.p.6">For instance, another application that is able to access a microphone might be able to sample confidential audio that is playing through speakers.  This is true even if acoustic echo cancellation, which attempts to prevent this from happening, is used.  Similarly, an application with access to a video camera might be able to use reflections to obtain all or part of a confidential video stream.  </p>
