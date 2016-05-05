@@ -158,9 +158,9 @@
         style="verb">c-webrtc</spanx> identifier MUST only be displayed to users.
       </t>
       <t>
-        These confidentiality protections do not apply to data that is sent using data channels.
-        Confidential data depends on having both data sources and consumers that are exclusively
-        browser- or user-based.  No mechanisms currently exist to take advantage of data
+        The promise to apply confidentiality protections do not apply to data that is sent using
+        data channels.  Confidential data depends on having both data sources and consumers that are
+        exclusively browser- or user-based.  No mechanisms currently exist to take advantage of data
         confidentiality, though some use cases suggest that this could be useful, for example,
         confidential peer-to-peer file transfer.  Alternative labels might be provided in future to
         support these use cases.
@@ -233,8 +233,8 @@
           </t>
           <t hangText="c-webrtc:">
             <vspace blankLines="1"/>
-            The <spanx style="verb">c-webrtc</spanx> label identifies confidential WebRTC
-            communications:
+            The <spanx style="verb">c-webrtc</spanx> label identifies WebRTC
+            communications with a promise to protect media confidentiality:
             <list style="hanging">
               <t hangText="Protocol:">Confidential WebRTC Media and Data</t>
               <t hangText="Identification Sequence:">0x63 0x2d 0x77 0x65 0x62 0x72 0x74 0x63
